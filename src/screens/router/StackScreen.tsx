@@ -3,7 +3,11 @@ import { RootStack } from 'types/screen/screenType';
 
 export default function StackScreen() {
   return (
-    <RootStack.Navigator>
+    <RootStack.Navigator
+      screenOptions={{
+        headerTitleAlign: 'center',
+      }}
+    >
       <RootStack.Screen name="RestaurantDetailScreen" component={RestaurantDetailScreen} />
     </RootStack.Navigator>
   );
