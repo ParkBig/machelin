@@ -4,6 +4,6 @@
     "strict": true,
     "baseUrl": "./src"
   },
-  "include": ["src", "App.tsx"],
+  "include": ["src", "App.tsx", "env.d.ts"],
   "moduleResolution": "node"
 }

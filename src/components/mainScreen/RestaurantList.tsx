@@ -1,8 +1,12 @@
-import { View, StyleSheet, Pressable, LayoutAnimation } from 'react-native';
+import { View, StyleSheet, Pressable, LayoutAnimation, ScrollView, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
+import { mockNearbyRestaurantList } from 'data/mockdata';
+import ScrollList from './ScrollList';
+import BriefRestaurantInfo from './BriefRestaurantInfo';
 
 export default function RestaurantList() {
+  const mockData = mockNearbyRestaurantList;
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleListHandler = () => {
@@ -10,22 +14,25 @@ export default function RestaurantList() {
     setIsOpen(prev => !prev);
   };
 
-  const boxHeight = isOpen ? '80%' : '15%';
-
   return (
-    <View style={[styles.wrap, { height: boxHeight }]}>
+    <View style={[styles.wrap, { height: isOpen ? '80%' : '15%', opacity: isOpen ? 1 : 0.75 }]}>
       <Pressable style={styles.openBtn} onPress={toggleListHandler}>
         <Ionicons name={isOpen ? 'chevron-down-outline' : 'chevron-up-outline'} size={20} />
       </Pressable>
-      <View style={styles.restaurantList}></View>
+      {isOpen ? (
+        <ScrollList restaurants={mockData} />
+      ) : (
+        <View style={styles.firstRestaurant}>
+          <BriefRestaurantInfo restaurant={mockData[0]} />
+        </View>
+      )}
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   wrap: {
-    // height: "15%",
-    width: "95%",
+    width: '95%',
     position: 'absolute',
     zIndex: 2,
     justifyContent: 'center',
@@ -33,8 +40,8 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     overflow: 'hidden',
-
-    backgroundColor: 'tomato', // 지우자
+    backgroundColor: 'white',
+    opacity: 0.9,
   },
   openBtn: {
     height: 20,
@@ -43,10 +50,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
   },
-  restaurantList: {
-    flex: 1,
+  firstRestaurant: {
     width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
   },
-})
+  restaurantList: {
+    width: '100%',
+    paddingHorizontal: 10,
+  },
+  restaurant: {
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'blue',
+  },
+});

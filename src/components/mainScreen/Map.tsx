@@ -6,8 +6,10 @@ import MapView, { Callout, MapPressEvent, Marker } from 'react-native-maps';
 import { myLocationState } from 'store/locationState';
 import { useForegroundPermissions } from 'expo-location';
 import { verifyLocationPermissions } from 'util/verifyLocationPermissions';
+import { mockNearbyRestaurantList } from 'data/mockdata';
 
 export default function Map() {
+  const mockData = mockNearbyRestaurantList;
   const [locationPermissionInformation, requestPermission] = useForegroundPermissions();
   const [myLocation, setMyLocation] = useRecoilState(myLocationState);
   const myRegion = {
@@ -57,6 +59,7 @@ export default function Map() {
           </Callout>
         </Marker>
       )}
+      {mockData.map(prop => <Marker key={prop.place_id} coordinate={{latitude: prop.geometry.location.lat, longitude: prop.geometry.location.lng}} title={prop.name} />)}
     </MapView>
   );
 }
