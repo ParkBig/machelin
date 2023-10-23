@@ -1,14 +1,15 @@
-import Test from 'components/mainScreen/Test';
 import { StatusBar } from 'expo-status-bar';
-import { getDetailRestaurantInfo, getNearbyRestaurants, getRestaurantPhotos } from 'query/restaurants';
 import { RecoilRoot } from 'recoil';
 import Router from 'screens/router/Router';
 import { useEffect, useState } from 'react';
 import { Restaurant } from 'types/data/restaureant';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 export default function App() {
   const [a, setA] = useState<Restaurant[]>();
-  console.log(a)
+  
   useEffect(() => {
     const getData = async () => {
       // 훌륭하게 가져오는중, 이것을 recoil로 가져오는걸로 바꾸자
@@ -20,10 +21,11 @@ export default function App() {
     getData();
   }, [])
   return (
-    <RecoilRoot>
-      <StatusBar style='auto' />
-      <Router />
-      {/* <Test /> */}
-    </RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <StatusBar style='light' />
+        <Router />
+      </RecoilRoot>
+    </QueryClientProvider>
   );
 }
