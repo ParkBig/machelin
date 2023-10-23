@@ -13,3 +13,7 @@
 ## short info
 
   - 대표이미지, 이름, 별점, 주소,
+
+## react native관련 라이브러리 찾는곳
+
+  - https://reactnative.directory/?search=slider
