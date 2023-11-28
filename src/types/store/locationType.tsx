@@ -11,7 +11,7 @@ export interface MyLocationState {
   longitude: number;
 }
 
-export type LocationSearchRadius = 1000 | 2000 | 3000 | 4000 | 5000;
+export type LocationSearchRadius = '1000' | '2000' | '3000' | '4000' | '5000';
 
 export interface FocusedRestaurant {
   isFocused: boolean;

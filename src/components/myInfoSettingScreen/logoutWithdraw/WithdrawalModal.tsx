@@ -1,0 +1,126 @@
+import { useNavigation } from '@react-navigation/native';
+import Button from 'components/common/Button';
+import ConfirmAlertModal, { ToggleState } from 'components/common/ConfirmAlertModal';
+import Line from 'components/common/Line';
+import { Colors, Shadow } from 'const/global-styles';
+import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
+import { withdrawalQuery } from 'query/user';
+import { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import Modal from 'react-native-modal';
+import { useMutation } from 'react-query';
+import { useResetRecoilState } from 'recoil';
+import { clickedMyInfoListTypeState } from 'store/userInfoState';
+import { UseNavigation } from 'types/screen/screenType';
+import { deleteToken } from 'util/tokenDB';
+
+interface Props {
+  toggleWithdrawalModal: boolean;
+  setToggleWithdrawalModal: () => void;
+}
+
+export default function WithdrawalModal({ toggleWithdrawalModal, setToggleWithdrawalModal }: Props) {
+  const { navigate } = useNavigation<UseNavigation<'MyInfoSettingScreen'>>();
+  const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
+  const resetClickedMyInfoListType = useResetRecoilState(clickedMyInfoListTypeState);
+  const { myInfo, reMyInfo } = useMyInfoQuery();
+  const { mutate } = useMutation(withdrawalQuery, {
+    onSuccess: async res => {
+      if (res.ok) {
+        await deleteToken();
+        reMyInfo();
+        resetClickedMyInfoListType();
+        navigate('MyScreen');
+      } else {
+        setToggleAlertModal({ toggle: true, alertMsg: res.msg });
+      }
+    },
+    onError: () => {
+      setToggleAlertModal({ toggle: true, alertMsg: '서버가 잠시 아픈거 같아요...' });
+    },
+  });
+
+  const withdrawHandler = () => {
+    mutate();
+  };
+
+  return (
+    <Modal
+      style={styles.modal}
+      backdropColor="transparent"
+      isVisible={toggleWithdrawalModal}
+      onSwipeComplete={setToggleWithdrawalModal}
+      onBackdropPress={setToggleWithdrawalModal}
+      onBackButtonPress={setToggleWithdrawalModal}
+      swipeDirection={['down']}
+      useNativeDriverForBackdrop
+    >
+      <View style={styles.wrap}>
+        <View style={styles.title}>
+          <Text style={styles.text}>마슐랭</Text>
+          <Text>"예"를 누르시면 즉시 회원 탈퇴되요</Text>
+          <Text>정말 회원탈퇴 하시겠습니까?</Text>
+        </View>
+        <View style={styles.buttons}>
+          <Button style={styles.button} onPress={setToggleWithdrawalModal}>
+            <Text style={styles.text}>아니요</Text>
+          </Button>
+          <Line style={styles.line} />
+          <Button style={styles.button} onPress={withdrawHandler}>
+            <Text style={styles.text}>예</Text>
+          </Button>
+        </View>
+      </View>
+      <ConfirmAlertModal
+        toggleModal={toggleAlertModal.toggle}
+        setToggleAlertModal={setToggleAlertModal}
+        alertMsg={toggleAlertModal.alertMsg}
+      />
+    </Modal>
+  );
+}
+
+const styles = StyleSheet.create({
+  modal: {
+    margin: 0,
+    marginBottom: 15,
+    paddingHorizontal: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  wrap: {
+    width: '100%',
+    padding: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    borderColor: Colors.mainGreen1,
+    borderWidth: 2,
+    ...Shadow,
+    backgroundColor: Colors.mainWhite1,
+  },
+  title: {
+    width: '100%',
+    alignItems: 'flex-start',
+    gap: 5,
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    flex: 1,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  line: {
+    height: '50%',
+    width: 3,
+    backgroundColor: Colors.lightGray,
+  },
+  text: {
+    fontWeight: 'bold',
+  },
+});

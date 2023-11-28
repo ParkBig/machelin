@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     gap: 10,
-    backgroundColor: Colors.mainWhite1,
+    backgroundColor: Colors.mainWhite3,
   },
   title: {
     height: 50,

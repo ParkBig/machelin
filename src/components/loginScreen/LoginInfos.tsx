@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import Button from 'components/common/Button';
+import ConfirmAlertModal, { ToggleState } from 'components/common/ConfirmAlertModal';
 import { Colors } from 'const/global-styles';
-import useMyInfoQuery from 'query/hooks/useMyInfoQuery';
+import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { loginQuery } from 'query/user';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
@@ -14,18 +15,24 @@ interface Infos {
   password: string;
 }
 
-
 export default function LoginInfos() {
   const { navigate } = useNavigation<UseNavigation<'LoginScreen'>>();
   const [infos, setInfos] = useState<Infos>({ email: '', password: '' });
+  const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const { reMyInfo } = useMyInfoQuery();
   const { mutate } = useMutation(loginQuery, {
-    onSuccess: async (res) => {
-      await storeToken(res.data.token);
-      reMyInfo();
-      navigate('MyListScreen');
+    onSuccess: async res => {
+      if (res.ok) {
+        await storeToken(res.token);
+        reMyInfo();
+        navigate('MyScreen');
+      } else {
+        setToggleAlertModal({ toggle: true, alertMsg: res.msg });
+      }
     },
-    onError: (error) => console.log(error),
+    onError: () => {
+      setToggleAlertModal({ toggle: true, alertMsg: '서버가 잠시 아픈거 같아요...' });
+    },
   });
 
   const setInfosHandler = (which: 'email' | 'password', text: string) => {
@@ -36,31 +43,38 @@ export default function LoginInfos() {
     const { email, password } = infos;
     mutate({ email, password });
   };
-  
+
   return (
-    <View style={styles.wrap}>
-      <TextInput
-        style={styles.input}
-        autoCorrect={false}
-        autoCapitalize="none"
-        keyboardType="email-address"
-        placeholder="이메일"
-        onChangeText={setInfosHandler.bind(null, 'email')}
-        value={infos.email}
+    <>
+      <View style={styles.wrap}>
+        <TextInput
+          style={styles.input}
+          autoCorrect={false}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          placeholder="이메일"
+          onChangeText={setInfosHandler.bind(null, 'email')}
+          value={infos.email}
+        />
+        <TextInput
+          style={styles.input}
+          autoCorrect={false}
+          autoCapitalize="none"
+          secureTextEntry={true}
+          placeholder="비밀번호"
+          onChangeText={setInfosHandler.bind(null, 'password')}
+          value={infos.password}
+        />
+        <Button style={styles.button} onPress={loginHandler}>
+          <Text style={styles.buttonText}>로그인</Text>
+        </Button>
+      </View>
+      <ConfirmAlertModal
+        toggleModal={toggleAlertModal.toggle}
+        setToggleAlertModal={setToggleAlertModal}
+        alertMsg={toggleAlertModal.alertMsg}
       />
-      <TextInput
-        style={styles.input}
-        autoCorrect={false}
-        autoCapitalize="none"
-        secureTextEntry={true}
-        placeholder="비밀번호"
-        onChangeText={setInfosHandler.bind(null, 'password')}
-        value={infos.password}
-      />
-      <Button style={styles.button} onPress={loginHandler}>
-        <Text style={styles.buttonText}>로그인</Text>
-      </Button>
-    </View>
+    </>
   );
 }
 
@@ -83,10 +97,10 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.lightGray,
+    backgroundColor: Colors.mainGreen1,
     borderRadius: 8,
   },
   buttonText: {
     color: 'white',
-  }
+  },
 });

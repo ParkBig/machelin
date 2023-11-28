@@ -7,18 +7,18 @@ import Modal from 'react-native-modal';
 
 interface Props {
   toggleModal: boolean;
-  openKeywordsHandler: () => void;
+  toggleModalHandler: () => void;
 }
 
-export default function KeywordsModal({ toggleModal, openKeywordsHandler }: Props) {
+export default function KeywordsModal({ toggleModal, toggleModalHandler }: Props) {
   return (
     <Modal
       style={styles.modal}
       backdropColor="transparent"
       isVisible={toggleModal}
-      onSwipeComplete={openKeywordsHandler}
-      onBackdropPress={openKeywordsHandler}
-      onBackButtonPress={openKeywordsHandler}
+      onSwipeComplete={toggleModalHandler}
+      onBackdropPress={toggleModalHandler}
+      onBackButtonPress={toggleModalHandler}
       swipeDirection={['down']}
       useNativeDriverForBackdrop
     >
@@ -28,7 +28,7 @@ export default function KeywordsModal({ toggleModal, openKeywordsHandler }: Prop
             <Ionicons name="flash" size={25} color={Colors.mainGreen3} />
             <Text style={styles.titleText}>키워드</Text>
           </View>
-          <Button onPress={openKeywordsHandler} style={styles.done}>
+          <Button onPress={toggleModalHandler} style={styles.done}>
             <Text style={styles.titleText}>완료</Text>
           </Button>
         </View>

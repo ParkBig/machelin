@@ -11,7 +11,6 @@ export default function Router() {
       .then(() => {
         setTokenDBInit(true);
       })
-      .catch(error => console.log(error));
   }, []);
 
   return (

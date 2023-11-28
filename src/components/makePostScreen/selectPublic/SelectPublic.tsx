@@ -1,15 +1,16 @@
 import Button from 'components/common/Button';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View } from 'react-native';
-import { Size } from 'const/global-styles';
+import { Colors, Size } from 'const/global-styles';
 import { useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { makePostState } from 'store/makePostState';
 import PublicSettingModal from './PublicSettingModal';
+import Line from 'components/common/Line';
 
 export default function SelectPublic() {
+  const makePostInfo = useRecoilValue(makePostState);
   const [togglePublicModal, setTogglePublicModal] = useState(false);
-  const [makePostInfo, setMakePostInfo] = useRecoilState(makePostState);
 
   const toggleModal = () => {
     setTogglePublicModal(prev => !prev);
@@ -18,7 +19,8 @@ export default function SelectPublic() {
   return (
     <View style={styles.wrap}>
       <View style={styles.title}>
-        <Text style={[styles.text, { fontWeight: 'bold' }]}>공개 범위</Text>
+        <Text style={[styles.text, { fontWeight: 'bold' }]}>공개범위</Text>
+        <Line style={styles.line} />
       </View>
       <View>
         <Button style={styles.button} onPress={toggleModal}>
@@ -33,26 +35,34 @@ export default function SelectPublic() {
 
 const styles = StyleSheet.create({
   wrap: {
-    height: 50,
+    height: 70,
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    gap: 20,
+    marginBottom: 50,
+    borderBottomColor: Colors.mainGreen1,
+    borderBottomWidth: 1.5,
   },
   title: {
+    height: '100%',
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
-    gap: 5,
+    gap: 10,
+  },
+  line: {
+    width: 2,
+    height: '50%',
+    backgroundColor: Colors.mainGreen2
   },
   button: {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
+    opacity: 0.7,
     gap: 5,
   },
   text: {
-    fontSize: Size.normalBig,
+    fontSize: Size.normalSmallMiddle,
   },
 });

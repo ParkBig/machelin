@@ -1,17 +1,23 @@
 import { Colors, Size } from 'const/global-styles';
-import EvaluatorsScreen from 'screens/EvaluatorsScreen';
-import MainScreen from 'screens/MainScreen';
-import MyListScreen from 'screens/MyListScreen';
-import MachelinLankScreen from 'screens/MachelinLankScreen';
 import { RootBottomTab } from 'types/screen/screenType';
-import Button from 'components/common/Button';
 import { Ionicons } from '@expo/vector-icons';
+import MainScreen from 'screens/bottomTab/MainScreen';
+import MachelinLankScreen from 'screens/bottomTab/MachelinLankScreen';
+import EvaluatorsScreen from 'screens/bottomTab/EvaluatorsScreen';
+import MyScreen from 'screens/bottomTab/MyScreen';
 
 export default function BottomTabScreen() {
   return (
     <RootBottomTab.Navigator
       screenOptions={{
         headerShown: false,
+        headerTintColor: Colors.mainWhite3,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerStyle: {
+          backgroundColor: Colors.mainGreen2,
+        },
         tabBarStyle: {
           backgroundColor: Colors.mainGreen2,
         },
@@ -48,12 +54,16 @@ export default function BottomTabScreen() {
         }}
       />
       <RootBottomTab.Screen
-        name="MyListScreen"
-        component={MyListScreen}
+        name="MyScreen"
+        component={MyScreen}
         options={{
+          unmountOnBlur: true,
           headerShown: true,
           headerTitleAlign: 'left',
           title: '마슐랭',
+          headerTitleStyle: {
+            fontWeight: 'bold'
+          },
           headerStyle: {
             backgroundColor: Colors.mainGreen2,
           },

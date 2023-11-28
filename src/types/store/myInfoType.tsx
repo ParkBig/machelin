@@ -1,47 +1,67 @@
-export interface MyInfo {
-  bookmarks: string[]; 
-  createdAt: string;
-  email: string;
-  follow: Follow[];
-  followers: Follow[];
+export interface UserInfo {
   id: number;
-  nickName: string;
-  password: string;
-  pfp: string;
-  posts: Post[];
-  rank: string;
+  createdAt: Date;
+  updatedAt: Date;
   role: 'ADMIN' | 'USER';
-  updatedAt: string;
-  verified: boolean;
+  mobile: string;
+  email: string;
+  password: string;
+  nickname: string;
+  pfp: string;
+  rank: string;
+  activityZone: string;
+  preferFoods: string[];
+  preferRestaurant: string;
+  medalsEarned: string[];
+  bookmarks: Bookmark[];
+
+  // will remove
+  follows: UserInfo[];
+  followers: UserInfo[];
+  posts: IPost[];
+  likes: Like[];
+  dislikes: Like[];
 }
 
 export interface Bookmark {
-  id: string;
+  id: number;
+  createdAt: Date;
+  restaurantId: string;
   lat: number;
   lng: number;
   restaurantName: string;
-  img: string;
+  images: string[];
   address: string;
   rating: number;
-  totalUserRatings: number;
+  totalRatings: number;
 }
 
-interface Follow {
-  pfp: string;
-  nickName: string;
-}
-
-interface Post {
+export interface Comment {
   id: number;
   createdAt: Date;
-  title: string;
+  comment: string;
+  owner: UserInfo;
+}
+
+export interface Like {
+  id: number;
+  createdAt: Date;
+  post: IPost;
+}
+
+export interface IPost {
+  id: number;
+  createdAt: Date;
+  restaurantId: string;
+  restaurantName: string;
+  restaurantAddress: string;
+  images: string[];
   contents: string;
-  photos: string[];
-  likes: number;
+  hashtags: string[];
+  rating: number;
+  isPublic: boolean;
+  likes: Like[];
   report: number;
-  comments: {
-    pfp: string;
-    nickName: string;
-    comment: string;
-  }
+  comments: Comment[];
+  owner: UserInfo;
 }

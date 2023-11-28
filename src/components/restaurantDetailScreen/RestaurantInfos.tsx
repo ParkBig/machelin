@@ -3,18 +3,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { OpeningHoursPeriod } from 'types/data/restaureant';
 import { Colors } from 'const/global-styles';
 import { useState } from 'react';
+import { useRoute } from '@react-navigation/native';
+import { UseRouter } from 'types/screen/screenType';
+import useRestaurantDetailQuery from 'query/hooks/restaurants/useRestaurantDetailQuery';
 
-interface Props {
-  phone: string;
-  vicinity: string;
-  opening_hours: {
-    open_now: boolean;
-    periods: OpeningHoursPeriod[];
-    weekday_text: string[];
-  };
-}
-
-export default function RestaurantInfos({ phone, vicinity, opening_hours }: Props) {
+export default function RestaurantInfos() {
+  const { params } = useRoute<UseRouter<'RestaurantDetailScreen'>>();
+  const { restaurantDetail } = useRestaurantDetailQuery(params.restaurantId);
   const [isOpenTimeInfo, setIsOpenTimeInfo] = useState(false);
   const dayOfWeek = new Date().getDay();
 
@@ -26,16 +21,16 @@ export default function RestaurantInfos({ phone, vicinity, opening_hours }: Prop
     <View style={styles.infos}>
       <View style={styles.info}>
         <Ionicons name="call-outline" size={25} />
-        <Text>{phone}</Text>
+        <Text>{restaurantDetail?.detailRestaurant?.formatted_phone_number}</Text>
       </View>
       <View style={styles.info}>
         <Ionicons name="location-outline" size={25} />
-        <Text>{vicinity}</Text>
+        <Text>{restaurantDetail?.detailRestaurant?.vicinity}</Text>
       </View>
       <View style={styles.info}>
         <Ionicons name="time-outline" size={25} />
         <View style={styles.timeInfo}>
-          <Text>{opening_hours.weekday_text[dayOfWeek]}</Text>
+          <Text>{restaurantDetail?.detailRestaurant?.opening_hours.weekday_text[dayOfWeek]}</Text>
           <Pressable onPress={toggleTimeInfo}>
             <Ionicons name="add-outline" size={25} />
           </Pressable>
@@ -44,10 +39,14 @@ export default function RestaurantInfos({ phone, vicinity, opening_hours }: Prop
       {isOpenTimeInfo && (
         <View style={styles.detailTimeInfo}>
           <View>
-            {opening_hours.open_now ? <Text>현재 오픈중입니다</Text> : <Text>현재 오픈중이 아닙니다</Text>}
+            {restaurantDetail?.detailRestaurant?.opening_hours.open_now ? (
+              <Text>현재 오픈중입니다</Text>
+            ) : (
+              <Text>현재 오픈중이 아닙니다</Text>
+            )}
           </View>
           <View>
-            {opening_hours.weekday_text.map((time, index) => (
+            {restaurantDetail?.detailRestaurant?.opening_hours.weekday_text.map((time, index) => (
               <View key={index}>
                 <Text>{time}</Text>
               </View>

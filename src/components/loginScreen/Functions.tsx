@@ -7,7 +7,9 @@ export default function Functions() {
   const { navigate } = useNavigation<UseNavigation<'LoginScreen'>>()
 
   const goToSignUpHandler = () => {
-    navigate('SignUpScreen');
+    // navigate('SignUpScreen');
+    // testing~
+    navigate('MobileVerificationScreen')
   };
 
   const goToFindEmailHandler = () => {};
