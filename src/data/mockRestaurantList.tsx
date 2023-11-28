@@ -1,6 +1,6 @@
-import { responseRestaurant } from "types/data/restaureant";
+import { IRestaurantInfo } from "types/data/restaureant";
 
-export const mockRestaurantList: responseRestaurant[] = [
+export const mockRestaurantList: IRestaurantInfo[] = [
   {
     business_status: 'OPERATIONAL',
     geometry: {
@@ -15,15 +15,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '서리풀식당',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJgdFnDN-hfDURZq6gKyWVau8',
     plus_code: { compound_code: 'F2R7+J9 서울특별시', global_code: '8Q99F2R7+J9' },
     rating: 3.9,
@@ -47,15 +39,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '정식당',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJLwsYxYijfDURiJD-QZw6MYU',
     plus_code: { compound_code: 'G2GR+6C 서울특별시', global_code: '8Q99G2GR+6C' },
     price_level: 4,
@@ -80,15 +64,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '신미식당',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJYz59k4-jfDUR7szEuiMOq6k',
     plus_code: { compound_code: 'G2HJ+59 서울특별시', global_code: '8Q99G2HJ+59' },
     rating: 4.2,
@@ -112,15 +88,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '호남식당',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJmQzUv42jfDUREbP94FRj7e4',
     plus_code: { compound_code: 'G2FJ+57 서울특별시', global_code: '8Q99G2FJ+57' },
     rating: 4.1,
@@ -144,15 +112,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '광주식당',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJTddK8hqkfDUR0kAGfh_G8CA',
     plus_code: { compound_code: 'G323+C5 서울특별시', global_code: '8Q99G323+C5' },
     price_level: 2,
@@ -177,15 +137,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '잠원정육식당',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJgZQyABmjfDURfFLUB6zqmlc',
     plus_code: { compound_code: 'G253+PC 서울특별시', global_code: '8Q99G253+PC' },
     price_level: 2,
@@ -210,15 +162,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '제주식당',
     opening_hours: { open_now: true },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJOT-6u7ajfDUR5qvkqArE1Bk',
     plus_code: { compound_code: 'G2M3+88 서울특별시', global_code: '8Q99G2M3+88' },
     price_level: 3,
@@ -243,15 +187,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '현대북어(구 현대기사식당)',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJQfd4h1WhfDUR1FfGRBr4kpE',
     plus_code: { compound_code: 'F2XP+GJ 서울특별시', global_code: '8Q99F2XP+GJ' },
     rating: 4.1,
@@ -275,15 +211,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '한라산 - 제주식당',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJ91Wq5nukfDURZnt-hp9-8Q4',
     plus_code: { compound_code: 'G2GW+R7 서울특별시', global_code: '8Q99G2GW+R7' },
     rating: 4.3,
@@ -306,15 +234,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_background_color: '#FF9E67',
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '거대식당',
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJ4dtlZIyjfDUR20ne5XGoky0',
     plus_code: { compound_code: 'G22M+9R 서울특별시', global_code: '8Q99G22M+9R' },
     rating: 4.2,
@@ -338,15 +258,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '춘식당',
     opening_hours: { open_now: true },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJSSgG6OyjfDURhq7NyK1J2I8',
     plus_code: { compound_code: 'G2CG+29 서울특별시', global_code: '8Q99G2CG+29' },
     rating: 4,
@@ -370,15 +282,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '우리식당',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJH_T6BZOjfDUR7PAWV_ovWFU',
     plus_code: { compound_code: 'G2FG+89 서울특별시', global_code: '8Q99G2FG+89' },
     price_level: 1,
@@ -403,15 +307,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '신흥식당',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJpeFp2BqkfDURp8QYMp0tU40',
     plus_code: { compound_code: 'G322+6P 서울특별시', global_code: '8Q99G322+6P' },
     price_level: 2,
@@ -436,15 +332,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '새마을식당 압구정역점',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJj5w8Jo6jfDURGYxuq9PnUY4',
     plus_code: { compound_code: 'G2GH+HQ 서울특별시', global_code: '8Q99G2GH+HQ' },
     price_level: 2,
@@ -469,15 +357,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '호보식당',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJYw7CRQ-hfDURuJUJvtO1_rQ',
     plus_code: { compound_code: 'F2XM+6R 서울특별시', global_code: '8Q99F2XM+6R' },
     rating: 4.4,
@@ -501,15 +381,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '칠백식당-삼성직영점',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJRUdJ6QykfDURw5Jq_jHzzOI',
     plus_code: { compound_code: 'G26W+PR 서울특별시', global_code: '8Q99G26W+PR' },
     rating: 4.1,
@@ -533,15 +405,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '동달식당 강남본점',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJvZdYaFuhfDURx5B0QbG_rv4',
     plus_code: { compound_code: 'F2WF+4V 서울특별시', global_code: '8Q99F2WF+4V' },
     price_level: 3,
@@ -566,15 +430,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '애월식당 압구정점',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJf1xp-_2jfDURB2qIgGydi9E',
     plus_code: { compound_code: 'G2GQ+45 서울특별시', global_code: '8Q99G2GQ+45' },
     rating: 4.4,
@@ -598,15 +454,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '새마을식당 역삼스타타워점',
     opening_hours: { open_now: true },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJFSLW5lWhfDURxRovg7NYyfs',
     plus_code: { compound_code: 'F2XP+C4 서울특별시', global_code: '8Q99F2XP+C4' },
     price_level: 2,
@@ -631,15 +479,7 @@ export const mockRestaurantList: responseRestaurant[] = [
     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
     name: '전주식당',
     opening_hours: { open_now: false },
-    photos: [
-      {
-        height: 3024,
-        html_attributions: ['<a href="https://maps.google.com/maps/contrib/117600448889234589608">Cynthia Wei</a>'],
-        photo_reference:
-          'Aap_uEC6jqtpflLS8GxQqPHBjlcwBf2sri0ZErk9q1ciHGZ6Zx5HBiiiEsPEO3emtB1PGyWbBQhgPL2r9CshoVlJEG4xzB71QMhGBTqqeaCNk1quO3vTTiP50aM1kmOaBQ-DF1ER7zpu6BQOEtnusKMul0m4KA45wfE3h6Xh2IxjLNzx-IiX',
-        width: 4032,
-      },
-    ],
+    photos: '',
     place_id: 'ChIJf-Umm7OhfDUR4Twt8xkK5OI',
     plus_code: { compound_code: 'F2R6+QM 서울특별시', global_code: '8Q99F2R6+QM' },
     rating: 3,

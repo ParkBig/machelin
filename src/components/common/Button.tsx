@@ -7,8 +7,13 @@ interface Props {
 }
 
 export default function Button({ style, children, onPress }: Props) {
+  const dynamicStyle = ({ pressed }: { pressed: boolean }) => ({
+    opacity: pressed ? 0.7 : 1,
+    ...(style),
+  });
+
   return (
-    <Pressable onPress={onPress} style={({ pressed }) => [pressed && { opacity: 0.7 }, style]}>
+    <Pressable onPress={onPress} style={dynamicStyle}>
       {children}
     </Pressable>
   );

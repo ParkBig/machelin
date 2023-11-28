@@ -1,22 +1,25 @@
-import { Colors } from 'const/global-styles';
 import { ScreenWidth } from 'const/dimenstions';
 import { StyleSheet, Text, View } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { Photo } from 'types/data/restaureant';
+import useRestaurantDetailQuery from 'query/hooks/restaurants/useRestaurantDetailQuery';
+import { useRoute } from '@react-navigation/native';
+import { UseRouter } from 'types/screen/screenType';
 
-interface Props {
-  photos?: Photo[];
-}
+export default function RestaurantImg() {
+  const { params } = useRoute<UseRouter<'RestaurantDetailScreen'>>();
+  const { restaurantDetail } = useRestaurantDetailQuery(params.restaurantId);
 
-export default function RestaurantImg({ photos }: Props) {
   return (
     <View style={styles.wrap}>
       <Swiper>
-        {photos?.map(contents => (
+        <View>
+          <Text>image here</Text>
+        </View>
+        {/* {restaurantDetail?.detailRestaurant?.images?.map(contents => (
           <View style={styles.img} key={contents.photo_reference}>
             <Text>oo</Text>
           </View>
-        ))}
+        ))} */}
       </Swiper>
     </View>
   );

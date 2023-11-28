@@ -1,62 +1,73 @@
 import { BottomTabScreenProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
-import { DetailRestaurant, responseRestaurant } from 'types/data/restaureant';
+import { DetailRestaurant } from 'types/data/restaureant';
 
 export type RootBottomTabParamList = {
   MainScreen: undefined;
-  MyListScreen: undefined;
   MachelinLankScreen: undefined;
   EvaluatorsScreen: undefined;
+  MyScreen: undefined;
 };
 export type RootStackParamList = {
-  SelectLoginPlatformScreen: undefined;
   BottomTabScreen: undefined;
   MyMapScreen: undefined;
   LoginScreen: undefined;
-  SignUpScreen: undefined;
   MyInfoSettingScreen: undefined;
-  InstanceModifyMyInfoScreen: {
-    modifyType: '닉네임 변경' | '이메일 변경';
-  }
+  MobileVerificationScreen: undefined;
+  ChangeMyNicknameScreen: undefined;
+  ChangeMyActivityZoneScreen: undefined;
+  ChangeMyPreferFoodsScreen: undefined;
+  ChangeMyPreferRestaurantScreen: undefined;
+  SignUpScreen: {
+    mobile: string;
+  };
+  ExploreUserInfoScreen: {
+    userId: number;
+  };
   MakePostScreen: {
-    restaurantInfo: DetailRestaurant;
+    restaurantInfo: DetailRestaurant | null;
   };
   RestaurantDetailScreen: {
-    restaurant: responseRestaurant;
+    restaurantName: string;
+    restaurantId: string;
   };
 };
 export type AllParmList = {
   // BottomTabScreen
   MainScreen: undefined;
-  MyListScreen: undefined;
   MachelinLankScreen: undefined;
   EvaluatorsScreen: undefined;
+  MyScreen: undefined;
 
   // StackScreen
-  SelectLoginPlatformScreen: undefined;
   BottomTabScreen: undefined;
   MyMapScreen: undefined;
   LoginScreen: undefined;
-  SignUpScreen: undefined;
   MyInfoSettingScreen: undefined;
-  InstanceModifyMyInfoScreen: {
-    modifyType: '닉네임 변경' | '이메일 변경';
-  }
+  MobileVerificationScreen: undefined;
+  ChangeMyNicknameScreen: undefined;
+  ChangeMyActivityZoneScreen: undefined;
+  ChangeMyPreferFoodsScreen: undefined;
+  ChangeMyPreferRestaurantScreen: undefined;
+  SignUpScreen: {
+    mobile: string;
+  };
+  ExploreUserInfoScreen: {
+    userId: number;
+  };
   MakePostScreen: {
-    restaurantInfo: DetailRestaurant;
+    restaurantInfo: DetailRestaurant | null;
   };
   RestaurantDetailScreen: {
-    restaurant: responseRestaurant;
+    restaurantName: string;
+    restaurantId: string;
   };
 };
 export type UseNavigation<T extends keyof AllParmList> = NavigationProp<AllParmList, T>;
 export type UseRouter<T extends keyof AllParmList> = RouteProp<AllParmList, T>;
-export type StackScreenPropsAbout<T extends keyof RootStackParamList> = NativeStackScreenProps<RootStackParamList, T>;
-export type BottomTabScreenPropsAbout<T extends keyof RootBottomTabParamList> = BottomTabScreenProps<
-  RootBottomTabParamList,
-  T
->;
+export type StackScreenPropsAbout<T extends keyof AllParmList> = NativeStackScreenProps<AllParmList, T>;
+export type BottomTabScreenPropsAbout<T extends keyof AllParmList> = BottomTabScreenProps<AllParmList, T>;
 
 export const RootBottomTab = createBottomTabNavigator<RootBottomTabParamList>();
 export const RootStack = createNativeStackNavigator<RootStackParamList>();

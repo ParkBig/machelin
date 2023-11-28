@@ -1,4 +1,4 @@
-import { Colors, Size } from 'const/global-styles';
+import { Size } from 'const/global-styles';
 import { StyleSheet, TextInput, View } from 'react-native';
 import { useRecoilState } from 'recoil';
 import { makePostState } from 'store/makePostState';
@@ -15,7 +15,7 @@ export default function PostContents() {
       <TextInput
         style={styles.textInput}
         multiline
-        placeholder="내용을 입력해봐요..."
+        placeholder="내용을 입력해요..."
         onChangeText={onChangeTextHandler}
         value={makePostInfo.contents}
       />
@@ -27,12 +27,10 @@ const styles = StyleSheet.create({
   wrap: {
     width: '100%',
     paddingVertical: 10,
-    borderBottomColor: Colors.mainColor,
-    borderBottomWidth: 2,
   },
   textInput: {
     width: '100%',
     minHeight: 50,
-    fontSize: Size.normalBig,
+    fontSize: Size.normalMiddle,
   },
 });

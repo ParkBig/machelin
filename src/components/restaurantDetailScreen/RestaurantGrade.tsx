@@ -1,26 +1,19 @@
+import { useRoute } from '@react-navigation/native';
 import { Colors } from 'const/global-styles';
+import useRestaurantDetailQuery from 'query/hooks/restaurants/useRestaurantDetailQuery';
 import { Text, View } from 'react-native';
 import { StyleSheet } from 'react-native';
+import { UseRouter } from 'types/screen/screenType';
 
-interface Props {
-  rating: number;
-}
+export default function RestaurantGrade() {
+  const { params } = useRoute<UseRouter<'RestaurantDetailScreen'>>();
+  const { restaurantDetail } = useRestaurantDetailQuery(params.restaurantId);
 
-export default function RestaurantGrade({ rating }: Props) {
   return (
     <View style={styles.grades}>
       <View style={styles.grade}>
         <Text>Google</Text>
-        <Text>{rating} /5</Text>
-      </View>
-      <View style={styles.grade}>
-        <Text>kakao</Text>
-      </View>
-      <View style={styles.grade}>
-        <Text>naver</Text>
-      </View>
-      <View style={styles.grade}>
-        <Text>machelin</Text>
+        <Text>{restaurantDetail?.detailRestaurant?.rating} /5</Text>
       </View>
     </View>
   );
