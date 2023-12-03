@@ -8,14 +8,33 @@ import LoadingOverlay from 'components/common/LoadingOverlay';
 import ContentsSelector from 'components/myScreen/contentsSeclector/ContentsSelector';
 import { RefreshControl } from 'react-native-gesture-handler';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
+import { useRecoilValue } from 'recoil';
+import { clickedMyInfoListTypeState } from 'store/userInfoState';
+import useUsersBookmarksQuery from 'query/hooks/users/useUsersBookmarksQuery';
+import useUsersPostsQuery from 'query/hooks/users/useUsersPostsQuery';
+import useUsersFollowersQuery from 'query/hooks/users/useUsersFollowersQuery';
+import useUsersFollowsQuery from 'query/hooks/users/useUsersFollowsQuery';
 
 export default function MyScreen() {
   const [refreshing, setRefreshing] = useState(false);
-  const { myInfoIsLoading, reMyInfo } = useMyInfoQuery();
+  const { myInfo, myInfoIsLoading, reMyInfo } = useMyInfoQuery();
+  const clickedMyInfoListType = useRecoilValue(clickedMyInfoListTypeState);
+  const { reBookmarks } = useUsersBookmarksQuery(myInfo?.authUser?.id);
+  const { rePosts } = useUsersPostsQuery(myInfo?.authUser?.id);
+  const { reFollowers } = useUsersFollowersQuery(myInfo?.authUser?.id);
+  const { reFollows } = useUsersFollowsQuery(myInfo?.authUser?.id);
 
   const onRefreshHandler = () => {
     setRefreshing(true);
     reMyInfo();
+    if (clickedMyInfoListType === 'posts') {
+      rePosts();
+    } else if (clickedMyInfoListType === 'bookMark') {
+      reBookmarks();
+    } else if (clickedMyInfoListType === 'follow') {
+      reFollows();
+      reFollowers();
+    }
     setRefreshing(false);
   };
 

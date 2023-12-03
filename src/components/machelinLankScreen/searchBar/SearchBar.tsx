@@ -4,8 +4,8 @@ import Button from 'components/common/Button';
 import { Colors } from 'const/global-styles';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import KeywordsModal from './KeywordsModal';
 import { regionalSettingsState } from 'store/searchState';
+import KeywordsModal from 'components/common/KeywordsModal';
 
 export default function SearchBar() {
   const [toggleModal, setToggleModal] = useState(false);
@@ -22,23 +22,25 @@ export default function SearchBar() {
   };
 
   return (
-    <View style={styles.wrap}>
-      <Button onPress={searchHandler} style={styles.searchIcon}>
-        <Ionicons name="search-outline" size={25} color={Colors.mainWhite1} />
-      </Button>
-      <TextInput
-        style={styles.searchInput}
-        autoCorrect={false}
-        autoCapitalize="none"
-        placeholder="검색해볼까요?"
-        onChangeText={searchTextChangeHandler}
-        value={regionalSettings.searchText}
-      />
-      <Button onPress={toggleModalHandler} style={styles.searchIcon}>
-        <Ionicons name="flash" size={25} color={Colors.mainWhite1} />
-      </Button>
+    <>
+      <View style={styles.wrap}>
+        <Button onPress={searchHandler} style={styles.searchIcon}>
+          <Ionicons name="search-outline" size={25} color={Colors.mainWhite1} />
+        </Button>
+        <TextInput
+          style={styles.searchInput}
+          autoCorrect={false}
+          autoCapitalize="none"
+          placeholder="검색해볼까요?"
+          onChangeText={searchTextChangeHandler}
+          value={regionalSettings.searchText}
+        />
+        <Button onPress={toggleModalHandler} style={styles.searchIcon}>
+          <Ionicons name="flash" size={25} color={Colors.mainWhite1} />
+        </Button>
+      </View>
       <KeywordsModal toggleModal={toggleModal} toggleModalHandler={toggleModalHandler} />
-    </View>
+    </>
   );
 }
 

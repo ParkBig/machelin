@@ -33,6 +33,11 @@ interface ToggleFriendStateInput {
   exploreUserId: number;
 }
 
+interface CheckSignUpVerificationInput {
+  phoneNumber: string;
+  verificationCode: string;
+}
+
 const axiosUsers = axios.create({
   baseURL: `${process.env.DEV_SERVER_URL}/users`,
 });
@@ -49,7 +54,7 @@ axiosUsers.interceptors.request.use(async config => {
 export const myInfoQuery = async () => {
   const token = await takeToken();
 
-  if (!token) return { ok: false, authUser: null };
+  if (!token) return { ok: true, authUser: null };
 
   const { data } = await axiosUsers.get('/me');
   return data;
@@ -73,22 +78,9 @@ export const exploreUserQuery = async (userId: number) => {
   return data;
 };
 
-export const usersPostsQuery = async (userId?: number) => {
-  if (!userId) {
-    return { ok: false, posts: null, likes: null, dislikes: null };
-  }
-
-  const { data } = await axiosUsers.get('/usersPosts', {
-    params: {
-      userId,
-    },
-  });
-  return data;
-};
-
 export const usersFollowsQuery = async (userId?: number) => {
   if (!userId) {
-    return { ok: false, follows: null };
+    return { ok: true, follows: null };
   }
 
   const { data } = await axiosUsers.get('/usersFollows', {
@@ -101,7 +93,7 @@ export const usersFollowsQuery = async (userId?: number) => {
 
 export const usersFollowersQuery = async (userId?: number) => {
   if (!userId) {
-    return { ok: false, follows: null };
+    return { ok: true, follows: null };
   }
 
   const { data } = await axiosUsers.get('/usersFollowers', {
@@ -134,6 +126,26 @@ export const loginQuery = async (loginInput: LoginInput) => {
   const { data } = await axiosUsers.post('/login', loginInput);
   return data;
 };
+
+export const sendSignUpVerificationQuery = async (phoneNumber: string) => {
+  const { data } = await axiosUsers.post('/sendSignUpVerification', { phoneNumber });
+  return data;
+};
+
+export const checkSignUpVerificationQuery =async (checkSignUpVerificationInput: CheckSignUpVerificationInput) => {
+  const { data } = await axiosUsers.post('/checkSignUpVerification', checkSignUpVerificationInput);
+  return data;
+}
+
+export const sendFindMyIdVerificationQuery =async (phoneNumber: string) => {
+  const { data } = await axiosUsers.post('/sendFindMyIdVerification', { phoneNumber });
+  return data;
+}
+
+export const checkFindMyIdVerificationQuery =async (checkFindMyIdVerificationInput: CheckSignUpVerificationInput) => {
+  const { data } = await axiosUsers.post('/checkFindMyIdVerification', checkFindMyIdVerificationInput);
+  return data;
+}
 
 export const modifyUserImageQuery = async (modifyUserImageInput: FormData) => {
   const { data } = await axiosUsers.post('/modifyUserImage', modifyUserImageInput, {

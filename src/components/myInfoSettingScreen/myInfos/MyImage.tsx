@@ -78,7 +78,7 @@ export default function MyImage() {
         <View style={styles.pfp}>
           <Image
             style={styles.image}
-            source={{ uri: myInfo?.authUser.pfp ? myInfo?.authUser.pfp : DEFAULT_IMAGE }}
+            source={myInfo?.authUser?.pfp ? { uri: myInfo?.authUser?.pfp } : require('assets/png/user.png')}
             resizeMode="contain"
           />
           <Button style={styles.changeImageButton} onPress={changeImageHandler}>

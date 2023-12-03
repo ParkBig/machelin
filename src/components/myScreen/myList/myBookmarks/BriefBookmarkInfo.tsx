@@ -1,30 +1,40 @@
 import Button from 'components/common/Button';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Bookmark } from 'types/store/myInfoType';
+import { useNavigation } from '@react-navigation/native';
+import { UseNavigation } from 'types/screen/screenType';
 
 interface Props {
   bookmark: Bookmark;
-  onPress: () => void;
 }
 
-export default function BriefBookmarkInfo({ bookmark, onPress }: Props) {
+export default function BriefBookmarkInfo({ bookmark }: Props) {
+  const { navigate } = useNavigation<UseNavigation<'MyScreen'>>();
+
+  const imageUrl = bookmark.images[0];
+
+  const goToDetailRestaurantHandler = () => {
+    navigate('RestaurantDetailScreen', {
+      restaurantName: bookmark.restaurantName,
+      restaurantId: bookmark.restaurantId,
+    });
+  };
+
   return (
     <View style={styles.wrap}>
       <View style={styles.imgWrap}>
-        <View style={styles.img}></View>
+        <Image
+          style={styles.img}
+          source={imageUrl ? { uri: imageUrl } : require('assets/png/dish.png')}
+          resizeMode="cover"
+        />
       </View>
       <View style={styles.info}>
         <View style={styles.restaurantName}>
-          <View>
-            <Text>{bookmark.restaurantName}</Text>
-          </View>
-          <View style={styles.rating}>
-            <Ionicons name="star" color="yellow" size={20} />
-            <Text>
-              {bookmark.rating}/5 {`(${bookmark.totalRatings})`}
-            </Text>
-          </View>
+          <Text numberOfLines={1} ellipsizeMode="tail">
+            {bookmark.restaurantName}
+          </Text>
         </View>
         <View style={styles.restaurantAddress}>
           <Text numberOfLines={1} ellipsizeMode="tail">
@@ -32,7 +42,7 @@ export default function BriefBookmarkInfo({ bookmark, onPress }: Props) {
           </Text>
         </View>
       </View>
-      <Button style={styles.Interaction} onPress={onPress}>
+      <Button style={styles.Interaction} onPress={goToDetailRestaurantHandler}>
         <Ionicons name="chevron-forward" size={25} />
       </Button>
     </View>
@@ -44,25 +54,26 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 5,
   },
   imgWrap: {
-    height: 80,
+    height: 70,
     width: 70,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 10,
+    overflow: 'hidden',
   },
   img: {
-    width: 55,
-    height: 55,
+    width: 70,
+    height: 70,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
-    backgroundColor: 'red',
   },
   info: {
     flex: 1,
-    height: 80,
+    minHeight: 80,
     paddingLeft: 10,
     alignItems: 'center',
     justifyContent: 'center',
@@ -70,9 +81,7 @@ const styles = StyleSheet.create({
   restaurantName: {
     flex: 1,
     width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 15,
+    justifyContent: 'center',
   },
   rating: {
     flexDirection: 'row',
@@ -84,6 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     justifyContent: 'center',
+    flexWrap: 'wrap',
   },
   Interaction: {
     justifyContent: 'center',

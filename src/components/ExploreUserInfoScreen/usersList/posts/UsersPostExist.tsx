@@ -6,11 +6,11 @@ import { UseRouter } from 'types/screen/screenType';
 
 export default function UsersPostExist() {
   const { params } = useRoute<UseRouter<'ExploreUserInfoScreen'>>();
-  const { posts } = useExploreUsersPostsQuery(params.userId);
+  const { posts, rePosts } = useExploreUsersPostsQuery(params.userId);
 
   return (
     <View style={styles.wrap}>
-      {posts?.posts?.map(post => <Post key={post.id} posts={post} likes={posts.likes} dislikes={posts.dislikes} />)}
+      {posts?.posts?.map(post => <Post key={post.id} posts={post} rePosts={rePosts} isDetailScreen={false} />)}
     </View>
   );
 }

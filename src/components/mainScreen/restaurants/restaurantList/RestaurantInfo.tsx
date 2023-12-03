@@ -1,31 +1,24 @@
-import { StyleSheet, View, ViewBase } from 'react-native';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { focusedRestaurantState, mapLocationState } from 'store/locationState';
+import { StyleSheet, View } from 'react-native';
+import { useRecoilState } from 'recoil';
+import { focusedRestaurantState } from 'store/locationState';
 import { IRestaurantInfo } from 'types/data/restaureant';
 import { Colors } from 'const/global-styles';
 import { useNavigation } from '@react-navigation/native';
 import { UseNavigation } from 'types/screen/screenType';
 import Button from 'components/common/Button';
 import BriefRestaurantInfo from '../common/BriefRestaurantInfo';
+import { memo } from 'react';
 
 interface Props {
   restaurant: IRestaurantInfo;
 }
 
-export default function RestaurantInfo({ restaurant }: Props) {
+const RestaurantInfo = memo(({ restaurant }: Props) => {
   const { navigate } = useNavigation<UseNavigation<'MainScreen'>>();
-  const setMapLocation = useSetRecoilState(mapLocationState);
   const [focusedRestaurant, setFocusedRestaurant] = useRecoilState(focusedRestaurantState);
 
   const restaurantChoiceHandler = () => {
     const { lat, lng } = restaurant.geometry.location;
-    setMapLocation(prev => ({
-      ...prev,
-      latitude: lat - 0.0045,
-      longitude: lng,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01,
-    }));
     setFocusedRestaurant({
       isFocused: true,
       id: restaurant.place_id,
@@ -52,7 +45,7 @@ export default function RestaurantInfo({ restaurant }: Props) {
     <Button
       style={{
         ...styles.wrap,
-        backgroundColor: focusedRestaurant.id === restaurant.place_id ? Colors.lightGray : Colors.mainWhite1,
+        backgroundColor: focusedRestaurant.id === restaurant.place_id ? Colors.superLightGray : Colors.mainWhite1,
       }}
       onPress={restaurantChoiceHandler}
     >
@@ -61,7 +54,9 @@ export default function RestaurantInfo({ restaurant }: Props) {
       </View>
     </Button>
   );
-}
+});
+
+export default RestaurantInfo;
 
 const styles = StyleSheet.create({
   wrap: {
@@ -80,7 +75,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    borderBottomColor: Colors.lightGray,
-    borderBottomWidth: 1,
   },
 });

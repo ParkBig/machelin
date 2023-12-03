@@ -14,7 +14,7 @@ export default function useUsersFollowersQuery(userId?: number) {
     data: followers,
     isSuccess,
     refetch: reFollowers,
-  } = useQuery<Data>(['usersFollowers'], () => usersFollowersQuery(userId));
+  } = useQuery<Data>(['usersFollowers', userId], () => usersFollowersQuery(userId));
 
   return { followers, followersIsLoading, isSuccess, reFollowers, isError };
 }

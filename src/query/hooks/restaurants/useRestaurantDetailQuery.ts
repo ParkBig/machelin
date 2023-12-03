@@ -1,10 +1,12 @@
 import { restaurantDetailQuery } from 'query/restaurants';
 import { useQuery } from 'react-query';
-import { DetailRestaurant } from 'types/data/restaureant';
+import { RestaurantDetail } from 'types/data/restaureant';
+import { IPost } from 'types/store/myInfoType';
 
 interface Data {
   ok: boolean;
-  detailRestaurant: DetailRestaurant;
+  restaurantDetail: RestaurantDetail;
+  machelinPosts: IPost[];
   msg: string;
 }
 
@@ -15,7 +17,7 @@ export default function useRestaurantDetailQuery(restaurantId: string) {
     data: restaurantDetail,
     isSuccess,
     refetch: reRestaurantDetail,
-  } = useQuery<Data>(['restaurantDetail'], () => restaurantDetailQuery(restaurantId));
+  } = useQuery<Data>(['restaurantDetail', restaurantId], () => restaurantDetailQuery(restaurantId));
 
   return { restaurantDetailIsLoading, isError, restaurantDetail, isSuccess, reRestaurantDetail };
 }

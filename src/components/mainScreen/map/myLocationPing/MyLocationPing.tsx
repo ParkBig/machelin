@@ -1,50 +1,34 @@
 import ConfirmAlertModal, { ToggleState } from 'components/common/ConfirmAlertModal';
+import { DEFAULT_IMAGE } from 'const/default';
+import { Colors, Shadow } from 'const/global-styles';
 import { PermissionStatus, getCurrentPositionAsync, requestForegroundPermissionsAsync } from 'expo-location';
+import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { Callout, Marker } from 'react-native-maps';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { mapLocationState, myLocationState } from 'store/locationState';
 
 export default function MyLocationPing() {
-  const setMapLocation = useSetRecoilState(mapLocationState);
-  const [myLocation, setMyLocation] = useRecoilState(myLocationState);
+  const { myInfo } = useMyInfoQuery();
+  const myLocation = useRecoilValue(myLocationState);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
-
-  useEffect(() => {
-    const getLocation = async () => {
-      const { status } = await requestForegroundPermissionsAsync();
-      if (status !== PermissionStatus.GRANTED) {
-        setToggleAlertModal({ toggle: true, alertMsg: '위치 접근 권한이 필요합니다' });
-        return;
-      }
-
-      const getMyLocation = await getCurrentPositionAsync();
-
-      setMyLocation({
-        isGetLocation: true,
-        latitude: getMyLocation.coords.latitude,
-        longitude: getMyLocation.coords.longitude,
-      });
-      setMapLocation(prev => ({
-        ...prev,
-        latitude: getMyLocation.coords.latitude,
-        longitude: getMyLocation.coords.longitude,
-      }));
-    };
-
-    getLocation();
-  }, [setMyLocation, setMapLocation, setToggleAlertModal]);
 
   return (
     <>
       {myLocation.isGetLocation && (
-        <Marker coordinate={{ latitude: myLocation.latitude, longitude: myLocation.longitude }} pinColor="default">
-          <Callout tooltip={true}>
-            <View style={{ backgroundColor: 'tomato' }}>
-              <Text>내위치</Text>
-            </View>
-          </Callout>
+        <Marker
+          coordinate={{ latitude: myLocation.latitude, longitude: myLocation.longitude }}
+          pinColor="default"
+          title="내위치"
+        >
+          <View style={styles.wrap}>
+            <Image
+              source={myInfo?.authUser?.pfp ? { uri: myInfo?.authUser?.pfp } : require('assets/png/user.png')}
+              style={styles.image}
+              resizeMode="cover"
+            />
+          </View>
         </Marker>
       )}
       <ConfirmAlertModal
@@ -55,3 +39,19 @@ export default function MyLocationPing() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  wrap: {
+    height: 40,
+    width: 40,
+    borderWidth: 2,
+    borderColor: Colors.mainGreen3,
+    borderRadius: 20,
+    overflow: 'hidden',
+    ...Shadow,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+});

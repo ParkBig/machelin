@@ -61,6 +61,7 @@ export interface IPost {
   rating: number;
   isPublic: boolean;
   likes: Like[];
+  disLikes: Like[];
   report: number;
   comments: Comment[];
   owner: UserInfo;

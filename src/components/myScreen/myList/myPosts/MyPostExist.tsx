@@ -5,12 +5,10 @@ import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 
 export default function MyPostExist() {
   const { myInfo } = useMyInfoQuery();
-  const { posts } = useUsersPostsQuery(myInfo?.authUser?.id);
+  const { posts, rePosts } = useUsersPostsQuery(myInfo?.authUser?.id);
 
   return (
-    <View style={styles.wrap}>
-      {posts?.posts?.map(post => <Post key={post.id} posts={post} likes={posts.likes} dislikes={posts.dislikes} />)}
-    </View>
+    <View style={styles.wrap}>{posts?.posts?.map(post => <Post key={post.id} posts={post} rePosts={rePosts} isDetailScreen={false} />)}</View>
   );
 }
 

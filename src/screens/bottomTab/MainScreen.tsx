@@ -2,7 +2,7 @@ import { View, StyleSheet, BackHandler, LayoutAnimation } from 'react-native';
 import { useEffect } from 'react';
 import Header from 'components/mainScreen/header/Header';
 import Map from 'components/mainScreen/map/Map';
-import { useRecoilState, useResetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { mainScreenTogglesState } from 'store/toggleState';
 import { useIsFocused } from '@react-navigation/native';
 import ToggleOptions from 'components/mainScreen/toggleOptions/ToggleOptions';
@@ -10,9 +10,8 @@ import Restaurants from 'components/mainScreen/restaurants/Restaurants';
 
 export default function MainScreen() {
   const thisScreenIsFocused = useIsFocused();
-  const [{ toggleOptions, toggleRestaurantList, toggleRestaurantSearch }, setMainScreenToggles] =
-    useRecoilState(mainScreenTogglesState);
   const resetMainScreenToggles = useResetRecoilState(mainScreenTogglesState);
+  const { toggleOptions, toggleRestaurantList, toggleRestaurantSearch } = useRecoilValue(mainScreenTogglesState);
 
   useEffect(() => {
     const backButtonHandler = () => {
@@ -21,7 +20,6 @@ export default function MainScreen() {
         resetMainScreenToggles();
         return true;
       }
-      // 앱종료하쉴? 안내문 뛰우자
     };
 
     BackHandler.addEventListener('hardwareBackPress', backButtonHandler);

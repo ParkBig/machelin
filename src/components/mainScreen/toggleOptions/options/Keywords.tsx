@@ -1,9 +1,9 @@
 import Button from 'components/common/Button';
 import { Ionicons } from '@expo/vector-icons';
-import KeywordsModal from 'components/machelinLankScreen/searchBar/KeywordsModal';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Colors, Shadow } from 'const/global-styles';
+import KeywordsModal from 'components/common/KeywordsModal';
 
 export default function Keywords() {
   const [toggleKeywordModal, setToggleKeywordModal] = useState(false);
@@ -14,7 +14,7 @@ export default function Keywords() {
 
   return (
     <>
-      <Button onPress={toggleModalHandler} style={styles.icon}>
+      <Button onPress={toggleModalHandler} style={styles.button}>
         <Ionicons name="flash" size={30} color={Colors.mainWhite3} />
       </Button>
       <KeywordsModal toggleModal={toggleKeywordModal} toggleModalHandler={toggleModalHandler} />
@@ -23,7 +23,7 @@ export default function Keywords() {
 }
 
 const styles = StyleSheet.create({
-  icon: {
+  button: {
     height: 50,
     width: 50,
     borderRadius: 5,

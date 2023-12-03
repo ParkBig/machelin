@@ -11,7 +11,7 @@ interface Props {
 export default function Writer({ pfp, nickname }: Props) {
   return (
     <Button style={styles.writerInfo}>
-      <Image style={styles.writerImage} source={{ uri: pfp ? pfp : DEFAULT_IMAGE }} />
+      <Image style={styles.writerImage} source={pfp ? { uri: pfp } : require('assets/png/user.png')} />
       <Text style={styles.writerText}>{nickname}</Text>
     </Button>
   );

@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { DetailRestaurant } from 'types/data/restaureant';
+import { RestaurantDetail } from 'types/data/restaureant';
 import { Colors } from 'const/global-styles';
 
 interface Props {
-  restaurantInfo: DetailRestaurant;
+  restaurantInfo: RestaurantDetail;
 }
 
 export default function TargetRestaurant({ restaurantInfo }: Props) {

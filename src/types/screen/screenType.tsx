@@ -1,7 +1,7 @@
 import { BottomTabScreenProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
-import { DetailRestaurant } from 'types/data/restaureant';
+import { RestaurantDetail } from 'types/data/restaureant';
 
 export type RootBottomTabParamList = {
   MainScreen: undefined;
@@ -13,6 +13,7 @@ export type RootStackParamList = {
   BottomTabScreen: undefined;
   MyMapScreen: undefined;
   LoginScreen: undefined;
+  FindMyIdScreen: undefined;
   MyInfoSettingScreen: undefined;
   MobileVerificationScreen: undefined;
   ChangeMyNicknameScreen: undefined;
@@ -26,7 +27,7 @@ export type RootStackParamList = {
     userId: number;
   };
   MakePostScreen: {
-    restaurantInfo: DetailRestaurant | null;
+    restaurantInfo: RestaurantDetail | null;
   };
   RestaurantDetailScreen: {
     restaurantName: string;
@@ -44,6 +45,7 @@ export type AllParmList = {
   BottomTabScreen: undefined;
   MyMapScreen: undefined;
   LoginScreen: undefined;
+  FindMyIdScreen: undefined;
   MyInfoSettingScreen: undefined;
   MobileVerificationScreen: undefined;
   ChangeMyNicknameScreen: undefined;
@@ -57,7 +59,7 @@ export type AllParmList = {
     userId: number;
   };
   MakePostScreen: {
-    restaurantInfo: DetailRestaurant | null;
+    restaurantInfo: RestaurantDetail | null;
   };
   RestaurantDetailScreen: {
     restaurantName: string;

@@ -14,7 +14,7 @@ export default function useExploreUserQuery(userId: number) {
     data: exploreUser,
     isSuccess,
     refetch: reExploreUser,
-  } = useQuery<Data>(['useExploreUserQuery'], () => exploreUserQuery(userId));
+  } = useQuery<Data>(['useExploreUserQuery', userId], () => exploreUserQuery(userId));
 
   return { exploreUserInfoIsLoading, isError, exploreUser, isSuccess, reExploreUser };
 }

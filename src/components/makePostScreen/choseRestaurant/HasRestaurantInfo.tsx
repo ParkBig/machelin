@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { DetailRestaurant } from 'types/data/restaureant';
+import { RestaurantDetail } from 'types/data/restaureant';
 import { Ionicons } from '@expo/vector-icons';
 
 interface Props {
-  restaurantInfo: DetailRestaurant;
+  restaurantInfo: RestaurantDetail;
 }
 
 export default function HasRestaurantInfo({ restaurantInfo }: Props) {

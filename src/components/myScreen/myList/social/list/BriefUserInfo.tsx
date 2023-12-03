@@ -7,7 +7,6 @@ import { useState } from 'react';
 import Line from 'components/common/Line';
 import { useNavigation } from '@react-navigation/native';
 import { UseNavigation } from 'types/screen/screenType';
-import { DEFAULT_IMAGE } from 'const/default';
 import ToggleFollow from 'components/ExploreUserInfoScreen/exploreUsersInfo/ToggleFollow';
 
 interface Props {
@@ -15,7 +14,7 @@ interface Props {
 }
 
 export default function BriefUserInfo({ userInfo }: Props) {
-  const { navigate } = useNavigation<UseNavigation<'MyScreen'>>();
+  const navigation = useNavigation<UseNavigation<'MyScreen'>>();
   const [isOpenInfo, setIsOpenInfo] = useState(false);
 
   const bookmarks = userInfo.bookmarks?.length;
@@ -28,14 +27,15 @@ export default function BriefUserInfo({ userInfo }: Props) {
   };
 
   const exploreUserInfoHandler = () => {
-    navigate('ExploreUserInfoScreen', { userId: +userInfo.id });
+    //@ts-ignore
+    navigation.push('ExploreUserInfoScreen', { userId: +userInfo.id });
   };
 
   return (
     <View style={styles.wrap}>
       <View style={styles.basicInfo}>
         <View style={styles.imageWrap}>
-          <Image style={styles.image} source={{ uri: userInfo.pfp ? userInfo.pfp : DEFAULT_IMAGE }} />
+          <Image style={styles.image} source={userInfo.pfp ? { uri: userInfo.pfp } : require('assets/png/user.png')} />
         </View>
         <View style={styles.info}>
           <View style={styles.nameEmail}>

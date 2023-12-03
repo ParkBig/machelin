@@ -12,7 +12,7 @@ export default function usePostsCommentsQuery(postId: number) {
     data: comments,
     refetch: reComments,
     isLoading: commentsIsLoading,
-  } = useQuery<Data>(['postComments'], () => postsCommentsQuery(postId));
+  } = useQuery<Data>(['postComments', postId], () => postsCommentsQuery(postId));
 
   return { comments, reComments, commentsIsLoading };
 }

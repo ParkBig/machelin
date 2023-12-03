@@ -1,4 +1,3 @@
-// response ~ 로바꿔주고 Rest~에는 photos의 인터페이스 바꾸기
 export type IRestaurantInfo = {
   business_status: string;
   geometry: {
@@ -12,7 +11,7 @@ export type IRestaurantInfo = {
   opening_hours?: {
     open_now: boolean;
   };
-  photos: string;
+  photos: Photo[];
   place_id: string;
   plus_code: {
     compound_code: string;
@@ -26,42 +25,42 @@ export type IRestaurantInfo = {
   user_ratings_total: number;
   vicinity: string;
 };
-export interface DetailRestaurant {
-  address_components: AddressComponent[];
-  adr_address: string;
-  business_status: string;
-  current_opening_hours: OpeningHours;
-  dine_in: boolean;
+export interface RestaurantDetail {
+  address_components?: AddressComponent[];
+  adr_address?: string;
+  business_status?: string;
+  current_opening_hours?: OpeningHours;
+  dine_in?: boolean;
   formatted_address: string;
-  formatted_phone_number: string;
+  formatted_phone_number?: string;
   geometry: {
-    location: { lat: number; lng: number };
-    viewport: { northeast: any; southwest: any };
+    location: Location;
+    viewport: Viewport;
   };
-  icon: string;
-  icon_background_color: string;
-  icon_mask_base_uri: string;
-  international_phone_number: string;
+  icon?: string;
+  icon_background_color?: string;
+  icon_mask_base_uri?: string;
+  international_phone_number?: string;
   name: string;
-  opening_hours: OpeningHours;
-  photos: Photo[];
+  opening_hours?: OpeningHours;
+  photos?: Photo[];
   place_id: string;
-  plus_code: PlusCode;
-  rating: number;
+  plus_code?: PlusCode;
+  rating?: number;
   reference: string;
-  reservable: boolean;
-  reviews: Review[];
-  serves_beer: boolean;
-  serves_brunch: boolean;
-  serves_dinner: boolean;
-  serves_lunch: boolean;
-  serves_wine: boolean;
-  types: string[];
-  url: string;
-  user_ratings_total: number;
-  utc_offset: number;
+  reservable?: boolean;
+  reviews?: Review[];
+  serves_beer?: boolean;
+  serves_brunch?: boolean;
+  serves_dinner?: boolean;
+  serves_lunch?: boolean;
+  serves_wine?: boolean;
+  types?: string[];
+  url?: string;
+  user_ratings_total?: number;
+  utc_offset?: number;
   vicinity: string;
-  website: string;
+  website?: string;
 }
 
 export type Restaurant = {
@@ -106,43 +105,6 @@ interface Location {
 interface Viewport {
   northeast: Location;
   southwest: Location;
-}
-
-interface GooglePlace {
-  address_components: AddressComponent[];
-  adr_address: string;
-  business_status: string;
-  formatted_address: string;
-  formatted_phone_number: string;
-  geometry: {
-    location: Location;
-    viewport: Viewport;
-  };
-  icon: string;
-  icon_background_color: string;
-  icon_mask_base_uri: string;
-  international_phone_number: string;
-  name: string;
-  opening_hours: {
-    open_now: boolean;
-    periods: OpeningHoursPeriod[];
-    weekday_text: string[];
-  };
-  photos: Photo[];
-  place_id: string;
-  plus_code: {
-    compound_code: string;
-    global_code: string;
-  };
-  rating: number;
-  reference: string;
-  reviews: Review[];
-  types: string[];
-  url: string;
-  user_ratings_total: number;
-  utc_offset: number;
-  vicinity: string;
-  website: string;
 }
 
 interface AddressComponent {

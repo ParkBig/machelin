@@ -4,32 +4,28 @@ import { useState } from 'react';
 import { LayoutAnimation, StyleSheet, Text, TextInput, View } from 'react-native';
 import ReVerifyModal from './ReVerifyModal';
 import { useMutation } from 'react-query';
-import { sendVerificationQuery } from 'query/verify';
+import { sendSignUpVerificationQuery } from 'query/user';
+import VerificationInput from './VerificationInput';
 
-interface Props {
-  isClickedSendVerify: boolean;
-  phoneNumber: string;
-  setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
-  setIsClickedSendVerify: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export default function MobileInput({
-  phoneNumber,
-  setPhoneNumber,
-  isClickedSendVerify,
-  setIsClickedSendVerify,
-}: Props) {
+export default function MobileInput() {
+  const [isClickedSendVerify, setIsClickedSendVerify] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [isEditable, setIsEditable] = useState(true);
   const [toggleConfirmReVerifyModal, setToggleConfirmReVerifyModal] = useState(false);
   const [alertMsg, setAlertMsg] = useState('');
-  const { mutate } = useMutation(sendVerificationQuery, {
+  
+  const { mutate } = useMutation(sendSignUpVerificationQuery, {
     onSuccess: res => {
       if (!isClickedSendVerify && res.ok) {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         setIsClickedSendVerify(true);
+        setIsEditable(false);
         return;
       }
       if (!res.ok && res.msg) {
         setAlertMsg(res.msg);
+        setIsEditable(true);
+        setPhoneNumber('');
       }
     },
   });
@@ -62,6 +58,7 @@ export default function MobileInput({
         <TextInput
           style={styles.textInput}
           value={phoneNumber}
+          editable={isEditable}
           onChangeText={onTextChangeHandler}
           placeholder="(-) 없이 입력해주세요."
           keyboardType="phone-pad"
@@ -69,9 +66,11 @@ export default function MobileInput({
         <View style={styles.alert}>
           <Text style={styles.alertText}>{alertMsg}</Text>
         </View>
-        <Button style={styles.button} onPress={doVerifyHandler}>
-          <Text style={styles.buttonText}>인증번호 발송</Text>
-        </Button>
+        {!isClickedSendVerify ? (
+          <Button style={styles.button} onPress={doVerifyHandler}>
+            <Text style={styles.buttonText}>인증번호 발송</Text>
+          </Button>
+        ) : <VerificationInput isClickedSendVerify={isClickedSendVerify} phoneNumber={phoneNumber} />}
       </View>
       <ReVerifyModal
         toggleModal={toggleConfirmReVerifyModal}

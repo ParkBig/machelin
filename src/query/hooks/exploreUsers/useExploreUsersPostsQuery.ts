@@ -1,13 +1,6 @@
-import { usersPostsQuery } from 'query/user';
+import { PostQueryResponse, usersPostsQuery } from 'query/posts';
 import { useQuery } from 'react-query';
 import { IPost, Like } from 'types/store/myInfoType';
-
-interface Data {
-  ok: boolean;
-  posts: IPost[];
-  likes: Like[];
-  dislikes: Like[];
-}
 
 export default function useExploreUsersPostsQuery(userId?: number) {
   const {
@@ -16,7 +9,7 @@ export default function useExploreUsersPostsQuery(userId?: number) {
     data: posts,
     isSuccess,
     refetch: rePosts,
-  } = useQuery<Data>(['exploreUsersPosts'], () => usersPostsQuery(userId));
+  } = useQuery<PostQueryResponse>(['exploreUsersPosts', userId], () => usersPostsQuery(userId));
 
   return { posts, postsIsLoading, isSuccess, rePosts, isError };
 }

@@ -14,7 +14,7 @@ export default function useExploreUsersFollowsQuery(userId?: number) {
     data: follows,
     isSuccess,
     refetch: reFollows,
-  } = useQuery<Data>(['exploreUsersFollows'], () => usersFollowsQuery(userId));
+  } = useQuery<Data>(['exploreUsersFollows', userId], () => usersFollowsQuery(userId));
 
   return { follows, followsIsLoading, isSuccess, reFollows, isError };
 }

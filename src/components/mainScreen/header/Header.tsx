@@ -6,14 +6,12 @@ import { mainScreenTogglesState } from 'store/toggleState';
 import { TextInput } from 'react-native-gesture-handler';
 import Button from 'components/common/Button';
 import { mainSearchState } from 'store/searchState';
-import { useEffect, useState } from 'react';
-import useNearbyRestaurantsQuery from 'query/hooks/restaurants/useNearbyRestaurantsQuery';
+import { useState } from 'react';
 
 export default function Header() {
-  const [{ toggleRestaurantSearch }, setMainScreenToggles] = useRecoilState(mainScreenTogglesState);
-  const { reRestaurants } = useNearbyRestaurantsQuery();
   const [textInputValue, setTextInputValue] = useState('');
   const [mainSearch, setMainSearch] = useRecoilState(mainSearchState);
+  const [{ toggleRestaurantSearch }, setMainScreenToggles] = useRecoilState(mainScreenTogglesState);
 
   const initMainSearchHandler = () => {
     setTextInputValue('');
@@ -47,16 +45,12 @@ export default function Header() {
     setMainSearch({ isTyping: false, mainSearchValue: textInputValue });
   };
 
-  useEffect(() => {
-    reRestaurants();
-  }, [mainSearch.isTyping, reRestaurants]);
-
   return (
     <View style={styles.wrap}>
       {!toggleRestaurantSearch && (
         <>
           <View style={styles.logo}>
-            <Text>logo</Text>
+            <Ionicons name='restaurant' size={35} color={Colors.mainWhite3} />
           </View>
           {mainSearch.mainSearchValue && (
             <View style={styles.mainSearchWrap}>
@@ -85,6 +79,7 @@ export default function Header() {
               onChangeText={onChangeTextHandler}
               onSubmitEditing={onSubmitEditingHandler}
               value={textInputValue}
+              placeholder='키워드 혹은 식당이름을 통해 검색'
             />
             <Button style={styles.initMainSearchButton} onPress={initMainSearchHandler}>
               <Ionicons name="close-outline" size={35} color={Colors.mainGreen2} />
@@ -110,9 +105,10 @@ const styles = StyleSheet.create({
   },
   logo: {
     height: 50,
-    width: 60,
+    width: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 10,
     backgroundColor: Colors.mainGreen2,
     ...Shadow,
   },
@@ -160,6 +156,6 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     height: 50,
-    paddingHorizontal: 10,
+    paddingLeft: 10,
   },
 });

@@ -5,12 +5,18 @@ import { UseRouter } from 'types/screen/screenType';
 import UsersPostExist from './UsersPostExist';
 import NoPost from 'components/myScreen/myList/myPosts/NoPost';
 import useExploreUsersPostsQuery from 'query/hooks/exploreUsers/useExploreUsersPostsQuery';
+import LoadingOverlay from 'components/common/LoadingOverlay';
 
 export default function UsersPostList() {
   const { params } = useRoute<UseRouter<'ExploreUserInfoScreen'>>();
-  const { posts } = useExploreUsersPostsQuery(params.userId);
+  const { posts, postsIsLoading } = useExploreUsersPostsQuery(params.userId);
+  const postsExist = posts?.posts?.length !== 0
 
-  return <View style={styles.wrap}>{posts?.posts?.length ? <UsersPostExist /> : <NoPost />}</View>;
+  return (
+    <View style={styles.wrap}>
+      {postsIsLoading ? <LoadingOverlay /> : postsExist ? <UsersPostExist /> : <NoPost />}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

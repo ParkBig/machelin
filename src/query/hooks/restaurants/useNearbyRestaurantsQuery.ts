@@ -1,5 +1,6 @@
 import { restaurantsQuery } from 'query/restaurants';
-import { useQuery } from 'react-query';
+import { useEffect } from 'react';
+import { useInfiniteQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { myLocationState, searchRadiusState } from 'store/locationState';
 import { mainSearchState } from 'store/searchState';
@@ -9,6 +10,7 @@ interface Data {
   ok: boolean;
   msg: string;
   restaurants: IRestaurantInfo[];
+  next_page_token: string;
 }
 
 export default function useNearbyRestaurantsQuery() {
@@ -19,18 +21,57 @@ export default function useNearbyRestaurantsQuery() {
   const keyword = mainSearch.mainSearchValue ? mainSearch.mainSearchValue : '식당';
 
   const {
-    isLoading,
-    isError,
     data: restaurants,
-    isSuccess,
+    isLoading: restaurantsIsLoading,
     refetch: reRestaurants,
-  } = useQuery<Data>(
-    ['nearbyRestaurants'],
-    () => restaurantsQuery(latitude, longitude, searchRadius, keyword),
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery<Data, unknown, IRestaurantInfo>(
+    ['nearbyRestaurants', latitude, longitude, searchRadius, keyword],
+    ({ pageParam = null }) => restaurantsQuery(latitude, longitude, searchRadius, keyword, pageParam),
     {
-      enabled: !!isGetLocation || mainSearch.isTyping,
+      enabled: isGetLocation && !mainSearch.isTyping ? true : false,
+      select: data => ({ pages: data.pages.flatMap(page => page.restaurants), pageParams: data.pageParams }),
+      getNextPageParam: lastPage => {
+        return lastPage.next_page_token || null;
+      },
     }
   );
 
-  return { isLoading, isError, restaurants, isSuccess, reRestaurants };
+  const fetchNextPageRestaurants = () => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }
+
+  useEffect(() => {
+    reRestaurants();
+  }, [mainSearch.mainSearchValue, searchRadius]);
+
+  return { restaurants, restaurantsIsLoading, reRestaurants, fetchNextPageRestaurants, isFetchingNextPage };
 }
+
+// export default function useNearbyRestaurantsQuery() {
+//   const mainSearch = useRecoilValue(mainSearchState);
+//   const searchRadius = useRecoilValue(searchRadiusState);
+//   const { isGetLocation, latitude, longitude } = useRecoilValue(myLocationState);
+
+//   const keyword = mainSearch.mainSearchValue ? mainSearch.mainSearchValue : '식당';
+
+//   const {
+//     isLoading,
+//     isError,
+//     data: restaurants,
+//     isSuccess,
+//     refetch: reRestaurants,
+//   } = useQuery<Data>(['nearbyRestaurants', latitude, longitude, searchRadius, keyword], () => restaurantsQuery(latitude, longitude, searchRadius, keyword), {
+//     enabled: isGetLocation && !mainSearch.isTyping ? true : false,
+//   });
+
+//   useEffect(() => {
+//     reRestaurants();
+//   }, [mainSearch.mainSearchValue, searchRadius]);
+
+//   return { isLoading, isError, restaurants, isSuccess, reRestaurants };
+// }
