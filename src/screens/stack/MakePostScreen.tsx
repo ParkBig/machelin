@@ -16,16 +16,19 @@ import { makePostState } from 'store/makePostState';
 import { StackScreenPropsAbout } from 'types/screen/screenType';
 import mime from 'mime';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
+import useUsersPostsQuery from 'query/hooks/users/useUsersPostsQuery';
 
 export default function MakePostScreen({ navigation, route }: StackScreenPropsAbout<'MakePostScreen'>) {
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const makePostInfo = useRecoilValue(makePostState);
   const resetMakePostState = useResetRecoilState(makePostState);
   const { myInfo, reMyInfo } = useMyInfoQuery();
+  const { rePosts } = useUsersPostsQuery(myInfo?.authUser.id);
   const { mutate } = useMutation(makePostQuery, {
     onSuccess: res => {
       if (res.ok) {
         reMyInfo();
+        rePosts();
         navigation.navigate('MyScreen');
       } else {
         setToggleAlertModal({ toggle: true, alertMsg: res.msg });
@@ -117,5 +120,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: Size.normalBig,
+    color: Colors.mainWhite3,
+    fontWeight: 'bold',
   },
 });

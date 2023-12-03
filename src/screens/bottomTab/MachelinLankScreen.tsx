@@ -5,8 +5,6 @@ import { Colors } from 'const/global-styles';
 import { Platform, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 
 export default function MachelinLankScreen() {
-  // const { restaurants } = useGetRestaurants(37.4979, 127.0276, '4000');
-
   return (
     <SafeAreaView style={styles.wrap}>
       <SearchBar />

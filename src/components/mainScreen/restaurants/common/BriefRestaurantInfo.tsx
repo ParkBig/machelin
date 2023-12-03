@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { IRestaurantInfo } from 'types/data/restaureant';
 import Button from 'components/common/Button';
+import imageTranslator from 'util/imageTranslator';
 
 interface Props {
   restaurant: IRestaurantInfo;
@@ -10,15 +11,17 @@ interface Props {
 }
 
 export default function BriefRestaurantInfo({ restaurant, isList, fnc }: Props) {
+  const imageUrl = imageTranslator(restaurant.photos, true);
+
   return (
     <>
       <View style={styles.imgWrap}>
-        <View style={styles.img}></View>
+        <Image source={imageUrl[0] ? { uri: imageUrl[0] } : require('assets/png/dish.png')} style={styles.img} resizeMode='cover' />
       </View>
       <View style={styles.info}>
         <View style={styles.restaurantName}>
-          <View>
-            <Text>{restaurant.name}</Text>
+          <View style={styles.title}>
+            <Text numberOfLines={1} ellipsizeMode='tail'>{restaurant.name}</Text>
           </View>
           <View style={styles.rating}>
             <Ionicons name="star" color="yellow" size={20} />
@@ -42,18 +45,18 @@ export default function BriefRestaurantInfo({ restaurant, isList, fnc }: Props) 
 
 const styles = StyleSheet.create({
   imgWrap: {
-    height: 80,
+    height: 70,
     width: 70,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 10,
+    overflow: 'hidden',
   },
   img: {
-    width: 60,
-    height: 60,
+    width: 70,
+    height: 70,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
-    backgroundColor: 'red',
   },
   info: {
     flex: 1,
@@ -69,6 +72,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 15,
+  },
+  title: {
+    flex: 1,
   },
   rating: {
     flexDirection: 'row',

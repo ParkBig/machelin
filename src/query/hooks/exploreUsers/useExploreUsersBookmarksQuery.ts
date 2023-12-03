@@ -12,7 +12,7 @@ export default function useExploreUsersBookmarksQuery(userId?: number) {
     data: bookmarks,
     refetch: reBookmarks,
     isLoading: bookmarksIsLoading,
-  } = useQuery<Data>(['exploreUsersBookmarks'], () => usersBookmarksQuery(userId));
+  } = useQuery<Data>(['exploreUsersBookmarks', userId], () => usersBookmarksQuery(userId));
 
   return { bookmarks, reBookmarks, bookmarksIsLoading };
 }

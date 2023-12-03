@@ -1,26 +1,31 @@
 import { StyleSheet, View } from 'react-native';
-import { IPost, Like } from 'types/store/myInfoType';
+import { IPost } from 'types/store/myInfoType';
 import { Colors } from 'const/global-styles';
 import WriterNContent from './writerNContent/WriterNContent';
 import ShowCommentsAndHearts from './showCommentsAndHeart/ShowCommentsAndHearts';
 import PostingImages from './postingImages/PostingImages';
 import PostBriefRestaurantInfo from './postBriefRestaurantInfo/PostBriefRestaurantInfo';
 import HashTags from './hashtags/HashTags';
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
+import { PostQueryResponse } from 'query/posts';
+import { RestaurantPosts } from 'query/hooks/restaurants/useRestaurantPostsQuery';
 
 interface Props {
   posts: IPost;
-  likes: Like[];
-  dislikes: Like[];
+  rePosts: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<PostQueryResponse | RestaurantPosts, unknown>>;
+  isDetailScreen: boolean;
 }
 
-export default function Post({ posts, likes, dislikes }: Props) {
+export default function Post({ posts, rePosts, isDetailScreen }: Props) {
   return (
     <View style={styles.wrap}>
-      <PostBriefRestaurantInfo posts={posts} />
+      {!isDetailScreen && <PostBriefRestaurantInfo posts={posts} />}
       <WriterNContent posts={posts} />
-      <HashTags hashtags={posts.hashtags} />
+      {/* <HashTags hashtags={posts.hashtags} /> */}
       <PostingImages images={posts.images} />
-      <ShowCommentsAndHearts posts={posts} likes={likes} dislikes={dislikes} />
+      <ShowCommentsAndHearts posts={posts} rePosts={rePosts} />
     </View>
   );
 }

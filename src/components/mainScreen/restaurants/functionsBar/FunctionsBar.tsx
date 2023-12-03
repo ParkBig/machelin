@@ -1,11 +1,12 @@
 import { StyleSheet, View } from 'react-native';
-import RefreshNMyLocation from './RefreshNMyLocation';
+import InstanceInfo from './InstanceInfo';
+import FunctionButtons from './functionButtons/FunctionButtons';
 
-export default function FunctionBar() {
+export default function FunctionsBar() {
   return (
     <View style={styles.wrap}>
-      <View></View>
-      <RefreshNMyLocation />
+      <InstanceInfo />
+      <FunctionButtons />
     </View>
   );
 }
@@ -16,7 +17,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 10,
-    paddingBottom: 5,
-    gap: 8,
+    gap: 10,
   },
 });

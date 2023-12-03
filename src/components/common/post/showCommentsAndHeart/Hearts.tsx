@@ -1,31 +1,34 @@
 import Button from 'components/common/Button';
 import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useMutation } from 'react-query';
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters, useMutation } from 'react-query';
 import { Colors, Size } from 'const/global-styles';
 import { Like } from 'types/store/myInfoType';
-import { togglePostLikeDislike } from 'query/posts';
+import { PostQueryResponse, togglePostLikeDislike } from 'query/posts';
 import useUsersPostsQuery from 'query/hooks/users/useUsersPostsQuery';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useState } from 'react';
 import ConfirmAlertModal, { ToggleState } from 'components/common/ConfirmAlertModal';
+import useUsersPostLikesDislikesQuery from 'query/hooks/users/useUsersPostLikesDislikesQuery';
+import { RestaurantPosts } from 'query/hooks/restaurants/useRestaurantPostsQuery';
 
 interface Props {
   postId: number;
   postsLikes: Like[];
-  usersLikes: Like[];
-  usersDislikes: Like[];
+  rePosts: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<PostQueryResponse | RestaurantPosts, unknown>>;
 }
 
-export default function Hearts({ postId, postsLikes, usersLikes, usersDislikes }: Props) {
-  const { myInfo, reMyInfo } = useMyInfoQuery();
+export default function Hearts({ postId, postsLikes, rePosts }: Props) {
+  const { myInfo } = useMyInfoQuery();
+  const { usersPostLikesDislikes, reUsersPostLikesDislikes } = useUsersPostLikesDislikesQuery(myInfo?.authUser?.id);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
-  const { rePosts } = useUsersPostsQuery(myInfo?.authUser?.id);
   const { mutate } = useMutation(togglePostLikeDislike, {
     onSuccess: res => {
       if (res.ok) {
-        reMyInfo();
         rePosts();
+        reUsersPostLikesDislikes();
       } else {
         setToggleAlertModal({ toggle: true, alertMsg: res.msg });
       }
@@ -36,11 +39,16 @@ export default function Hearts({ postId, postsLikes, usersLikes, usersDislikes }
   });
 
   const togglePostLikeDislikeHandler = (which: 'like' | 'dislike') => {
+    if (!myInfo?.authUser) {
+      setToggleAlertModal({ toggle: true, alertMsg: '로그인후 이용가능합니다' });
+      return;
+    }
+
     mutate({ postId, which });
   };
 
-  const isHeart = usersLikes.find(like => like.post.id === postId);
-  const isHeartBroken = usersDislikes.find(dislike => dislike.post.id === postId);
+  const isHeart = usersPostLikesDislikes?.usersLikes?.find(like => like.post.id === postId);
+  const isHeartBroken = usersPostLikesDislikes?.usersDislikes?.find(dislike => dislike.post.id === postId);
   const likesCount = postsLikes.length;
 
   return (

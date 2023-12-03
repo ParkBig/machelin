@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { UseNavigation } from 'types/screen/screenType';
 
 export default function GoBack() {
-  const { goBack } = useNavigation<UseNavigation<'SelectLoginPlatformScreen'>>();
+  const { goBack } = useNavigation<UseNavigation<'LoginScreen'>>();
 
   const goBackHandler = () => {
     goBack();

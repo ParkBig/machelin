@@ -9,12 +9,12 @@ interface CheckVerificationQueryInput {
   verificationCode: string;
 }
 
-export const sendVerificationQuery = async (phoneNumber: string) => {
-  const { data } = await axiosVerify.post('/sendVerification', { phoneNumber });
-  return data;
-};
+// export const sendVerificationQuery = async (phoneNumber: string) => {
+//   const { data } = await axiosVerify.post('/sendVerification', { phoneNumber });
+//   return data;
+// };
 
-export const checkVerificationQuery = async (checkVerificationQueryInput: CheckVerificationQueryInput) => {
-  const { data } = await axiosVerify.post('/checkVerification', checkVerificationQueryInput);
-  return data;
-};
+// export const checkVerificationQuery = async (checkVerificationQueryInput: CheckVerificationQueryInput) => {
+//   const { data } = await axiosVerify.post('/checkVerification', checkVerificationQueryInput);
+//   return data;
+// };

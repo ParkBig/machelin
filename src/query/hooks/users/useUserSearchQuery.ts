@@ -12,7 +12,7 @@ export default function useUserSearchQuery(nickname: string) {
     data: userList,
     refetch: reUserList,
     isLoading,
-  } = useQuery<Data>(['userList'], () => findUsersQuery(nickname), {
+  } = useQuery<Data>(['userList', nickname], () => findUsersQuery(nickname), {
     enabled: !!nickname,
   });
 

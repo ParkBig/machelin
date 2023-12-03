@@ -4,15 +4,21 @@ import { IPost } from 'types/store/myInfoType';
 import { Ionicons } from '@expo/vector-icons';
 import Button from 'components/common/Button';
 import Line from 'components/common/Line';
+import { useNavigation } from '@react-navigation/native';
+import { UseNavigation } from 'types/screen/screenType';
 
 interface Props {
   posts: IPost;
 }
 
 export default function PostBriefRestaurantInfo({ posts }: Props) {
+  const { navigate } = useNavigation<UseNavigation<'MyScreen' | 'ExploreUserInfoScreen' | 'MachelinLankScreen'>>();
+
   const goToDetailRestaurantHandler = () => {
-    // with id goto detailResScreen
-    // navigate('');
+    navigate('RestaurantDetailScreen', {
+      restaurantName: posts.restaurantName,
+      restaurantId: posts.restaurantId,
+    })
   };
 
   if (!posts.restaurantId) return null;

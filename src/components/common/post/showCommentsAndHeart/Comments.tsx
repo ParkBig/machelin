@@ -25,7 +25,10 @@ export default function Comments({ postId }: Props) {
             return (
               <View style={styles.wrap}>
                 <View style={styles.imgWrap}>
-                  <Image style={styles.img} source={{ uri: item.owner.pfp ? item.owner.pfp : DEFAULT_IMAGE }} />
+                  <Image
+                    style={styles.img}
+                    source={item.owner.pfp ? { uri: item.owner.pfp } : require('assets/png/user.png')}
+                  />
                 </View>
                 <View style={styles.userNameNComment}>
                   <View style={styles.userInfo}>

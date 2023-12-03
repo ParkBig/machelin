@@ -32,23 +32,28 @@ export default function ToggleFollow({ exploreUserId }: Props) {
   });
 
   const toggleFriendStateQueryHandler = () => {
+    if (myInfo?.authUser && myInfo.authUser.id === exploreUserId) {
+      return;
+    }
+
     mutate({ exploreUserId });
   };
 
   const isMyFollow = follows?.follows?.find(follow => +follow.id === exploreUserId);
+  const iconName = myInfo?.authUser
+    ? myInfo.authUser.id === exploreUserId
+      ? 'body'
+      : isMyFollow
+      ? 'person'
+      : 'person-add-outline'
+    : 'person-add-outline';
 
   return (
     <>
       <View style={styles.wrap}>
         <Button style={styles.button} onPress={toggleFriendStateQueryHandler}>
-          <Ionicons
-            name={
-              myInfo && +myInfo.authUser.id === exploreUserId ? undefined : isMyFollow ? 'person' : 'person-add-outline'
-            }
-            size={20}
-            color={Colors.mainWhite3}
-          />
-          {!isMyFollow && <Text style={styles.text}>팔로우</Text>}
+          <Ionicons name={iconName} size={20} color={Colors.mainWhite3} />
+          {iconName === 'person' ? null : <Text style={styles.text}>{iconName === 'body' ? 'Me' : '팔로우'}</Text>}
         </Button>
       </View>
       <ConfirmAlertModal

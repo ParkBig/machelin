@@ -1,5 +1,4 @@
 import { useRoute } from '@react-navigation/native';
-import { DEFAULT_IMAGE } from 'const/default';
 import { Colors } from 'const/global-styles';
 import useExploreUserQuery from 'query/hooks/exploreUsers/useExploreUserQuery';
 import { Image, StyleSheet, Text, View } from 'react-native';
@@ -14,7 +13,9 @@ export default function BriefExploreUsersInfo() {
       <View style={styles.php}>
         <Image
           style={styles.image}
-          source={{ uri: exploreUser?.exploreUser.pfp ? exploreUser?.exploreUser.pfp : DEFAULT_IMAGE }}
+          source={
+            exploreUser?.exploreUser?.pfp ? { uri: exploreUser?.exploreUser?.pfp } : require('assets/png/user.png')
+          }
         />
       </View>
       <View style={styles.infos}>

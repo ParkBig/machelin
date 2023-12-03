@@ -6,7 +6,7 @@ import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 export default function LoginInfo() {
   const { myInfo } = useMyInfoQuery();
 
-  return <View style={styles.wrap}>{myInfo?.ok ? <BriefLoginInfo /> : <GotoLoginSignUp />}</View>;
+  return <View style={styles.wrap}>{myInfo?.authUser ? <BriefLoginInfo /> : <GotoLoginSignUp />}</View>;
 }
 
 const styles = StyleSheet.create({

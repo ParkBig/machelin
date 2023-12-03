@@ -1,6 +1,6 @@
-import { DetailRestaurant } from 'types/data/restaureant';
+import { RestaurantDetail } from 'types/data/restaureant';
 
-export const restaurant: DetailRestaurant = {
+export const restaurant: RestaurantDetail = {
   address_components: [
     { long_name: '1층', short_name: '1층', types: ['Array'] },
     { long_name: '39', short_name: '39', types: ['Array'] },

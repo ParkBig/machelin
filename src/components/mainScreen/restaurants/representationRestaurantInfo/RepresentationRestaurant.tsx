@@ -25,14 +25,10 @@ export default function RepresentationRestaurantInfo() {
 
   return (
     <>
-      {restaurants?.restaurants && (
+      {restaurants && restaurants.pages.length !== 0 && (
         <View style={styles.wrap}>
           <Button onPress={openRestaurantListHandler} style={styles.listWrap}>
-            <BriefRestaurantInfo
-              restaurant={restaurants.restaurants[0]}
-              isList={false}
-              fnc={openRestaurantListHandler}
-            />
+            <BriefRestaurantInfo restaurant={restaurants.pages[0]} isList={false} fnc={openRestaurantListHandler} />
           </Button>
         </View>
       )}

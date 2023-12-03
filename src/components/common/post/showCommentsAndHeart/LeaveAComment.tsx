@@ -36,6 +36,11 @@ export default function LeaveAComment({ postId }: Props) {
   };
 
   const onSubmitEditingHandler = () => {
+    if (!myInfo?.authUser) {
+      setToggleAlertModal({ toggle: true, alertMsg: '로그인후 이용가능합니다' });
+      return;
+    }
+
     mutate({ postId, comment });
   };
 
@@ -45,7 +50,7 @@ export default function LeaveAComment({ postId }: Props) {
         <View style={styles.writerImgWrap}>
           <Image
             style={styles.writerImg}
-            source={{ uri: myInfo?.authUser.pfp ? myInfo?.authUser.pfp : DEFAULT_IMAGE }}
+            source={myInfo?.authUser?.pfp ? { uri: myInfo?.authUser?.pfp } : require('assets/png/user.png')}
           />
         </View>
         <TextInput

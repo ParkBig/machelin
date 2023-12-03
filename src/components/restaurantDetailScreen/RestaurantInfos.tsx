@@ -1,6 +1,5 @@
-import { LayoutAnimation, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { OpeningHoursPeriod } from 'types/data/restaureant';
 import { Colors } from 'const/global-styles';
 import { useState } from 'react';
 import { useRoute } from '@react-navigation/native';
@@ -19,34 +18,42 @@ export default function RestaurantInfos() {
 
   return (
     <View style={styles.infos}>
-      <View style={styles.info}>
-        <Ionicons name="call-outline" size={25} />
-        <Text>{restaurantDetail?.detailRestaurant?.formatted_phone_number}</Text>
-      </View>
-      <View style={styles.info}>
-        <Ionicons name="location-outline" size={25} />
-        <Text>{restaurantDetail?.detailRestaurant?.vicinity}</Text>
-      </View>
-      <View style={styles.info}>
-        <Ionicons name="time-outline" size={25} />
-        <View style={styles.timeInfo}>
-          <Text>{restaurantDetail?.detailRestaurant?.opening_hours.weekday_text[dayOfWeek]}</Text>
-          <Pressable onPress={toggleTimeInfo}>
-            <Ionicons name="add-outline" size={25} />
-          </Pressable>
+      {restaurantDetail?.restaurantDetail?.formatted_phone_number && (
+        <View style={styles.info}>
+          <Ionicons name="call" size={25} color={Colors.mainGreen2} />
+          <Text>{restaurantDetail?.restaurantDetail?.formatted_phone_number}</Text>
         </View>
-      </View>
+      )}
+      {restaurantDetail?.restaurantDetail?.vicinity && (
+        <View style={styles.info}>
+          <Ionicons name="location" size={25} color={Colors.mainGreen2} />
+          <Text>{restaurantDetail?.restaurantDetail?.vicinity}</Text>
+        </View>
+      )}
+      {restaurantDetail?.restaurantDetail?.opening_hours && (
+        <View style={styles.info}>
+          <Ionicons name="time" size={25} color={Colors.mainGreen2} />
+          <View style={styles.timeInfo}>
+            <Text>
+              {restaurantDetail?.restaurantDetail?.opening_hours?.weekday_text[dayOfWeek - 1 < 0 ? 6 : dayOfWeek - 1]}
+            </Text>
+            <Pressable onPress={toggleTimeInfo}>
+              <Ionicons name={isOpenTimeInfo ? 'chevron-up' : 'chevron-down'} size={25} color={Colors.mainGreen2} />
+            </Pressable>
+          </View>
+        </View>
+      )}
       {isOpenTimeInfo && (
         <View style={styles.detailTimeInfo}>
           <View>
-            {restaurantDetail?.detailRestaurant?.opening_hours.open_now ? (
-              <Text>현재 오픈중입니다</Text>
+            {restaurantDetail?.restaurantDetail?.opening_hours?.open_now ? (
+              <Text style={styles.openText}>영업중입니다</Text>
             ) : (
-              <Text>현재 오픈중이 아닙니다</Text>
+              <Text style={styles.closeText}>영업종료</Text>
             )}
           </View>
           <View>
-            {restaurantDetail?.detailRestaurant?.opening_hours.weekday_text.map((time, index) => (
+            {restaurantDetail?.restaurantDetail?.opening_hours?.weekday_text.map((time, index) => (
               <View key={index}>
                 <Text>{time}</Text>
               </View>
@@ -61,10 +68,8 @@ export default function RestaurantInfos() {
 const styles = StyleSheet.create({
   infos: {
     width: '100%',
-    paddingVertical: 10,
+    paddingVertical: 20,
     paddingHorizontal: 15,
-    borderBottomColor: Colors.lightGray,
-    borderBottomWidth: 2,
   },
   info: {
     width: '100%',
@@ -83,5 +88,11 @@ const styles = StyleSheet.create({
     paddingLeft: 35,
     paddingBottom: 10,
     gap: 5,
+  },
+  openText: {
+    color: Colors.mainGreen3,
+  },
+  closeText: {
+    color: Colors.googleBackground,
   },
 });

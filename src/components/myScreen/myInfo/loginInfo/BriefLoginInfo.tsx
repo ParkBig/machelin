@@ -18,7 +18,10 @@ export default function BriefLoginInfo() {
   return (
     <View style={styles.wrap}>
       <View style={styles.php}>
-        <Image style={styles.image} source={{ uri: myInfo?.authUser.pfp ? myInfo?.authUser.pfp : DEFAULT_IMAGE }} />
+        <Image
+          style={styles.image}
+          source={myInfo?.authUser?.pfp ? { uri: myInfo?.authUser?.pfp } : require('assets/png/user.png')}
+        />
       </View>
       <View style={styles.infos}>
         <View>

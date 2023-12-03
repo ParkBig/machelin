@@ -1,8 +1,8 @@
-import { useRef } from 'react';
-import { StyleSheet, LayoutAnimation } from 'react-native';
+import { useEffect, useRef } from 'react';
+import { StyleSheet, LayoutAnimation, LayoutChangeEvent } from 'react-native';
 import { useRecoilState } from 'recoil';
 import MapView from 'react-native-maps';
-import { focusedRestaurantState, mapLocationState } from 'store/locationState';
+import { focusedRestaurantState, mapLocationState, mapRefState } from 'store/locationState';
 import { mainScreenTogglesState } from 'store/toggleState';
 import { MapLocationState } from 'types/store/locationType';
 import MyLocationPing from './myLocationPing/MyLocationPing';
@@ -13,7 +13,7 @@ export default function Map() {
   const [mapLocation, setMapLocation] = useRecoilState(mapLocationState);
   const [focusedRestaurant, setFocusedRestaurant] = useRecoilState(focusedRestaurantState);
   const [mainScreenToggles, setMainScreenToggles] = useRecoilState(mainScreenTogglesState);
-  
+
   const mapPressHandler = () => {
     if (mainScreenToggles.toggleRestaurantList) {
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -41,6 +41,17 @@ export default function Map() {
       longitudeDelta,
     });
   };
+
+  useEffect(() => {
+    if (focusedRestaurant.isFocused && focusedRestaurant.latitude && focusedRestaurant.longitude) {
+      mapRef.current?.animateToRegion({
+        latitude: focusedRestaurant.latitude - 0.0035,
+        longitude: focusedRestaurant.longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      }, 500);
+    }
+  }, [focusedRestaurant]);
 
   return (
     <MapView

@@ -1,3 +1,5 @@
+import { MutableRefObject, RefObject } from 'react';
+import MapView from 'react-native-maps';
 import { atom } from 'recoil';
 import { FocusedRestaurant, LocationSearchRadius, MapLocationState, MyLocationState } from 'types/store/locationType';
 
@@ -9,6 +11,11 @@ export const mapLocationState = atom<MapLocationState>({
     latitudeDelta: 0.01,
     longitudeDelta: 0.01,
   },
+});
+
+export const mapRefState = atom<RefObject<MapView> | null>({
+  key: 'mapRefState',
+  default: null,
 });
 
 export const myLocationState = atom<MyLocationState>({

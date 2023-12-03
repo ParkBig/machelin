@@ -15,6 +15,7 @@ import ChangeMyPreferFoodsScreen from 'screens/stack/ChangeMyPreferFoodsScreen';
 import ChangeMyPreferRestaurantScreen from 'screens/stack/ChangeMyPreferRestaurantScreen';
 import ToggleFollow from 'components/ExploreUserInfoScreen/exploreUsersInfo/ToggleFollow';
 import ToggleBookmark from 'components/restaurantDetailScreen/ToggleBookmark';
+import FindMyIdScreen from 'screens/stack/FindMyIdScreen';
 
 export default function StackScreen() {
   return (
@@ -72,6 +73,7 @@ export default function StackScreen() {
           title: '회원가입',
         }}
       />
+      <RootStack.Screen name="FindMyIdScreen" component={FindMyIdScreen} options={{ title: '나의 계정 찾기' }} />
       <RootStack.Screen
         name="MyInfoSettingScreen"
         component={MyInfoSettingScreen}

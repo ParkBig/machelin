@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import Button from 'components/common/Button';
 import { Colors, Shadow, Size } from 'const/global-styles';
-import { checkVerificationQuery } from 'query/verify';
+import { checkSignUpVerificationQuery } from 'query/user';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';
@@ -16,7 +16,7 @@ export default function VerificationInput({ isClickedSendVerify, phoneNumber }: 
   const { navigate } = useNavigation<UseNavigation<'MobileVerificationScreen'>>();
   const [verificationCode, setVerificationCode] = useState('');
   const [alertMsg, setAlertMsg] = useState('');
-  const { mutate } = useMutation(checkVerificationQuery, {
+  const { mutate } = useMutation(checkSignUpVerificationQuery, {
     onSuccess: res => {
       if (res.ok) {
         navigate('SignUpScreen', {
@@ -53,7 +53,7 @@ export default function VerificationInput({ isClickedSendVerify, phoneNumber }: 
             <Text>{alertMsg}</Text>
           </View>
           <Button style={styles.button} onPress={checkVerifyHandler}>
-            <Text style={styles.buttonText}>인증번호 입력</Text>
+            <Text style={styles.buttonText}>인증하기</Text>
           </Button>
         </>
       )}

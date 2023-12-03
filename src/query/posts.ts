@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { IPost } from 'types/store/myInfoType';
 import { takeToken } from 'util/tokenDB';
 
 const axiosPosts = axios.create({
@@ -23,11 +24,16 @@ interface TogglePostLikeDislikeInput {
   which: 'like' | 'dislike';
 }
 
+export interface PostQueryResponse {
+  ok: boolean;
+  posts: IPost[];
+}
+
 export const getPostsQuery = async () => {};
 
 export const usersPostsQuery = async (userId: number | undefined) => {
   if (!userId) {
-    return;
+    return { ok: true, posts: null };
   }
 
   const { data } = await axiosPosts.get('/usersPosts', {
@@ -35,6 +41,20 @@ export const usersPostsQuery = async (userId: number | undefined) => {
       userId,
     },
   });
+  return data;
+};
+
+export const usersPostLikesDislikesQuery = async (userId: number | undefined) => {
+  if (!userId) {
+    return { ok: true, usersLikes: [], usersDislikes: [] };
+  }
+
+  const { data } = await axiosPosts.get('/usersPostLikesDislikes', {
+    params: {
+      userId,
+    },
+  });
+
   return data;
 };
 
