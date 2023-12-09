@@ -1,20 +1,33 @@
-import RestaurantDetailScreen from 'screens/RestaurantDetailScreen';
-import { RootStack, StackScreenPropsAbout } from 'types/screen/screenType';
+import { RootStack } from 'types/screen/screenType';
 import BottomTabScreen from './BottomTabScreen';
 import { Colors } from 'const/global-styles';
-import MyMapScreen from 'screens/MyMapScreen';
-import SelectLoginPlatformScreen from 'screens/SelectLoginPlatformScreen';
-import LoginScreen from 'screens/LoginScreen';
-import SignUpScreen from 'screens/SignUpScreen';
-import MakePostScreen from 'screens/MakePostScreen';
-import MyInfoSettingScreen from 'screens/MyInfoSettingScreen';
-import InstanceModifyMyInfoScreen from 'screens/InstanceModifyMyInfoScreen';
+import MakePostScreen from 'screens/stack/MakePostScreen';
+import MyMapScreen from 'screens/stack/MyMapScreen';
+import RestaurantDetailScreen from 'screens/stack/RestaurantDetailScreen';
+import LoginScreen from 'screens/stack/LoginScreen';
+import SignUpScreen from 'screens/stack/SignUpScreen';
+import MyInfoSettingScreen from 'screens/stack/MyInfoSettingScreen';
+import ChangeMyNicknameScreen from 'screens/stack/ChangeMyNicknameScreen';
+import ExploreUserInfoScreen from 'screens/stack/ExploreUserInfoScreen';
+import MobileVerificationScreen from 'screens/stack/MobileVerificationScreen';
+import ChangeMyActivityZoneScreen from 'screens/stack/ChangeMyActivityZoneScreen';
+import ChangeMyPreferFoodsScreen from 'screens/stack/ChangeMyPreferFoodsScreen';
+import ChangeMyPreferRestaurantScreen from 'screens/stack/ChangeMyPreferRestaurantScreen';
+import ToggleFollow from 'components/stackScreen/ExploreUserInfoScreen/exploreUsersInfo/ToggleFollow';
+import ToggleBookmark from 'components/stackScreen/restaurantDetailScreen/ToggleBookmark';
+import FindMyIdScreen from 'screens/stack/FindMyIdScreen';
+import FindRestaurantInfoForMakePostScreen from 'screens/stack/FindRestaurantInfoForMakePostScreen';
+import RegionalSearchMapScreen from 'screens/stack/RegionalSearchMapScreen';
 
 export default function StackScreen() {
   return (
     <RootStack.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
+        headerTintColor: Colors.mainWhite3,
+        headerStyle: {
+          backgroundColor: Colors.mainGreen2,
+        },
       }}
     >
       <RootStack.Screen name="BottomTabScreen" component={BottomTabScreen} options={{ headerShown: false }} />
@@ -24,39 +37,42 @@ export default function StackScreen() {
         options={{
           title: '기록하기',
           headerTitleAlign: 'left',
-          headerStyle: {
-            backgroundColor: Colors.mainGreen2,
-          },
+        }}
+      />
+      <RootStack.Screen
+        name="FindRestaurantInfoForMakePostScreen"
+        component={FindRestaurantInfoForMakePostScreen}
+        options={{
+          title: '식당태그하기',
         }}
       />
       <RootStack.Screen
         name="MyMapScreen"
         component={MyMapScreen}
         options={{
-          title: '나의 보물지도',
+          title: '나의 지도',
         }}
       />
       <RootStack.Screen
         name="RestaurantDetailScreen"
         component={RestaurantDetailScreen}
-        options={{
-          headerStyle: {
-            backgroundColor: Colors.mainGreen2,
-          },
-        }}
-      />
-      <RootStack.Screen
-        name="SelectLoginPlatformScreen"
-        component={SelectLoginPlatformScreen}
-        options={{
-          headerShown: false,
-        }}
+        options={({ route }) => ({
+          title: route.params.restaurantName,
+          headerRight: () => <ToggleBookmark restaurantId={route.params.restaurantId} />,
+        })}
       />
       <RootStack.Screen
         name="LoginScreen"
         component={LoginScreen}
         options={{
-          title: '이메일로 로그인',
+          title: '로그인',
+        }}
+      />
+      <RootStack.Screen
+        name="MobileVerificationScreen"
+        component={MobileVerificationScreen}
+        options={{
+          headerShown: false,
         }}
       />
       <RootStack.Screen
@@ -66,25 +82,57 @@ export default function StackScreen() {
           title: '회원가입',
         }}
       />
+      <RootStack.Screen name="FindMyIdScreen" component={FindMyIdScreen} options={{ title: '나의 계정 찾기' }} />
       <RootStack.Screen
         name="MyInfoSettingScreen"
         component={MyInfoSettingScreen}
         options={{
           title: '내 정보 수정',
-          headerStyle: {
-            backgroundColor: Colors.mainGreen2,
-          },
         }}
       />
       <RootStack.Screen
-        name="InstanceModifyMyInfoScreen"
-        component={InstanceModifyMyInfoScreen}
-        options={({ navigation, route }: StackScreenPropsAbout<'InstanceModifyMyInfoScreen'>) => ({
-          title: route.params.modifyType,
-          headerStyle: {
-            backgroundColor: Colors.mainGreen2,
-          },
+        name="ChangeMyNicknameScreen"
+        component={ChangeMyNicknameScreen}
+        options={{
+          title: '닉네임 변경',
+        }}
+      />
+      <RootStack.Screen
+        name="ChangeMyActivityZoneScreen"
+        component={ChangeMyActivityZoneScreen}
+        options={{
+          title: '활동구역 변경',
+        }}
+      />
+      <RootStack.Screen
+        name="ChangeMyPreferFoodsScreen"
+        component={ChangeMyPreferFoodsScreen}
+        options={{
+          title: '선호음식 변경',
+        }}
+      />
+      <RootStack.Screen
+        name="ChangeMyPreferRestaurantScreen"
+        component={ChangeMyPreferRestaurantScreen}
+        options={{
+          title: '최애식당 변경',
+        }}
+      />
+      <RootStack.Screen
+        name="ExploreUserInfoScreen"
+        component={ExploreUserInfoScreen}
+        options={({ route }) => ({
+          title: '탐험중...',
+          headerTitleAlign: 'left',
+          headerRight: () => <ToggleFollow exploreUserId={route.params.userId} />,
         })}
+      />
+      <RootStack.Screen
+        name="RegionalSearchMapScreen"
+        component={RegionalSearchMapScreen}
+        options={{
+          title: '마슐 랭크 맵',
+        }}
       />
     </RootStack.Navigator>
   );
