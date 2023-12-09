@@ -10,17 +10,18 @@ axiosRestaurants.interceptors.request.use(async config => {
   if (token) {
     config.headers['token'] = token;
   }
+
   return config;
 });
 
-export const restaurantsQuery = async (
+export const nearbyRestaurantsSearchQuery = async (
   lat: number,
   lng: number,
   radius: string,
   keyword: string,
   nextPageParams?: string
 ) => {
-  const { data } = await axiosRestaurants.get('/nearbyRestaurants', {
+  const { data } = await axiosRestaurants.get('/nearbyRestaurantsSearch', {
     params: {
       lat,
       lng,
@@ -29,6 +30,21 @@ export const restaurantsQuery = async (
       nextPageParams: nextPageParams ? nextPageParams : null,
     },
   });
+
+  return data;
+};
+
+export const localRestaurantsSearchQuery =async (keyword: string) => {
+  
+}
+
+export const restaurantsTextSearchQuery = async (keyword: string) => {
+  const { data } = await axiosRestaurants.get('/restaurantsTextSearch', {
+    params: {
+      keyword,
+    },
+  });
+
   return data;
 };
 
@@ -38,6 +54,7 @@ export const restaurantDetailQuery = async (restaurantId: string) => {
       restaurantId,
     },
   });
+
   return data;
 };
 
@@ -47,5 +64,6 @@ export const restaurantPostsQuery = async (restaurantId: string) => {
       restaurantId,
     },
   });
+
   return data;
 };

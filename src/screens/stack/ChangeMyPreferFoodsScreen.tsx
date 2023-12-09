@@ -1,5 +1,5 @@
-import MakePreferFood from 'components/changeMyPreferFoodsScreen/MakePreferFood';
-import PreferFoods from 'components/changeMyPreferFoodsScreen/PreferFoods';
+import MakePreferFood from 'components/stackScreen/changeMyPreferFoodsScreen/MakePreferFood';
+import PreferFoods from 'components/stackScreen/changeMyPreferFoodsScreen/PreferFoods';
 import { ScrollView, StyleSheet } from 'react-native';
 
 export default function ChangeMyPreferFoodsScreen() {

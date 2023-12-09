@@ -31,12 +31,26 @@ export interface PostQueryResponse {
 
 export const getPostsQuery = async () => {};
 
-export const usersPostsQuery = async (userId: number | undefined) => {
-  if (!userId) {
+export const usersPostsQuery = async (targetId: number | undefined, myId: number | undefined) => {
+  if (!targetId) {
     return { ok: true, posts: null };
   }
 
   const { data } = await axiosPosts.get('/usersPosts', {
+    params: {
+      targetId,
+      myId,
+    },
+  });
+  return data;
+};
+
+export const usersPostForMyMapQuery = async (userId: number | undefined) => {
+  if (!userId) {
+    return { ok: true, posts: null };
+  }
+
+  const { data } = await axiosPosts.get('/usersPostForMyMap', {
     params: {
       userId,
     },

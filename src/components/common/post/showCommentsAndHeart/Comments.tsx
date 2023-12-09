@@ -1,8 +1,7 @@
-import { DEFAULT_IMAGE } from 'const/default';
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 import { Colors } from 'const/global-styles';
 import getDateTrans from 'util/dateTranslator';
-import Line from 'components/common/Line';
+import Line from 'components/common/layout/Line';
 import usePostsCommentsQuery from 'query/hooks/posts/usePostsCommentsQuery';
 
 interface Props {
@@ -17,6 +16,7 @@ export default function Comments({ postId }: Props) {
       {comments && !commentsIsLoading && (
         <FlatList
           style={styles.FlatWrap}
+          showsVerticalScrollIndicator={false}
           data={comments.comments}
           keyExtractor={item => `${item.id}`}
           renderItem={({ item }) => {

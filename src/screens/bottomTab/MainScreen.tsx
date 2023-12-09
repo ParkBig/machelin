@@ -1,15 +1,16 @@
 import { View, StyleSheet, BackHandler, LayoutAnimation } from 'react-native';
 import { useEffect } from 'react';
-import Header from 'components/mainScreen/header/Header';
-import Map from 'components/mainScreen/map/Map';
+import Header from 'components/bottomTabScreen/mainScreen/header/Header';
+import MainMap from 'components/bottomTabScreen/mainScreen/map/MainMap';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { mainScreenTogglesState } from 'store/toggleState';
 import { useIsFocused } from '@react-navigation/native';
-import ToggleOptions from 'components/mainScreen/toggleOptions/ToggleOptions';
-import Restaurants from 'components/mainScreen/restaurants/Restaurants';
+import Restaurants from 'components/bottomTabScreen/mainScreen/restaurants/Restaurants';
+import { focusedRestaurantState } from 'store/locationState';
 
 export default function MainScreen() {
   const thisScreenIsFocused = useIsFocused();
+  const resetFocusedRestaurant = useResetRecoilState(focusedRestaurantState);
   const resetMainScreenToggles = useResetRecoilState(mainScreenTogglesState);
   const { toggleOptions, toggleRestaurantList, toggleRestaurantSearch } = useRecoilValue(mainScreenTogglesState);
 
@@ -31,14 +32,15 @@ export default function MainScreen() {
   useEffect(() => {
     if (thisScreenIsFocused) {
       resetMainScreenToggles();
+      resetFocusedRestaurant();
     }
   }, [thisScreenIsFocused]);
 
   return (
     <View style={styles.wrap}>
       <Header />
-      <ToggleOptions />
-      <Map />
+      {/* <ToggleOptions /> */}
+      <MainMap />
       <Restaurants />
     </View>
   );
@@ -47,7 +49,6 @@ export default function MainScreen() {
 const styles = StyleSheet.create({
   wrap: {
     flex: 1,
-    flexDirection: 'column-reverse',
     alignItems: 'center',
     justifyContent: 'center',
   },

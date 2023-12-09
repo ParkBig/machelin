@@ -1,5 +1,4 @@
-import ConfirmAlertModal, { ToggleState } from 'components/common/ConfirmAlertModal';
-import { DEFAULT_IMAGE } from 'const/default';
+import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { Colors } from 'const/global-styles';
 import { makeCommentQuery } from 'query/comments';
 import usePostsCommentsQuery from 'query/hooks/posts/usePostsCommentsQuery';

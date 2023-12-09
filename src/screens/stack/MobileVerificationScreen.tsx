@@ -1,6 +1,6 @@
-import BriefIntro from 'components/mobileVerificationScreen/BriefIntro';
-import GoBack from 'components/mobileVerificationScreen/GoBack';
-import Verify from 'components/mobileVerificationScreen/Verify/Verify';
+import BriefIntro from 'components/stackScreen/mobileVerificationScreen/BriefIntro';
+import GoBack from 'components/stackScreen/mobileVerificationScreen/GoBack';
+import Verify from 'components/stackScreen/mobileVerificationScreen/Verify/Verify';
 import { Colors } from 'const/global-styles';
 import { Platform, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 

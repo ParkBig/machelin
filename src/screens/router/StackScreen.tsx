@@ -13,9 +13,11 @@ import MobileVerificationScreen from 'screens/stack/MobileVerificationScreen';
 import ChangeMyActivityZoneScreen from 'screens/stack/ChangeMyActivityZoneScreen';
 import ChangeMyPreferFoodsScreen from 'screens/stack/ChangeMyPreferFoodsScreen';
 import ChangeMyPreferRestaurantScreen from 'screens/stack/ChangeMyPreferRestaurantScreen';
-import ToggleFollow from 'components/ExploreUserInfoScreen/exploreUsersInfo/ToggleFollow';
-import ToggleBookmark from 'components/restaurantDetailScreen/ToggleBookmark';
+import ToggleFollow from 'components/stackScreen/ExploreUserInfoScreen/exploreUsersInfo/ToggleFollow';
+import ToggleBookmark from 'components/stackScreen/restaurantDetailScreen/ToggleBookmark';
 import FindMyIdScreen from 'screens/stack/FindMyIdScreen';
+import FindRestaurantInfoForMakePostScreen from 'screens/stack/FindRestaurantInfoForMakePostScreen';
+import RegionalSearchMapScreen from 'screens/stack/RegionalSearchMapScreen';
 
 export default function StackScreen() {
   return (
@@ -38,10 +40,17 @@ export default function StackScreen() {
         }}
       />
       <RootStack.Screen
+        name="FindRestaurantInfoForMakePostScreen"
+        component={FindRestaurantInfoForMakePostScreen}
+        options={{
+          title: '식당태그하기',
+        }}
+      />
+      <RootStack.Screen
         name="MyMapScreen"
         component={MyMapScreen}
         options={{
-          title: '나의 보물지도',
+          title: '나의 지도',
         }}
       />
       <RootStack.Screen
@@ -117,6 +126,13 @@ export default function StackScreen() {
           headerTitleAlign: 'left',
           headerRight: () => <ToggleFollow exploreUserId={route.params.userId} />,
         })}
+      />
+      <RootStack.Screen
+        name="RegionalSearchMapScreen"
+        component={RegionalSearchMapScreen}
+        options={{
+          title: '마슐 랭크 맵',
+        }}
       />
     </RootStack.Navigator>
   );

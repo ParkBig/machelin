@@ -1,11 +1,11 @@
-import { Colors } from 'const/global-styles';
+import { Colors, Size } from 'const/global-styles';
 import { StyleSheet, Text, View } from 'react-native';
 import { IPost } from 'types/store/myInfoType';
 import { Ionicons } from '@expo/vector-icons';
-import Button from 'components/common/Button';
-import Line from 'components/common/Line';
+import Button from 'components/common/layout/Button';
 import { useNavigation } from '@react-navigation/native';
 import { UseNavigation } from 'types/screen/screenType';
+import Line from 'components/common/layout/Line';
 
 interface Props {
   posts: IPost;
@@ -18,7 +18,7 @@ export default function PostBriefRestaurantInfo({ posts }: Props) {
     navigate('RestaurantDetailScreen', {
       restaurantName: posts.restaurantName,
       restaurantId: posts.restaurantId,
-    })
+    });
   };
 
   if (!posts.restaurantId) return null;
@@ -26,15 +26,18 @@ export default function PostBriefRestaurantInfo({ posts }: Props) {
   return (
     <>
       <View style={styles.wrap}>
-        <View style={styles.imgWrap}>
-          <Ionicons name="restaurant-outline" size={25} color={Colors.mainBlue1} />
-        </View>
-        <View style={styles.infos}>
-          <View>
-            <Text>{posts.restaurantName}</Text>
+        <View style={styles.ratingNIcon}>
+          <Ionicons style={styles.ionicons} size={25} name="star" color="yellow" />
+          <View style={styles.rating}>
+            <Text style={styles.ratingText}>{posts.rating} / 5</Text>
           </View>
-          <View>
-            <Text numberOfLines={1} ellipsizeMode="tail">
+        </View>
+        <View style={styles.info}>
+          <View style={styles.name}>
+            <Text style={styles.nameText}>{posts.restaurantName}</Text>
+          </View>
+          <View style={styles.restaurantAddress}>
+            <Text numberOfLines={1} ellipsizeMode="tail" style={styles.addressText}>
               {posts.restaurantAddress}
             </Text>
           </View>
@@ -43,7 +46,7 @@ export default function PostBriefRestaurantInfo({ posts }: Props) {
           <Ionicons name="chevron-forward" size={25} color={Colors.darkGray} />
         </Button>
       </View>
-      {posts.images.length === 0 ? <Line style={styles.lineOnlyRestaurant} /> : <Line style={styles.lineBoth} />}
+      <Line style={styles.line} />
     </>
   );
 }
@@ -54,25 +57,43 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
   },
-  imgWrap: {
+  ratingNIcon: {
     width: 40,
-    height: 50,
-    borderRadius: 10,
+    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.mainGreen1,
+    gap: 5,
+  },
+  ionicons: {
+    width: 35,
+    height: 35,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    borderRadius: 10,
+    backgroundColor: Colors.mainGreen2,
+  },
+  rating: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   img: {
     height: 30,
     width: 30,
     borderRadius: 10,
   },
-  infos: {
+  info: {
     flex: 1,
-    height: 50,
+    height: 60,
     paddingLeft: 10,
     justifyContent: 'center',
-    alignItems: 'flex-start',
+    gap: 5,
+  },
+  name: {
+    width: '100%',
+  },
+  restaurantAddress: {
+    width: '100%',
+    justifyContent: 'center',
   },
   button: {
     justifyContent: 'center',
@@ -80,16 +101,23 @@ const styles = StyleSheet.create({
     right: 0,
     width: 40,
   },
-  lineOnlyRestaurant: {
+  line: {
     width: '100%',
-    height: 3,
-    marginVertical: 10,
-    backgroundColor: Colors.mainGreen1,
-  },
-  lineBoth: {
-    width: '100%',
-    height: 3,
+    height: 2,
     marginTop: 10,
     backgroundColor: Colors.mainGreen1,
+  },
+  ratingText: {
+    fontSize: Size.normalSmall,
+    color: Colors.gray,
+    fontWeight: 'bold',
+  },
+  nameText: {
+    fontSize: Size.normalMiddle,
+    fontWeight: 'bold',
+  },
+  addressText: {
+    color: Colors.gray,
+    fontWeight: 'bold',
   },
 });

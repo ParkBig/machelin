@@ -3,13 +3,13 @@ import { takeToken } from 'util/tokenDB';
 
 interface ToggleBookmarkInput {
   restaurantId: string;
-  lat: string;
-  lng: string;
+  lat: number;
+  lng: number;
   restaurantName: string;
   images: string[];
   address: string;
-  rating: string;
-  totalRatings: string;
+  rating: number;
+  totalRatings: number;
 }
 
 const axiosBookmarks = axios.create({

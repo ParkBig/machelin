@@ -1,17 +1,18 @@
 import { BottomTabScreenProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
-import { RestaurantDetail } from 'types/data/restaureant';
+import { GooglePlace } from 'types/data/restaureant';
 
 export type RootBottomTabParamList = {
   MainScreen: undefined;
-  MachelinLankScreen: undefined;
+  RegionalSearchScreen: undefined;
   EvaluatorsScreen: undefined;
   MyScreen: undefined;
 };
 export type RootStackParamList = {
   BottomTabScreen: undefined;
   MyMapScreen: undefined;
+  RegionalSearchMapScreen: undefined;
   LoginScreen: undefined;
   FindMyIdScreen: undefined;
   MyInfoSettingScreen: undefined;
@@ -20,6 +21,7 @@ export type RootStackParamList = {
   ChangeMyActivityZoneScreen: undefined;
   ChangeMyPreferFoodsScreen: undefined;
   ChangeMyPreferRestaurantScreen: undefined;
+  FindRestaurantInfoForMakePostScreen: undefined;
   SignUpScreen: {
     mobile: string;
   };
@@ -27,7 +29,7 @@ export type RootStackParamList = {
     userId: number;
   };
   MakePostScreen: {
-    restaurantInfo: RestaurantDetail | null;
+    restaurantInfo: GooglePlace | null;
   };
   RestaurantDetailScreen: {
     restaurantName: string;
@@ -37,13 +39,14 @@ export type RootStackParamList = {
 export type AllParmList = {
   // BottomTabScreen
   MainScreen: undefined;
-  MachelinLankScreen: undefined;
+  RegionalSearchScreen: undefined;
   EvaluatorsScreen: undefined;
   MyScreen: undefined;
 
   // StackScreen
   BottomTabScreen: undefined;
   MyMapScreen: undefined;
+  RegionalSearchMapScreen: undefined;
   LoginScreen: undefined;
   FindMyIdScreen: undefined;
   MyInfoSettingScreen: undefined;
@@ -52,6 +55,7 @@ export type AllParmList = {
   ChangeMyActivityZoneScreen: undefined;
   ChangeMyPreferFoodsScreen: undefined;
   ChangeMyPreferRestaurantScreen: undefined;
+  FindRestaurantInfoForMakePostScreen: undefined;
   SignUpScreen: {
     mobile: string;
   };
@@ -59,7 +63,7 @@ export type AllParmList = {
     userId: number;
   };
   MakePostScreen: {
-    restaurantInfo: RestaurantDetail | null;
+    restaurantInfo: GooglePlace | null;
   };
   RestaurantDetailScreen: {
     restaurantName: string;

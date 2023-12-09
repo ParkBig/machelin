@@ -1,4 +1,4 @@
-import SignUpInfos from "components/signUpScreen/SignUpInfos";
+import SignUpInfos from "components/stackScreen/signUpScreen/SignUpInfos";
 import { Colors } from "const/global-styles";
 import { StyleSheet, View } from "react-native";
 

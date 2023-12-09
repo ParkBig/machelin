@@ -52,6 +52,9 @@ export interface Like {
 export interface IPost {
   id: number;
   createdAt: Date;
+  hasRestaurantTag: boolean;
+  restaurantLat: number;
+  restaurantLng: number;
   restaurantId: string;
   restaurantName: string;
   restaurantAddress: string;

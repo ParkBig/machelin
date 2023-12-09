@@ -2,7 +2,7 @@ import { Colors, Size } from 'const/global-styles';
 import { RootBottomTab } from 'types/screen/screenType';
 import { Ionicons } from '@expo/vector-icons';
 import MainScreen from 'screens/bottomTab/MainScreen';
-import MachelinLankScreen from 'screens/bottomTab/MachelinLankScreen';
+import RegionalSearchScreen from 'screens/bottomTab/RegionalSearchScreen';
 import EvaluatorsScreen from 'screens/bottomTab/EvaluatorsScreen';
 import MyScreen from 'screens/bottomTab/MyScreen';
 
@@ -27,19 +27,19 @@ export default function BottomTabScreen() {
         name="MainScreen"
         component={MainScreen}
         options={{
-          title: '마슐맵스',
+          title: '내주변',
           tabBarIcon: () => (
             <Ionicons name='map' size={Size.bigMiddle} color={Colors.mainBlue1} />
           )
         }}
       />
       <RootBottomTab.Screen
-        name="MachelinLankScreen"
-        component={MachelinLankScreen}
+        name="RegionalSearchScreen"
+        component={RegionalSearchScreen}
         options={{
-          title: '마슐랭크',
+          title: '지역검색',
           tabBarIcon: () => (
-            <Ionicons name='medal' size={Size.bigMiddle} color={Colors.mainBlue1} />
+            <Ionicons name='search' size={Size.bigMiddle} color={Colors.mainBlue1} />
           )
         }}
       />
@@ -47,7 +47,7 @@ export default function BottomTabScreen() {
         name="EvaluatorsScreen"
         component={EvaluatorsScreen}
         options={{
-          title: '평가단들',
+          title: '동네소식',
           tabBarIcon: () => (
             <Ionicons name='boat' size={Size.bigMiddle} color={Colors.mainBlue1} />
           )

@@ -14,7 +14,8 @@ export default function useMyInfoQuery() {
     data: myInfo,
     isSuccess,
     refetch: reMyInfo,
+    isRefetching,
   } = useQuery<Data>(['myInfo'], myInfoQuery);
 
-  return { myInfoIsLoading, isError, myInfo, isSuccess, reMyInfo };
+  return { myInfoIsLoading, isError, myInfo, isSuccess, reMyInfo, isRefetching };
 }
