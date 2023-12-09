@@ -1,136 +1,81 @@
-// response ~ 로바꿔주고 Rest~에는 photos의 인터페이스 바꾸기
-export type responseRestaurant = {
-  business_status: string;
+export interface GooglePlace {
+  name: string;
+  formatted_address: string;
+  place_id: string;
   geometry: {
     location: Location;
     viewport: Viewport;
   };
-  icon: string;
-  icon_background_color: string;
-  icon_mask_base_uri: string;
-  name: string;
-  opening_hours?: {
-    open_now: boolean;
-  };
-  photos?: Photo[];
-  place_id: string;
-  plus_code: {
-    compound_code: string;
-    global_code: string;
-  };
-  price_level?: number;
-  rating: number;
-  reference: string;
-  scope: string;
-  types: string[];
-  user_ratings_total: number;
-  vicinity: string;
-};
-export type Restaurant = {
-  business_status: string;
-  geometry: {
-    location: Location;
-    viewport: Viewport;
-  };
-  icon: string;
-  icon_background_color: string;
-  icon_mask_base_uri: string;
-  name: string;
-  opening_hours?: {
-    open_now: boolean;
-  };
-  photo: string;
-  place_id: string;
-  plus_code: {
-    compound_code: string;
-    global_code: string;
-  };
-  price_level?: number;
-  rating: number;
-  reference: string;
-  scope: string;
-  types: string[];
-  user_ratings_total: number;
-  vicinity: string;
-};
+  photos: Photo[];
 
-interface AddressComponent {
-  long_name: string;
-  short_name: string;
-  types: string[];
+  address_components?: AddressComponent[];
+  adr_address?: string;
+  business_status?: string;
+  curbside_pickup?: boolean;
+  current_opening_hours?: OpeningHours;
+  delivery?: boolean;
+  dine_in?: boolean;
+  editorial_summary?: PlaceEditorialSummary;
+  formatted_phone_number?: string;
+  icon?: string;
+  icon_background_color?: string;
+  icon_mask_base_uri?: string;
+  international_phone_number?: string;
+  opening_hours?: PlaceOpeningHours;
+  plus_code?: PlusCode;
+  price_level?: number;
+  rating?: number;
+  reservable?: boolean;
+  reference?: string;
+  reviews?: Review[];
+  scope?: string;
+  serves_beer?: boolean;
+  serves_breakfast?: boolean;
+  serves_brunch?: boolean;
+  serves_dinner?: boolean;
+  serves_lunch?: boolean;
+  serves_wine?: boolean;
+  takeout?: boolean;
+  types?: string[];
+  url?: string;
+  user_ratings_total?: number;
+  utc_offset?: number;
+  vicinity?: string;
+  wheelchair_accessible_entrance?: boolean;
 }
 
+interface PlusCode {
+  compound_code: string;
+  global_code: string;
+}
 interface Location {
   lat: number;
   lng: number;
 }
-
-interface Viewport {
-  northeast: Location;
-  southwest: Location;
-}
-
-interface GooglePlace {
-  address_components: AddressComponent[];
-  adr_address: string;
-  business_status: string;
-  formatted_address: string;
-  formatted_phone_number: string;
-  geometry: {
-    location: Location;
-    viewport: Viewport;
-  };
-  icon: string;
-  icon_background_color: string;
-  icon_mask_base_uri: string;
-  international_phone_number: string;
-  name: string;
-  opening_hours: {
-    open_now: boolean;
-    periods: OpeningHoursPeriod[];
-    weekday_text: string[];
-  };
-  photos: Photo[];
-  place_id: string;
-  plus_code: {
-    compound_code: string;
-    global_code: string;
-  };
-  rating: number;
-  reference: string;
-  reviews: Review[];
-  types: string[];
-  url: string;
-  user_ratings_total: number;
-  utc_offset: number;
-  vicinity: string;
-  website: string;
-}
-
-interface AddressComponent {
-  long_name: string;
-  short_name: string;
-  types: string[];
-}
-
-export interface OpeningHoursPeriod {
-  open: { day: number; time: string };
-  close: { day: number; time: string };
-}
-
-interface OpeningHours {
-  open_now: boolean;
-  periods: OpeningHoursPeriod[];
-  weekday_text: string[];
-}
-
 export interface Photo {
   height: number;
   html_attributions: string[];
   photo_reference: string;
   width: number;
 }
-
+interface AddressComponent {
+  long_name: string;
+  short_name: string;
+  types: string[];
+}
+interface OpeningHours {
+  open_now: boolean;
+  periods: OpeningHoursPeriod[];
+  weekday_text: string[];
+}
+export interface OpeningHoursPeriod {
+  open: { day: number; time: string };
+  close: { day: number; time: string };
+}
+interface PlaceEditorialSummary {
+  language?: string;
+  overview?: string;
+}
 export interface Review {
   author_name: string;
   author_url: string;
@@ -142,47 +87,14 @@ export interface Review {
   text: string;
   time: number;
   translated: boolean;
+  website?: string;
 }
-
-interface PlusCode {
-  compound_code: string;
-  global_code: string;
+interface Viewport {
+  northeast: Location;
+  southwest: Location;
 }
-
-export interface DetailRestaurant {
-  address_components: AddressComponent[];
-  adr_address: string;
-  business_status: string;
-  current_opening_hours: OpeningHours;
-  dine_in: boolean;
-  formatted_address: string;
-  formatted_phone_number: string;
-  geometry: {
-    location: { lat: number; lng: number };
-    viewport: { northeast: any; southwest: any };
-  };
-  icon: string;
-  icon_background_color: string;
-  icon_mask_base_uri: string;
-  international_phone_number: string;
-  name: string;
-  opening_hours: OpeningHours;
-  photos: Photo[];
-  place_id: string;
-  plus_code: PlusCode;
-  rating: number;
-  reference: string;
-  reservable: boolean;
-  reviews: Review[];
-  serves_beer: boolean;
-  serves_brunch: boolean;
-  serves_dinner: boolean;
-  serves_lunch: boolean;
-  serves_wine: boolean;
-  types: string[];
-  url: string;
-  user_ratings_total: number;
-  utc_offset: number;
-  vicinity: string;
-  website: string;
+interface PlaceOpeningHours {
+  open_now?: boolean;
+  type?: string;
+  weekday_text: string[];
 }
