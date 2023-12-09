@@ -1,7 +1,8 @@
 import { SearchName, SearchSubName } from 'data/administrativeDistrict';
 import { atom } from 'recoil';
 
-interface RegionalSettingsState {
+interface RegionalRestaurantSearchInputState {
+  isTyping: boolean;
   searchText: string;
   location: {
     city: SearchName;
@@ -22,9 +23,10 @@ export const mainSearchState = atom<MainSearchState>({
   },
 });
 
-export const regionalSettingsState = atom<RegionalSettingsState>({
-  key: 'regionalSettingsState',
+export const regionalRestaurantSearchInputState = atom<RegionalRestaurantSearchInputState>({
+  key: 'regionalRestaurantSearchInputState',
   default: {
+    isTyping: false,
     searchText: '',
     location: {
       city: '전체',

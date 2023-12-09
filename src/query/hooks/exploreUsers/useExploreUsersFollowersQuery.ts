@@ -7,7 +7,7 @@ interface Data {
   followers: UserInfo[];
 }
 
-export default function useExploreUsersFollowersQuery(userId?: number) {
+export default function useExploreUsersFollowersQuery(userId: number) {
   const {
     isLoading: followersIsLoading,
     isError,

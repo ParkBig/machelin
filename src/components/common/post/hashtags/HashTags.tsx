@@ -1,4 +1,4 @@
-import Button from 'components/common/Button';
+import Button from 'components/common/layout/Button';
 import { Colors } from 'const/global-styles';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -11,13 +11,15 @@ export default function HashTags({ hashtags }: Props) {
     return null;
   }
 
+  const onPressHandler = () => {
+    // 내주변, 동네 게시글들스크린에서 이 키워드로 검색 이동
+  }
+
   return (
     <View style={styles.wrap}>
       {hashtags.map((hashtag, i) => (
-        <Button key={hashtag + i}>
-          <Text style={styles.text}>
-            #{hashtag}
-          </Text>
+        <Button key={hashtag + i} onPress={onPressHandler}>
+          <Text style={styles.text}>#{hashtag}</Text>
         </Button>
       ))}
     </View>
@@ -29,10 +31,10 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    paddingVertical: 15,
     gap: 5,
   },
   text: {
-    color: Colors.darkGray,
+    color: Colors.gray,
+    textDecorationLine: 'underline',
   },
 });

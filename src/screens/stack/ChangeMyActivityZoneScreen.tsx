@@ -1,5 +1,5 @@
-import Button from 'components/common/Button';
-import ConfirmAlertModal, { ToggleState } from 'components/common/ConfirmAlertModal';
+import Button from 'components/common/layout/Button';
+import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { Colors, Shadow, Size } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { modifyUserActivityZoneQuery } from 'query/user';

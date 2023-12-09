@@ -1,5 +1,5 @@
-import LogoutWithdraw from 'components/myInfoSettingScreen/logoutWithdraw/LogoutWithdraw';
-import MyInfos from 'components/myInfoSettingScreen/myInfos/MyInfos';
+import LogoutWithdraw from 'components/stackScreen/myInfoSettingScreen/logoutWithdraw/LogoutWithdraw';
+import MyInfos from 'components/stackScreen/myInfoSettingScreen/myInfos/MyInfos';
 import { Colors } from 'const/global-styles';
 import { StyleSheet, View } from 'react-native';
 

@@ -1,15 +1,15 @@
 import { ScrollView, StyleSheet } from 'react-native';
 import { StackScreenPropsAbout } from 'types/screen/screenType';
-import RestaurantInfos from 'components/restaurantDetailScreen/RestaurantInfos';
-import RestaurantGrade from 'components/restaurantDetailScreen/RestaurantGrade';
-import RestaurantImg from 'components/restaurantDetailScreen/RestaurantImg';
+import RestaurantInfos from 'components/stackScreen/restaurantDetailScreen/RestaurantInfos';
+import RestaurantGrade from 'components/stackScreen/restaurantDetailScreen/RestaurantGrade';
+import RestaurantImg from 'components/stackScreen/restaurantDetailScreen/RestaurantImg';
 import { Colors } from 'const/global-styles';
 import { useState } from 'react';
 import useRestaurantDetailQuery from 'query/hooks/restaurants/useRestaurantDetailQuery';
-import LoadingOverlay from 'components/common/LoadingOverlay';
 import { RefreshControl } from 'react-native-gesture-handler';
-import Line from 'components/common/Line';
-import RestaurantReviews from 'components/restaurantDetailScreen/restaurantReviews/RestaurantReviews';
+import Line from 'components/common/layout/Line';
+import RestaurantReviews from 'components/stackScreen/restaurantDetailScreen/restaurantReviews/RestaurantReviews';
+import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 
 export default function RestaurantDetailScreen({ route }: StackScreenPropsAbout<'RestaurantDetailScreen'>) {
   const [refreshing, setRefreshing] = useState(false);
@@ -30,12 +30,12 @@ export default function RestaurantDetailScreen({ route }: StackScreenPropsAbout<
       >
         <RestaurantImg />
         <RestaurantGrade />
-        <Line style={styles.line} />
+        <Line style={styles.innerLine} />
         <RestaurantInfos />
         <Line style={styles.line} />
         <RestaurantReviews />
       </ScrollView>
-      {restaurantDetailIsLoading && <LoadingOverlay />}
+      {restaurantDetailIsLoading && <LoadingOverlay style={styles.loadingOverlay} />}
     </>
   );
 }
@@ -45,9 +45,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.mainWhite1,
   },
+  innerLine: {
+    marginHorizontal: 15,
+    flex: 1,
+    height: 2,
+    backgroundColor: Colors.mainGreen2,
+  },
   line: {
     width: '100%',
     height: 5,
-    backgroundColor: Colors.superLightGray,
+    backgroundColor: Colors.mainGreen2,
+  },
+  loadingOverlay: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.lightGrayOpacity1,
+    position: 'absolute',
+    zIndex: 100,
   },
 });

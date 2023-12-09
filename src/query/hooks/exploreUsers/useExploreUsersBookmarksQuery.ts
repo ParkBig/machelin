@@ -7,7 +7,7 @@ interface Data {
   bookmarks: Bookmark[];
 }
 
-export default function useExploreUsersBookmarksQuery(userId?: number) {
+export default function useExploreUsersBookmarksQuery(userId: number) {
   const {
     data: bookmarks,
     refetch: reBookmarks,

@@ -1,11 +1,11 @@
 import { restaurantDetailQuery } from 'query/restaurants';
 import { useQuery } from 'react-query';
-import { RestaurantDetail } from 'types/data/restaureant';
+import { GooglePlace } from 'types/data/restaureant';
 import { IPost } from 'types/store/myInfoType';
 
 interface Data {
   ok: boolean;
-  restaurantDetail: RestaurantDetail;
+  restaurantDetail: GooglePlace;
   machelinPosts: IPost[];
   msg: string;
 }

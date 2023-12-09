@@ -1,14 +1,13 @@
-import Button from 'components/common/Button';
+import Button from 'components/common/layout/Button';
 import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters, useMutation } from 'react-query';
 import { Colors, Size } from 'const/global-styles';
 import { Like } from 'types/store/myInfoType';
 import { PostQueryResponse, togglePostLikeDislike } from 'query/posts';
-import useUsersPostsQuery from 'query/hooks/users/useUsersPostsQuery';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useState } from 'react';
-import ConfirmAlertModal, { ToggleState } from 'components/common/ConfirmAlertModal';
+import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import useUsersPostLikesDislikesQuery from 'query/hooks/users/useUsersPostLikesDislikesQuery';
 import { RestaurantPosts } from 'query/hooks/restaurants/useRestaurantPostsQuery';
 

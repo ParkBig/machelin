@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-import Button from 'components/common/Button';
-import ConfirmAlertModal, { ToggleState } from 'components/common/ConfirmAlertModal';
+import Button from 'components/common/layout/Button';
+import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { Colors, Size } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { sendFindMyIdVerificationQuery, checkFindMyIdVerificationQuery } from 'query/user';

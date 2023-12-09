@@ -3,7 +3,7 @@ import { useState } from 'react';
 import CommentsModal from './CommentsModal';
 import { IPost, Like } from 'types/store/myInfoType';
 import { Ionicons } from '@expo/vector-icons';
-import Button from 'components/common/Button';
+import Button from 'components/common/layout/Button';
 import Hearts from './Hearts';
 import { Colors, Size } from 'const/global-styles';
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';

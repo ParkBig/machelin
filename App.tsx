@@ -6,7 +6,6 @@ import { useForegroundPermissions } from 'expo-location';
 import { useEffect } from 'react';
 import { verifyLocationPermissions, verifyMediaLibraryPermissions } from 'util/accessRight';
 import { useMediaLibraryPermissions } from 'expo-image-picker';
-import useNearbyRestaurantsQueryTest from 'query/hooks/restaurants/test';
 
 const queryClient = new QueryClient();
 

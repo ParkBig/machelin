@@ -1,15 +1,15 @@
-import Button from 'components/common/Button';
-import ConfirmAlertModal, { ToggleState } from 'components/common/ConfirmAlertModal';
-import ChoseRestaurant from 'components/makePostScreen/choseRestaurant/ChoseRestaurant';
-import PostContents from 'components/makePostScreen/contents/PostContents';
-import Hashtag from 'components/makePostScreen/hashtag/Hashtag';
-import SelectPublic from 'components/makePostScreen/selectPublic/SelectPublic';
-import StarScore from 'components/makePostScreen/starScore/StarScore';
-import WriterImg from 'components/makePostScreen/writerImg/WriterImg';
+import Button from 'components/common/layout/Button';
+import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
+import ChoseRestaurant from 'components/stackScreen/makePostScreen/choseRestaurant/ChoseRestaurant';
+import PostContents from 'components/stackScreen/makePostScreen/contents/PostContents';
+import Hashtag from 'components/stackScreen/makePostScreen/hashtag/Hashtag';
+import SelectPublic from 'components/stackScreen/makePostScreen/selectPublic/SelectPublic';
+import StarScore from 'components/stackScreen/makePostScreen/starScore/StarScore';
+import WriterImg from 'components/stackScreen/makePostScreen/writerImg/WriterImg';
 import { Colors, Size } from 'const/global-styles';
 import { makePostQuery } from 'query/posts';
 import { useEffect, useLayoutEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text } from 'react-native';
 import { useMutation } from 'react-query';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { makePostState } from 'store/makePostState';
@@ -29,7 +29,7 @@ export default function MakePostScreen({ navigation, route }: StackScreenPropsAb
       if (res.ok) {
         reMyInfo();
         rePosts();
-        navigation.navigate('MyScreen');
+        navigation.goBack();
       } else {
         setToggleAlertModal({ toggle: true, alertMsg: res.msg });
       }
@@ -69,6 +69,9 @@ export default function MakePostScreen({ navigation, route }: StackScreenPropsAb
     }
 
     if (route.params.restaurantInfo) {
+      payloadFormData.append('hasRestaurantTag', 'true');
+      payloadFormData.append('restaurantLat', String(route.params.restaurantInfo.geometry.location.lat));
+      payloadFormData.append('restaurantLng', String(route.params.restaurantInfo.geometry.location.lng))
       payloadFormData.append('restaurantId', route.params.restaurantInfo.place_id);
       payloadFormData.append('restaurantName', route.params.restaurantInfo.name);
       payloadFormData.append('restaurantAddress', route.params.restaurantInfo.formatted_address);
@@ -94,13 +97,11 @@ export default function MakePostScreen({ navigation, route }: StackScreenPropsAb
   return (
     <ScrollView style={styles.wrap}>
       <ChoseRestaurant />
-      <View style={styles.contents}>
-        <WriterImg />
-        <PostContents />
-        <Hashtag />
-        {route.params.restaurantInfo && <StarScore />}
-        <SelectPublic />
-      </View>
+      <WriterImg />
+      <PostContents />
+      <Hashtag />
+      {route.params.restaurantInfo && <StarScore />}
+      <SelectPublic />
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}
         setToggleAlertModal={setToggleAlertModal}
@@ -113,10 +114,7 @@ export default function MakePostScreen({ navigation, route }: StackScreenPropsAb
 const styles = StyleSheet.create({
   wrap: {
     backgroundColor: Colors.mainWhite1,
-  },
-  contents: {
     paddingHorizontal: 15,
-    width: '100%',
   },
   text: {
     fontSize: Size.normalBig,
