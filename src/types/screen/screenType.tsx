@@ -6,7 +6,7 @@ import { GooglePlace } from 'types/data/restaureant';
 export type RootBottomTabParamList = {
   MainScreen: undefined;
   RegionalSearchScreen: undefined;
-  EvaluatorsScreen: undefined;
+  NeighborhoodPostsScreen: undefined;
   MyScreen: undefined;
 };
 export type RootStackParamList = {
@@ -40,7 +40,7 @@ export type AllParmList = {
   // BottomTabScreen
   MainScreen: undefined;
   RegionalSearchScreen: undefined;
-  EvaluatorsScreen: undefined;
+  NeighborhoodPostsScreen: undefined;
   MyScreen: undefined;
 
   // StackScreen

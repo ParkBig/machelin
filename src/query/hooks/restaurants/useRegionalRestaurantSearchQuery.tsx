@@ -1,6 +1,6 @@
 import { restaurantsTextSearchQuery } from 'query/restaurants';
 import { useEffect } from 'react';
-import { useQuery } from 'react-query';
+import { useInfiniteQuery, useQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { regionalRestaurantSearchInputState } from 'store/searchState';
 import { GooglePlace } from 'types/data/restaureant';
@@ -9,6 +9,7 @@ interface Data {
   ok: boolean;
   msg: string;
   restaurants: GooglePlace[];
+  next_page_token: string;
 }
 
 export default function useRegionalRestaurantSearchQuery() {
@@ -26,14 +27,30 @@ export default function useRegionalRestaurantSearchQuery() {
     data: restaurants,
     isLoading: restaurantsIsLoading,
     refetch: reRestaurants,
-    isRefetching: isReRestaurants,
-  } = useQuery<Data>(['regionalRestaurantSearch', keyword], () => restaurantsTextSearchQuery(keyword), {
-    enabled: isTyping ? false : true,
-  });
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery<Data, unknown, GooglePlace>(
+    ['nearbyRestaurantsSearch', keyword],
+    ({ pageParam = null }) => restaurantsTextSearchQuery(keyword, pageParam),
+    {
+      enabled: isTyping ? false : true,
+      select: data => ({ pages: data.pages.flatMap(page => page.restaurants), pageParams: data.pageParams }),
+      getNextPageParam: lastPage => {
+        return lastPage.next_page_token || null;
+      },
+    }
+  );
+
+  const fetchNextPageRestaurants = () => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  };
 
   useEffect(() => {
     reRestaurants();
   }, [isTyping, city, district, reRestaurants]);
 
-  return { restaurants, restaurantsIsLoading, reRestaurants, isReRestaurants };
+  return { restaurants, restaurantsIsLoading, reRestaurants, fetchNextPageRestaurants, isFetchingNextPage };
 }

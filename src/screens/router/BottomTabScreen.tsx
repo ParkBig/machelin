@@ -3,8 +3,8 @@ import { RootBottomTab } from 'types/screen/screenType';
 import { Ionicons } from '@expo/vector-icons';
 import MainScreen from 'screens/bottomTab/MainScreen';
 import RegionalSearchScreen from 'screens/bottomTab/RegionalSearchScreen';
-import EvaluatorsScreen from 'screens/bottomTab/EvaluatorsScreen';
 import MyScreen from 'screens/bottomTab/MyScreen';
+import NeighborhoodPostsScreen from 'screens/bottomTab/NeighborhoodPostsScreen';
 
 export default function BottomTabScreen() {
   return (
@@ -44,8 +44,8 @@ export default function BottomTabScreen() {
         }}
       />
       <RootBottomTab.Screen
-        name="EvaluatorsScreen"
-        component={EvaluatorsScreen}
+        name="NeighborhoodPostsScreen"
+        component={NeighborhoodPostsScreen}
         options={{
           title: '동네소식',
           tabBarIcon: () => (

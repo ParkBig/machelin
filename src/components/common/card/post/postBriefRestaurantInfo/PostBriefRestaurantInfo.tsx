@@ -9,10 +9,11 @@ import Line from 'components/common/layout/Line';
 
 interface Props {
   posts: IPost;
+  isDetailScreen: boolean;
 }
 
-export default function PostBriefRestaurantInfo({ posts }: Props) {
-  const { navigate } = useNavigation<UseNavigation<'MyScreen' | 'ExploreUserInfoScreen' | 'MachelinLankScreen'>>();
+export default function PostBriefRestaurantInfo({ posts, isDetailScreen }: Props) {
+  const { navigate } = useNavigation<UseNavigation<'MyScreen' | 'ExploreUserInfoScreen' | 'RegionalSearchScreen'>>();
 
   const goToDetailRestaurantHandler = () => {
     navigate('RestaurantDetailScreen', {
@@ -42,9 +43,11 @@ export default function PostBriefRestaurantInfo({ posts }: Props) {
             </Text>
           </View>
         </View>
-        <Button style={styles.button} onPress={goToDetailRestaurantHandler}>
-          <Ionicons name="chevron-forward" size={25} color={Colors.darkGray} />
-        </Button>
+        {!isDetailScreen && (
+          <Button style={styles.button} onPress={goToDetailRestaurantHandler}>
+            <Ionicons name="chevron-forward" size={25} color={Colors.darkGray} />
+          </Button>
+        )}
       </View>
       <Line style={styles.line} />
     </>
@@ -104,7 +107,7 @@ const styles = StyleSheet.create({
   line: {
     width: '100%',
     height: 2,
-    marginTop: 10,
+    marginVertical: 10,
     backgroundColor: Colors.mainGreen1,
   },
   ratingText: {

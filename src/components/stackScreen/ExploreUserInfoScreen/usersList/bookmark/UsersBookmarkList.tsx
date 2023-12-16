@@ -10,14 +10,12 @@ import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 
 export default function UsersBookmarkList() {
   const { params } = useRoute<UseRouter<'ExploreUserInfoScreen'>>();
-  const { bookmarks, bookmarksIsLoading } = useExploreUsersBookmarksQuery(params.userId);
+  const { bookmarks, bookmarksIsLoading, isReBookmarks } = useExploreUsersBookmarksQuery(params.userId);
   const bookmarksExist = bookmarks?.bookmarks && bookmarks.bookmarks.length !== 0 ? true : false;
 
   return (
     <View style={styles.wrap}>
-      {bookmarksIsLoading ? (
-        <LoadingOverlay style={styles.loadingOverlay} />
-      ) : bookmarksExist ? (
+      {bookmarksExist ? (
         <FlatList
           scrollEnabled={false}
           showsVerticalScrollIndicator={false}
@@ -29,6 +27,7 @@ export default function UsersBookmarkList() {
       ) : (
         <NoBookmark />
       )}
+      {(bookmarksIsLoading || isReBookmarks) && <LoadingOverlay style={styles.loadingOverlay} />}
     </View>
   );
 }
@@ -43,7 +42,9 @@ const styles = StyleSheet.create({
   loadingOverlay: {
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
+    paddingTop: 30,
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    position: 'absolute',
   },
 });

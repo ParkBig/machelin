@@ -27,11 +27,22 @@ interface TogglePostLikeDislikeInput {
 export interface PostQueryResponse {
   ok: boolean;
   posts: IPost[];
+  msg: string;
+  nextPage: number | null;
 }
 
-export const getPostsQuery = async () => {};
+export const neighborhoodPostsQuery = async (subLocality: string, page: number = 1) => {
+  const { data } = await axiosPosts.get('/neighborhoodPosts', {
+    params: {
+      subLocality,
+      page,
+    },
+  });
 
-export const usersPostsQuery = async (targetId: number | undefined, myId: number | undefined) => {
+  return data;
+};
+
+export const usersPostsQuery = async (targetId: number | undefined, myId: number | undefined, page: number = 1) => {
   if (!targetId) {
     return { ok: true, posts: null };
   }
@@ -40,6 +51,7 @@ export const usersPostsQuery = async (targetId: number | undefined, myId: number
     params: {
       targetId,
       myId,
+      page,
     },
   });
   return data;

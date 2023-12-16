@@ -6,28 +6,32 @@ import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import BriefBookmarkInfo from './BriefBookmarkInfo';
 import { FlatList } from 'react-native-gesture-handler';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
+import AvailableAfterLogin from 'components/common/modal/AvailableAfterLogin';
 
 export default function MyBookmarkList() {
   const { myInfo } = useMyInfoQuery();
-  const { bookmarks, bookmarksIsLoading } = useUsersBookmarksQuery(myInfo?.authUser?.id);
+  const { bookmarks, bookmarksIsLoading, isReBookmarks } = useUsersBookmarksQuery(myInfo?.authUser?.id);
   const bookmarksExist = bookmarks?.bookmarks && bookmarks.bookmarks.length !== 0 ? true : false;
 
   return (
     <View style={styles.wrap}>
-      {bookmarksIsLoading ? (
-        <LoadingOverlay style={styles.loadingOverlay} />
-      ) : bookmarksExist ? (
-        <FlatList
-          scrollEnabled={false}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ gap: 5 }}
-          data={bookmarks?.bookmarks}
-          keyExtractor={item => `${item.id}`}
-          renderItem={({ item }) => <BriefBookmarkInfo key={item.id} bookmark={item} isSlide={false} />}
-        />
+      {myInfo?.authUser ? (
+        bookmarksExist ? (
+          <FlatList
+            scrollEnabled={false}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ gap: 5 }}
+            data={bookmarks?.bookmarks}
+            keyExtractor={item => `${item.id}`}
+            renderItem={({ item }) => <BriefBookmarkInfo key={item.id} bookmark={item} isSlide={false} />}
+          />
+        ) : (
+          <NoBookmark />
+        )
       ) : (
-        <NoBookmark />
+        <AvailableAfterLogin />
       )}
+      {(bookmarksIsLoading || isReBookmarks) && <LoadingOverlay style={styles.loadingOverlay} />}
     </View>
   );
 }
@@ -42,7 +46,9 @@ const styles = StyleSheet.create({
   loadingOverlay: {
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
+    paddingTop: 30,
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    position: 'absolute',
   },
 });

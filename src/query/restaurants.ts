@@ -34,14 +34,13 @@ export const nearbyRestaurantsSearchQuery = async (
   return data;
 };
 
-export const localRestaurantsSearchQuery =async (keyword: string) => {
-  
-}
+export const localRestaurantsSearchQuery = async (keyword: string) => {};
 
-export const restaurantsTextSearchQuery = async (keyword: string) => {
+export const restaurantsTextSearchQuery = async (keyword: string, nextPageParams?: string) => {
   const { data } = await axiosRestaurants.get('/restaurantsTextSearch', {
     params: {
       keyword,
+      nextPageParams: nextPageParams ? nextPageParams : null,
     },
   });
 
@@ -58,10 +57,11 @@ export const restaurantDetailQuery = async (restaurantId: string) => {
   return data;
 };
 
-export const restaurantPostsQuery = async (restaurantId: string) => {
+export const restaurantPostsQuery = async (restaurantId: string, page: number = 1) => {
   const { data } = await axiosRestaurants.get('/restaurantPosts', {
     params: {
       restaurantId,
+      page,
     },
   });
 

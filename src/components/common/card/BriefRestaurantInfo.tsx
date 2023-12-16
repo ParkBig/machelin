@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     right: 0,
     height: '100%',
-    width: 40,
+    width: 50,
   },
   nameText: {
     fontSize: Size.normalMiddle,

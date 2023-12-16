@@ -1,9 +1,9 @@
 import Button from 'components/common/layout/Button';
 import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { QueryObserverResult, RefetchOptions, RefetchQueryFilters, useMutation } from 'react-query';
+import { InfiniteData, QueryObserverResult, RefetchOptions, RefetchQueryFilters, useMutation } from 'react-query';
 import { Colors, Size } from 'const/global-styles';
-import { Like } from 'types/store/myInfoType';
+import { IPost, Like } from 'types/store/myInfoType';
 import { PostQueryResponse, togglePostLikeDislike } from 'query/posts';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useState } from 'react';
@@ -16,7 +16,7 @@ interface Props {
   postsLikes: Like[];
   rePosts: <TPageData>(
     options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-  ) => Promise<QueryObserverResult<PostQueryResponse | RestaurantPosts, unknown>>;
+  ) => Promise<QueryObserverResult<PostQueryResponse | RestaurantPosts | InfiniteData<IPost>, unknown>>;
 }
 
 export default function Hearts({ postId, postsLikes, rePosts }: Props) {
