@@ -56,22 +56,22 @@ export default function BriefUserInfo({ userInfo }: Props) {
         <View style={styles.moreInfos}>
           <View style={styles.upperMoreInfo}>
             <View style={styles.moreInfo}>
-              <Ionicons name="bookmarks" size={25} color={Colors.mainBlue1} />
+              <Ionicons name="bookmarks" size={25} color={Colors.mainGreen1} />
               <Text>{bookmarks}</Text>
             </View>
             <Line style={styles.line} />
             <View style={styles.moreInfo}>
-              <Ionicons name="reader" size={25} color={Colors.mainBlue1} />
+              <Ionicons name="reader" size={25} color={Colors.mainGreen1} />
               <Text>{posts}</Text>
             </View>
             <Line style={styles.line} />
             <View style={styles.moreInfo}>
-              <Ionicons name="people" size={25} color={Colors.mainBlue1} />
+              <Ionicons name="people" size={25} color={Colors.mainGreen1} />
               <Text>{followers}</Text>
             </View>
             <Line style={styles.line} />
             <Button style={styles.button} onPress={exploreUserInfoHandler}>
-              <Ionicons name="chevron-forward" size={25} color={Colors.mainBlue1} />
+              <Ionicons name="chevron-forward" size={25} color={Colors.mainGreen1} />
             </Button>
           </View>
         </View>
@@ -156,6 +156,6 @@ const styles = StyleSheet.create({
   line: {
     height: '60%',
     width: 2,
-    backgroundColor: Colors.mainBlue1,
+    backgroundColor: Colors.mainGreen1,
   },
 });

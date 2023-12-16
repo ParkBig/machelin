@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Button from 'components/common/layout/Button';
 import Hearts from './Hearts';
 import { Colors, Size } from 'const/global-styles';
-import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
+import { InfiniteData, QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
 import { PostQueryResponse } from 'query/posts';
 import { RestaurantPosts } from 'query/hooks/restaurants/useRestaurantPostsQuery';
 
@@ -14,7 +14,7 @@ interface Props {
   posts: IPost;
   rePosts: <TPageData>(
     options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-  ) => Promise<QueryObserverResult<PostQueryResponse | RestaurantPosts, unknown>>;
+  ) => Promise<QueryObserverResult<PostQueryResponse | RestaurantPosts | InfiniteData<IPost>, unknown>>;
 }
 
 export default function ShowCommentsAndHearts({ posts, rePosts }: Props) {

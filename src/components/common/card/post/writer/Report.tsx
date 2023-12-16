@@ -31,7 +31,7 @@ export default function Report({ postId, isPublic }: Props) {
         </Button>
       )}
       <Button onPress={toggleReportModalHandler}>
-        <Ionicons style={styles.ionicons} name="ellipsis-vertical" size={30} color={Colors.gray} />
+        <Ionicons style={styles.ionicons} name="ellipsis-vertical" size={20} color={Colors.gray} />
       </Button>
       <ReportModal postId={postId} toggleModal={toggleReportModal} toggleModalHandler={toggleReportModalHandler} />
       <ConfirmAlertModal

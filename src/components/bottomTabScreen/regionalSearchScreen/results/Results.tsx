@@ -1,4 +1,3 @@
-import useRegionalRestaurantSearchQuery from 'query/hooks/restaurants/useRegionalRestaurantSearchQuery';
 import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import Button from 'components/common/layout/Button';
 import { Ionicons } from '@expo/vector-icons';
@@ -9,22 +8,28 @@ import NoResults from './NoResults';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import BriefRestaurantInfo from 'components/common/card/BriefRestaurantInfo';
 import { useState } from 'react';
+import useRegionalRestaurantSearchQuery from 'query/hooks/restaurants/useRegionalRestaurantSearchQuery';
 
 export default function Results() {
-  const { navigate } = useNavigation<UseNavigation<'MachelinLankScreen'>>();
+  const { navigate } = useNavigation<UseNavigation<'RegionalSearchScreen'>>();
   const [refreshing, setRefreshing] = useState(false);
-  const { restaurants, restaurantsIsLoading, reRestaurants } = useRegionalRestaurantSearchQuery();
+  const { restaurants, fetchNextPageRestaurants, isFetchingNextPage, reRestaurants, restaurantsIsLoading } =
+    useRegionalRestaurantSearchQuery();
 
-  const restaurantsIsExist = restaurants?.restaurants && restaurants.restaurants.length !== 0 ? true : false;
-
-  const onPressHandler = () => {
-    navigate('MachelinLankMapScreen');
-  };
+  const restaurantsIsExist = restaurants?.pages && restaurants.pages.length !== 0 ? true : false;
 
   const onRefreshHandler = () => {
     setRefreshing(true);
     reRestaurants();
     setRefreshing(false);
+  };
+
+  const onEndReachedHandler = () => {
+    fetchNextPageRestaurants();
+  };
+
+  const onPressHandler = () => {
+    navigate('RegionalSearchMapScreen');
   };
 
   return (
@@ -35,8 +40,9 @@ export default function Results() {
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}
             style={styles.flatList}
             showsVerticalScrollIndicator={false}
-            data={restaurants?.restaurants}
-            keyExtractor={item => item.place_id}
+            onEndReached={onEndReachedHandler}
+            data={restaurants?.pages}
+            keyExtractor={(_, index) => String(index)}
             contentContainerStyle={{ paddingBottom: 90 }}
             renderItem={({ item }) => {
               const navigateHandler = () => {
@@ -56,7 +62,8 @@ export default function Results() {
       ) : (
         <NoResults />
       )}
-      {restaurantsIsLoading && <LoadingOverlay style={styles.loadingOverlay} />}
+      {restaurantsIsLoading && <LoadingOverlay style={styles.defaultLoading} />}
+      {isFetchingNextPage && <LoadingOverlay style={styles.moreDataLoading} />}
     </View>
   );
 }
@@ -85,11 +92,19 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
   },
-  loadingOverlay: {
+  defaultLoading: {
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
+    paddingTop: 20,
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    position: 'absolute',
+  },
+  moreDataLoading: {
+    width: '100%',
+    height: '100%',
+    paddingBottom: 20,
+    justifyContent: 'flex-end',
     position: 'absolute',
   },
 });

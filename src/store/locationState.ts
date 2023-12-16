@@ -1,4 +1,4 @@
-import { MutableRefObject, RefObject } from 'react';
+import { RefObject } from 'react';
 import MapView from 'react-native-maps';
 import { atom } from 'recoil';
 import { FocusedRestaurant, LocationSearchRadius, MapLocationState, MyLocationState } from 'types/store/locationType';

@@ -18,6 +18,7 @@ import ToggleBookmark from 'components/stackScreen/restaurantDetailScreen/Toggle
 import FindMyIdScreen from 'screens/stack/FindMyIdScreen';
 import FindRestaurantInfoForMakePostScreen from 'screens/stack/FindRestaurantInfoForMakePostScreen';
 import RegionalSearchMapScreen from 'screens/stack/RegionalSearchMapScreen';
+import MakePostButton from 'components/stackScreen/makePostScreen/makePostButton/MakePostButton';
 
 export default function StackScreen() {
   return (
@@ -34,10 +35,11 @@ export default function StackScreen() {
       <RootStack.Screen
         name="MakePostScreen"
         component={MakePostScreen}
-        options={{
+        options={({ route }) => ({
           title: '기록하기',
           headerTitleAlign: 'left',
-        }}
+          headerRight: () => <MakePostButton restaurantInfo={route.params.restaurantInfo} />
+        })}
       />
       <RootStack.Screen
         name="FindRestaurantInfoForMakePostScreen"
@@ -131,7 +133,7 @@ export default function StackScreen() {
         name="RegionalSearchMapScreen"
         component={RegionalSearchMapScreen}
         options={{
-          title: '마슐 랭크 맵',
+          title: '검색 결과',
         }}
       />
     </RootStack.Navigator>

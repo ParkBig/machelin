@@ -1,7 +1,7 @@
 import MyInfos from 'components/bottomTabScreen/myScreen/myInfo/MyInfos';
 import MyList from 'components/bottomTabScreen/myScreen/myList/MyList';
 import { Colors } from 'const/global-styles';
-import { ScrollView } from 'react-native';
+import { NativeScrollEvent, NativeSyntheticEvent, ScrollView } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { useState } from 'react';
 import ContentsSelector from 'components/bottomTabScreen/myScreen/contentsSeclector/ContentsSelector';
@@ -14,13 +14,15 @@ import useUsersPostsQuery from 'query/hooks/users/useUsersPostsQuery';
 import useUsersFollowersQuery from 'query/hooks/users/useUsersFollowersQuery';
 import useUsersFollowsQuery from 'query/hooks/users/useUsersFollowsQuery';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
+import { ScreenHeight } from 'const/dimenstions';
 
 export default function MyScreen() {
   const [refreshing, setRefreshing] = useState(false);
+  const [contentsHeight, setContentHeight] = useState(0);
   const { myInfo, myInfoIsLoading, reMyInfo } = useMyInfoQuery();
   const clickedMyInfoListType = useRecoilValue(clickedMyInfoListTypeState);
   const { reBookmarks } = useUsersBookmarksQuery(myInfo?.authUser?.id);
-  const { rePosts } = useUsersPostsQuery(myInfo?.authUser?.id);
+  const { rePosts, fetchNextPagePosts } = useUsersPostsQuery(myInfo?.authUser?.id);
   const { reFollowers } = useUsersFollowersQuery(myInfo?.authUser?.id);
   const { reFollows } = useUsersFollowsQuery(myInfo?.authUser?.id);
 
@@ -38,12 +40,22 @@ export default function MyScreen() {
     setRefreshing(false);
   };
 
+  const onScrollHandler = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    if (event.nativeEvent.contentOffset.y > contentsHeight - ScreenHeight - 100) {
+      fetchNextPagePosts();
+    }
+  };
+
   return (
     <>
       <ScrollView
         nestedScrollEnabled={false}
         style={styles.wrap}
         scrollEnabled={!myInfoIsLoading}
+        onScrollEndDrag={onScrollHandler}
+        onContentSizeChange={(w: number, h: number) => {
+          setContentHeight(h);
+        }}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}
       >
         <MyInfos />

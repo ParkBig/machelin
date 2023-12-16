@@ -104,6 +104,17 @@ export const usersFollowersQuery = async (userId?: number) => {
   return data;
 };
 
+export const usersSubLocalityQuery = async (lat: number, lng: number) => {
+  const { data } = await axiosUsers.get('/usersSubLocality', {
+    params: {
+      lat,
+      lng,
+    },
+  });
+
+  return data;
+};
+
 // post~
 export const signUpQuery = async (signupInput: SignUpInput) => {
   const token = await takeToken();
@@ -132,20 +143,20 @@ export const sendSignUpVerificationQuery = async (phoneNumber: string) => {
   return data;
 };
 
-export const checkSignUpVerificationQuery =async (checkSignUpVerificationInput: CheckSignUpVerificationInput) => {
+export const checkSignUpVerificationQuery = async (checkSignUpVerificationInput: CheckSignUpVerificationInput) => {
   const { data } = await axiosUsers.post('/checkSignUpVerification', checkSignUpVerificationInput);
   return data;
-}
+};
 
-export const sendFindMyIdVerificationQuery =async (phoneNumber: string) => {
+export const sendFindMyIdVerificationQuery = async (phoneNumber: string) => {
   const { data } = await axiosUsers.post('/sendFindMyIdVerification', { phoneNumber });
   return data;
-}
+};
 
-export const checkFindMyIdVerificationQuery =async (checkFindMyIdVerificationInput: CheckSignUpVerificationInput) => {
+export const checkFindMyIdVerificationQuery = async (checkFindMyIdVerificationInput: CheckSignUpVerificationInput) => {
   const { data } = await axiosUsers.post('/checkFindMyIdVerification', checkFindMyIdVerificationInput);
   return data;
-}
+};
 
 export const modifyUserImageQuery = async (modifyUserImageInput: FormData) => {
   const { data } = await axiosUsers.post('/modifyUserImage', modifyUserImageInput, {
