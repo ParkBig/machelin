@@ -30,9 +30,7 @@ export default function MainMap() {
   };
 
   return (
-    <MachelinMap
-      onPress={mapPressHandler}
-    >
+    <MachelinMap onPress={mapPressHandler}>
       <MyLocationPing />
       <RestaurantPings />
     </MachelinMap>

@@ -15,9 +15,10 @@ export type RootStackParamList = {
   RegionalSearchMapScreen: undefined;
   LoginScreen: undefined;
   FindMyIdScreen: undefined;
+  MakeStampScreen: undefined;
   MyInfoSettingScreen: undefined;
-  MobileVerificationScreen: undefined;
   ChangeMyNicknameScreen: undefined;
+  MobileVerificationScreen: undefined;
   ChangeMyActivityZoneScreen: undefined;
   ChangeMyPreferFoodsScreen: undefined;
   ChangeMyPreferRestaurantScreen: undefined;
@@ -49,9 +50,10 @@ export type AllParmList = {
   RegionalSearchMapScreen: undefined;
   LoginScreen: undefined;
   FindMyIdScreen: undefined;
+  MakeStampScreen: undefined;
   MyInfoSettingScreen: undefined;
-  MobileVerificationScreen: undefined;
   ChangeMyNicknameScreen: undefined;
+  MobileVerificationScreen: undefined;
   ChangeMyActivityZoneScreen: undefined;
   ChangeMyPreferFoodsScreen: undefined;
   ChangeMyPreferRestaurantScreen: undefined;

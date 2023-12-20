@@ -1,10 +1,11 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from 'const/global-styles';
 import { useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { UseRouter } from 'types/screen/screenType';
 import useRestaurantDetailQuery from 'query/hooks/restaurants/useRestaurantDetailQuery';
+import Button from 'components/common/layout/Button';
 
 export default function RestaurantInfos() {
   const { params } = useRoute<UseRouter<'RestaurantDetailScreen'>>();
@@ -21,26 +22,28 @@ export default function RestaurantInfos() {
       {restaurantDetail?.restaurantDetail?.formatted_phone_number && (
         <View style={styles.info}>
           <Ionicons name="call" size={25} color={Colors.mainGreen2} />
-          <Text>{restaurantDetail?.restaurantDetail?.formatted_phone_number}</Text>
+          <View style={styles.infoContent}>
+            <Text>{restaurantDetail?.restaurantDetail?.formatted_phone_number}</Text>
+          </View>
         </View>
       )}
       {restaurantDetail?.restaurantDetail?.formatted_address && (
         <View style={styles.info}>
           <Ionicons name="location" size={25} color={Colors.mainGreen2} />
-          <Text>{restaurantDetail?.restaurantDetail?.formatted_address}</Text>
+          <View style={styles.infoContent}>
+            <Text>{restaurantDetail?.restaurantDetail?.formatted_address}</Text>
+          </View>
         </View>
       )}
       {restaurantDetail?.restaurantDetail?.opening_hours && (
         <View style={styles.info}>
           <Ionicons name="time" size={25} color={Colors.mainGreen2} />
-          <View style={styles.timeInfo}>
+          <Button style={styles.timeInfo} onPress={toggleTimeInfo}>
             <Text>
               {restaurantDetail?.restaurantDetail?.opening_hours?.weekday_text[dayOfWeek - 1 < 0 ? 6 : dayOfWeek - 1]}
             </Text>
-            <Pressable onPress={toggleTimeInfo}>
-              <Ionicons name={isOpenTimeInfo ? 'chevron-up' : 'chevron-down'} size={25} color={Colors.mainGreen2} />
-            </Pressable>
-          </View>
+            <Ionicons name={isOpenTimeInfo ? 'chevron-up' : 'chevron-down'} size={25} color={Colors.mainGreen2} />
+          </Button>
         </View>
       )}
       {isOpenTimeInfo && (
@@ -68,15 +71,21 @@ export default function RestaurantInfos() {
 const styles = StyleSheet.create({
   infos: {
     width: '100%',
-    paddingVertical: 20,
+    paddingVertical: 25,
     paddingHorizontal: 15,
+    gap: 10,
   },
   info: {
     width: '100%',
-    height: 40,
+    minHeight: 40,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
+  },
+  infoContent: {
+    flex: 1,
+    alignItems: 'center',
+    flexWrap: 'wrap',
   },
   timeInfo: {
     flex: 1,

@@ -13,7 +13,7 @@ interface ToggleBookmarkInput {
 }
 
 const axiosBookmarks = axios.create({
-  baseURL: `${process.env.DEV_SERVER_URL}/bookmark`,
+  baseURL: `${process.env.EXPO_DEV_SERVER_URL}/bookmark`,
 });
 
 axiosBookmarks.interceptors.request.use(async config => {

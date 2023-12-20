@@ -5,6 +5,7 @@ import { Colors, Size } from 'const/global-styles';
 import { getCurrentPositionAsync } from 'expo-location';
 import mime from 'mime';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
+import useUsersPostsQuery from 'query/hooks/users/useUsersPostsQuery';
 import { makePostQuery } from 'query/posts';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
@@ -23,6 +24,7 @@ export default function MakePostButton({ restaurantInfo }: Props) {
   const { goBack } = useNavigation<UseNavigation<'MakePostScreen'>>();
   const queryClient = useQueryClient();
   const { myInfo, reMyInfo } = useMyInfoQuery();
+  const { rePosts } = useUsersPostsQuery(myInfo?.authUser?.id);
   const makePostInfo = useRecoilValue(makePostState);
   const [myLocation, setMyLocation] = useRecoilState(myLocationState);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
@@ -31,7 +33,7 @@ export default function MakePostButton({ restaurantInfo }: Props) {
     onSuccess: res => {
       if (res.ok) {
         reMyInfo();
-        queryClient.invalidateQueries('usersPosts');
+        rePosts();
         queryClient.invalidateQueries('neighborhoodPosts');
         if (restaurantInfo?.place_id) {
           queryClient.invalidateQueries('restaurantPosts');

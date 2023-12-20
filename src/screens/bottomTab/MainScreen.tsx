@@ -39,7 +39,6 @@ export default function MainScreen() {
   return (
     <View style={styles.wrap}>
       <Header />
-      {/* <ToggleOptions /> */}
       <MainMap />
       <Restaurants />
     </View>

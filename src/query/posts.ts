@@ -3,7 +3,7 @@ import { IPost } from 'types/store/myInfoType';
 import { takeToken } from 'util/tokenDB';
 
 const axiosPosts = axios.create({
-  baseURL: `${process.env.DEV_SERVER_URL}/posts`,
+  baseURL: `${process.env.EXPO_DEV_SERVER_URL}/posts`,
 });
 
 axiosPosts.interceptors.request.use(async config => {

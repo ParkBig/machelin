@@ -4,12 +4,14 @@ import Button from 'components/common/layout/Button';
 import Line from 'components/common/layout/Line';
 import { Colors } from 'const/global-styles';
 import useRestaurantPostsQuery from 'query/hooks/restaurants/useRestaurantPostsQuery';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text } from 'react-native';
 import { UseRouter } from 'types/screen/screenType';
 
 export default function MachelinReviews() {
   const { params } = useRoute<UseRouter<'RestaurantDetailScreen'>>();
-  const { restaurantPosts, reRestaurantPosts, fetchNextPagePosts } = useRestaurantPostsQuery(params.restaurantId);
+  const { restaurantPosts, reRestaurantPosts, fetchNextPagePosts, hasNextPage } = useRestaurantPostsQuery(
+    params.restaurantId
+  );
   const postsExist = restaurantPosts?.pages && restaurantPosts.pages.length !== 0 ? true : false;
 
   const onPressHandler = () => {
@@ -25,16 +27,18 @@ export default function MachelinReviews() {
           showsVerticalScrollIndicator={false}
           keyExtractor={(_, index) => String(index)}
           data={restaurantPosts?.pages}
-          renderItem={({ item }) => (
-            <Post key={item.id} posts={item} rePosts={reRestaurantPosts} isDetailScreen={true} />
-          )}
+          renderItem={({ item }) => <Post posts={item} rePosts={reRestaurantPosts} isDetailScreen={true} />}
           ListHeaderComponent={() => <Line style={styles.line} />}
           ItemSeparatorComponent={() => <Line style={styles.line} />}
-          ListFooterComponent={() => (
-            <Button style={styles.button} onPress={onPressHandler}>
-              <Text style={styles.text}>더보기</Text>
-            </Button>
-          )}
+          ListFooterComponent={() =>
+            hasNextPage ? (
+              <Button style={styles.button} onPress={onPressHandler}>
+                <Text style={styles.text}>더보기</Text>
+              </Button>
+            ) : (
+              <Line style={styles.line} />
+            )
+          }
         />
       )}
     </>

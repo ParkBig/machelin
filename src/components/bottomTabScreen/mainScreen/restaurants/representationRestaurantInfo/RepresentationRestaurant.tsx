@@ -1,4 +1,4 @@
-import { LayoutAnimation, StyleSheet, View } from 'react-native';
+import { LayoutAnimation, StyleSheet } from 'react-native';
 import { useSetRecoilState } from 'recoil';
 import { mapLocationState } from 'store/locationState';
 import { mainScreenTogglesState } from 'store/toggleState';

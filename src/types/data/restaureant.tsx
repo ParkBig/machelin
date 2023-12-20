@@ -7,6 +7,7 @@ export interface GooglePlace {
     viewport: Viewport;
   };
   photos: Photo[];
+  vicinity: string;
 
   address_components?: AddressComponent[];
   adr_address?: string;
@@ -40,7 +41,6 @@ export interface GooglePlace {
   url?: string;
   user_ratings_total?: number;
   utc_offset?: number;
-  vicinity?: string;
   wheelchair_accessible_entrance?: boolean;
 }
 

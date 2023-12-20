@@ -1,14 +1,14 @@
-import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import Line from 'components/common/layout/Line';
-import BriefRestaurantInfoForTag from 'components/stackScreen/findRestaurantInfoForMakePostScreen/BriefRestaurantInfoForTag';
-import { Colors } from 'const/global-styles';
+import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
+import BriefRestaurantInfoForStamp from 'components/stackScreen/makeStampScreen/BriefRestaurantInfoForStamp';
+import { Colors, Size } from 'const/global-styles';
 import { restaurantsTextSearchQuery } from 'query/restaurants';
 import { useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';
 import { GooglePlace } from 'types/data/restaureant';
 
-export default function FindRestaurantInfoForMakePostScreen() {
+export default function MakeStampScreen() {
   const [textInputValue, setTextInputValue] = useState('');
   const [searchResult, setSearchResult] = useState<GooglePlace[]>([]);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
@@ -35,23 +35,24 @@ export default function FindRestaurantInfoForMakePostScreen() {
 
   return (
     <View style={styles.wrap}>
-      <View style={styles.search}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="식당이름 or 지역이름 식당이름 검색"
-          value={textInputValue}
-          onChangeText={onChangeTextHandler}
-          onEndEditing={onEndEditingHandler}
-        />
-        <Text style={styles.example}>ex) 맛있는식당 or 서울 맛있는식당</Text>
+      <TextInput
+        style={styles.textInput}
+        placeholder="식당이름"
+        value={textInputValue}
+        onChangeText={onChangeTextHandler}
+        onEndEditing={onEndEditingHandler}
+      />
+      <View style={styles.explain}>
+        <Text style={styles.explainText}>도장 찍기는 현재 위치만 찍을 수 있어요.</Text>
+        <Text style={styles.explainText}>그래서 직접 다녀왔다는 인증이 가능해요!</Text>
       </View>
       <FlatList
-        style={[styles.searchResult, searchResult.length !==0 && styles.hasResult]}
+        style={[styles.searchResult, searchResult.length !== 0 && styles.hasResult]}
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item.place_id}
         ItemSeparatorComponent={() => <Line style={styles.line} />}
         data={searchResult}
-        renderItem={({ item }) => <BriefRestaurantInfoForTag restaurantInfo={item} />}
+        renderItem={({ item }) => <BriefRestaurantInfoForStamp restaurantInfo={item} />}
       />
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}
@@ -65,36 +66,35 @@ export default function FindRestaurantInfoForMakePostScreen() {
 const styles = StyleSheet.create({
   wrap: {
     flex: 1,
-    paddingTop: 20,
-    paddingHorizontal: 15,
     backgroundColor: Colors.mainWhite1,
+    paddingHorizontal: 15,
+    paddingTop: 20,
     gap: 20,
-  },
-  search: {
-    width: '100%',
-    gap: 10,
   },
   textInput: {
     width: '100%',
     height: 60,
     borderBottomWidth: 2,
-    paddingHorizontal: 10,
-    borderColor: Colors.mainGreen2,
+    borderBottomColor: Colors.mainGreen2,
+    fontSize: Size.normalBig,
   },
-  example: {
-    color: Colors.gray,
-    paddingHorizontal: 10,
+  explain: {
+    width: '100%',
+    gap: 5,
   },
   searchResult: {
-    flex: 1
+    flex: 1,
   },
   hasResult: {
     borderTopWidth: 1,
-    borderTopColor: Colors.superLightGray
+    borderTopColor: Colors.superLightGray,
   },
   line: {
     width: '100%',
     height: 1,
     backgroundColor: Colors.superLightGray,
+  },
+  explainText: {
+    color: Colors.darkGray,
   },
 });
