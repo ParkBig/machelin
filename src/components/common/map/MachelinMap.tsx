@@ -1,12 +1,10 @@
-import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import MapView, { MapPressEvent } from 'react-native-maps';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { focusedRestaurantState, mapLocationState, myLocationState } from 'store/locationState';
 import { MapLocationState } from 'types/store/locationType';
 import { PermissionStatus, getCurrentPositionAsync, requestForegroundPermissionsAsync } from 'expo-location';
 import { StyleSheet } from 'react-native';
-import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 
 interface Props {
   onPress?: (event: MapPressEvent) => void;
@@ -18,7 +16,6 @@ export default function MachelinMap({ onPress, children }: Props) {
   const setMyLocation = useSetRecoilState(myLocationState);
   const focusedRestaurant = useRecoilValue(focusedRestaurantState);
   const [mapLocation, setMapLocation] = useRecoilState(mapLocationState);
-  const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
   const onRegionChangeHandler = (region: MapLocationState) => {
     const { latitude, longitude, latitudeDelta, longitudeDelta } = region;
@@ -48,7 +45,6 @@ export default function MachelinMap({ onPress, children }: Props) {
     const getLocation = async () => {
       const { status } = await requestForegroundPermissionsAsync();
       if (status !== PermissionStatus.GRANTED) {
-        setToggleAlertModal({ toggle: true, alertMsg: '위치 접근 권한이 필요합니다' });
         return;
       }
 
@@ -68,7 +64,7 @@ export default function MachelinMap({ onPress, children }: Props) {
     };
 
     getLocation();
-  }, [setMyLocation, setMapLocation, setToggleAlertModal]);
+  }, [setMyLocation, setMapLocation]);
 
   return (
     <MapView
@@ -80,11 +76,6 @@ export default function MachelinMap({ onPress, children }: Props) {
       onRegionChangeComplete={onRegionChangeHandler}
     >
       {children}
-      <ConfirmAlertModal
-        toggleModal={toggleAlertModal.toggle}
-        setToggleAlertModal={setToggleAlertModal}
-        alertMsg={toggleAlertModal.alertMsg}
-      />
     </MapView>
   );
 }

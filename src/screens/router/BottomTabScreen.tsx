@@ -11,15 +11,13 @@ export default function BottomTabScreen() {
     <RootBottomTab.Navigator
       screenOptions={{
         headerShown: false,
-        headerTintColor: Colors.mainWhite3,
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-        headerStyle: {
-          backgroundColor: Colors.mainGreen2,
-        },
         tabBarStyle: {
           backgroundColor: Colors.mainGreen2,
+        },
+        tabBarActiveTintColor: Colors.mainWhite3,
+        tabBarHideOnKeyboard: true,
+        tabBarLabelStyle: {
+          fontWeight: 'bold',
         },
       }}
     >
@@ -28,9 +26,7 @@ export default function BottomTabScreen() {
         component={MainScreen}
         options={{
           title: '내주변',
-          tabBarIcon: () => (
-            <Ionicons name='map' size={Size.bigMiddle} color={Colors.mainBlue1} />
-          )
+          tabBarIcon: () => <Ionicons name="map" size={Size.bigMiddle} color={Colors.mainWhite3} />,
         }}
       />
       <RootBottomTab.Screen
@@ -38,9 +34,7 @@ export default function BottomTabScreen() {
         component={RegionalSearchScreen}
         options={{
           title: '지역검색',
-          tabBarIcon: () => (
-            <Ionicons name='search' size={Size.bigMiddle} color={Colors.mainBlue1} />
-          )
+          tabBarIcon: () => <Ionicons name="search" size={Size.bigMiddle} color={Colors.mainWhite3} />,
         }}
       />
       <RootBottomTab.Screen
@@ -48,9 +42,7 @@ export default function BottomTabScreen() {
         component={NeighborhoodPostsScreen}
         options={{
           title: '동네소식',
-          tabBarIcon: () => (
-            <Ionicons name='boat' size={Size.bigMiddle} color={Colors.mainBlue1} />
-          )
+          tabBarIcon: () => <Ionicons name="boat" size={Size.bigMiddle} color={Colors.mainWhite3} />,
         }}
       />
       <RootBottomTab.Screen
@@ -62,14 +54,13 @@ export default function BottomTabScreen() {
           headerTitleAlign: 'left',
           title: '마슐랭',
           headerTitleStyle: {
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            color: Colors.mainWhite3,
           },
           headerStyle: {
             backgroundColor: Colors.mainGreen2,
           },
-          tabBarIcon: () => (
-            <Ionicons name='restaurant' size={Size.bigMiddle} color={Colors.mainBlue1} />
-          )
+          tabBarIcon: () => <Ionicons name="restaurant" size={Size.bigMiddle} color={Colors.mainWhite3} />,
         }}
       />
     </RootBottomTab.Navigator>

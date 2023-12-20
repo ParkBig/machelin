@@ -10,6 +10,7 @@ import MachelinReviews from './reviews/MachelinReviews';
 import GoogleReviews from './reviews/GoogleReviews';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { PermissionStatus, requestForegroundPermissionsAsync } from 'expo-location';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function RestaurantReviews() {
   const { navigate } = useNavigation<UseNavigation<'RestaurantDetailScreen'>>();
@@ -41,23 +42,21 @@ export default function RestaurantReviews() {
   };
 
   return (
-    <>
-      <View style={styles.reviews}>
-        <View style={styles.reviewTitle}>
-          <Text style={styles.titleText}>리뷰</Text>
-          <Button style={styles.button} onPress={goToMakePostHandler}>
-            <Text style={styles.buttonText}>리뷰작성</Text>
-          </Button>
-        </View>
-        <MachelinReviews />
-        <GoogleReviews reviews={restaurantDetail?.restaurantDetail?.reviews} />
+    <View style={styles.reviews}>
+      <View style={styles.reviewTitle}>
+        <Text style={styles.titleText}>리뷰</Text>
+        <Button style={styles.button} onPress={goToMakePostHandler}>
+          <Text style={styles.buttonText}>리뷰작성</Text>
+        </Button>
       </View>
+      <MachelinReviews />
+      <GoogleReviews reviews={restaurantDetail?.restaurantDetail?.reviews} />
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}
         setToggleAlertModal={setToggleAlertModal}
         alertMsg={toggleAlertModal.alertMsg}
       />
-    </>
+    </View>
   );
 }
 
@@ -67,29 +66,32 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   reviewTitle: {
-    padding: 15,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     borderBottomWidth: 5,
     borderBottomColor: Colors.mainGreen2,
+    backgroundColor: Colors.mainGreen2
   },
   button: {
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.mainGreen2,
+    backgroundColor: Colors.mainWhite3,
     borderRadius: 10,
     ...Shadow,
   },
+  titleText: {
+    fontSize: Size.bigSmall,
+    fontWeight: 'bold',
+    color: Colors.mainWhite3
+  },
   buttonText: {
     fontSize: Size.normalMiddle,
-    color: Colors.mainWhite3,
-    fontWeight: 'bold',
-  },
-  titleText: {
-    fontSize: Size.normalMiddle,
+    color: Colors.mainGreen2,
     fontWeight: 'bold',
   },
 });

@@ -23,7 +23,7 @@ export default function UsersPostList() {
           showsVerticalScrollIndicator={false}
           data={posts?.pages}
           keyExtractor={(_, index) => String(index)}
-          renderItem={({ item }) => <Post key={item.id} posts={item} rePosts={rePosts} isDetailScreen={false} />}
+          renderItem={({ item }) => <Post posts={item} rePosts={rePosts} isDetailScreen={false} />}
           ListHeaderComponent={() => <Line style={styles.line} />}
           ItemSeparatorComponent={() => <Line style={styles.line} />}
           ListFooterComponent={() => <Line style={styles.line} />}

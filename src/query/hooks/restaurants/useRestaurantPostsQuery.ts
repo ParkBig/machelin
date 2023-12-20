@@ -34,5 +34,12 @@ export default function useRestaurantPostsQuery(restaurantId: string) {
     }
   };
 
-  return { restaurantPosts, restaurantPostsIsLoading, reRestaurantPosts, fetchNextPagePosts, isFetchingNextPage };
+  return {
+    restaurantPosts,
+    restaurantPostsIsLoading,
+    reRestaurantPosts,
+    fetchNextPagePosts,
+    isFetchingNextPage,
+    hasNextPage,
+  };
 }

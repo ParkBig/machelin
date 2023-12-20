@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     ...Shadow,
   },
   text: {
-    color: Colors.mainBlue1,
+    color: Colors.mainWhite3,
     fontSize: Size.normalBig,
     fontWeight: 'bold',
   },

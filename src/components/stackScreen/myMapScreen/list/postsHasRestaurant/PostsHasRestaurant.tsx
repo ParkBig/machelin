@@ -14,20 +14,26 @@ export default function PostsHasRestaurant() {
 
   return (
     <View style={styles.wrap}>
-      {postsIsLoading ? (
-        <LoadingOverlay style={styles.loadingOverlay} />
-      ) : postsIsExist ? (
-        <FlatList
-          style={styles.flatList}
-          showsVerticalScrollIndicator={false}
-          data={posts?.posts}
-          keyExtractor={item => `${item.id}`}
-          ItemSeparatorComponent={() => <Line style={styles.line} />}
-          renderItem={({ item }) => <PostHasRestaurant post={item} />}
-        />
+      {myInfo?.authUser ? (
+        postsIsLoading ? (
+          <LoadingOverlay style={styles.loadingOverlay} />
+        ) : postsIsExist ? (
+          <FlatList
+            style={styles.flatList}
+            showsVerticalScrollIndicator={false}
+            data={posts?.posts}
+            keyExtractor={item => `${item.id}`}
+            ItemSeparatorComponent={() => <Line style={styles.line} />}
+            renderItem={({ item }) => <PostHasRestaurant post={item} />}
+          />
+        ) : (
+          <View style={styles.none}>
+            <Text>점수를 남긴 게시글이 없어요</Text>
+          </View>
+        )
       ) : (
         <View style={styles.none}>
-          <Text>점수를 남긴 게시글이 없어요</Text>
+          <Text>로그인 후 기록해 보아요</Text>
         </View>
       )}
     </View>

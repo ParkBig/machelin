@@ -14,8 +14,8 @@ export default function AdditionalInfos() {
       <PreferFoods />
       <Line style={styles.line} />
       <PreferRestaurant />
-      <Line style={styles.line} />
-      <MedalsEarned />
+      {/* <Line style={styles.line} />
+      <MedalsEarned /> */}
     </View>
   );
 }

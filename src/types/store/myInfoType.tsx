@@ -69,3 +69,15 @@ export interface IPost {
   comments: Comment[];
   owner: UserInfo;
 }
+
+export interface IStamp {
+  id: number;
+  createdAt: Date;
+  lat: number;
+  lng: number;
+  restaurantId: string;
+  restaurantName: string;
+  address: string;
+  rating: number;
+  totalRatings: number;
+}

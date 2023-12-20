@@ -2,7 +2,7 @@ import axios from 'axios';
 import { takeToken } from 'util/tokenDB';
 
 const axiosComments = axios.create({
-  baseURL: `${process.env.DEV_SERVER_URL}/comments`,
+  baseURL: `${process.env.EXPO_DEV_SERVER_URL}/comments`,
 });
 
 axiosComments.interceptors.request.use(async config => {

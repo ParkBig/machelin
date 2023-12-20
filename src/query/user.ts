@@ -1,4 +1,3 @@
-import { UserInfo } from 'types/store/myInfoType';
 import { deleteToken, takeToken } from 'util/tokenDB';
 import axios from 'axios';
 
@@ -39,7 +38,7 @@ interface CheckSignUpVerificationInput {
 }
 
 const axiosUsers = axios.create({
-  baseURL: `${process.env.DEV_SERVER_URL}/users`,
+  baseURL: `${process.env.EXPO_DEV_SERVER_URL}/users`,
 });
 
 axiosUsers.interceptors.request.use(async config => {

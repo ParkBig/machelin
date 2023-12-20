@@ -2,7 +2,7 @@ import axios from 'axios';
 import { takeToken } from 'util/tokenDB';
 
 const axiosRestaurants = axios.create({
-  baseURL: `${process.env.DEV_SERVER_URL}/restaurants`,
+  baseURL: `${process.env.EXPO_DEV_SERVER_URL}/restaurants`,
 });
 
 axiosRestaurants.interceptors.request.use(async config => {

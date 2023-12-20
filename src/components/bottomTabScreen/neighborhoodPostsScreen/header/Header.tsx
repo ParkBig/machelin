@@ -8,13 +8,17 @@ import { useNavigation } from '@react-navigation/native';
 import { UseNavigation } from 'types/screen/screenType';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { myLocationState } from 'store/locationState';
+import { PermissionStatus, getCurrentPositionAsync, requestForegroundPermissionsAsync } from 'expo-location';
 
 export default function Header() {
   const { navigate } = useNavigation<UseNavigation<'NeighborhoodPostsScreen'>>();
   const { myInfo } = useMyInfoQuery();
   const { mySubLocality } = useUsersSubLocalityQuery();
   const { city, district } = trimMySubLocality(mySubLocality?.subLocality);
+  const setMyLocation = useSetRecoilState(myLocationState);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
   const goToMakePostHandler = async () => {
@@ -28,14 +32,32 @@ export default function Header() {
     });
   };
 
+  const myLocation = async () => {
+    const { status } = await requestForegroundPermissionsAsync();
+    if (status !== PermissionStatus.GRANTED) {
+      setToggleAlertModal({ toggle: true, alertMsg: '위치 접근 권한이 필요합니다' });
+      return;
+    }
+
+    const getMyLocation = await getCurrentPositionAsync();
+
+    setMyLocation({
+      isGetLocation: true,
+      latitude: getMyLocation.coords.latitude,
+      longitude: getMyLocation.coords.longitude,
+    });
+  };
+
+  useEffect(() => {
+    myLocation();
+  }, []);
+
   return (
     <View style={styles.wrap}>
-      <View style={styles.location}>
+      <Button style={styles.location} onPress={myLocation}>
         <Ionicons name="location" size={30} color={Colors.mainWhite3} />
-        <Text style={styles.text}>
-          {city} {district}
-        </Text>
-      </View>
+        <Text style={styles.text}>{!city && !district ? '내위치' : `${city} ${district}`}</Text>
+      </Button>
       <Button style={styles.button} onPress={goToMakePostHandler}>
         <Ionicons style={styles.ionicons} name="add" size={30} color={Colors.mainWhite3} />
       </Button>

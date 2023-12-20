@@ -1,9 +1,11 @@
 import { restaurantsTextSearchQuery } from 'query/restaurants';
 import { useEffect } from 'react';
-import { useInfiniteQuery, useQuery } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { regionalRestaurantSearchInputState } from 'store/searchState';
 import { GooglePlace } from 'types/data/restaureant';
+import useUsersSubLocalityQuery from '../users/useUsersSubLocalityQuery';
+import trimMySubLocality from 'util/ trimMySubLocality';
 
 interface Data {
   ok: boolean;
@@ -13,13 +15,16 @@ interface Data {
 }
 
 export default function useRegionalRestaurantSearchQuery() {
+  const { mySubLocality } = useUsersSubLocalityQuery();
   const {
     isTyping,
     searchText,
     location: { city, district },
   } = useRecoilValue(regionalRestaurantSearchInputState);
 
-  const keyword = `${city === '전체' ? '' : city} ${district === '전체' ? '' : district} ${
+  const { city: myCity } = trimMySubLocality(mySubLocality?.subLocality);
+
+  const keyword = `${city === '전체' ? (searchText ? '' : myCity) : city} ${district === '전체' ? '' : district} ${
     searchText ? searchText : ''
   }`;
 

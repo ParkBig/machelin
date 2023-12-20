@@ -1,33 +1,33 @@
 import Line from 'components/common/layout/Line';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
-import BriefBookmarkInfo from 'components/bottomTabScreen/myScreen/myList/myBookmarks/BriefBookmarkInfo';
 import { Colors } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
-import useUsersBookmarksQuery from 'query/hooks/users/useUsersBookmarksQuery';
+import useUsersStampsQuery from 'query/hooks/users/useUsersStampsQuery';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
+import Stamp from './Stamp';
 
-export default function Bookmarks() {
+export default function Stamps() {
   const { myInfo } = useMyInfoQuery();
-  const { bookmarks, bookmarksIsLoading } = useUsersBookmarksQuery(myInfo?.authUser?.id);
-  const bookmarksIsExist = bookmarks?.bookmarks && bookmarks.bookmarks.length !== 0 ? true : false;
+  const { stamps, stampIsLoading } = useUsersStampsQuery();
+  const stampsIsExist = stamps?.stamps && stamps.stamps.length !== 0 ? true : false;
 
   return (
     <View style={styles.wrap}>
       {myInfo?.authUser ? (
-        bookmarksIsLoading ? (
+        stampIsLoading ? (
           <LoadingOverlay style={styles.loadingOverlay} />
-        ) : bookmarksIsExist ? (
+        ) : stampsIsExist ? (
           <FlatList
             style={styles.flatList}
             showsVerticalScrollIndicator={false}
-            data={bookmarks?.bookmarks}
+            data={stamps?.stamps}
             keyExtractor={item => `${item.id}`}
             ItemSeparatorComponent={() => <Line style={styles.line} />}
-            renderItem={({ item }) => <BriefBookmarkInfo bookmark={item} isSlide={true} />}
+            renderItem={({ item }) => <Stamp stamp={item} />}
           />
         ) : (
           <View style={styles.none}>
-            <Text>북마크한 곳이 없어요</Text>
+            <Text>스탬프를 남긴 곳이 없어요</Text>
           </View>
         )
       ) : (

@@ -10,13 +10,15 @@ interface Data {
 }
 
 export default function useUsersSubLocalityQuery() {
-  const { latitude, longitude } = useRecoilValue(myLocationState);
+  const { isGetLocation, latitude, longitude } = useRecoilValue(myLocationState);
 
   const {
     data: mySubLocality,
     refetch: reMySubLocality,
     isLoading: mySubLocalityIsLoading,
-  } = useQuery<Data>(['usersSubLocality', latitude, longitude], () => usersSubLocalityQuery(latitude, longitude));
+  } = useQuery<Data>(['usersSubLocality', latitude, longitude], () => usersSubLocalityQuery(latitude, longitude), {
+    enabled: !!isGetLocation,
+  });
 
   return { mySubLocality, reMySubLocality, mySubLocalityIsLoading };
 }

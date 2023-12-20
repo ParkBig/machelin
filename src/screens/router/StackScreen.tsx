@@ -19,6 +19,8 @@ import FindMyIdScreen from 'screens/stack/FindMyIdScreen';
 import FindRestaurantInfoForMakePostScreen from 'screens/stack/FindRestaurantInfoForMakePostScreen';
 import RegionalSearchMapScreen from 'screens/stack/RegionalSearchMapScreen';
 import MakePostButton from 'components/stackScreen/makePostScreen/makePostButton/MakePostButton';
+import StampButton from 'components/stackScreen/myMapScreen/StampButton';
+import MakeStampScreen from 'screens/stack/MakeStampScreen';
 
 export default function StackScreen() {
   return (
@@ -38,7 +40,7 @@ export default function StackScreen() {
         options={({ route }) => ({
           title: '기록하기',
           headerTitleAlign: 'left',
-          headerRight: () => <MakePostButton restaurantInfo={route.params.restaurantInfo} />
+          headerRight: () => <MakePostButton restaurantInfo={route.params.restaurantInfo} />,
         })}
       />
       <RootStack.Screen
@@ -52,7 +54,9 @@ export default function StackScreen() {
         name="MyMapScreen"
         component={MyMapScreen}
         options={{
+          headerTitleAlign: 'left',
           title: '나의 지도',
+          headerRight: () => <StampButton />,
         }}
       />
       <RootStack.Screen
@@ -134,6 +138,14 @@ export default function StackScreen() {
         component={RegionalSearchMapScreen}
         options={{
           title: '검색 결과',
+        }}
+      />
+      <RootStack.Screen
+        name="MakeStampScreen"
+        component={MakeStampScreen}
+        options={{
+          title: '도장찍기',
+          headerTitleAlign: 'left',
         }}
       />
     </RootStack.Navigator>

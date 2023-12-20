@@ -68,18 +68,9 @@ export default function MyScreen() {
 }
 
 const styles = StyleSheet.create({
-  headerRight: {
-    paddingRight: 10,
-  },
   wrap: {
     flex: 1,
     backgroundColor: Colors.mainWhite1,
-  },
-  line: {
-    width: '100%',
-    height: 6,
-    backgroundColor: Colors.mainGreen2,
-    borderRadius: 30,
   },
   loadingOverlay: {
     width: '100%',

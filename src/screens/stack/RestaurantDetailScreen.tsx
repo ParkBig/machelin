@@ -32,7 +32,7 @@ export default function RestaurantDetailScreen({ route }: StackScreenPropsAbout<
         <RestaurantGrade />
         <Line style={styles.innerLine} />
         <RestaurantInfos />
-        <Line style={styles.innerLine} />
+        {/* <Line style={styles.innerLine} /> */}
         <RestaurantReviews />
       </ScrollView>
       {restaurantDetailIsLoading && <LoadingOverlay style={styles.loadingOverlay} />}
