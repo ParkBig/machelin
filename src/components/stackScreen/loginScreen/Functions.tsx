@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import Button from 'components/common/layout/Button';
 import { Colors } from 'const/global-styles';
 import { StyleSheet, Text, View } from 'react-native';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 
 export default function Functions() {
   const { navigate } = useNavigation<UseNavigation<'LoginScreen'>>();

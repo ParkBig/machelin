@@ -1,4 +1,4 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Button from 'components/common/layout/Button';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { Colors, Size } from 'const/global-styles';
@@ -13,8 +13,8 @@ import { useMutation, useQueryClient } from 'react-query';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { myLocationState } from 'store/locationState';
 import { makePostState } from 'store/makePostState';
-import { GooglePlace } from 'types/data/restaureant';
-import { UseNavigation } from 'types/screen/screenType';
+import { GooglePlace } from 'types/types';
+import { UseNavigation } from 'types/screenType';
 
 interface Props {
   restaurantInfo: GooglePlace | null;

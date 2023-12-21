@@ -1,10 +1,10 @@
 import { Colors, Size } from 'const/global-styles';
 import { StyleSheet, Text, View } from 'react-native';
-import { IPost } from 'types/store/myInfoType';
+import { IPost } from 'types/types';
 import { Ionicons } from '@expo/vector-icons';
 import Button from 'components/common/layout/Button';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 import Line from 'components/common/layout/Line';
 
 interface Props {

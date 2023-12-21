@@ -1,8 +1,8 @@
 import { Colors } from 'const/global-styles';
 import { FlatList, StyleSheet } from 'react-native';
-import { Review } from 'types/data/restaureant';
 import Line from 'components/common/layout/Line';
 import GoogleReview from 'components/common/card/GoogleReview';
+import { Review } from 'types/types';
 
 interface Props {
   reviews?: Review[];

@@ -4,7 +4,6 @@ import { StyleSheet, View } from 'react-native';
 import ActivityZone from './ActivityZone';
 import PreferFoods from './PreferFoods';
 import PreferRestaurant from './PreferRestaurant';
-import MedalsEarned from './MedalsEarned';
 
 export default function AdditionalInfos() {
   return (

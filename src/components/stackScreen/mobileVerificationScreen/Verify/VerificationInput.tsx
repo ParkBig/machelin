@@ -5,7 +5,7 @@ import { checkSignUpVerificationQuery } from 'query/user';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 
 interface Props {
   isClickedSendVerify: boolean;

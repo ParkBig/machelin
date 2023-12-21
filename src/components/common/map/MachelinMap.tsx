@@ -1,8 +1,7 @@
 import { useEffect, useRef } from 'react';
 import MapView, { MapPressEvent } from 'react-native-maps';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { focusedRestaurantState, mapLocationState, myLocationState } from 'store/locationState';
-import { MapLocationState } from 'types/store/locationType';
+import { MapLocationState, focusedRestaurantState, mapLocationState, myLocationState } from 'store/locationState';
 import { PermissionStatus, getCurrentPositionAsync, requestForegroundPermissionsAsync } from 'expo-location';
 import { StyleSheet } from 'react-native';
 

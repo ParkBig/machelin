@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IPost } from 'types/store/myInfoType';
+import { IPost } from 'types/types';
 import { takeToken } from 'util/tokenDB';
 
 export const axiosPosts = axios.create({

@@ -1,11 +1,11 @@
 import Button from 'components/common/layout/Button';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Bookmark } from 'types/store/myInfoType';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 import { useSetRecoilState } from 'recoil';
 import { focusedRestaurantState } from 'store/locationState';
+import { Bookmark } from 'types/types';
 
 interface Props {
   bookmark: Bookmark;

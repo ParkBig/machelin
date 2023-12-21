@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from 'const/global-styles';
 import { StyleSheet, Text, View } from 'react-native';
-import { Review } from 'types/data/restaureant';
+import { Review } from 'types/types';
 
 interface Props {
   review: Review;

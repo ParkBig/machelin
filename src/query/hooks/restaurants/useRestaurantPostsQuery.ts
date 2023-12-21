@@ -1,6 +1,6 @@
-import { axiosRestaurants, restaurantPostsQuery } from 'query/restaurants';
+import { axiosRestaurants } from 'query/restaurants';
 import { useInfiniteQuery } from 'react-query';
-import { IPost } from 'types/store/myInfoType';
+import { IPost } from 'types/types';
 
 export interface RestaurantPosts {
   ok: boolean;

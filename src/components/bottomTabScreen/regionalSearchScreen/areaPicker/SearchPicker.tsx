@@ -1,8 +1,8 @@
-import { administrativeDistrict, administrativeDistrictName } from 'data/administrativeDistrict';
 import { StyleSheet, View } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useRecoilState } from 'recoil';
 import { regionalRestaurantSearchInputState } from 'store/searchState';
+import { administrativeDistrict, administrativeDistrictName } from 'const/administrativeDistrict';
 
 interface Props {
   which: 'city' | 'district';

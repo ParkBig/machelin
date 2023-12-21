@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { useResetRecoilState } from 'recoil';
 import { makePostState } from 'store/makePostState';
-import { StackScreenPropsAbout } from 'types/screen/screenType';
+import { StackScreenPropsAbout } from 'types/screenType';
 
 export default function MakePostScreen({ route }: StackScreenPropsAbout<'MakePostScreen'>) {
   const resetMakePostState = useResetRecoilState(makePostState);

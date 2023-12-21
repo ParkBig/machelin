@@ -3,7 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Colors } from 'const/global-styles';
 import { useState } from 'react';
 import { useRoute } from '@react-navigation/native';
-import { UseRouter } from 'types/screen/screenType';
+import { UseRouter } from 'types/screenType';
 import useRestaurantDetailQuery from 'query/hooks/restaurants/useRestaurantDetailQuery';
 import Button from 'components/common/layout/Button';
 

@@ -1,6 +1,6 @@
-import { axiosUsers, myInfoQuery } from 'query/user';
+import { axiosUsers } from 'query/user';
 import { useQuery } from 'react-query';
-import { UserInfo } from 'types/store/myInfoType';
+import { UserInfo } from 'types/types';
 import { takeToken } from 'util/tokenDB';
 
 interface Data {

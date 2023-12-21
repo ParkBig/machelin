@@ -1,9 +1,8 @@
 import { NativeScrollEvent, NativeSyntheticEvent, ScrollView, StyleSheet } from 'react-native';
-import { StackScreenPropsAbout } from 'types/screen/screenType';
+import { StackScreenPropsAbout } from 'types/screenType';
 import { useEffect, useState } from 'react';
 import { Colors } from 'const/global-styles';
 import { useResetRecoilState } from 'recoil';
-import { clickedExploreUserInfoListTypeState } from 'store/userInfoState';
 import UsersList from 'components/stackScreen/ExploreUserInfoScreen/usersList/UsersList';
 import ExploreUsersInfo from 'components/stackScreen/ExploreUserInfoScreen/exploreUsersInfo/ExploreUsersInfo';
 import ExploreContentsSelector from 'components/stackScreen/ExploreUserInfoScreen/exploreContentsSelector/ExploreContentsSelector';
@@ -11,6 +10,7 @@ import useExploreUserQuery from 'query/hooks/exploreUsers/useExploreUserQuery';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import useExploreUsersPostsQuery from 'query/hooks/exploreUsers/useExploreUsersPostsQuery';
 import { ScreenHeight } from 'const/dimenstions';
+import { clickedExploreUserInfoListTypeState } from 'store/toggleState';
 
 export default function ExploreUserInfoScreen({ navigation, route }: StackScreenPropsAbout<'ExploreUserInfoScreen'>) {
   const resetClickedExploreUserInfoListType = useResetRecoilState(clickedExploreUserInfoListTypeState);

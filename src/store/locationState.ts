@@ -1,7 +1,26 @@
-import { RefObject } from 'react';
-import MapView from 'react-native-maps';
 import { atom } from 'recoil';
-import { FocusedRestaurant, LocationSearchRadius, MapLocationState, MyLocationState } from 'types/store/locationType';
+
+export interface MapLocationState {
+  latitude: number;
+  longitude: number;
+  latitudeDelta: number;
+  longitudeDelta: number;
+}
+
+interface MyLocationState {
+  isGetLocation: boolean;
+  latitude: number;
+  longitude: number;
+}
+
+export type LocationSearchRadius = '500' | '1000' | '1500' | '2000' | '3000';
+
+interface FocusedRestaurant {
+  isFocused: boolean;
+  id: string | null;
+  latitude: number | null;
+  longitude: number | null;
+}
 
 export const mapLocationState = atom<MapLocationState>({
   key: 'mapLocationState',
@@ -11,11 +30,6 @@ export const mapLocationState = atom<MapLocationState>({
     latitudeDelta: 0.01,
     longitudeDelta: 0.01,
   },
-});
-
-export const mapRefState = atom<RefObject<MapView> | null>({
-  key: 'mapRefState',
-  default: null,
 });
 
 export const myLocationState = atom<MyLocationState>({

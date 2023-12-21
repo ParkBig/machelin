@@ -4,7 +4,7 @@ import { Image, StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
 import { useRecoilValue } from 'recoil';
 import { focusedRestaurantState } from 'store/locationState';
-import { GooglePlace } from 'types/data/restaureant';
+import { GooglePlace } from 'types/types';
 
 interface Props {
   restaurantInfo: GooglePlace;

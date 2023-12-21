@@ -1,6 +1,6 @@
-import { axiosPosts, usersPostLikesDislikesQuery } from 'query/posts';
+import { axiosPosts } from 'query/posts';
 import { useQuery } from 'react-query';
-import { Like } from 'types/store/myInfoType';
+import { Like } from 'types/types';
 
 interface Data {
   ok: boolean;

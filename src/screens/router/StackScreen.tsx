@@ -1,6 +1,6 @@
-import { RootStack } from 'types/screen/screenType';
-import BottomTabScreen from './BottomTabScreen';
+import { RootStack } from 'types/screenType';
 import { Colors } from 'const/global-styles';
+import BottomTabScreen from './BottomTabScreen';
 import MakePostScreen from 'screens/stack/MakePostScreen';
 import MyMapScreen from 'screens/stack/MyMapScreen';
 import RestaurantDetailScreen from 'screens/stack/RestaurantDetailScreen';

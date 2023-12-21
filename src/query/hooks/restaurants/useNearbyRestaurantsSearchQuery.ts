@@ -1,10 +1,10 @@
-import { axiosRestaurants, nearbyRestaurantsSearchQuery } from 'query/restaurants';
+import { axiosRestaurants } from 'query/restaurants';
 import { useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { myLocationState, searchRadiusState } from 'store/locationState';
 import { mainSearchState } from 'store/searchState';
-import { GooglePlace } from 'types/data/restaureant';
+import { GooglePlace } from 'types/types';
 
 interface Data {
   ok: boolean;

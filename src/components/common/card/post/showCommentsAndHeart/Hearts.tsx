@@ -3,13 +3,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { InfiniteData, QueryObserverResult, RefetchOptions, RefetchQueryFilters, useMutation } from 'react-query';
 import { Colors, Size } from 'const/global-styles';
-import { IPost, Like } from 'types/store/myInfoType';
 import { PostQueryResponse, togglePostLikeDislike } from 'query/posts';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useState } from 'react';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import useUsersPostLikesDislikesQuery from 'query/hooks/users/useUsersPostLikesDislikesQuery';
 import { RestaurantPosts } from 'query/hooks/restaurants/useRestaurantPostsQuery';
+import { IPost, Like } from 'types/types';
 
 interface Props {
   postId: number;

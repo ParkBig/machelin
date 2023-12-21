@@ -3,7 +3,7 @@ import Button from 'components/common/layout/Button';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from 'const/global-styles';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 import NoResults from './NoResults';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import BriefRestaurantInfo from 'components/common/card/BriefRestaurantInfo';

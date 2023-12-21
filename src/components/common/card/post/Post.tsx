@@ -1,5 +1,4 @@
 import { StyleSheet, View } from 'react-native';
-import { IPost } from 'types/store/myInfoType';
 import Writer from './writer/Writer';
 import ShowCommentsAndHearts from './showCommentsAndHeart/ShowCommentsAndHearts';
 import PostingImages from './postingImages/PostingImages';
@@ -10,6 +9,7 @@ import { PostQueryResponse } from 'query/posts';
 import { RestaurantPosts } from 'query/hooks/restaurants/useRestaurantPostsQuery';
 import Content from './content/Content';
 import { Colors } from 'const/global-styles';
+import { IPost } from 'types/types';
 
 interface Props {
   posts: IPost;

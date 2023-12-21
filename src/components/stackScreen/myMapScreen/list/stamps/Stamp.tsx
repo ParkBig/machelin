@@ -1,11 +1,10 @@
 import Button from 'components/common/layout/Button';
 import { StyleSheet, Text, View } from 'react-native';
-import { IStamp } from 'types/store/myInfoType';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Size } from 'const/global-styles';
 import Line from 'components/common/layout/Line';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 import { useMutation } from 'react-query';
 import { deleteStampQuery } from 'query/stamps';
 import useUsersStampsQuery from 'query/hooks/users/useUsersStampsQuery';
@@ -14,6 +13,7 @@ import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmA
 import { useSetRecoilState } from 'recoil';
 import { focusedRestaurantState } from 'store/locationState';
 import YesOrNoModal from 'components/common/modal/YesOrNoModal';
+import { IStamp } from 'types/types';
 
 interface Props {
   stamp: IStamp;

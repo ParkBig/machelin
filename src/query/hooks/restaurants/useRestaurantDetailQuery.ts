@@ -1,7 +1,7 @@
-import { axiosRestaurants, restaurantDetailQuery } from 'query/restaurants';
+import { axiosRestaurants } from 'query/restaurants';
 import { useQuery } from 'react-query';
-import { GooglePlace } from 'types/data/restaureant';
-import { IPost } from 'types/store/myInfoType';
+import { GooglePlace } from 'types/types';
+import { IPost } from 'types/types';
 
 interface Data {
   ok: boolean;

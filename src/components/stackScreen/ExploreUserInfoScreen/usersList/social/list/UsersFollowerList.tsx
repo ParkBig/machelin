@@ -5,7 +5,7 @@ import NoSocial from 'components/bottomTabScreen/myScreen/myList/social/list/NoS
 import useExploreUsersFollowersQuery from 'query/hooks/exploreUsers/useExploreUsersFollowersQuery';
 import { StyleSheet, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { UseRouter } from 'types/screen/screenType';
+import { UseRouter } from 'types/screenType';
 
 export default function UsersFollowerList() {
   const { params } = useRoute<UseRouter<'ExploreUserInfoScreen'>>();

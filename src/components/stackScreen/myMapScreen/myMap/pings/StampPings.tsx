@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
-import { IStamp } from 'types/store/myInfoType';
+import { IStamp } from 'types/types';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from 'const/global-styles';
 import useUsersStampsQuery from 'query/hooks/users/useUsersStampsQuery';

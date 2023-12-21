@@ -1,4 +1,4 @@
-import { IPost } from 'types/store/myInfoType';
+import { IPost } from 'types/types';
 
 export default function postRating(posts?: IPost[]) {
   if (!posts) {

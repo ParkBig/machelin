@@ -1,4 +1,5 @@
-import { Photo } from 'types/data/restaureant';
+import { Photo } from "types/types";
+
 
 export default function imageTranslator(photos: Photo[] | undefined, representative?: boolean) {
   if (!photos) {

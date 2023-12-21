@@ -1,7 +1,7 @@
 import { BottomTabScreenProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
-import { GooglePlace } from 'types/data/restaureant';
+import { GooglePlace } from './types';
 
 export type RootBottomTabParamList = {
   MainScreen: undefined;
