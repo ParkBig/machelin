@@ -1,7 +1,7 @@
 import { useRoute } from '@react-navigation/native';
 import { Colors } from 'const/global-styles';
 import { StyleSheet, View } from 'react-native';
-import { UseRouter } from 'types/screen/screenType';
+import { UseRouter } from 'types/screenType';
 import NoPost from 'components/bottomTabScreen/myScreen/myList/myPosts/NoPost';
 import useExploreUsersPostsQuery from 'query/hooks/exploreUsers/useExploreUsersPostsQuery';
 import Post from 'components/common/card/post/Post';

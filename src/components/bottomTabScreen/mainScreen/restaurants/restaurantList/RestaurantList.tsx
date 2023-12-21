@@ -7,10 +7,10 @@ import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { useSetRecoilState } from 'recoil';
 import { focusedRestaurantState } from 'store/locationState';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigation } from 'types/screen/screenType';
 import Button from 'components/common/layout/Button';
 import BriefRestaurantInfo from 'components/common/card/BriefRestaurantInfo';
 import NoResults from 'components/bottomTabScreen/regionalSearchScreen/results/NoResults';
+import { UseNavigation } from 'types/screenType';
 
 export default function RestaurantList() {
   const { navigate } = useNavigation<UseNavigation<'MainScreen'>>();

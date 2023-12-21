@@ -1,10 +1,10 @@
 import { Colors, Size } from 'const/global-styles';
-import { RootBottomTab } from 'types/screen/screenType';
 import { Ionicons } from '@expo/vector-icons';
 import MainScreen from 'screens/bottomTab/MainScreen';
 import RegionalSearchScreen from 'screens/bottomTab/RegionalSearchScreen';
 import MyScreen from 'screens/bottomTab/MyScreen';
 import NeighborhoodPostsScreen from 'screens/bottomTab/NeighborhoodPostsScreen';
+import { RootBottomTab } from 'types/screenType';
 
 export default function BottomTabScreen() {
   return (

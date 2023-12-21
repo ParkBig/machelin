@@ -3,11 +3,7 @@ import { Colors, Shadow } from 'const/global-styles';
 import Keywords from './Keywords';
 
 export default function Options() {
-  return (
-    <>
-      <Keywords />
-    </>
-  );
+  return <Keywords />;
 }
 
 const styles = StyleSheet.create({

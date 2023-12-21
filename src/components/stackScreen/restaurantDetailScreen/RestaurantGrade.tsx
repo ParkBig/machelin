@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import useRestaurantDetailQuery from 'query/hooks/restaurants/useRestaurantDetailQuery';
 import { Text, View } from 'react-native';
 import { StyleSheet } from 'react-native';
-import { UseRouter } from 'types/screen/screenType';
+import { UseRouter } from 'types/screenType';
 import postRating from 'util/postRating';
 
 export default function RestaurantGrade() {

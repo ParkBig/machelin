@@ -1,5 +1,4 @@
 import Post from 'components/common/card/post/Post';
-import Line from 'components/common/layout/Line';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { Colors } from 'const/global-styles';
 import useNeighborhoodPostsQuery from 'query/hooks/posts/useNeighborhoodPostsQuery';
@@ -53,11 +52,6 @@ export default function NeighborhoodPosts() {
 const styles = StyleSheet.create({
   wrap: {
     flex: 1,
-    backgroundColor: Colors.lightGrayOpacity1,
-  },
-  line: {
-    width: '100%',
-    height: 30,
     backgroundColor: Colors.lightGrayOpacity1,
   },
   defaultLoading: {

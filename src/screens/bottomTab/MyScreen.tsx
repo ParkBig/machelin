@@ -8,13 +8,13 @@ import ContentsSelector from 'components/bottomTabScreen/myScreen/contentsSeclec
 import { RefreshControl } from 'react-native-gesture-handler';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useRecoilValue } from 'recoil';
-import { clickedMyInfoListTypeState } from 'store/userInfoState';
 import useUsersBookmarksQuery from 'query/hooks/users/useUsersBookmarksQuery';
 import useUsersPostsQuery from 'query/hooks/users/useUsersPostsQuery';
 import useUsersFollowersQuery from 'query/hooks/users/useUsersFollowersQuery';
 import useUsersFollowsQuery from 'query/hooks/users/useUsersFollowsQuery';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { ScreenHeight } from 'const/dimenstions';
+import { clickedMyInfoListTypeState } from 'store/toggleState';
 
 export default function MyScreen() {
   const [refreshing, setRefreshing] = useState(false);

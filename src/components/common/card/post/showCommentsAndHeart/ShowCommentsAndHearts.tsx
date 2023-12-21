@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react';
 import CommentsModal from './CommentsModal';
-import { IPost, Like } from 'types/store/myInfoType';
+import { IPost } from 'types/types';
 import { Ionicons } from '@expo/vector-icons';
 import Button from 'components/common/layout/Button';
 import Hearts from './Hearts';

@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet } from 'react-native';
-import { StackScreenPropsAbout } from 'types/screen/screenType';
+import { StackScreenPropsAbout } from 'types/screenType';
 import RestaurantInfos from 'components/stackScreen/restaurantDetailScreen/RestaurantInfos';
 import RestaurantGrade from 'components/stackScreen/restaurantDetailScreen/RestaurantGrade';
 import RestaurantImg from 'components/stackScreen/restaurantDetailScreen/RestaurantImg';

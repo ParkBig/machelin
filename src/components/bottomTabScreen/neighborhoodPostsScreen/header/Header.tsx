@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import trimMySubLocality from 'util/ trimMySubLocality';
 import Button from 'components/common/layout/Button';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { useEffect, useState } from 'react';

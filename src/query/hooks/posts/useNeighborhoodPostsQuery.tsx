@@ -1,6 +1,6 @@
 import { axiosPosts } from 'query/posts';
 import { useInfiniteQuery } from 'react-query';
-import { IPost } from 'types/store/myInfoType';
+import { IPost } from 'types/types';
 
 interface Data {
   ok: boolean;

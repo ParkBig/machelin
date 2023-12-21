@@ -1,6 +1,6 @@
-import { axiosPosts, usersPostForMyMapQuery } from 'query/posts';
+import { axiosPosts } from 'query/posts';
 import { useQuery } from 'react-query';
-import { IPost } from 'types/store/myInfoType';
+import { IPost } from 'types/types';
 
 interface Data {
   ok: boolean;

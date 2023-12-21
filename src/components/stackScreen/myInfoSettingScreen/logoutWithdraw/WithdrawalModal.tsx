@@ -10,9 +10,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { useMutation } from 'react-query';
 import { useResetRecoilState } from 'recoil';
-import { clickedMyInfoListTypeState } from 'store/userInfoState';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 import { deleteToken } from 'util/tokenDB';
+import { clickedMyInfoListTypeState } from 'store/toggleState';
 
 interface Props {
   toggleWithdrawalModal: boolean;

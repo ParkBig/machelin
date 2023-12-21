@@ -5,7 +5,7 @@ import Line from 'components/common/layout/Line';
 import { Colors } from 'const/global-styles';
 import useRestaurantPostsQuery from 'query/hooks/restaurants/useRestaurantPostsQuery';
 import { FlatList, StyleSheet, Text } from 'react-native';
-import { UseRouter } from 'types/screen/screenType';
+import { UseRouter } from 'types/screenType';
 
 export default function MachelinReviews() {
   const { params } = useRoute<UseRouter<'RestaurantDetailScreen'>>();

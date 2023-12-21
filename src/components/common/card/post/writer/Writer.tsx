@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import Info from './Info';
 import Report from './Report';
-import { IPost } from 'types/store/myInfoType';
+import { IPost } from 'types/types';
 
 interface Props {
   posts: IPost;

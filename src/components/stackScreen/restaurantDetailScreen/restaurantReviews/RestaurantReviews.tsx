@@ -5,12 +5,11 @@ import { Colors, Shadow, Size } from 'const/global-styles';
 import useRestaurantDetailQuery from 'query/hooks/restaurants/useRestaurantDetailQuery';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { UseNavigation, UseRouter } from 'types/screen/screenType';
+import { UseNavigation, UseRouter } from 'types/screenType';
 import MachelinReviews from './reviews/MachelinReviews';
 import GoogleReviews from './reviews/GoogleReviews';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { PermissionStatus, requestForegroundPermissionsAsync } from 'expo-location';
-import { Ionicons } from '@expo/vector-icons';
 
 export default function RestaurantReviews() {
   const { navigate } = useNavigation<UseNavigation<'RestaurantDetailScreen'>>();

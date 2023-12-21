@@ -1,9 +1,9 @@
-import { axiosRestaurants, restaurantsTextSearchQuery } from 'query/restaurants';
+import { axiosRestaurants } from 'query/restaurants';
 import { useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { regionalRestaurantSearchInputState } from 'store/searchState';
-import { GooglePlace } from 'types/data/restaureant';
+import { GooglePlace } from 'types/types';
 import useUsersSubLocalityQuery from '../users/useUsersSubLocalityQuery';
 import trimMySubLocality from 'util/ trimMySubLocality';
 

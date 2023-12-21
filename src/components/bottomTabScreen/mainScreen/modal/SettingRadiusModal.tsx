@@ -1,12 +1,11 @@
-import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
-import { useRecoilState } from 'recoil';
-import { searchRadiusState } from 'store/locationState';
-import { useState } from 'react';
-import Slider from '@react-native-community/slider';
-import { LocationSearchRadius } from 'types/store/locationType';
-import { toggleRadiusSettingState } from 'store/toggleState';
+// import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+// import { useRecoilState } from 'recoil';
+// import { searchRadiusState } from 'store/locationState';
+// import { useState } from 'react';
+// import Slider from '@react-native-community/slider';
+// import { toggleRadiusSettingState } from 'store/toggleState';
 
-export default function SettingRadiusModal() {
+// export default function SettingRadiusModal() {
   // const [radiusValue, setRadiusValue] = useRecoilState(searchRadiusState);
   // const [isRadiusSettingOpen, setIsRadiusSettingOpen] = useRecoilState(toggleRadiusSettingState);
   // const [sliderValue, setSliderValue] = useState<LocationSearchRadius>('3000');
@@ -46,44 +45,44 @@ export default function SettingRadiusModal() {
   //     </View>
   //   </Modal>
   // );
-}
+// }
 
-const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  text: {
-    fontSize: 20,
-  },
-  sliderWrap: {
-    width: 200,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: 30,
-    gap: 15,
-  },
-  valueText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  slider: {
-    width: '100%',
-  },
-});
+// const styles = StyleSheet.create({
+//   centeredView: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   modalView: {
+//     margin: 20,
+//     backgroundColor: 'white',
+//     borderRadius: 20,
+//     padding: 35,
+//     alignItems: 'center',
+//     shadowColor: '#000',
+//     shadowOffset: {
+//       width: 0,
+//       height: 2,
+//     },
+//     shadowOpacity: 0.25,
+//     shadowRadius: 4,
+//     elevation: 5,
+//   },
+//   text: {
+//     fontSize: 20,
+//   },
+//   sliderWrap: {
+//     width: 200,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     marginVertical: 30,
+//     gap: 15,
+//   },
+//   valueText: {
+//     fontSize: 20,
+//     fontWeight: 'bold',
+//   },
+//   slider: {
+//     width: '100%',
+//   },
+// });

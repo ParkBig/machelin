@@ -3,7 +3,7 @@ import NoBookmark from 'components/bottomTabScreen/myScreen/myList/myBookmarks/N
 import { Colors } from 'const/global-styles';
 import useExploreUsersBookmarksQuery from 'query/hooks/exploreUsers/useExploreUsersBookmarksQuery';
 import { StyleSheet, View } from 'react-native';
-import { UseRouter } from 'types/screen/screenType';
+import { UseRouter } from 'types/screenType';
 import BriefBookmarkInfo from 'components/bottomTabScreen/myScreen/myList/myBookmarks/BriefBookmarkInfo';
 import { FlatList } from 'react-native-gesture-handler';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';

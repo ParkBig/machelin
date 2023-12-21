@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function Comments({ postId }: Props) {
-  const { comments, commentsIsLoading, reComments } = usePostsCommentsQuery(postId);
+  const { comments, commentsIsLoading } = usePostsCommentsQuery(postId);
 
   return (
     <>

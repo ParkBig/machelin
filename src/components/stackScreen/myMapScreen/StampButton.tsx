@@ -6,7 +6,7 @@ import { Colors } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 
 export default function StampButton() {
   const { navigate } = useNavigation<UseNavigation<'MyMapScreen'>>();

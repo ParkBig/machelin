@@ -6,8 +6,8 @@ import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { StyleSheet, Text, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { useResetRecoilState } from 'recoil';
-import { clickedMyInfoListTypeState } from 'store/userInfoState';
-import { UseNavigation } from 'types/screen/screenType';
+import { clickedMyInfoListTypeState } from 'store/toggleState';
+import { UseNavigation } from 'types/screenType';
 import { deleteToken } from 'util/tokenDB';
 
 interface Props {

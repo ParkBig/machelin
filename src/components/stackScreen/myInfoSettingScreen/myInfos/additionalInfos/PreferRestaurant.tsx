@@ -3,7 +3,7 @@ import { Colors, Size } from 'const/global-styles';
 import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 import Button from 'components/common/layout/Button';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 

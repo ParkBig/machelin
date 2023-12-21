@@ -1,14 +1,14 @@
 import Button from 'components/common/layout/Button';
 import { Colors, Size } from 'const/global-styles';
 import { StyleSheet, Text, View } from 'react-native';
-import { GooglePlace } from 'types/data/restaureant';
+import { GooglePlace } from 'types/types';
 import { Ionicons } from '@expo/vector-icons';
 import { useMutation } from 'react-query';
 import { makeStampQuery } from 'query/stamps';
 import { useRecoilValue } from 'recoil';
 import { myLocationState } from 'store/locationState';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 import { useState } from 'react';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import useUsersStampsQuery from 'query/hooks/users/useUsersStampsQuery';

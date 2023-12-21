@@ -1,6 +1,6 @@
-import { axiosComments, postsCommentsQuery } from 'query/comments';
+import { axiosComments } from 'query/comments';
 import { useQuery } from 'react-query';
-import { Comment } from 'types/store/myInfoType';
+import { Comment } from 'types/types';
 
 interface Data {
   ok: boolean;

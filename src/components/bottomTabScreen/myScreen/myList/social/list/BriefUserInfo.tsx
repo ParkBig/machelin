@@ -1,13 +1,13 @@
 import Button from 'components/common/layout/Button';
 import { Image, LayoutAnimation, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { UserInfo } from 'types/store/myInfoType';
 import { Colors, Size } from 'const/global-styles';
 import { useState } from 'react';
 import Line from 'components/common/layout/Line';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 import ToggleFollow from 'components/stackScreen/ExploreUserInfoScreen/exploreUsersInfo/ToggleFollow';
+import { UserInfo } from 'types/types';
 
 interface Props {
   userInfo: UserInfo;

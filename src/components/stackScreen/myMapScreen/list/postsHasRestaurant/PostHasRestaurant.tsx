@@ -1,10 +1,10 @@
 import Button from 'components/common/layout/Button';
-import { IPost } from 'types/store/myInfoType';
+import { IPost } from 'types/types';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View } from 'react-native';
 import { Colors, Size } from 'const/global-styles';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 import { useSetRecoilState } from 'recoil';
 import { focusedRestaurantState } from 'store/locationState';
 
