@@ -1,6 +1,7 @@
-import { myInfoQuery } from 'query/user';
+import { axiosUsers, myInfoQuery } from 'query/user';
 import { useQuery } from 'react-query';
 import { UserInfo } from 'types/store/myInfoType';
+import { takeToken } from 'util/tokenDB';
 
 interface Data {
   ok: boolean;
@@ -15,7 +16,14 @@ export default function useMyInfoQuery() {
     isSuccess,
     refetch: reMyInfo,
     isRefetching,
-  } = useQuery<Data>(['myInfo'], myInfoQuery);
+  } = useQuery<Data>(['myInfo'], async () => {
+    const token = await takeToken();
+
+    if (!token) return { ok: true, authUser: null };
+
+    const { data } = await axiosUsers.get('/me');
+    return data;
+  });
 
   return { myInfoIsLoading, isError, myInfo, isSuccess, reMyInfo, isRefetching };
 }

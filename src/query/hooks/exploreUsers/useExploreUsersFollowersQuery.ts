@@ -1,4 +1,4 @@
-import { usersFollowersQuery } from 'query/user';
+import { axiosUsers, usersFollowersQuery } from 'query/user';
 import { useQuery } from 'react-query';
 import { UserInfo } from 'types/store/myInfoType';
 
@@ -15,7 +15,18 @@ export default function useExploreUsersFollowersQuery(userId: number) {
     isSuccess,
     refetch: reFollowers,
     isRefetching: isReFollowers,
-  } = useQuery<Data>(['exploreUsersFollowers', userId], () => usersFollowersQuery(userId));
+  } = useQuery<Data>(['exploreUsersFollowers', userId], async () => {
+    if (!userId) {
+      return { ok: true, follows: null };
+    }
+
+    const { data } = await axiosUsers.get('/usersFollowers', {
+      params: {
+        userId,
+      },
+    });
+    return data;
+  });
 
   return { followers, followersIsLoading, isSuccess, reFollowers, isError, isReFollowers };
 }

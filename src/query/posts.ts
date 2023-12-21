@@ -2,8 +2,8 @@ import axios from 'axios';
 import { IPost } from 'types/store/myInfoType';
 import { takeToken } from 'util/tokenDB';
 
-const axiosPosts = axios.create({
-  baseURL: `${process.env.EXPO_DEV_SERVER_URL}/posts`,
+export const axiosPosts = axios.create({
+  baseURL: `${process.env.EXPO_PROD_SERVER_URL}/posts`,
 });
 
 axiosPosts.interceptors.request.use(async config => {

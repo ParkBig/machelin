@@ -1,4 +1,4 @@
-import { usersPostForMyMapQuery } from 'query/posts';
+import { axiosPosts, usersPostForMyMapQuery } from 'query/posts';
 import { useQuery } from 'react-query';
 import { IPost } from 'types/store/myInfoType';
 
@@ -13,7 +13,18 @@ export default function useUsersPostForMyMapQuery(userId?: number) {
     data: posts,
     refetch: rePosts,
     isLoading: postsIsLoading,
-  } = useQuery<Data>(['usersPostForMyMap', userId], () => usersPostForMyMapQuery(userId));
+  } = useQuery<Data>(['usersPostForMyMap', userId], async () => {
+    if (!userId) {
+      return { ok: true, posts: null };
+    }
+
+    const { data } = await axiosPosts.get('/usersPostForMyMap', {
+      params: {
+        userId,
+      },
+    });
+    return data;
+  });
 
   return { posts, rePosts, postsIsLoading };
 }

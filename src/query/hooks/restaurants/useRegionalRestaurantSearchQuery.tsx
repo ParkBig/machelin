@@ -1,4 +1,4 @@
-import { restaurantsTextSearchQuery } from 'query/restaurants';
+import { axiosRestaurants, restaurantsTextSearchQuery } from 'query/restaurants';
 import { useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
@@ -24,9 +24,12 @@ export default function useRegionalRestaurantSearchQuery() {
 
   const { city: myCity } = trimMySubLocality(mySubLocality?.subLocality);
 
-  const keyword = `${city === '전체' ? (searchText ? '' : myCity) : city} ${district === '전체' ? '' : district} ${
-    searchText ? searchText : ''
-  }`;
+  const keyword =
+    city === '전체'
+      ? myCity
+        ? `${myCity} ${searchText ? searchText : ''}`
+        : `서울 강남 ${searchText ? searchText : ''}`
+      : `${city} ${district === '전체' ? '' : district} ${searchText ? searchText : ''}`;
 
   const {
     data: restaurants,
@@ -37,7 +40,16 @@ export default function useRegionalRestaurantSearchQuery() {
     isFetchingNextPage,
   } = useInfiniteQuery<Data, unknown, GooglePlace>(
     ['nearbyRestaurantsSearch', keyword],
-    ({ pageParam = null }) => restaurantsTextSearchQuery(keyword, pageParam),
+    async ({ pageParam = null }) => {
+      const { data } = await axiosRestaurants.get('/restaurantsTextSearch', {
+        params: {
+          keyword,
+          nextPageParams: pageParam ? pageParam : null,
+        },
+      });
+
+      return data;
+    },
     {
       enabled: isTyping ? false : true,
       select: data => ({ pages: data.pages.flatMap(page => page.restaurants), pageParams: data.pageParams }),

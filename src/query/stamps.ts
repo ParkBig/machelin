@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { takeToken } from 'util/tokenDB';
 
-const axiosStamps = axios.create({
-  baseURL: `${process.env.EXPO_DEV_SERVER_URL}/stamps`,
+export const axiosStamps = axios.create({
+  baseURL: `${process.env.EXPO_PROD_SERVER_URL}/stamps`,
 });
 
 axiosStamps.interceptors.request.use(async config => {
@@ -26,7 +26,7 @@ interface MakeStampInput {
 export const usersStampQuery = async () => {
   const { data } = await axiosStamps.get('/usersStamp');
   return data;
-}
+};
 
 export const makeStampQuery = async (makeStampInput: MakeStampInput) => {
   const { data } = await axiosStamps.post('/makeStamp', makeStampInput);

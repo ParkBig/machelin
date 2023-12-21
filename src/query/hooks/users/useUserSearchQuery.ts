@@ -1,4 +1,4 @@
-import { findUsersQuery } from 'query/user';
+import { axiosUsers, findUsersQuery } from 'query/user';
 import { useQuery } from 'react-query';
 import { UserInfo } from 'types/store/myInfoType';
 
@@ -12,9 +12,20 @@ export default function useUserSearchQuery(nickname: string) {
     data: userList,
     refetch: reUserList,
     isLoading,
-  } = useQuery<Data>(['userList', nickname], () => findUsersQuery(nickname), {
-    enabled: !!nickname,
-  });
+  } = useQuery<Data>(
+    ['userList', nickname],
+    async () => {
+      const { data } = await axiosUsers.get('/findUsers', {
+        params: {
+          nickname,
+        },
+      });
+      return data;
+    },
+    {
+      enabled: !!nickname,
+    }
+  );
 
   return { userList, isLoading, reUserList };
 }

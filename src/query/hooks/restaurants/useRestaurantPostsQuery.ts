@@ -1,4 +1,4 @@
-import { restaurantPostsQuery } from 'query/restaurants';
+import { axiosRestaurants, restaurantPostsQuery } from 'query/restaurants';
 import { useInfiniteQuery } from 'react-query';
 import { IPost } from 'types/store/myInfoType';
 
@@ -19,7 +19,16 @@ export default function useRestaurantPostsQuery(restaurantId: string) {
     isFetchingNextPage,
   } = useInfiniteQuery<RestaurantPosts, unknown, IPost>(
     ['restaurantPosts', restaurantId],
-    ({ pageParam = 1 }) => restaurantPostsQuery(restaurantId, pageParam),
+    async ({ pageParam = 1 }) => {
+      const { data } = await axiosRestaurants.get('/restaurantPosts', {
+        params: {
+          restaurantId,
+          page: pageParam,
+        },
+      });
+
+      return data;
+    },
     {
       select: data => ({ pages: data.pages.flatMap(page => page.machelinPosts), pageParams: data.pageParams }),
       getNextPageParam: lastPage => {

@@ -1,19 +1,8 @@
 import axios from 'axios';
 import { takeToken } from 'util/tokenDB';
 
-interface ToggleBookmarkInput {
-  restaurantId: string;
-  lat: number;
-  lng: number;
-  restaurantName: string;
-  images: string[];
-  address: string;
-  rating: number;
-  totalRatings: number;
-}
-
-const axiosBookmarks = axios.create({
-  baseURL: `${process.env.EXPO_DEV_SERVER_URL}/bookmark`,
+export const axiosBookmarks = axios.create({
+  baseURL: `${process.env.EXPO_PROD_SERVER_URL}/bookmark`,
 });
 
 axiosBookmarks.interceptors.request.use(async config => {
@@ -24,7 +13,16 @@ axiosBookmarks.interceptors.request.use(async config => {
   return config;
 });
 
-export const getBookmarksQuery = async () => {};
+interface ToggleBookmarkInput {
+  restaurantId: string;
+  lat: number;
+  lng: number;
+  restaurantName: string;
+  images: string[];
+  address: string;
+  rating: number;
+  totalRatings: number;
+}
 
 export const usersBookmarksQuery = async (userId?: number) => {
   if (!userId) {

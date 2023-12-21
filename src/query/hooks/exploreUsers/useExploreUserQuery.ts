@@ -1,4 +1,4 @@
-import { exploreUserQuery } from 'query/user';
+import { axiosUsers, exploreUserQuery } from 'query/user';
 import { useQuery } from 'react-query';
 import { UserInfo } from 'types/store/myInfoType';
 
@@ -14,7 +14,14 @@ export default function useExploreUserQuery(userId: number) {
     data: exploreUser,
     isSuccess,
     refetch: reExploreUser,
-  } = useQuery<Data>(['useExploreUserQuery', userId], () => exploreUserQuery(userId));
+  } = useQuery<Data>(['useExploreUserQuery', userId], async () => {
+    const { data } = await axiosUsers.get('/exploreUser', {
+      params: {
+        userId,
+      },
+    });
+    return data;
+  });
 
   return { exploreUserInfoIsLoading, isError, exploreUser, isSuccess, reExploreUser };
 }

@@ -1,4 +1,4 @@
-import { neighborhoodPostsQuery } from 'query/posts';
+import { axiosPosts } from 'query/posts';
 import { useInfiniteQuery } from 'react-query';
 import { IPost } from 'types/store/myInfoType';
 
@@ -19,10 +19,21 @@ export default function useNeighborhoodPostsQuery(subLocality: string = '') {
     isFetchingNextPage,
   } = useInfiniteQuery<Data, unknown, IPost>(
     ['neighborhoodPosts', subLocality],
-    ({ pageParam = 1 }) => neighborhoodPostsQuery(subLocality, pageParam),
+    async ({ pageParam = 1 }) => {
+      const { data } = await axiosPosts.get('/neighborhoodPosts', {
+        params: {
+          subLocality,
+          page: pageParam,
+        },
+      });
+
+      return data;
+    },
     {
       enabled: !!subLocality,
-      select: data => ({ pages: data.pages.flatMap(page => page.neighborhoodPosts), pageParams: data.pageParams }),
+      select: data => {
+        return { pages: data.pages.flatMap(page => page.neighborhoodPosts), pageParams: data.pageParams };
+      },
       getNextPageParam: lastPage => {
         return lastPage.nextPage || null;
       },

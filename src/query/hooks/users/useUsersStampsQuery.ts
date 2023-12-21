@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import useMyInfoQuery from './useMyInfoQuery';
-import { usersStampQuery } from 'query/stamps';
+import { axiosStamps, usersStampQuery } from 'query/stamps';
 import { IStamp } from 'types/store/myInfoType';
 
 interface Data {
@@ -16,9 +16,16 @@ export default function useUsersStampsQuery() {
     data: stamps,
     isLoading: stampIsLoading,
     refetch: reStamps,
-  } = useQuery<Data>(['useUsersStamps'], () => usersStampQuery(), {
-    enabled: !!myInfo?.authUser,
-  });
+  } = useQuery<Data>(
+    ['useUsersStamps'],
+    async () => {
+      const { data } = await axiosStamps.get('/usersStamp');
+      return data;
+    },
+    {
+      enabled: !!myInfo?.authUser,
+    }
+  );
 
   return { stamps, stampIsLoading, reStamps };
 }

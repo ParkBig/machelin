@@ -1,6 +1,18 @@
 import { deleteToken, takeToken } from 'util/tokenDB';
 import axios from 'axios';
 
+export const axiosUsers = axios.create({
+  baseURL: `${process.env.EXPO_PROD_SERVER_URL}/users`,
+});
+
+axiosUsers.interceptors.request.use(async config => {
+  const token = await takeToken();
+  if (token) {
+    config.headers['token'] = token;
+  }
+  return config;
+});
+
 interface LoginInput {
   email: string;
   password: string;
@@ -36,18 +48,6 @@ interface CheckSignUpVerificationInput {
   phoneNumber: string;
   verificationCode: string;
 }
-
-const axiosUsers = axios.create({
-  baseURL: `${process.env.EXPO_DEV_SERVER_URL}/users`,
-});
-
-axiosUsers.interceptors.request.use(async config => {
-  const token = await takeToken();
-  if (token) {
-    config.headers['token'] = token;
-  }
-  return config;
-});
 
 // get~
 export const myInfoQuery = async () => {
@@ -100,17 +100,6 @@ export const usersFollowersQuery = async (userId?: number) => {
       userId,
     },
   });
-  return data;
-};
-
-export const usersSubLocalityQuery = async (lat: number, lng: number) => {
-  const { data } = await axiosUsers.get('/usersSubLocality', {
-    params: {
-      lat,
-      lng,
-    },
-  });
-
   return data;
 };
 

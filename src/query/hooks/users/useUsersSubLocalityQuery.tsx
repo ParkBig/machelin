@@ -1,4 +1,4 @@
-import { usersSubLocalityQuery } from 'query/user';
+import { axiosUsers } from 'query/user';
 import { useQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { myLocationState } from 'store/locationState';
@@ -16,9 +16,22 @@ export default function useUsersSubLocalityQuery() {
     data: mySubLocality,
     refetch: reMySubLocality,
     isLoading: mySubLocalityIsLoading,
-  } = useQuery<Data>(['usersSubLocality', latitude, longitude], () => usersSubLocalityQuery(latitude, longitude), {
-    enabled: !!isGetLocation,
-  });
+  } = useQuery<Data>(
+    ['usersSubLocality', latitude, longitude],
+    async () => {
+      const { data } = await axiosUsers.get('/usersSubLocality', {
+        params: {
+          lat: latitude,
+          lng: longitude,
+        },
+      });
+
+      return data;
+    },
+    {
+      enabled: !!isGetLocation,
+    }
+  );
 
   return { mySubLocality, reMySubLocality, mySubLocalityIsLoading };
 }
