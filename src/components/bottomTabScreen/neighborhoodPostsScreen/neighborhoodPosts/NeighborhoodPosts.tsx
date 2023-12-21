@@ -29,7 +29,7 @@ export default function NeighborhoodPosts() {
   const onEndReachedHandler = () => {
     fetchNextPageRestaurants();
   };
-
+  
   return (
     <View style={styles.wrap}>
       {neighborhoodPosts?.pages.length !== 0 ? (
@@ -40,8 +40,6 @@ export default function NeighborhoodPosts() {
           keyExtractor={(_, index) => String(index)}
           data={neighborhoodPosts?.pages}
           renderItem={({ item }) => <Post posts={item} rePosts={reNeighborhoodPosts} isDetailScreen={false} />}
-          ItemSeparatorComponent={() => <Line style={styles.line} />}
-          ListFooterComponent={() => <Line style={styles.line} />}
         />
       ) : (
         <NoNeighborhoodPosts />
@@ -55,7 +53,7 @@ export default function NeighborhoodPosts() {
 const styles = StyleSheet.create({
   wrap: {
     flex: 1,
-    backgroundColor: Colors.mainWhite1,
+    backgroundColor: Colors.lightGrayOpacity1,
   },
   line: {
     width: '100%',

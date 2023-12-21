@@ -1,4 +1,4 @@
-import { PostQueryResponse, usersPostsQuery } from 'query/posts';
+import { PostQueryResponse, axiosPosts, usersPostsQuery } from 'query/posts';
 import { useInfiniteQuery, useQuery } from 'react-query';
 import useMyInfoQuery from '../users/useMyInfoQuery';
 import { IPost } from 'types/store/myInfoType';
@@ -16,7 +16,20 @@ export default function useExploreUsersPostsQuery(targetId: number) {
     isFetchingNextPage,
   } = useInfiniteQuery<PostQueryResponse, unknown, IPost>(
     ['exploreUsersPosts', targetId, myId],
-    ({ pageParam = 1 }) => usersPostsQuery(targetId, myId, pageParam),
+    async ({ pageParam = 1 }) => {
+      if (!targetId) {
+        return { ok: true, posts: null };
+      }
+
+      const { data } = await axiosPosts.get('/usersPosts', {
+        params: {
+          targetId,
+          myId,
+          page: pageParam,
+        },
+      });
+      return data;
+    },
     {
       select: data => ({ pages: data.pages.flatMap(page => page.posts), pageParams: data.pageParams }),
       getNextPageParam: lastPage => {

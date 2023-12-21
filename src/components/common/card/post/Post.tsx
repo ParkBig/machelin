@@ -39,5 +39,6 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: Colors.mainGreen1,
+    backgroundColor: Colors.mainWhite1,
   },
 });

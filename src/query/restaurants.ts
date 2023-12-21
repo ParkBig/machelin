@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { takeToken } from 'util/tokenDB';
 
-const axiosRestaurants = axios.create({
-  baseURL: `${process.env.EXPO_DEV_SERVER_URL}/restaurants`,
+export const axiosRestaurants = axios.create({
+  baseURL: `${process.env.EXPO_PROD_SERVER_URL}/restaurants`,
 });
 
 axiosRestaurants.interceptors.request.use(async config => {
@@ -33,8 +33,6 @@ export const nearbyRestaurantsSearchQuery = async (
 
   return data;
 };
-
-export const localRestaurantsSearchQuery = async (keyword: string) => {};
 
 export const restaurantsTextSearchQuery = async (keyword: string, nextPageParams?: string) => {
   const { data } = await axiosRestaurants.get('/restaurantsTextSearch', {

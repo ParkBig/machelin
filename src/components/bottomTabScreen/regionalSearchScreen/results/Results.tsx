@@ -1,4 +1,4 @@
-import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import Button from 'components/common/layout/Button';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from 'const/global-styles';
@@ -43,7 +43,6 @@ export default function Results() {
             onEndReached={onEndReachedHandler}
             data={restaurants?.pages}
             keyExtractor={(_, index) => String(index)}
-            contentContainerStyle={{ paddingBottom: 90 }}
             renderItem={({ item }) => {
               const navigateHandler = () => {
                 navigate('RestaurantDetailScreen', {
@@ -54,6 +53,11 @@ export default function Results() {
 
               return <BriefRestaurantInfo restaurant={item} isList={true} fnc={navigateHandler} />;
             }}
+            ListFooterComponent={() => (
+              <View style={styles.listFooterComponent}>
+                <Text style={styles.text}>- 마슐랭 -</Text>
+              </View>
+            )}
           />
           <Button style={styles.button} onPress={onPressHandler}>
             <Ionicons style={styles.ionicons} size={35} name="map" color={Colors.mainWhite3} />
@@ -106,5 +110,15 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     justifyContent: 'flex-end',
     position: 'absolute',
+  },
+  listFooterComponent: {
+    height: 90,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontWeight: 'bold',
+    color: Colors.gray,
   },
 });
