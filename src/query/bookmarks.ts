@@ -1,8 +1,9 @@
 import axios from 'axios';
+import Constants from 'expo-constants';
 import { takeToken } from 'util/tokenDB';
 
 export const axiosBookmarks = axios.create({
-  baseURL: `${process.env.EXPO_PROD_SERVER_URL}/bookmark`,
+  baseURL: `${Constants.manifest?.extra?.EXPO_PROD_SERVER_URL}/bookmark`,
 });
 
 axiosBookmarks.interceptors.request.use(async config => {
