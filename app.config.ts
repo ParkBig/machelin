@@ -29,7 +29,7 @@ const expoConfig: ExpoConfig = {
     permissions: ['android.permission.RECORD_AUDIO'],
     config: {
       googleMaps: {
-        apiKey: 'AIzaSyAgb1saQXdlvRXGhu6mt8IRZyVmzEJBS88',
+        apiKey: process.env.EXPO_GOOGLE_ANDROID_MAPS_SDK_KEY,
       },
     },
     package: 'com.parkbig.machelin',
@@ -51,7 +51,7 @@ const expoConfig: ExpoConfig = {
     },
     EXPO_PROD_SERVER_URL: process.env.EXPO_PROD_SERVER_URL,
     EXPO_DEV_SERVER_URL: process.env.EXPO_DEV_SERVER_URL,
-    EXPO_GOOGLE_KEY: process.env.EXPO_GOOGLE_KEY,
+    EXPO_GOOGLE_MAPS_SERVICE_KEY: process.env.EXPO_GOOGLE_MAPS_SERVICE_KEY,
   },
 };
 
