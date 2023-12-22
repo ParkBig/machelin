@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { Colors, Shadow } from 'const/global-styles';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 import { useRecoilState } from 'recoil';
-import { ClickedMyInfoListTypeState, clickedMyInfoListTypeState } from 'store/userInfoState';
 import { Ionicons } from '@expo/vector-icons';
 import Button from 'components/common/layout/Button';
 import Line from 'components/common/layout/Line';
+import { ClickedMyInfoListTypeState, clickedMyInfoListTypeState } from 'store/toggleState';
 
 export default function ContentsSelector() {
   const { navigate } = useNavigation<UseNavigation<'MyScreen'>>();

@@ -3,8 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { Picker } from '@react-native-picker/picker';
 import { useRecoilState } from 'recoil';
-import { searchRadiusState } from 'store/locationState';
-import { LocationSearchRadius } from 'types/store/locationType';
+import { LocationSearchRadius, searchRadiusState } from 'store/locationState';
 import Button from 'components/common/layout/Button';
 
 interface Props {

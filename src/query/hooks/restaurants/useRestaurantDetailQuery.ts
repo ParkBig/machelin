@@ -1,7 +1,7 @@
-import { restaurantDetailQuery } from 'query/restaurants';
+import { axiosRestaurants } from 'query/restaurants';
 import { useQuery } from 'react-query';
-import { GooglePlace } from 'types/data/restaureant';
-import { IPost } from 'types/store/myInfoType';
+import { GooglePlace } from 'types/types';
+import { IPost } from 'types/types';
 
 interface Data {
   ok: boolean;
@@ -17,7 +17,15 @@ export default function useRestaurantDetailQuery(restaurantId: string) {
     data: restaurantDetail,
     isSuccess,
     refetch: reRestaurantDetail,
-  } = useQuery<Data>(['restaurantDetail', restaurantId], () => restaurantDetailQuery(restaurantId));
+  } = useQuery<Data>(['restaurantDetail', restaurantId], async () => {
+    const { data } = await axiosRestaurants.get('/restaurantDetail', {
+      params: {
+        restaurantId,
+      },
+    });
+
+    return data;
+  });
 
   return { restaurantDetailIsLoading, isError, restaurantDetail, isSuccess, reRestaurantDetail };
 }

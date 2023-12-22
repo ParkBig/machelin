@@ -6,7 +6,7 @@ import { modifyUserActivityZoneQuery } from 'query/user';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';
-import { StackScreenPropsAbout } from 'types/screen/screenType';
+import { StackScreenPropsAbout } from 'types/screenType';
 
 export default function ChangeMyActivityZoneScreen({
   navigation,
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     ...Shadow,
   },
   text: {
-    color: Colors.mainBlue1,
+    color: Colors.mainWhite3,
     fontSize: Size.normalBig,
     fontWeight: 'bold',
   },

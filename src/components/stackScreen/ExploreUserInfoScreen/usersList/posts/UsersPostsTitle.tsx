@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     height: 50,
+    paddingHorizontal: 15,
   },
   titleText: {
     fontSize: Size.normalMiddle,

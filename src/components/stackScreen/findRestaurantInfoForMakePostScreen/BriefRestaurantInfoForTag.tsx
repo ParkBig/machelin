@@ -2,8 +2,8 @@ import { useNavigation } from '@react-navigation/native';
 import Button from 'components/common/layout/Button';
 import { Colors, Size } from 'const/global-styles';
 import { StyleSheet, Text, View } from 'react-native';
-import { GooglePlace } from 'types/data/restaureant';
-import { UseNavigation } from 'types/screen/screenType';
+import { GooglePlace } from 'types/types';
+import { UseNavigation } from 'types/screenType';
 
 interface Props {
   restaurantInfo: GooglePlace;

@@ -10,15 +10,13 @@ import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 
 export default function FollowList() {
   const { myInfo } = useMyInfoQuery();
-  const { follows, followsIsLoading } = useUsersFollowsQuery(myInfo?.authUser?.id);
+  const { follows, followsIsLoading, isReFollows } = useUsersFollowsQuery(myInfo?.authUser?.id);
   const followsExist = follows?.follows && follows.follows.length !== 0 ? true : false;
 
   return (
     <View>
       {myInfo?.authUser ? (
-        followsIsLoading ? (
-          <LoadingOverlay style={styles.loadingOverlay} />
-        ) : followsExist ? (
+        followsExist ? (
           <FlatList
             scrollEnabled={false}
             showsVerticalScrollIndicator={false}
@@ -33,6 +31,7 @@ export default function FollowList() {
       ) : (
         <AvailableAfterLogin />
       )}
+      {(followsIsLoading || isReFollows) && <LoadingOverlay style={styles.loadingOverlay} />}
     </View>
   );
 }
@@ -41,7 +40,9 @@ const styles = StyleSheet.create({
   loadingOverlay: {
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
+    paddingTop: 30,
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    position: 'absolute',
   },
 });

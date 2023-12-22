@@ -7,14 +7,17 @@ import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { useSetRecoilState } from 'recoil';
 import { focusedRestaurantState } from 'store/locationState';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigation } from 'types/screen/screenType';
 import Button from 'components/common/layout/Button';
 import BriefRestaurantInfo from 'components/common/card/BriefRestaurantInfo';
+import NoResults from 'components/bottomTabScreen/regionalSearchScreen/results/NoResults';
+import { UseNavigation } from 'types/screenType';
 
 export default function RestaurantList() {
   const { navigate } = useNavigation<UseNavigation<'MainScreen'>>();
   const setFocusedRestaurant = useSetRecoilState(focusedRestaurantState);
-  const { restaurants, fetchNextPageRestaurants, isFetchingNextPage } = useNearbyRestaurantsSearchQuery();
+  const { restaurants, fetchNextPageRestaurants, isFetchingNextPage, restaurantsIsLoading } = useNearbyRestaurantsSearchQuery();
+
+  const restaurantsIsExist = restaurants?.pages && restaurants.pages.length !== 0 ? true : false;
 
   const onEndReachedHandler = () => {
     fetchNextPageRestaurants();
@@ -22,38 +25,43 @@ export default function RestaurantList() {
 
   return (
     <View style={styles.wrap}>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={restaurants?.pages}
-        onEndReached={onEndReachedHandler}
-        ItemSeparatorComponent={() => <Line style={styles.line} />}
-        keyExtractor={item => item.place_id}
-        renderItem={({ item }) => {
-          const restaurantChoiceHandler = () => {
-            const { lat, lng } = item.geometry.location;
-            setFocusedRestaurant({
-              isFocused: true,
-              id: item.place_id,
-              latitude: lat,
-              longitude: lng,
-            });
-          };
+      {restaurantsIsExist ? (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={restaurants?.pages}
+          onEndReached={onEndReachedHandler}
+          ItemSeparatorComponent={() => <Line style={styles.line} />}
+          keyExtractor={(_, index) => String(index)}
+          renderItem={({ item }) => {
+            const restaurantChoiceHandler = () => {
+              const { lat, lng } = item.geometry.location;
+              setFocusedRestaurant({
+                isFocused: true,
+                id: item.place_id,
+                latitude: lat,
+                longitude: lng,
+              });
+            };
 
-          const goToDetailRestaurantInfoHandler = () => {
-            navigate('RestaurantDetailScreen', {
-              restaurantName: item.name,
-              restaurantId: item.place_id,
-            });
-          };
+            const goToDetailRestaurantInfoHandler = () => {
+              navigate('RestaurantDetailScreen', {
+                restaurantName: item.name,
+                restaurantId: item.place_id,
+              });
+            };
 
-          return (
-            <Button style={styles.button} onPress={restaurantChoiceHandler}>
-              <BriefRestaurantInfo restaurant={item} isList={true} fnc={goToDetailRestaurantInfoHandler} />
-            </Button>
-          );
-        }}
-      />
-      {isFetchingNextPage && <LoadingOverlay style={styles.loadingOverlay} />}
+            return (
+              <Button style={styles.button} onPress={restaurantChoiceHandler}>
+                <BriefRestaurantInfo restaurant={item} isList={true} fnc={goToDetailRestaurantInfoHandler} />
+              </Button>
+            );
+          }}
+        />
+      ) : (
+        <NoResults />
+      )}
+      {restaurantsIsLoading && <LoadingOverlay style={styles.defaultLoading} />}
+      {isFetchingNextPage && <LoadingOverlay style={styles.moreDataLoading} />}
     </View>
   );
 }
@@ -75,10 +83,18 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 10,
   },
-  loadingOverlay: {
+  defaultLoading: {
     width: '100%',
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'absolute',
+  },
+  moreDataLoading: {
+    width: '100%',
+    height: '100%',
+    paddingBottom: 20,
+    justifyContent: 'flex-end',
+    position: 'absolute',
   },
 });

@@ -3,7 +3,7 @@ import Line from 'components/common/layout/Line';
 import { Colors, Size } from 'const/global-styles';
 import useExploreUserQuery from 'query/hooks/exploreUsers/useExploreUserQuery';
 import { StyleSheet, Text, View } from 'react-native';
-import { UseRouter } from 'types/screen/screenType';
+import { UseRouter } from 'types/screenType';
 
 export default function ExploreUsersAdditionalInfos() {
   const { params } = useRoute<UseRouter<'ExploreUserInfoScreen'>>();

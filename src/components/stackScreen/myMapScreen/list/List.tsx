@@ -3,18 +3,25 @@ import { StyleSheet, View } from 'react-native';
 import Bookmarks from './bookmarks/Bookmarks';
 import PostsHasRestaurant from './postsHasRestaurant/PostsHasRestaurant';
 import FunctionsBar from './functionsBar/FunctionsBar';
-import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
+import Stamps from './stamps/Stamps';
 
-export type WhichOneClickedState = 'bookmarks' | 'posts' | null;
+export type WhichOneClickedState = 'bookmarks' | 'posts' | 'stamps' | null;
 
 export default function List() {
-  const { myInfo } = useMyInfoQuery();
   const [whichOneClicked, setWhichOneClicked] = useState<WhichOneClickedState>(null);
 
   return (
     <View style={styles.wrap}>
-      {myInfo?.authUser && <FunctionsBar whichOneClicked={whichOneClicked} setWhichOneClicked={setWhichOneClicked} />}
-      {whichOneClicked ? whichOneClicked === 'bookmarks' ? <Bookmarks /> : <PostsHasRestaurant /> : null}
+      <FunctionsBar whichOneClicked={whichOneClicked} setWhichOneClicked={setWhichOneClicked} />
+      {whichOneClicked ? (
+        whichOneClicked === 'bookmarks' ? (
+          <Bookmarks />
+        ) : whichOneClicked === 'posts' ? (
+          <PostsHasRestaurant />
+        ) : (
+          <Stamps />
+        )
+      ) : null}
     </View>
   );
 }

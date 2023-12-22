@@ -34,7 +34,7 @@ export default function Header() {
         setTextInputValue(mainSearch.mainSearchValue);
       }
       setMainSearch(prev => ({ ...prev, isTyping: true }));
-      setMainScreenToggles(prev => ({ ...prev, toggleRestaurantSearch: true }));
+      setMainScreenToggles({ toggleRestaurantSearch: true, toggleOptions: false, toggleRestaurantList: false });
     }
   };
 
@@ -52,7 +52,7 @@ export default function Header() {
       {!toggleRestaurantSearch && (
         <>
           <View style={styles.logo}>
-            <Ionicons style={styles.ionicons} name='restaurant' size={35} color={Colors.mainWhite3} />
+            <Ionicons style={styles.ionicons} name="restaurant" size={35} color={Colors.mainWhite3} />
           </View>
           {mainSearch.mainSearchValue && (
             <View style={styles.mainSearchWrap}>
@@ -70,7 +70,12 @@ export default function Header() {
       )}
       <View style={toggleRestaurantSearch ? styles.onSearch : styles.offSearch}>
         <Button onPress={toggleRestaurantSearchHandler} style={styles.searchIcon}>
-          <Ionicons style={styles.ionicons} name={toggleRestaurantSearch ? 'chevron-back' : 'search'} size={30} color={Colors.mainWhite3} />
+          <Ionicons
+            style={styles.ionicons}
+            name={toggleRestaurantSearch ? 'chevron-back' : 'search'}
+            size={30}
+            color={Colors.mainWhite3}
+          />
         </Button>
         {toggleRestaurantSearch && (
           <>

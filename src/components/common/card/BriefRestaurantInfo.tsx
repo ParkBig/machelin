@@ -1,9 +1,9 @@
 import Button from 'components/common/layout/Button';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import { GooglePlace } from 'types/data/restaureant';
 import imageTranslator from 'util/imageTranslator';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Size } from 'const/global-styles';
+import { GooglePlace } from 'types/types';
 
 interface Props {
   restaurant: GooglePlace;
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     right: 0,
     height: '100%',
-    width: 40,
+    width: 50,
   },
   nameText: {
     fontSize: Size.normalMiddle,

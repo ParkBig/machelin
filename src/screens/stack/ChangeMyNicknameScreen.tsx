@@ -6,7 +6,7 @@ import { modifyUserNicknameQuery } from 'query/user';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';
-import { StackScreenPropsAbout } from 'types/screen/screenType';
+import { StackScreenPropsAbout } from 'types/screenType';
 
 export default function ChangeMyNicknameScreen({ navigation }: StackScreenPropsAbout<'ChangeMyNicknameScreen'>) {
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });

@@ -3,7 +3,7 @@ import useUsersBookmarksQuery from 'query/hooks/users/useUsersBookmarksQuery';
 import { memo } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
-import { Bookmark } from 'types/store/myInfoType';
+import { Bookmark } from 'types/types';
 
 interface Props {
   bookmark: Bookmark;

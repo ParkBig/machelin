@@ -1,6 +1,6 @@
-import { usersBookmarksQuery } from 'query/bookmarks';
+import { axiosBookmarks } from 'query/bookmarks';
 import { useQuery } from 'react-query';
-import { Bookmark } from 'types/store/myInfoType';
+import { Bookmark } from 'types/types';
 
 interface Data {
   ok: boolean;
@@ -12,7 +12,19 @@ export default function useUsersBookmarksQuery(userId?: number) {
     data: bookmarks,
     refetch: reBookmarks,
     isLoading: bookmarksIsLoading,
-  } = useQuery<Data>(['usersBookmarks', userId], () => usersBookmarksQuery(userId));
+    isFetching: isReBookmarks,
+  } = useQuery<Data>(['usersBookmarks', userId], async () => {
+    if (!userId) {
+      return { ok: false, bookmarks: null };
+    }
 
-  return { bookmarks, reBookmarks, bookmarksIsLoading };
+    const { data } = await axiosBookmarks.get('/usersBookmarks', {
+      params: {
+        userId,
+      },
+    });
+    return data;
+  });
+
+  return { bookmarks, reBookmarks, bookmarksIsLoading, isReBookmarks };
 }

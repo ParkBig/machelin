@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { takeToken } from 'util/tokenDB';
 
-const axiosComments = axios.create({
-  baseURL: `${process.env.DEV_SERVER_URL}/comments`,
+export const axiosComments = axios.create({
+  baseURL: `${process.env.EXPO_PROD_SERVER_URL}/comments`,
 });
 
 axiosComments.interceptors.request.use(async config => {

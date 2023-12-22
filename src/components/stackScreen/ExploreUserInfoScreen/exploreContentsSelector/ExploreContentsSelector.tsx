@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { Colors, Shadow } from 'const/global-styles';
 import { useRecoilState } from 'recoil';
-import { ClickedMyInfoListTypeState, clickedExploreUserInfoListTypeState } from 'store/userInfoState';
 import { Ionicons } from '@expo/vector-icons';
 import Button from 'components/common/layout/Button';
 import Line from 'components/common/layout/Line';
+import { ClickedMyInfoListTypeState, clickedExploreUserInfoListTypeState } from 'store/toggleState';
 
 export default function ExploreContentsSelector() {
   const [clickedType, setClickedType] = useRecoilState(clickedExploreUserInfoListTypeState);

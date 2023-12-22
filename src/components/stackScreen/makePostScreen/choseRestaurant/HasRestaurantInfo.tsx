@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { GooglePlace } from 'types/data/restaureant';
+import { GooglePlace } from 'types/types';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Size } from 'const/global-styles';
 

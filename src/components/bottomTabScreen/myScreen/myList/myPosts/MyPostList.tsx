@@ -3,30 +3,32 @@ import NoPost from './NoPost';
 import { Colors } from 'const/global-styles';
 import useUsersPostsQuery from 'query/hooks/users/useUsersPostsQuery';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
-import Post from 'components/common/post/Post';
+import Post from 'components/common/card/post/Post';
 import { FlatList } from 'react-native-gesture-handler';
 import AvailableAfterLogin from 'components/common/modal/AvailableAfterLogin';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
+import Line from 'components/common/layout/Line';
 
 export default function MyPostList() {
   const { myInfo } = useMyInfoQuery();
-  const { posts, postsIsLoading, rePosts } = useUsersPostsQuery(myInfo?.authUser?.id);
-  const postsExist = posts?.posts && posts.posts.length !== 0 ? true : false;
+  const { posts, postsIsLoading, rePosts, isFetchingNextPage } = useUsersPostsQuery(
+    myInfo?.authUser?.id
+  );
+  const postsExist = posts?.pages && posts.pages.length !== 0 ? true : false;
 
   return (
     <View style={styles.wrap}>
       {myInfo?.authUser ? (
-        postsIsLoading ? (
-          <LoadingOverlay style={styles.loadingOverlay} />
-        ) : postsExist ? (
+        postsExist ? (
           <FlatList
             scrollEnabled={false}
             style={styles.posts}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ gap: 20 }}
-            data={posts?.posts}
-            keyExtractor={item => `${item.id}`}
-            renderItem={({ item }) => <Post key={item.id} posts={item} rePosts={rePosts} isDetailScreen={false} />}
+            data={posts?.pages}
+            keyExtractor={(_, index) => String(index)}
+            renderItem={({ item }) => <Post posts={item} rePosts={rePosts} isDetailScreen={false} />}
+            ItemSeparatorComponent={() => <Line style={styles.line} />}
+            ListFooterComponent={() => <Line style={styles.line} />}
           />
         ) : (
           <NoPost />
@@ -34,6 +36,9 @@ export default function MyPostList() {
       ) : (
         <AvailableAfterLogin />
       )}
+
+      {postsIsLoading && <LoadingOverlay style={styles.loadingTop} />}
+      {isFetchingNextPage && <LoadingOverlay style={styles.loadingBottom} />}
     </View>
   );
 }
@@ -43,17 +48,31 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    borderTopWidth: 2,
-    borderTopColor: Colors.mainGreen1,
+    borderTopWidth: 3,
+    borderTopColor: Colors.mainGreen2,
   },
   posts: {
     width: '100%',
-    paddingVertical: 20,
   },
-  loadingOverlay: {
+  line: {
+    width: '100%',
+    height: 30,
+    backgroundColor: Colors.lightGrayOpacity1,
+  },
+  loadingTop: {
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
+    paddingTop: 30,
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    position: 'absolute',
+  },
+  loadingBottom: {
+    width: '100%',
+    height: '100%',
+    paddingBottom: 30,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    position: 'absolute',
   },
 });

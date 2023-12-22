@@ -3,7 +3,7 @@ import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { memo } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
-import { IPost } from 'types/store/myInfoType';
+import { IPost } from 'types/types';
 
 interface Props {
   post: IPost;

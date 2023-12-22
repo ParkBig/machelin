@@ -6,7 +6,7 @@ import { restaurantsTextSearchQuery } from 'query/restaurants';
 import { useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';
-import { GooglePlace } from 'types/data/restaureant';
+import { GooglePlace } from 'types/types';
 
 export default function FindRestaurantInfoForMakePostScreen() {
   const [textInputValue, setTextInputValue] = useState('');
@@ -77,8 +77,7 @@ const styles = StyleSheet.create({
   textInput: {
     width: '100%',
     height: 60,
-    borderWidth: 1,
-    borderRadius: 10,
+    borderBottomWidth: 2,
     paddingHorizontal: 10,
     borderColor: Colors.mainGreen2,
   },

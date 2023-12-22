@@ -1,6 +1,6 @@
-import { usersPostLikesDislikesQuery } from 'query/posts';
+import { axiosPosts } from 'query/posts';
 import { useQuery } from 'react-query';
-import { Like } from 'types/store/myInfoType';
+import { Like } from 'types/types';
 
 interface Data {
   ok: boolean;
@@ -10,8 +10,21 @@ interface Data {
 }
 
 export default function useUsersPostLikesDislikesQuery(userId?: number) {
-  const { data: usersPostLikesDislikes, refetch: reUsersPostLikesDislikes } = useQuery<Data>(['usersPostLikesDislikes', userId], () =>
-    usersPostLikesDislikesQuery(userId)
+  const { data: usersPostLikesDislikes, refetch: reUsersPostLikesDislikes } = useQuery<Data>(
+    ['usersPostLikesDislikes', userId],
+    async () => {
+      if (!userId) {
+        return { ok: true, usersLikes: [], usersDislikes: [] };
+      }
+
+      const { data } = await axiosPosts.get('/usersPostLikesDislikes', {
+        params: {
+          userId,
+        },
+      });
+
+      return data;
+    }
   );
 
   return { usersPostLikesDislikes, reUsersPostLikesDislikes };

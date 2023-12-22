@@ -2,7 +2,7 @@ import { useRoute } from '@react-navigation/native';
 import { Colors } from 'const/global-styles';
 import useExploreUserQuery from 'query/hooks/exploreUsers/useExploreUserQuery';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import { UseRouter } from 'types/screen/screenType';
+import { UseRouter } from 'types/screenType';
 
 export default function BriefExploreUsersInfo() {
   const { params } = useRoute<UseRouter<'ExploreUserInfoScreen'>>();

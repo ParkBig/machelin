@@ -1,6 +1,6 @@
-import { postsCommentsQuery } from 'query/comments';
+import { axiosComments } from 'query/comments';
 import { useQuery } from 'react-query';
-import { Comment } from 'types/store/myInfoType';
+import { Comment } from 'types/types';
 
 interface Data {
   ok: boolean;
@@ -12,7 +12,14 @@ export default function usePostsCommentsQuery(postId: number) {
     data: comments,
     refetch: reComments,
     isLoading: commentsIsLoading,
-  } = useQuery<Data>(['postComments', postId], () => postsCommentsQuery(postId));
+  } = useQuery<Data>(['postComments', postId], async () => {
+    const { data } = await axiosComments.get('/postsComments', {
+      params: {
+        postId,
+      },
+    });
+    return data;
+  });
 
   return { comments, reComments, commentsIsLoading };
 }

@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import MyBookmarks from './myBookmarks/MyBookmarks';
 import MyPosts from './myPosts/MyPosts';
 import Social from './social/Social';
-import { clickedMyInfoListTypeState } from 'store/userInfoState';
+import { clickedMyInfoListTypeState } from 'store/toggleState';
 
 export default function MyList() {
   const clickedType = useRecoilValue(clickedMyInfoListTypeState);
