@@ -11,10 +11,6 @@
       "distribution": "internal",
       "android": {
         "buildType": "apk"
-      },
-      "env": {
-        "EXPO_GOOGLE_KEY": "AIzaSyAgb1saQXdlvRXGhu6mt8IRZyVmzEJBS88",
-        "EXPO_PROD_SERVER_URL": "https://web-production-4df9.up.railway.app"
       }
     },
     "production": {}

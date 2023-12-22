@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { takeToken } from 'util/tokenDB';
+import Constants from 'expo-constants';
 
 export const axiosRestaurants = axios.create({
-  baseURL: `${process.env.EXPO_PROD_SERVER_URL}/restaurants`,
+  baseURL: `${Constants.manifest?.extra?.EXPO_PROD_SERVER_URL}/restaurants`,
 });
 
 axiosRestaurants.interceptors.request.use(async config => {
