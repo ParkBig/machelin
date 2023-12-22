@@ -1,8 +1,9 @@
 import { deleteToken, takeToken } from 'util/tokenDB';
 import axios from 'axios';
+import Constants from 'expo-constants';
 
 export const axiosUsers = axios.create({
-  baseURL: `${process.env.EXPO_PROD_SERVER_URL}/users`,
+  baseURL: `${Constants.manifest?.extra?.EXPO_PROD_SERVER_URL}/users`,
 });
 
 axiosUsers.interceptors.request.use(async config => {
