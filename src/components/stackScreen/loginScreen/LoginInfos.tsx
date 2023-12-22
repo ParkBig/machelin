@@ -8,8 +8,8 @@ import { loginQuery } from 'query/user';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';
-import { UseNavigation } from 'types/screen/screenType';
-import { storeToken, takeToken } from 'util/tokenDB';
+import { UseNavigation } from 'types/screenType';
+import { storeToken } from 'util/tokenDB';
 
 interface Infos {
   email: string;

@@ -1,4 +1,4 @@
-import { SearchName, SearchSubName } from 'data/administrativeDistrict';
+import { SearchName, SearchSubName } from 'const/administrativeDistrict';
 import { atom } from 'recoil';
 
 interface RegionalRestaurantSearchInputState {

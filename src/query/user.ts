@@ -1,6 +1,17 @@
-import { UserInfo } from 'types/store/myInfoType';
 import { deleteToken, takeToken } from 'util/tokenDB';
 import axios from 'axios';
+
+export const axiosUsers = axios.create({
+  baseURL: `${process.env.EXPO_PROD_SERVER_URL}/users`,
+});
+
+axiosUsers.interceptors.request.use(async config => {
+  const token = await takeToken();
+  if (token) {
+    config.headers['token'] = token;
+  }
+  return config;
+});
 
 interface LoginInput {
   email: string;
@@ -37,18 +48,6 @@ interface CheckSignUpVerificationInput {
   phoneNumber: string;
   verificationCode: string;
 }
-
-const axiosUsers = axios.create({
-  baseURL: `${process.env.DEV_SERVER_URL}/users`,
-});
-
-axiosUsers.interceptors.request.use(async config => {
-  const token = await takeToken();
-  if (token) {
-    config.headers['token'] = token;
-  }
-  return config;
-});
 
 // get~
 export const myInfoQuery = async () => {
@@ -132,20 +131,20 @@ export const sendSignUpVerificationQuery = async (phoneNumber: string) => {
   return data;
 };
 
-export const checkSignUpVerificationQuery =async (checkSignUpVerificationInput: CheckSignUpVerificationInput) => {
+export const checkSignUpVerificationQuery = async (checkSignUpVerificationInput: CheckSignUpVerificationInput) => {
   const { data } = await axiosUsers.post('/checkSignUpVerification', checkSignUpVerificationInput);
   return data;
-}
+};
 
-export const sendFindMyIdVerificationQuery =async (phoneNumber: string) => {
+export const sendFindMyIdVerificationQuery = async (phoneNumber: string) => {
   const { data } = await axiosUsers.post('/sendFindMyIdVerification', { phoneNumber });
   return data;
-}
+};
 
-export const checkFindMyIdVerificationQuery =async (checkFindMyIdVerificationInput: CheckSignUpVerificationInput) => {
+export const checkFindMyIdVerificationQuery = async (checkFindMyIdVerificationInput: CheckSignUpVerificationInput) => {
   const { data } = await axiosUsers.post('/checkFindMyIdVerification', checkFindMyIdVerificationInput);
   return data;
-}
+};
 
 export const modifyUserImageQuery = async (modifyUserImageInput: FormData) => {
   const { data } = await axiosUsers.post('/modifyUserImage', modifyUserImageInput, {

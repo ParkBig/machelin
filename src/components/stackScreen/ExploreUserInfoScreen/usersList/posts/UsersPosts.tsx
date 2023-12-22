@@ -14,7 +14,6 @@ export default function UsersPosts() {
 const styles = StyleSheet.create({
   wrap: {
     width: '100%',
-    paddingHorizontal: 15,
   },
   content: {
     justifyContent: 'center',

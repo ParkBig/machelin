@@ -1,13 +1,13 @@
 import Button from 'components/common/layout/Button';
 import { Image, LayoutAnimation, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { UserInfo } from 'types/store/myInfoType';
 import { Colors, Size } from 'const/global-styles';
 import { useState } from 'react';
 import Line from 'components/common/layout/Line';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 import ToggleFollow from 'components/stackScreen/ExploreUserInfoScreen/exploreUsersInfo/ToggleFollow';
+import { UserInfo } from 'types/types';
 
 interface Props {
   userInfo: UserInfo;
@@ -56,22 +56,22 @@ export default function BriefUserInfo({ userInfo }: Props) {
         <View style={styles.moreInfos}>
           <View style={styles.upperMoreInfo}>
             <View style={styles.moreInfo}>
-              <Ionicons name="bookmarks" size={25} color={Colors.mainBlue1} />
+              <Ionicons name="bookmarks" size={25} color={Colors.mainGreen1} />
               <Text>{bookmarks}</Text>
             </View>
             <Line style={styles.line} />
             <View style={styles.moreInfo}>
-              <Ionicons name="reader" size={25} color={Colors.mainBlue1} />
+              <Ionicons name="reader" size={25} color={Colors.mainGreen1} />
               <Text>{posts}</Text>
             </View>
             <Line style={styles.line} />
             <View style={styles.moreInfo}>
-              <Ionicons name="people" size={25} color={Colors.mainBlue1} />
+              <Ionicons name="people" size={25} color={Colors.mainGreen1} />
               <Text>{followers}</Text>
             </View>
             <Line style={styles.line} />
             <Button style={styles.button} onPress={exploreUserInfoHandler}>
-              <Ionicons name="chevron-forward" size={25} color={Colors.mainBlue1} />
+              <Ionicons name="chevron-forward" size={25} color={Colors.mainGreen1} />
             </Button>
           </View>
         </View>
@@ -156,6 +156,6 @@ const styles = StyleSheet.create({
   line: {
     height: '60%',
     width: 2,
-    backgroundColor: Colors.mainBlue1,
+    backgroundColor: Colors.mainGreen1,
   },
 });

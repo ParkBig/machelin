@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet } from 'react-native';
-import { StackScreenPropsAbout } from 'types/screen/screenType';
+import { StackScreenPropsAbout } from 'types/screenType';
 import RestaurantInfos from 'components/stackScreen/restaurantDetailScreen/RestaurantInfos';
 import RestaurantGrade from 'components/stackScreen/restaurantDetailScreen/RestaurantGrade';
 import RestaurantImg from 'components/stackScreen/restaurantDetailScreen/RestaurantImg';
@@ -32,7 +32,7 @@ export default function RestaurantDetailScreen({ route }: StackScreenPropsAbout<
         <RestaurantGrade />
         <Line style={styles.innerLine} />
         <RestaurantInfos />
-        <Line style={styles.line} />
+        {/* <Line style={styles.innerLine} /> */}
         <RestaurantReviews />
       </ScrollView>
       {restaurantDetailIsLoading && <LoadingOverlay style={styles.loadingOverlay} />}

@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import Button from 'components/common/layout/Button';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View } from 'react-native';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 import { Colors, Size } from 'const/global-styles';
 
 export default function GotoLoginSignUp() {

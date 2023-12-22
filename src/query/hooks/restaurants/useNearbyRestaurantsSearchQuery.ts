@@ -1,10 +1,10 @@
-import { nearbyRestaurantsSearchQuery } from 'query/restaurants';
+import { axiosRestaurants } from 'query/restaurants';
 import { useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { myLocationState, searchRadiusState } from 'store/locationState';
 import { mainSearchState } from 'store/searchState';
-import { GooglePlace } from 'types/data/restaureant';
+import { GooglePlace } from 'types/types';
 
 interface Data {
   ok: boolean;
@@ -29,7 +29,19 @@ export default function useNearbyRestaurantsSearchQuery() {
     isFetchingNextPage,
   } = useInfiniteQuery<Data, unknown, GooglePlace>(
     ['nearbyRestaurantsSearch', latitude, longitude, searchRadius, keyword],
-    ({ pageParam = null }) => nearbyRestaurantsSearchQuery(latitude, longitude, searchRadius, keyword, pageParam),
+    async ({ pageParam = null }) => {
+      const { data } = await axiosRestaurants.get('/nearbyRestaurantsSearch', {
+        params: {
+          lat: latitude,
+          lng: longitude,
+          radius: searchRadius,
+          keyword,
+          nextPageParams: pageParam ? pageParam : null,
+        },
+      });
+
+      return data;
+    },
     {
       enabled: isGetLocation && !mainSearch.isTyping ? true : false,
       select: data => ({ pages: data.pages.flatMap(page => page.restaurants), pageParams: data.pageParams }),
@@ -43,7 +55,7 @@ export default function useNearbyRestaurantsSearchQuery() {
     if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }
+  };
 
   useEffect(() => {
     reRestaurants();
@@ -51,27 +63,3 @@ export default function useNearbyRestaurantsSearchQuery() {
 
   return { restaurants, restaurantsIsLoading, reRestaurants, fetchNextPageRestaurants, isFetchingNextPage };
 }
-
-// export default function useNearbyRestaurantsQuery() {
-//   const mainSearch = useRecoilValue(mainSearchState);
-//   const searchRadius = useRecoilValue(searchRadiusState);
-//   const { isGetLocation, latitude, longitude } = useRecoilValue(myLocationState);
-
-//   const keyword = mainSearch.mainSearchValue ? mainSearch.mainSearchValue : '식당';
-
-//   const {
-//     isLoading,
-//     isError,
-//     data: restaurants,
-//     isSuccess,
-//     refetch: reRestaurants,
-//   } = useQuery<Data>(['nearbyRestaurants', latitude, longitude, searchRadius, keyword], () => restaurantsQuery(latitude, longitude, searchRadius, keyword), {
-//     enabled: isGetLocation && !mainSearch.isTyping ? true : false,
-//   });
-
-//   useEffect(() => {
-//     reRestaurants();
-//   }, [mainSearch.mainSearchValue, searchRadius]);
-
-//   return { isLoading, isError, restaurants, isSuccess, reRestaurants };
-// }

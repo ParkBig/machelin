@@ -1,6 +1,6 @@
 import { useRoute } from '@react-navigation/native';
 import { StyleSheet, View } from 'react-native';
-import { UseRouter } from 'types/screen/screenType';
+import { UseRouter } from 'types/screenType';
 import HasRestaurantInfo from './HasRestaurantInfo';
 import NoRestaurantInfo from './NoRestaurantInfo';
 import { Colors } from 'const/global-styles';

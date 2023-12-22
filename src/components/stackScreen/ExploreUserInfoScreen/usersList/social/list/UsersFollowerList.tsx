@@ -5,18 +5,16 @@ import NoSocial from 'components/bottomTabScreen/myScreen/myList/social/list/NoS
 import useExploreUsersFollowersQuery from 'query/hooks/exploreUsers/useExploreUsersFollowersQuery';
 import { StyleSheet, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { UseRouter } from 'types/screen/screenType';
+import { UseRouter } from 'types/screenType';
 
 export default function UsersFollowerList() {
   const { params } = useRoute<UseRouter<'ExploreUserInfoScreen'>>();
-  const { followers, followersIsLoading } = useExploreUsersFollowersQuery(params.userId);
+  const { followers, followersIsLoading, isReFollowers } = useExploreUsersFollowersQuery(params.userId);
   const followersExist = followers?.followers && followers.followers.length !== 0 ? true : false;
 
   return (
     <View>
-      {followersIsLoading ? (
-        <LoadingOverlay style={styles.loadingOverlay} />
-      ) : followersExist ? (
+      {followersExist ? (
         <FlatList
           scrollEnabled={false}
           showsVerticalScrollIndicator={false}
@@ -28,6 +26,7 @@ export default function UsersFollowerList() {
       ) : (
         <NoSocial type="follower" />
       )}
+      {(followersIsLoading || isReFollowers) && <LoadingOverlay style={styles.loadingOverlay} />}
     </View>
   );
 }
@@ -36,7 +35,9 @@ const styles = StyleSheet.create({
   loadingOverlay: {
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
+    paddingTop: 30,
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    position: 'absolute',
   },
 })

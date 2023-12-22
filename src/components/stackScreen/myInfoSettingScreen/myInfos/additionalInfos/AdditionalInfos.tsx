@@ -4,7 +4,6 @@ import { StyleSheet, View } from 'react-native';
 import ActivityZone from './ActivityZone';
 import PreferFoods from './PreferFoods';
 import PreferRestaurant from './PreferRestaurant';
-import MedalsEarned from './MedalsEarned';
 
 export default function AdditionalInfos() {
   return (
@@ -14,8 +13,8 @@ export default function AdditionalInfos() {
       <PreferFoods />
       <Line style={styles.line} />
       <PreferRestaurant />
-      <Line style={styles.line} />
-      <MedalsEarned />
+      {/* <Line style={styles.line} />
+      <MedalsEarned /> */}
     </View>
   );
 }

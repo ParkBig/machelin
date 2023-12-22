@@ -5,9 +5,7 @@ import { Colors, Size } from 'const/global-styles';
 export default function NoPost() {
   return (
     <View style={styles.wrap}>
-      <View>
-        <Ionicons name='reader-outline' size={100} color={Colors.gray} />
-      </View>
+      <Ionicons name='reader-outline' size={100} color={Colors.gray} />
       <Text style={styles.text}>게시글/리뷰를 남겨볼까요?</Text>
     </View>
   );

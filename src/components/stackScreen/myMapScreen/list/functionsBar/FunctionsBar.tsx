@@ -7,6 +7,7 @@ import useUsersPostForMyMapQuery from 'query/hooks/posts/useUsersPostForMyMapQue
 import useUsersBookmarksQuery from 'query/hooks/users/useUsersBookmarksQuery';
 import ToMyLocation from 'components/bottomTabScreen/mainScreen/restaurants/functionsBar/functionButtons/ToMyLocation';
 import { WhichOneClickedState } from '../List';
+import useUsersStampsQuery from 'query/hooks/users/useUsersStampsQuery';
 
 interface Props {
   whichOneClicked: WhichOneClickedState;
@@ -15,9 +16,11 @@ interface Props {
 
 export default function FunctionsBar({ whichOneClicked, setWhichOneClicked }: Props) {
   const { myInfo } = useMyInfoQuery();
+  const { stamps } = useUsersStampsQuery();
   const { posts } = useUsersPostForMyMapQuery(myInfo?.authUser?.id);
   const { bookmarks } = useUsersBookmarksQuery(myInfo?.authUser?.id);
 
+  const stampsLength = stamps?.stamps.length ? stamps.stamps.length : 0;
   const bookmarksLength = bookmarks?.bookmarks?.length ? bookmarks?.bookmarks?.length : 0;
   const postsLength = posts?.posts?.length ? posts?.posts.length : 0;
 
@@ -36,6 +39,15 @@ export default function FunctionsBar({ whichOneClicked, setWhichOneClicked }: Pr
   return (
     <View style={styles.wrap}>
       <View style={{ flexDirection: 'row', gap: 10 }}>
+        <Button style={styles.button} onPress={changeWhichOneClickedStateHandler.bind(null, 'stamps')}>
+          <Ionicons
+            style={styles.ionicons}
+            name={whichOneClicked === 'stamps' ? 'paw' : 'paw-outline'}
+            size={25}
+            color={Colors.mainWhite3}
+          />
+          {myInfo?.authUser && <Text style={styles.text}>{stampsLength}</Text>}
+        </Button>
         <Button style={styles.button} onPress={changeWhichOneClickedStateHandler.bind(null, 'bookmarks')}>
           <Ionicons
             style={styles.ionicons}
@@ -43,7 +55,7 @@ export default function FunctionsBar({ whichOneClicked, setWhichOneClicked }: Pr
             size={25}
             color={Colors.mainWhite3}
           />
-          <Text style={styles.text}>{bookmarksLength}</Text>
+          {myInfo?.authUser && <Text style={styles.text}>{bookmarksLength}</Text>}
         </Button>
         <Button style={styles.button} onPress={changeWhichOneClickedStateHandler.bind(null, 'posts')}>
           <Ionicons
@@ -52,7 +64,7 @@ export default function FunctionsBar({ whichOneClicked, setWhichOneClicked }: Pr
             size={25}
             color={Colors.mainWhite3}
           />
-          <Text style={styles.text}>{postsLength}</Text>
+          {myInfo?.authUser && <Text style={styles.text}>{postsLength}</Text>}
         </Button>
       </View>
       <ToMyLocation />

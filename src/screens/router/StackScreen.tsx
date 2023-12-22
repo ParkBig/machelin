@@ -1,6 +1,6 @@
-import { RootStack } from 'types/screen/screenType';
-import BottomTabScreen from './BottomTabScreen';
+import { RootStack } from 'types/screenType';
 import { Colors } from 'const/global-styles';
+import BottomTabScreen from './BottomTabScreen';
 import MakePostScreen from 'screens/stack/MakePostScreen';
 import MyMapScreen from 'screens/stack/MyMapScreen';
 import RestaurantDetailScreen from 'screens/stack/RestaurantDetailScreen';
@@ -18,6 +18,9 @@ import ToggleBookmark from 'components/stackScreen/restaurantDetailScreen/Toggle
 import FindMyIdScreen from 'screens/stack/FindMyIdScreen';
 import FindRestaurantInfoForMakePostScreen from 'screens/stack/FindRestaurantInfoForMakePostScreen';
 import RegionalSearchMapScreen from 'screens/stack/RegionalSearchMapScreen';
+import MakePostButton from 'components/stackScreen/makePostScreen/makePostButton/MakePostButton';
+import StampButton from 'components/stackScreen/myMapScreen/StampButton';
+import MakeStampScreen from 'screens/stack/MakeStampScreen';
 
 export default function StackScreen() {
   return (
@@ -34,10 +37,11 @@ export default function StackScreen() {
       <RootStack.Screen
         name="MakePostScreen"
         component={MakePostScreen}
-        options={{
+        options={({ route }) => ({
           title: '기록하기',
           headerTitleAlign: 'left',
-        }}
+          headerRight: () => <MakePostButton restaurantInfo={route.params.restaurantInfo} />,
+        })}
       />
       <RootStack.Screen
         name="FindRestaurantInfoForMakePostScreen"
@@ -50,7 +54,9 @@ export default function StackScreen() {
         name="MyMapScreen"
         component={MyMapScreen}
         options={{
+          headerTitleAlign: 'left',
           title: '나의 지도',
+          headerRight: () => <StampButton />,
         }}
       />
       <RootStack.Screen
@@ -131,7 +137,15 @@ export default function StackScreen() {
         name="RegionalSearchMapScreen"
         component={RegionalSearchMapScreen}
         options={{
-          title: '마슐 랭크 맵',
+          title: '검색 결과',
+        }}
+      />
+      <RootStack.Screen
+        name="MakeStampScreen"
+        component={MakeStampScreen}
+        options={{
+          title: '도장찍기',
+          headerTitleAlign: 'left',
         }}
       />
     </RootStack.Navigator>

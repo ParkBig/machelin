@@ -15,8 +15,8 @@ export default function AvailableAfterLogin() {
 
 const styles = StyleSheet.create({
   wrap: {
+    height: 350,
     width: '100%',
-    height: 300,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 20,

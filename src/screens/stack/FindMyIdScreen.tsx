@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { useMutation } from 'react-query';
-import { UseNavigation } from 'types/screen/screenType';
+import { UseNavigation } from 'types/screenType';
 import { storeToken } from 'util/tokenDB';
 
 export default function FindMyIdScreen() {

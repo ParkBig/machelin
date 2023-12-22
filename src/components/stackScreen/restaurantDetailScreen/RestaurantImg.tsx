@@ -1,9 +1,9 @@
 import { ScreenWidth } from 'const/dimenstions';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import Swiper from 'react-native-swiper';
 import useRestaurantDetailQuery from 'query/hooks/restaurants/useRestaurantDetailQuery';
 import { useRoute } from '@react-navigation/native';
-import { UseRouter } from 'types/screen/screenType';
+import { UseRouter } from 'types/screenType';
 import imageTranslator from 'util/imageTranslator';
 
 export default function RestaurantImg() {

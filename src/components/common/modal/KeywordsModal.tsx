@@ -1,9 +1,9 @@
 import Button from 'components/common/layout/Button';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Size } from 'const/global-styles';
-import { searchKeyword } from 'data/searchKeyword';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import Modal from 'react-native-modal';
+import { searchKeyword } from 'const/searchKeyword';
 
 interface Props {
   toggleModal: boolean;

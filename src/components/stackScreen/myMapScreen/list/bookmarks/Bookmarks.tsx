@@ -13,20 +13,26 @@ export default function Bookmarks() {
 
   return (
     <View style={styles.wrap}>
-      {bookmarksIsLoading ? (
-        <LoadingOverlay style={styles.loadingOverlay} />
-      ) : bookmarksIsExist ? (
-        <FlatList
-          style={styles.flatList}
-          showsVerticalScrollIndicator={false}
-          data={bookmarks?.bookmarks}
-          keyExtractor={item => `${item.id}`}
-          ItemSeparatorComponent={() => <Line style={styles.line} />}
-          renderItem={({ item }) => <BriefBookmarkInfo bookmark={item} isSlide={true} />}
-        />
+      {myInfo?.authUser ? (
+        bookmarksIsLoading ? (
+          <LoadingOverlay style={styles.loadingOverlay} />
+        ) : bookmarksIsExist ? (
+          <FlatList
+            style={styles.flatList}
+            showsVerticalScrollIndicator={false}
+            data={bookmarks?.bookmarks}
+            keyExtractor={item => `${item.id}`}
+            ItemSeparatorComponent={() => <Line style={styles.line} />}
+            renderItem={({ item }) => <BriefBookmarkInfo bookmark={item} isSlide={true} />}
+          />
+        ) : (
+          <View style={styles.none}>
+            <Text>북마크한 곳이 없어요</Text>
+          </View>
+        )
       ) : (
         <View style={styles.none}>
-          <Text>북마크한 곳이 없어요</Text>
+          <Text>로그인 후 기록해 보아요</Text>
         </View>
       )}
     </View>

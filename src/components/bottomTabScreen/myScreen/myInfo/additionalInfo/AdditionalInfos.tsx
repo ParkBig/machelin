@@ -49,7 +49,8 @@ export default function AdditionalInfos() {
           )}
         </View>
       </View>
-      <View style={styles.info}>
+      {/* will update */}
+      {/* <View style={styles.info}>
         <View style={styles.title}>
           <Text style={styles.text}>획득메달</Text>
           <Line style={styles.line} />
@@ -61,7 +62,7 @@ export default function AdditionalInfos() {
             myInfo.authUser.medalsEarned.map((medalEarned, i) => <Text key={medalEarned + i}>{medalEarned}</Text>)
           )}
         </View>
-      </View>
+      </View> */}
     </View>
   );
 }

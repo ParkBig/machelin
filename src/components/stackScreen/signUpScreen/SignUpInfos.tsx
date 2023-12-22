@@ -6,7 +6,7 @@ import { signUpQuery } from 'query/user';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';
-import { UseNavigation, UseRouter } from 'types/screen/screenType';
+import { UseNavigation, UseRouter } from 'types/screenType';
 
 interface Infos {
   email: string;

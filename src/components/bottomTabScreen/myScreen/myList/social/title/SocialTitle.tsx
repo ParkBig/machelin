@@ -4,6 +4,7 @@ import { LayoutAnimation, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Title from './Title';
 import Search from './Search';
+import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 
 interface Props {
   isFollow: boolean;
@@ -13,7 +14,13 @@ interface Props {
 }
 
 export default function SocialTitle({ isFollow, setIsFollow, toggleSearch, setToggleSearch }: Props) {
+  const { myInfo } = useMyInfoQuery();
+
   const toggleSearchHandler = () => {
+    if (!myInfo?.authUser) {
+      return;
+    }
+
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setToggleSearch(prev => !prev);
   };
