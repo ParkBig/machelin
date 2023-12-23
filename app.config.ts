@@ -4,7 +4,7 @@ import { config } from 'dotenv';
 config();
 
 const expoConfig: ExpoConfig = {
-  name: 'machelin',
+  name: '마슐랭',
   slug: 'machelin',
   version: '1.0.0',
   orientation: 'portrait',
