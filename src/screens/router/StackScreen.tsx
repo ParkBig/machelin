@@ -16,11 +16,14 @@ import ChangeMyPreferRestaurantScreen from 'screens/stack/ChangeMyPreferRestaura
 import ToggleFollow from 'components/stackScreen/ExploreUserInfoScreen/exploreUsersInfo/ToggleFollow';
 import ToggleBookmark from 'components/stackScreen/restaurantDetailScreen/ToggleBookmark';
 import FindMyIdScreen from 'screens/stack/FindMyIdScreen';
-import FindRestaurantInfoForMakePostScreen from 'screens/stack/FindRestaurantInfoForMakePostScreen';
 import RegionalSearchMapScreen from 'screens/stack/RegionalSearchMapScreen';
 import MakePostButton from 'components/stackScreen/makePostScreen/makePostButton/MakePostButton';
 import StampButton from 'components/stackScreen/myMapScreen/StampButton';
 import MakeStampScreen from 'screens/stack/MakeStampScreen';
+import FindRestaurantInfoScreen from 'screens/stack/FindRestaurantInfoScreen';
+import MakeStampButton from 'components/stackScreen/makeStampScreen/MakeStampButton';
+import StampDetailScreen from 'screens/stack/StampDetailScreen';
+import DeleteStampButton from 'components/stackScreen/stampDetailScreen/DeleteStampButton';
 
 export default function StackScreen() {
   return (
@@ -44,8 +47,8 @@ export default function StackScreen() {
         })}
       />
       <RootStack.Screen
-        name="FindRestaurantInfoForMakePostScreen"
-        component={FindRestaurantInfoForMakePostScreen}
+        name="FindRestaurantInfoScreen"
+        component={FindRestaurantInfoScreen}
         options={{
           title: '식당태그하기',
         }}
@@ -146,6 +149,16 @@ export default function StackScreen() {
         options={{
           title: '도장찍기',
           headerTitleAlign: 'left',
+          headerRight: () => <MakeStampButton />,
+        }}
+      />
+      <RootStack.Screen
+        name="StampDetailScreen"
+        component={StampDetailScreen}
+        options={{
+          title: '나의 도장',
+          headerTitleAlign: 'left',
+          headerRight: () => <DeleteStampButton />,
         }}
       />
     </RootStack.Navigator>

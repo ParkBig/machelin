@@ -174,11 +174,11 @@ export interface IPost {
 export interface IStamp {
   id: number;
   createdAt: Date;
+  title: string;
+  content: string;
   lat: number;
   lng: number;
-  restaurantId: string;
-  restaurantName: string;
-  address: string;
-  rating: number;
-  totalRatings: number;
+  restaurantId: string | null;
+  restaurantName: string | null;
+  address: string | null;
 }

@@ -1,0 +1,21 @@
+import TaggedRestaurantInfo from 'components/stackScreen/stampDetailScreen/TaggedRestaurantInfo';
+import TitleNContent from 'components/stackScreen/stampDetailScreen/TitleNContent';
+import { Colors } from 'const/global-styles';
+import { ScrollView, StyleSheet } from 'react-native';
+
+export default function StampDetailScreen() {
+  return (
+    <ScrollView style={styles.wrap} showsVerticalScrollIndicator={false}>
+      <TitleNContent />
+      <TaggedRestaurantInfo />
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  wrap: {
+    flex: 1,
+    backgroundColor: Colors.mainWhite1,
+    paddingHorizontal: 15,
+  },
+});

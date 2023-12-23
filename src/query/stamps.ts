@@ -14,14 +14,14 @@ axiosStamps.interceptors.request.use(async config => {
   return config;
 });
 
-interface MakeStampInput {
-  restaurantId: string;
+export interface MakeStampInput {
+  title: string;
+  content: string;
   lat: number;
   lng: number;
-  restaurantName: string;
-  address: string;
-  rating: number;
-  totalRatings: number;
+  restaurantId: string | null;
+  restaurantName: string | null;
+  address: string | null;
 }
 
 export const usersStampQuery = async () => {

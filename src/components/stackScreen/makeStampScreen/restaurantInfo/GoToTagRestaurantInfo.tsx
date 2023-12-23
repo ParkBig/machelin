@@ -1,21 +1,21 @@
 import Button from 'components/common/layout/Button';
+import { Colors, Size } from 'const/global-styles';
 import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors, Size } from 'const/global-styles';
 import { useNavigation } from '@react-navigation/native';
 import { UseNavigation } from 'types/screenType';
 
-export default function NoRestaurantInfo() {
-  const { navigate } = useNavigation<UseNavigation<'MakePostScreen'>>();
+export default function GoToTagRestaurantInfo() {
+  const { navigate } = useNavigation<UseNavigation<'MakeStampScreen'>>();
 
   const gotoTagRestaurantHandler = () => {
     navigate('FindRestaurantInfoScreen', {
-      forWhich: 'makePost'
+      forWhich: 'stamp',
     });
   };
 
   return (
-    <>
+    <View style={styles.wrap}>
       <View style={styles.textWrap}>
         <Text style={styles.titleText}>식당정보, </Text>
         <Text>태그 할까요?</Text>
@@ -24,11 +24,18 @@ export default function NoRestaurantInfo() {
         <Text style={styles.buttonText}>태그하기</Text>
         <Ionicons name="chevron-forward" size={25} color={Colors.darkGray} />
       </Button>
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  wrap: {
+    height: 100,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   textWrap: {
     flex: 1,
     alignItems: 'center',

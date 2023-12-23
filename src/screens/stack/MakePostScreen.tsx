@@ -19,7 +19,7 @@ export default function MakePostScreen({ route }: StackScreenPropsAbout<'MakePos
   }, []);
 
   return (
-    <ScrollView style={styles.wrap}>
+    <ScrollView style={styles.wrap} showsVerticalScrollIndicator={false}>
       <ChoseRestaurant />
       <WriterImg />
       <PostContents />
