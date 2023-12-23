@@ -49,6 +49,7 @@ export default function MyScreen() {
   return (
     <>
       <ScrollView
+        showsVerticalScrollIndicator={false}
         nestedScrollEnabled={false}
         style={styles.wrap}
         scrollEnabled={!myInfoIsLoading}

@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function BriefRestaurantInfoForTag({ restaurantInfo }: Props) {
-  const { navigate } = useNavigation<UseNavigation<'FindRestaurantInfoForMakePostScreen'>>();
+  const { navigate } = useNavigation<UseNavigation<'FindRestaurantInfoScreen'>>();
 
   const onPressHandler = () => {
     navigate('MakePostScreen', {

@@ -24,6 +24,7 @@ export default function RestaurantDetailScreen({ route }: StackScreenPropsAbout<
   return (
     <>
       <ScrollView
+        showsVerticalScrollIndicator={false}
         style={styles.wrap}
         scrollEnabled={!restaurantDetailIsLoading}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}

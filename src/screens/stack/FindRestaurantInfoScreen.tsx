@@ -7,8 +7,10 @@ import { useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';
 import { GooglePlace } from 'types/types';
+import { StackScreenPropsAbout } from 'types/screenType';
+import BriefRestaurantInfoForStamp from 'components/stackScreen/makeStampScreen/BriefRestaurantInfoForStamp';
 
-export default function FindRestaurantInfoForMakePostScreen() {
+export default function FindRestaurantInfoScreen({ route }: StackScreenPropsAbout<'FindRestaurantInfoScreen'>) {
   const [textInputValue, setTextInputValue] = useState('');
   const [searchResult, setSearchResult] = useState<GooglePlace[]>([]);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
@@ -46,12 +48,18 @@ export default function FindRestaurantInfoForMakePostScreen() {
         <Text style={styles.example}>ex) 맛있는식당 or 서울 맛있는식당</Text>
       </View>
       <FlatList
-        style={[styles.searchResult, searchResult.length !==0 && styles.hasResult]}
+        style={[styles.searchResult, searchResult.length !== 0 && styles.hasResult]}
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item.place_id}
         ItemSeparatorComponent={() => <Line style={styles.line} />}
         data={searchResult}
-        renderItem={({ item }) => <BriefRestaurantInfoForTag restaurantInfo={item} />}
+        renderItem={({ item }) =>
+          route.params.forWhich === 'makePost' ? (
+            <BriefRestaurantInfoForTag restaurantInfo={item} />
+          ) : (
+            <BriefRestaurantInfoForStamp restaurantInfo={item} />
+          )
+        }
       />
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}
@@ -86,11 +94,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   searchResult: {
-    flex: 1
+    flex: 1,
   },
   hasResult: {
     borderTopWidth: 1,
-    borderTopColor: Colors.superLightGray
+    borderTopColor: Colors.superLightGray,
   },
   line: {
     width: '100%',
