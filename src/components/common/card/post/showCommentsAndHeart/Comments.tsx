@@ -1,8 +1,8 @@
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 import { Colors } from 'const/global-styles';
-import getDateTrans from 'util/dateTranslator';
 import Line from 'components/common/layout/Line';
 import usePostsCommentsQuery from 'query/hooks/posts/usePostsCommentsQuery';
+import { getPreviousDate } from 'util/dateTranslator';
 
 interface Props {
   postId: number;
@@ -20,7 +20,7 @@ export default function Comments({ postId }: Props) {
           data={comments.comments}
           keyExtractor={item => `${item.id}`}
           renderItem={({ item }) => {
-            const timeAgo = getDateTrans(item.createdAt);
+            const timeAgo = getPreviousDate(item.createdAt);
 
             return (
               <View style={styles.wrap}>

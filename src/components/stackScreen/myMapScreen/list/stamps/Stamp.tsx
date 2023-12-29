@@ -7,6 +7,7 @@ import { UseNavigation } from 'types/screenType';
 import { useSetRecoilState } from 'recoil';
 import { focusedRestaurantState } from 'store/locationState';
 import { IStamp } from 'types/types';
+import { getCreatedDate } from 'util/dateTranslator';
 
 interface Props {
   stamp: IStamp;
@@ -31,15 +32,22 @@ export default function Stamp({ stamp }: Props) {
     });
   };
 
+  const createdDate = getCreatedDate(stamp.createdAt);
+
   return (
     <Button style={styles.wrap} onPress={onPressHandler}>
       <View style={styles.contents}>
-        <Text style={styles.titleText}>{stamp.title}</Text>
+        <Text style={styles.titleText} numberOfLines={1} ellipsizeMode="tail">
+          {stamp.title}
+        </Text>
         {stamp.content && (
-          <Text numberOfLines={2} ellipsizeMode="tail">
+          <Text numberOfLines={1} ellipsizeMode="tail">
             {stamp.content}
           </Text>
         )}
+        <View>
+          <Text style={styles.dateText}>{createdDate}</Text>
+        </View>
       </View>
       <Button style={styles.button} onPress={navigateHandler}>
         <Ionicons name="chevron-forward" size={30} color={Colors.darkGray} />
@@ -75,5 +83,9 @@ const styles = StyleSheet.create({
   titleText: {
     fontWeight: 'bold',
     fontSize: Size.normalMiddle,
+  },
+  dateText: {
+    fontSize: Size.normalSmall,
+    color: Colors.gray
   },
 });
