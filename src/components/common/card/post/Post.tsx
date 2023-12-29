@@ -6,10 +6,10 @@ import PostBriefRestaurantInfo from './postBriefRestaurantInfo/PostBriefRestaura
 import HashTags from './hashtags/HashTags';
 import { InfiniteData, QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
 import { PostQueryResponse } from 'query/posts';
-import { RestaurantPosts } from 'query/hooks/restaurants/useRestaurantPostsQuery';
 import Content from './content/Content';
 import { Colors } from 'const/global-styles';
 import { IPost } from 'types/types';
+import { RestaurantPosts } from 'query/hooks/restaurants/useRestaurantPostsQuery';
 
 interface Props {
   posts: IPost;

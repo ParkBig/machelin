@@ -17,7 +17,7 @@ export default function GoToTagRestaurantInfo() {
   return (
     <View style={styles.wrap}>
       <View style={styles.textWrap}>
-        <Text style={styles.titleText}>식당정보, </Text>
+        <Text style={styles.titleText}>장소, </Text>
         <Text>태그 할까요?</Text>
       </View>
       <Button style={styles.button} onPress={gotoTagRestaurantHandler}>
@@ -30,7 +30,7 @@ export default function GoToTagRestaurantInfo() {
 
 const styles = StyleSheet.create({
   wrap: {
-    height: 100,
+    paddingVertical: 20,
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'center',

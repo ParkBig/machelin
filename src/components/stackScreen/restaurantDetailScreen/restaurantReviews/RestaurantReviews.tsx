@@ -65,8 +65,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   reviewTitle: {
-    paddingHorizontal: 15,
-    paddingVertical: 5,
+    padding: 10,
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.mainWhite3,
     borderRadius: 10,
-    ...Shadow,
+    // ...Shadow,
   },
   titleText: {
     fontSize: Size.bigSmall,

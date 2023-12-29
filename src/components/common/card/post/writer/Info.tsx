@@ -1,6 +1,6 @@
 import Button from 'components/common/layout/Button';
 import { Size } from 'const/global-styles';
-import { Image, StyleSheet, Text } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 interface Props {
   pfp: string;
@@ -9,10 +9,14 @@ interface Props {
 
 export default function Info({ pfp, nickname }: Props) {
   return (
-    <Button style={styles.writerInfo}>
-      <Image style={styles.writerImage} source={pfp ? { uri: pfp } : require('assets/png/user.png')} />
-      <Text style={styles.writerText}>{nickname}</Text>
-    </Button>
+    <View style={styles.writerInfo}>
+      <Button>
+        <Image style={styles.writerImage} source={pfp ? { uri: pfp } : require('assets/png/user.png')} />
+      </Button>
+      <Button style={styles.writer}>
+        <Text style={styles.writerText}>{nickname}</Text>
+      </Button>
+    </View>
   );
 }
 
@@ -30,6 +34,11 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  writer: {
+    flex: 1,
+    alignItems: 'center',
+    flexWrap: 'wrap'
   },
   writerText: {
     fontSize: Size.normalBig,

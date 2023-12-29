@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.mainWhite1,
     paddingHorizontal: 15,
     paddingTop: 20,
-    gap: 20,
   },
   explain: {
     width: '100%',

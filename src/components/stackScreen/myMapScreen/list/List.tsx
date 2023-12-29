@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { BackHandler, LayoutAnimation, StyleSheet, View } from 'react-native';
 import Bookmarks from './bookmarks/Bookmarks';
 import PostsHasRestaurant from './postsHasRestaurant/PostsHasRestaurant';
 import FunctionsBar from './functionsBar/FunctionsBar';
@@ -9,6 +9,21 @@ export type WhichOneClickedState = 'bookmarks' | 'posts' | 'stamps' | null;
 
 export default function List() {
   const [whichOneClicked, setWhichOneClicked] = useState<WhichOneClickedState>(null);
+
+  useEffect(() => {
+    const backButtonHandler = () => {
+      if (whichOneClicked) {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+        setWhichOneClicked(null)
+        return true;
+      }
+    };
+
+    BackHandler.addEventListener('hardwareBackPress', backButtonHandler);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', backButtonHandler);
+    };
+  }, [whichOneClicked, setWhichOneClicked]);
 
   return (
     <View style={styles.wrap}>

@@ -26,7 +26,7 @@ export default function PostContents() {
 const styles = StyleSheet.create({
   wrap: {
     width: '100%',
-    paddingVertical: 10,
+    paddingVertical: 20,
   },
   textInput: {
     width: '100%',

@@ -29,7 +29,7 @@ export default function StackScreen() {
   return (
     <RootStack.Navigator
       screenOptions={{
-        headerTitleAlign: 'center',
+        headerTitleAlign: 'left',
         headerTintColor: Colors.mainWhite3,
         headerStyle: {
           backgroundColor: Colors.mainGreen2,
@@ -42,7 +42,6 @@ export default function StackScreen() {
         component={MakePostScreen}
         options={({ route }) => ({
           title: '기록하기',
-          headerTitleAlign: 'left',
           headerRight: () => <MakePostButton restaurantInfo={route.params.restaurantInfo} />,
         })}
       />
@@ -57,7 +56,6 @@ export default function StackScreen() {
         name="MyMapScreen"
         component={MyMapScreen}
         options={{
-          headerTitleAlign: 'left',
           title: '나의 지도',
           headerRight: () => <StampButton />,
         }}
@@ -66,7 +64,7 @@ export default function StackScreen() {
         name="RestaurantDetailScreen"
         component={RestaurantDetailScreen}
         options={({ route }) => ({
-          title: route.params.restaurantName,
+          title: '상세보기',
           headerRight: () => <ToggleBookmark restaurantId={route.params.restaurantId} />,
         })}
       />
@@ -132,7 +130,6 @@ export default function StackScreen() {
         component={ExploreUserInfoScreen}
         options={({ route }) => ({
           title: '탐험중...',
-          headerTitleAlign: 'left',
           headerRight: () => <ToggleFollow exploreUserId={route.params.userId} />,
         })}
       />
@@ -148,7 +145,6 @@ export default function StackScreen() {
         component={MakeStampScreen}
         options={{
           title: '도장찍기',
-          headerTitleAlign: 'left',
           headerRight: () => <MakeStampButton />,
         }}
       />
@@ -157,7 +153,6 @@ export default function StackScreen() {
         component={StampDetailScreen}
         options={{
           title: '나의 도장',
-          headerTitleAlign: 'left',
           headerRight: () => <DeleteStampButton />,
         }}
       />
