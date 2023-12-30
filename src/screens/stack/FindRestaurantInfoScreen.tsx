@@ -31,7 +31,7 @@ export default function FindRestaurantInfoScreen({ route }: StackScreenPropsAbou
 
   const onEndEditingHandler = () => {
     if (textInputValue) {
-      mutate(textInputValue);
+      mutate({ keyword: textInputValue, isRegional: false });
     }
   };
 
