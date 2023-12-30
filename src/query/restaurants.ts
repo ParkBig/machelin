@@ -3,7 +3,7 @@ import { takeToken } from 'util/tokenDB';
 import Constants from 'expo-constants';
 
 export const axiosRestaurants = axios.create({
-  baseURL: `${Constants.manifest?.extra?.EXPO_DEV_SERVER_URL}/restaurants`,
+  baseURL: `${Constants.manifest?.extra?.EXPO_PROD_SERVER_URL}/restaurants`,
 });
 
 axiosRestaurants.interceptors.request.use(async config => {
@@ -14,6 +14,12 @@ axiosRestaurants.interceptors.request.use(async config => {
 
   return config;
 });
+
+interface RestaurantsTextSearchQueryInput {
+  keyword: string;
+  isRegional: boolean;
+  nextPageParams?: string;
+}
 
 export const nearbyRestaurantsSearchQuery = async (
   lat: number,
@@ -35,10 +41,11 @@ export const nearbyRestaurantsSearchQuery = async (
   return data;
 };
 
-export const restaurantsTextSearchQuery = async (keyword: string, nextPageParams?: string) => {
+export const restaurantsTextSearchQuery = async ({ keyword, isRegional, nextPageParams }: RestaurantsTextSearchQueryInput) => {
   const { data } = await axiosRestaurants.get('/restaurantsTextSearch', {
     params: {
       keyword,
+      isRegional,
       nextPageParams: nextPageParams ? nextPageParams : null,
     },
   });
