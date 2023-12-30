@@ -3,7 +3,7 @@ import { takeToken } from 'util/tokenDB';
 import Constants from 'expo-constants';
 
 export const axiosStamps = axios.create({
-  baseURL: `${Constants.manifest?.extra?.EXPO_PROD_SERVER_URL}/stamps`,
+  baseURL: `${Constants.manifest?.extra?.EXPO_DEV_SERVER_URL}/stamps`,
 });
 
 axiosStamps.interceptors.request.use(async config => {
@@ -14,23 +14,17 @@ axiosStamps.interceptors.request.use(async config => {
   return config;
 });
 
-export interface MakeStampInput {
-  title: string;
-  content: string;
-  lat: number;
-  lng: number;
-  restaurantId: string | null;
-  restaurantName: string | null;
-  address: string | null;
-}
-
 export const usersStampQuery = async () => {
   const { data } = await axiosStamps.get('/usersStamp');
   return data;
 };
 
-export const makeStampQuery = async (makeStampInput: MakeStampInput) => {
-  const { data } = await axiosStamps.post('/makeStamp', makeStampInput);
+export const makeStampQuery = async (makeStampInput: FormData) => {
+  const { data } = await axiosStamps.post('/makeStamp', makeStampInput, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return data;
 };
 

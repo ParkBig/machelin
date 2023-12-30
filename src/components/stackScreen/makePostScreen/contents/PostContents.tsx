@@ -1,4 +1,4 @@
-import { Size } from 'const/global-styles';
+import { Colors, Size } from 'const/global-styles';
 import { StyleSheet, TextInput, View } from 'react-native';
 import { useRecoilState } from 'recoil';
 import { makePostState } from 'store/makePostState';
@@ -27,6 +27,8 @@ const styles = StyleSheet.create({
   wrap: {
     width: '100%',
     paddingVertical: 20,
+    borderBottomColor: Colors.mainGreen1,
+    borderBottomWidth: 1.5,
   },
   textInput: {
     width: '100%',

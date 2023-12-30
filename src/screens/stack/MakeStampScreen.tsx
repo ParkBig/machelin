@@ -2,6 +2,7 @@ import { Colors } from 'const/global-styles';
 import { StyleSheet, Text, View } from 'react-native';
 import TitleNContent from 'components/stackScreen/makeStampScreen/TitleNContent';
 import RestaurantInfo from 'components/stackScreen/makeStampScreen/restaurantInfo/RestaurantInfo';
+import WriterImg from 'components/stackScreen/makeStampScreen/writerImg/WriterImg';
 
 export default function MakeStampScreen() {
   return (
@@ -11,6 +12,7 @@ export default function MakeStampScreen() {
         <Text style={styles.explainText}>그래서 직접 다녀왔다는 인증이 가능해요!</Text>
       </View>
       <TitleNContent />
+      <WriterImg />
       <RestaurantInfo />
     </View>
   );
@@ -25,6 +27,7 @@ const styles = StyleSheet.create({
   },
   explain: {
     width: '100%',
+    paddingBottom: 10,
     gap: 5,
   },
   explainText: {

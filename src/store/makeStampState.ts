@@ -3,6 +3,7 @@ import { atom } from 'recoil';
 export interface MakeStampState {
   title: string;
   content: string;
+  images: string[];
   restaurantInfo: {
     restaurantId: string;
     restaurantName: string;
@@ -15,6 +16,7 @@ export const makeStampState = atom<MakeStampState>({
   default: {
     title: '',
     content: '',
+    images: [],
     restaurantInfo: null,
   },
 });

@@ -23,7 +23,8 @@ export default function MakePostScreen({ route }: StackScreenPropsAbout<'MakePos
       <ChoseRestaurant />
       <WriterImg />
       <PostContents />
-      <Hashtag />
+      {/* will update */}
+      {/* <Hashtag /> */}
       {route.params.restaurantInfo && <StarScore />}
       <SelectPublic />
     </ScrollView>
