@@ -2,18 +2,18 @@ import { Image, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Button from 'components/common/layout/Button';
 import { useSetRecoilState } from 'recoil';
-import { makePostState } from 'store/makePostState';
 import { Colors } from 'const/global-styles';
+import { makeStampState } from 'store/makeStampState';
 
 interface Props {
   uri: string;
 }
 
 export default function PickedImage({ uri }: Props) {
-  const setMakePostInfo = useSetRecoilState(makePostState);
+  const setMakeStampValues = useSetRecoilState(makeStampState);
 
   const deleteImageHandler = () => {
-    setMakePostInfo(prev => ({ ...prev, images: prev.images.filter(image => image !== uri) }));
+    setMakeStampValues(prev => ({ ...prev, images: prev.images.filter(image => image !== uri) }));
   };
 
   return (

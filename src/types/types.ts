@@ -178,6 +178,7 @@ export interface IStamp {
   content: string;
   lat: number;
   lng: number;
+  images: string[];
   restaurantId: string | null;
   restaurantName: string | null;
   address: string | null;
