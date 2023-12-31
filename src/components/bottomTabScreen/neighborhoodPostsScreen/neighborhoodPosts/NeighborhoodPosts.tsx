@@ -4,10 +4,13 @@ import { Colors } from 'const/global-styles';
 import useNeighborhoodPostsQuery from 'query/hooks/posts/useNeighborhoodPostsQuery';
 import useUsersSubLocalityQuery from 'query/hooks/users/useUsersSubLocalityQuery';
 import { useState } from 'react';
-import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import NoNeighborhoodPosts from './NoNeighborhoodPosts';
+import { useNetInfo } from '@react-native-community/netinfo';
+import Line from 'components/common/layout/Line';
 
 export default function NeighborhoodPosts() {
+  const netInfo = useNetInfo();
   const [refreshing, setRefreshing] = useState(false);
   const { mySubLocality, reMySubLocality, mySubLocalityIsLoading } = useUsersSubLocalityQuery();
   const {
@@ -28,20 +31,27 @@ export default function NeighborhoodPosts() {
   const onEndReachedHandler = () => {
     fetchNextPageRestaurants();
   };
-  
+
   return (
     <View style={styles.wrap}>
-      {neighborhoodPosts?.pages.length !== 0 ? (
-        <FlatList
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}
-          onEndReached={onEndReachedHandler}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(_, index) => String(index)}
-          data={neighborhoodPosts?.pages}
-          renderItem={({ item }) => <Post posts={item} rePosts={reNeighborhoodPosts} isDetailScreen={false} />}
-        />
+      {netInfo.isConnected ? (
+        neighborhoodPosts?.pages.length !== 0 ? (
+          <FlatList
+            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}
+            onEndReached={onEndReachedHandler}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(_, index) => String(index)}
+            data={neighborhoodPosts?.pages}
+            renderItem={({ item }) => <Post posts={item} rePosts={reNeighborhoodPosts} isDetailScreen={false} />}
+            ItemSeparatorComponent={() => <Line style={styles.line} />}
+          />
+        ) : (
+          <NoNeighborhoodPosts />
+        )
       ) : (
-        <NoNeighborhoodPosts />
+        <View style={styles.netInfo}>
+          <Text>인터넷 연결이 불안정합니다</Text>
+        </View>
       )}
       {(mySubLocalityIsLoading || neighborhoodPostsIsLoading) && <LoadingOverlay style={styles.defaultLoading} />}
       {isFetchingNextPage && <LoadingOverlay style={styles.moreDataLoading} />}
@@ -67,5 +77,15 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     justifyContent: 'flex-end',
     position: 'absolute',
+  },
+  line: {
+    width: '100%',
+    height: 30,
+    backgroundColor: Colors.lightGrayOpacity1,
+  },
+  netInfo: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
