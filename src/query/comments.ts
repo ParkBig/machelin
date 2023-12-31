@@ -3,7 +3,7 @@ import { takeToken } from 'util/tokenDB';
 import Constants from 'expo-constants';
 
 export const axiosComments = axios.create({
-  baseURL: `${Constants.manifest?.extra?.s}/comments`,
+  baseURL: `${Constants.manifest?.extra?.EXPO_PROD_SERVER_URL}/comments`,
 });
 
 axiosComments.interceptors.request.use(async config => {
