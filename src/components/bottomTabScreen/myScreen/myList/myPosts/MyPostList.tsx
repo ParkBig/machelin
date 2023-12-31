@@ -11,9 +11,7 @@ import Line from 'components/common/layout/Line';
 
 export default function MyPostList() {
   const { myInfo } = useMyInfoQuery();
-  const { posts, postsIsLoading, rePosts, isFetchingNextPage } = useUsersPostsQuery(
-    myInfo?.authUser?.id
-  );
+  const { posts, postsIsLoading, rePosts, isFetchingNextPage } = useUsersPostsQuery();
   const postsExist = posts?.pages && posts.pages.length !== 0 ? true : false;
 
   return (

@@ -22,7 +22,7 @@ export default function MyScreen() {
   const { myInfo, myInfoIsLoading, reMyInfo } = useMyInfoQuery();
   const clickedMyInfoListType = useRecoilValue(clickedMyInfoListTypeState);
   const { reBookmarks } = useUsersBookmarksQuery(myInfo?.authUser?.id);
-  const { rePosts, fetchNextPagePosts } = useUsersPostsQuery(myInfo?.authUser?.id);
+  const { rePosts, fetchNextPagePosts } = useUsersPostsQuery();
   const { reFollowers } = useUsersFollowersQuery(myInfo?.authUser?.id);
   const { reFollows } = useUsersFollowsQuery(myInfo?.authUser?.id);
 

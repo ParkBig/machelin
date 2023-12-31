@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import Button from 'components/common/layout/Button';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
+import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { Colors, Size } from 'const/global-styles';
 import mime from 'mime';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
@@ -22,7 +23,7 @@ export default function MakeStampButton() {
   const makeStampValues = useRecoilValue(makeStampState);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
-  const { mutate } = useMutation(makeStampQuery, {
+  const { mutate, isLoading } = useMutation(makeStampQuery, {
     onSuccess: res => {
       if (res.ok) {
         goBack();
@@ -74,14 +75,20 @@ export default function MakeStampButton() {
   };
 
   return (
-    <Button style={styles.wrap} onPress={makeStampHandler}>
-      <Text style={styles.text}>완료</Text>
-      <ConfirmAlertModal
-        toggleModal={toggleAlertModal.toggle}
-        setToggleAlertModal={setToggleAlertModal}
-        alertMsg={toggleAlertModal.alertMsg}
-      />
-    </Button>
+    <>
+      {isLoading ? (
+        <LoadingOverlay style={styles.loadingOverlay} size={30} color={Colors.mainWhite3} />
+      ) : (
+        <Button style={styles.wrap} onPress={makeStampHandler}>
+          <Text style={styles.text}>완료</Text>
+          <ConfirmAlertModal
+            toggleModal={toggleAlertModal.toggle}
+            setToggleAlertModal={setToggleAlertModal}
+            alertMsg={toggleAlertModal.alertMsg}
+          />
+        </Button>
+      )}
+    </>
   );
 }
 
@@ -93,5 +100,9 @@ const styles = StyleSheet.create({
     fontSize: Size.bigMiddle,
     fontWeight: 'bold',
     color: Colors.mainWhite3,
+  },
+  loadingOverlay: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

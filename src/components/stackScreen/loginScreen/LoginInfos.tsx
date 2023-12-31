@@ -18,18 +18,16 @@ interface Infos {
 
 export default function LoginInfos() {
   const { navigate } = useNavigation<UseNavigation<'LoginScreen'>>();
-  const [isLoading, setIsLoading] = useState(false);
   const [infos, setInfos] = useState<Infos>({ email: '', password: '' });
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const { reMyInfo, myInfo } = useMyInfoQuery();
 
-  const { mutate } = useMutation(loginQuery, {
+  const { mutate, isLoading } = useMutation(loginQuery, {
     onSuccess: async res => {
       if (res.ok) {
         const t = await storeToken(res.token);
         reMyInfo();
       } else {
-        setIsLoading(false);
         setToggleAlertModal({ toggle: true, alertMsg: res.msg });
       }
     },
@@ -45,7 +43,6 @@ export default function LoginInfos() {
   const loginHandler = () => {
     const { email, password } = infos;
     mutate({ email, password });
-    setIsLoading(true);
   };
 
   useEffect(() => {

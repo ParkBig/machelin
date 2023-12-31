@@ -10,6 +10,7 @@ import { StyleSheet } from 'react-native';
 import { useMutation } from 'react-query';
 import { UseNavigation, UseRouter } from 'types/screenType';
 import { Ionicons } from '@expo/vector-icons';
+import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 
 export default function DeleteStampButton() {
   const { params } = useRoute<UseRouter<'StampDetailScreen'>>();
@@ -18,7 +19,7 @@ export default function DeleteStampButton() {
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const [toggleYesOrNoModal, setToggleYesOrNoModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
-  const { mutate } = useMutation(deleteStampQuery, {
+  const { mutate, isLoading } = useMutation(deleteStampQuery, {
     onSuccess: res => {
       if (res.ok) {
         reStamps();
@@ -34,26 +35,36 @@ export default function DeleteStampButton() {
   };
 
   return (
-    <Button style={styles.wrap} onPress={deleteStampHandler}>
-      <Ionicons name='trash' size={30} color={Colors.mainWhite3} />
-      <YesOrNoModal
-        toggleModal={toggleYesOrNoModal.toggle}
-        setToggleAlertModal={setToggleYesOrNoModal}
-        alertMsg={toggleYesOrNoModal.alertMsg}
-        mutate={mutate}
-        argument={params.stamp.id}
-      />
-      <ConfirmAlertModal
-        toggleModal={toggleAlertModal.toggle}
-        setToggleAlertModal={setToggleAlertModal}
-        alertMsg={toggleAlertModal.alertMsg}
-      />
-    </Button>
+    <>
+      {isLoading ? (
+        <LoadingOverlay style={styles.loadingOverlay} size={30} color={Colors.mainWhite3} />
+      ) : (
+        <Button style={styles.wrap} onPress={deleteStampHandler}>
+          <Ionicons name="trash" size={30} color={Colors.mainWhite3} />
+          <YesOrNoModal
+            toggleModal={toggleYesOrNoModal.toggle}
+            setToggleAlertModal={setToggleYesOrNoModal}
+            alertMsg={toggleYesOrNoModal.alertMsg}
+            mutate={mutate}
+            argument={params.stamp.id}
+          />
+          <ConfirmAlertModal
+            toggleModal={toggleAlertModal.toggle}
+            setToggleAlertModal={setToggleAlertModal}
+            alertMsg={toggleAlertModal.alertMsg}
+          />
+        </Button>
+      )}
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   wrap: {
     paddingHorizontal: 10,
+  },
+  loadingOverlay: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
