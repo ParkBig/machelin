@@ -9,11 +9,13 @@ export default function NoRestaurantInfo() {
   const { navigate } = useNavigation<UseNavigation<'MakePostScreen'>>();
 
   const gotoTagRestaurantHandler = () => {
-    navigate('FindRestaurantInfoForMakePostScreen');
+    navigate('FindRestaurantInfoScreen', {
+      forWhich: 'makePost'
+    });
   };
 
   return (
-    <>
+    <View style={styles.wrap}>
       <View style={styles.textWrap}>
         <Text style={styles.titleText}>식당정보, </Text>
         <Text>태그 할까요?</Text>
@@ -22,11 +24,21 @@ export default function NoRestaurantInfo() {
         <Text style={styles.buttonText}>태그하기</Text>
         <Ionicons name="chevron-forward" size={25} color={Colors.darkGray} />
       </Button>
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  wrap: {
+    minHeight: 100,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 10,
+    borderBottomColor: Colors.mainGreen1,
+    borderBottomWidth: 1.5,
+  },
   textWrap: {
     flex: 1,
     alignItems: 'center',

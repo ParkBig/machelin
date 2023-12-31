@@ -11,7 +11,7 @@ interface Data {
 
 export default function useUsersSubLocalityQuery() {
   const { isGetLocation, latitude, longitude } = useRecoilValue(myLocationState);
-
+  
   const {
     data: mySubLocality,
     refetch: reMySubLocality,

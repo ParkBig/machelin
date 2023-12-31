@@ -32,55 +32,53 @@ export default function StarScore() {
       <View style={styles.sub}>
         <View style={styles.explanation}>
           <View style={styles.explain}>
-            <Text style={styles.explainText}>극상 최강의 식당.</Text>
-            <Text style={styles.explainText}>무조건 추천 또 추천.</Text>
+            <Text style={styles.explainText}>극상의 식당.</Text>
           </View>
           <View style={styles.stars}>
-            <Ionicons name="star" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star" size={Size.normalBig} color={Colors.darkGray} />
+            <Ionicons name="star" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star" size={Size.normalMiddle} color={Colors.darkGray} />
           </View>
         </View>
         <Line style={styles.explainLine} />
         <View style={styles.explanation}>
           <View style={styles.explain}>
-            <Text style={styles.explainText}>계속 찾아올 것이다. </Text>
-            <Text style={styles.explainText}>주변사람에게 추천할것이다.</Text>
+            <Text style={styles.explainText}>계속 방문할 것이다. </Text>
           </View>
           <View style={styles.stars}>
-            <Ionicons name="star" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star-outline" size={Size.normalBig} color={Colors.darkGray} />
+            <Ionicons name="star" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star-outline" size={Size.normalMiddle} color={Colors.darkGray} />
           </View>
         </View>
         <Line style={styles.explainLine} />
         <View style={styles.explanation}>
           <View style={styles.explain}>
-            <Text style={styles.explainText}>평범함. 맛과 가격이 합리적이다.</Text>
+            <Text style={styles.explainText}>맛과 가격이 합리적이다.</Text>
           </View>
           <View style={styles.stars}>
-            <Ionicons name="star" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star-outline" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star-outline" size={Size.normalBig} color={Colors.darkGray} />
+            <Ionicons name="star" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star-outline" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star-outline" size={Size.normalMiddle} color={Colors.darkGray} />
           </View>
         </View>
         <Line style={styles.explainLine} />
         <View style={styles.explanation}>
           <View style={styles.explain}>
-            <Text style={styles.explainText}>맛 or 서비스가 조금 아쉽다.</Text>
+            <Text style={styles.explainText}>맛, 서비스가 조금 아쉽다.</Text>
           </View>
           <View style={styles.stars}>
-            <Ionicons name="star" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star-outline" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star-outline" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star-outline" size={Size.normalBig} color={Colors.darkGray} />
+            <Ionicons name="star" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star-outline" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star-outline" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star-outline" size={Size.normalMiddle} color={Colors.darkGray} />
           </View>
         </View>
         <Line style={styles.explainLine} />
@@ -89,11 +87,11 @@ export default function StarScore() {
             <Text style={styles.explainText}>최악.</Text>
           </View>
           <View style={styles.stars}>
-            <Ionicons name="star" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star-outline" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star-outline" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star-outline" size={Size.normalBig} color={Colors.darkGray} />
-            <Ionicons name="star-outline" size={Size.normalBig} color={Colors.darkGray} />
+            <Ionicons name="star" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star-outline" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star-outline" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star-outline" size={Size.normalMiddle} color={Colors.darkGray} />
+            <Ionicons name="star-outline" size={Size.normalMiddle} color={Colors.darkGray} />
           </View>
         </View>
       </View>

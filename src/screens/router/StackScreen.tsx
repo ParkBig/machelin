@@ -16,17 +16,20 @@ import ChangeMyPreferRestaurantScreen from 'screens/stack/ChangeMyPreferRestaura
 import ToggleFollow from 'components/stackScreen/ExploreUserInfoScreen/exploreUsersInfo/ToggleFollow';
 import ToggleBookmark from 'components/stackScreen/restaurantDetailScreen/ToggleBookmark';
 import FindMyIdScreen from 'screens/stack/FindMyIdScreen';
-import FindRestaurantInfoForMakePostScreen from 'screens/stack/FindRestaurantInfoForMakePostScreen';
 import RegionalSearchMapScreen from 'screens/stack/RegionalSearchMapScreen';
 import MakePostButton from 'components/stackScreen/makePostScreen/makePostButton/MakePostButton';
 import StampButton from 'components/stackScreen/myMapScreen/StampButton';
 import MakeStampScreen from 'screens/stack/MakeStampScreen';
+import FindRestaurantInfoScreen from 'screens/stack/FindRestaurantInfoScreen';
+import MakeStampButton from 'components/stackScreen/makeStampScreen/MakeStampButton';
+import StampDetailScreen from 'screens/stack/StampDetailScreen';
+import DeleteStampButton from 'components/stackScreen/stampDetailScreen/DeleteStampButton';
 
 export default function StackScreen() {
   return (
     <RootStack.Navigator
       screenOptions={{
-        headerTitleAlign: 'center',
+        headerTitleAlign: 'left',
         headerTintColor: Colors.mainWhite3,
         headerStyle: {
           backgroundColor: Colors.mainGreen2,
@@ -39,22 +42,20 @@ export default function StackScreen() {
         component={MakePostScreen}
         options={({ route }) => ({
           title: '기록하기',
-          headerTitleAlign: 'left',
           headerRight: () => <MakePostButton restaurantInfo={route.params.restaurantInfo} />,
         })}
       />
       <RootStack.Screen
-        name="FindRestaurantInfoForMakePostScreen"
-        component={FindRestaurantInfoForMakePostScreen}
-        options={{
-          title: '식당태그하기',
-        }}
+        name="FindRestaurantInfoScreen"
+        component={FindRestaurantInfoScreen}
+        options={({ route }) => ({
+          title: route.params.forWhich === 'makePost' ? '식당태그하기' : '장소태그하기',
+        })}
       />
       <RootStack.Screen
         name="MyMapScreen"
         component={MyMapScreen}
         options={{
-          headerTitleAlign: 'left',
           title: '나의 지도',
           headerRight: () => <StampButton />,
         }}
@@ -63,7 +64,7 @@ export default function StackScreen() {
         name="RestaurantDetailScreen"
         component={RestaurantDetailScreen}
         options={({ route }) => ({
-          title: route.params.restaurantName,
+          title: '상세보기',
           headerRight: () => <ToggleBookmark restaurantId={route.params.restaurantId} />,
         })}
       />
@@ -129,7 +130,6 @@ export default function StackScreen() {
         component={ExploreUserInfoScreen}
         options={({ route }) => ({
           title: '탐험중...',
-          headerTitleAlign: 'left',
           headerRight: () => <ToggleFollow exploreUserId={route.params.userId} />,
         })}
       />
@@ -145,7 +145,15 @@ export default function StackScreen() {
         component={MakeStampScreen}
         options={{
           title: '도장찍기',
-          headerTitleAlign: 'left',
+          headerRight: () => <MakeStampButton />,
+        }}
+      />
+      <RootStack.Screen
+        name="StampDetailScreen"
+        component={StampDetailScreen}
+        options={{
+          title: '나의 도장',
+          headerRight: () => <DeleteStampButton />,
         }}
       />
     </RootStack.Navigator>

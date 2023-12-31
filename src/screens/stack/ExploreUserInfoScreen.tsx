@@ -31,6 +31,7 @@ export default function ExploreUserInfoScreen({ navigation, route }: StackScreen
   return (
     <>
       <ScrollView
+        showsVerticalScrollIndicator={false}
         style={styles.wrap}
         onScrollEndDrag={onScrollHandler}
         onContentSizeChange={(w: number, h: number) => {

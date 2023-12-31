@@ -32,6 +32,11 @@ export interface PostQueryResponse {
   nextPage: number | null;
 }
 
+interface ModifyPostPublicStateInput {
+  id: number;
+  isPublic: boolean;
+}
+
 export const neighborhoodPostsQuery = async (subLocality: string, page: number = 1) => {
   const { data } = await axiosPosts.get('/neighborhoodPosts', {
     params: {
@@ -113,3 +118,17 @@ export const reportPostQuery = async (reportPostInput: ReportPostInput) => {
   const { data } = await axiosPosts.post('/reportPost', reportPostInput);
   return data;
 };
+
+export const modifyPostPublicStateQuery = async (modifyPostPublicStateInput: ModifyPostPublicStateInput) => {
+  const { data } = await axiosPosts.post('/modifyPostPublicState', modifyPostPublicStateInput);
+  return data;
+}
+
+export const deletePostQuery = async (id: number) => {
+  const { data } = await axiosPosts.delete('/deletePost', {
+    params: {
+      id,
+    },
+  });
+  return data;
+}

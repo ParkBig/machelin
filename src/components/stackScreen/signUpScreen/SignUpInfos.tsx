@@ -1,6 +1,7 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Button from 'components/common/layout/Button';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
+import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { Colors } from 'const/global-styles';
 import { signUpQuery } from 'query/user';
 import { useState } from 'react';
@@ -20,7 +21,7 @@ export default function SignUpInfos() {
   const { params } = useRoute<UseRouter<'SignUpScreen'>>();
   const [infos, setInfos] = useState<Infos>({ email: '', password: '', passwordCheck: '', nickname: '' });
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
-  const { mutate } = useMutation(signUpQuery, {
+  const { mutate, isLoading } = useMutation(signUpQuery, {
     onSuccess: res => {
       if (res.ok) {
         navigate('LoginScreen');
@@ -99,6 +100,7 @@ export default function SignUpInfos() {
           <Text style={styles.buttonText}>회원가입</Text>
         </Button>
       </View>
+      {isLoading && <LoadingOverlay style={styles.loadingOverlay} />}
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}
         setToggleAlertModal={setToggleAlertModal}
@@ -132,5 +134,12 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
+  },
+  loadingOverlay: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
   },
 });

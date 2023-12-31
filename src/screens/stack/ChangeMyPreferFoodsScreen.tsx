@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet } from 'react-native';
 
 export default function ChangeMyPreferFoodsScreen() {
   return (
-    <ScrollView style={styles.wrap}>
+    <ScrollView style={styles.wrap} showsVerticalScrollIndicator={false}>
       <MakePreferFood />
       <PreferFoods />
     </ScrollView>
@@ -16,5 +16,5 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     paddingHorizontal: 20,
-  }
-})
+  },
+});

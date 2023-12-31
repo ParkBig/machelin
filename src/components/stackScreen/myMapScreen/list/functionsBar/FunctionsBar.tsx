@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { LayoutAnimation, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Button from 'components/common/layout/Button';
 import { Colors, Size } from 'const/global-styles';
@@ -25,6 +25,7 @@ export default function FunctionsBar({ whichOneClicked, setWhichOneClicked }: Pr
   const postsLength = posts?.posts?.length ? posts?.posts.length : 0;
 
   const changeWhichOneClickedStateHandler = (clicked: WhichOneClickedState) => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     if (whichOneClicked) {
       if (whichOneClicked === clicked) {
         setWhichOneClicked(null);

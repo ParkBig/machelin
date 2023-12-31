@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from 'const/global-styles';
+import { Colors, Size } from 'const/global-styles';
 import { useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { UseRouter } from 'types/screenType';
@@ -19,6 +19,14 @@ export default function RestaurantInfos() {
 
   return (
     <View style={styles.infos}>
+      {restaurantDetail?.restaurantDetail?.formatted_address && (
+        <View style={styles.info}>
+          <Ionicons name="restaurant" size={25} color={Colors.mainGreen2} />
+          <View style={styles.infoContent}>
+            <Text style={styles.name}>{restaurantDetail?.restaurantDetail?.name}</Text>
+          </View>
+        </View>
+      )}
       {restaurantDetail?.restaurantDetail?.formatted_phone_number && (
         <View style={styles.info}>
           <Ionicons name="call" size={25} color={Colors.mainGreen2} />
@@ -86,6 +94,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     flexWrap: 'wrap',
+  },
+  name: {
+    fontWeight: 'bold',
+    fontSize: Size.normalBig,
   },
   timeInfo: {
     flex: 1,
