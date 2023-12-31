@@ -48,9 +48,9 @@ export default function StackScreen() {
       <RootStack.Screen
         name="FindRestaurantInfoScreen"
         component={FindRestaurantInfoScreen}
-        options={{
-          title: '식당태그하기',
-        }}
+        options={({ route }) => ({
+          title: route.params.forWhich === 'makePost' ? '식당태그하기' : '장소태그하기',
+        })}
       />
       <RootStack.Screen
         name="MyMapScreen"

@@ -17,7 +17,7 @@ axiosRestaurants.interceptors.request.use(async config => {
 
 interface RestaurantsTextSearchQueryInput {
   keyword: string;
-  isRegional: boolean;
+  isRestaurant: boolean;
   nextPageParams?: string;
 }
 
@@ -41,11 +41,11 @@ export const nearbyRestaurantsSearchQuery = async (
   return data;
 };
 
-export const restaurantsTextSearchQuery = async ({ keyword, isRegional, nextPageParams }: RestaurantsTextSearchQueryInput) => {
+export const restaurantsTextSearchQuery = async ({ keyword, isRestaurant, nextPageParams }: RestaurantsTextSearchQueryInput) => {
   const { data } = await axiosRestaurants.get('/restaurantsTextSearch', {
     params: {
       keyword,
-      isRegional,
+      isRestaurant,
       nextPageParams: nextPageParams ? nextPageParams : null,
     },
   });

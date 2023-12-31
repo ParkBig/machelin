@@ -15,6 +15,7 @@ import { myLocationState } from 'store/locationState';
 import { makePostState } from 'store/makePostState';
 import { GooglePlace } from 'types/types';
 import { UseNavigation } from 'types/screenType';
+import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 
 interface Props {
   restaurantInfo: GooglePlace | null;
@@ -24,12 +25,12 @@ export default function MakePostButton({ restaurantInfo }: Props) {
   const { goBack } = useNavigation<UseNavigation<'MakePostScreen'>>();
   const queryClient = useQueryClient();
   const { myInfo, reMyInfo } = useMyInfoQuery();
-  const { rePosts } = useUsersPostsQuery(myInfo?.authUser?.id);
+  const { rePosts } = useUsersPostsQuery();
   const makePostInfo = useRecoilValue(makePostState);
   const [myLocation, setMyLocation] = useRecoilState(myLocationState);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
-  const { mutate } = useMutation(makePostQuery, {
+  const { mutate, isLoading } = useMutation(makePostQuery, {
     onSuccess: res => {
       if (res.ok) {
         reMyInfo();
@@ -107,14 +108,18 @@ export default function MakePostButton({ restaurantInfo }: Props) {
 
   return (
     <>
-      <Button onPress={makePostHandler}>
-        <Text style={styles.text}>완료</Text>
-      </Button>
-      <ConfirmAlertModal
-        toggleModal={toggleAlertModal.toggle}
-        setToggleAlertModal={setToggleAlertModal}
-        alertMsg={toggleAlertModal.alertMsg}
-      />
+      {isLoading ? (
+        <LoadingOverlay style={styles.loadingOverlay} size={30} color={Colors.mainWhite3} />
+      ) : (
+        <Button onPress={makePostHandler}>
+          <Text style={styles.text}>완료</Text>
+          <ConfirmAlertModal
+            toggleModal={toggleAlertModal.toggle}
+            setToggleAlertModal={setToggleAlertModal}
+            alertMsg={toggleAlertModal.alertMsg}
+          />
+        </Button>
+      )}
     </>
   );
 }
@@ -124,5 +129,9 @@ const styles = StyleSheet.create({
     fontSize: Size.normalBig,
     color: Colors.mainWhite3,
     fontWeight: 'bold',
+  },
+  loadingOverlay: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

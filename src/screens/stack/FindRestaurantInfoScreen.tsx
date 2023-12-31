@@ -31,7 +31,7 @@ export default function FindRestaurantInfoScreen({ route }: StackScreenPropsAbou
 
   const onEndEditingHandler = () => {
     if (textInputValue) {
-      mutate({ keyword: textInputValue, isRegional: false });
+      mutate({ keyword: textInputValue, isRestaurant: false });
     }
   };
 
@@ -40,12 +40,17 @@ export default function FindRestaurantInfoScreen({ route }: StackScreenPropsAbou
       <View style={styles.search}>
         <TextInput
           style={styles.textInput}
-          placeholder="식당이름 or 지역이름 식당이름 검색"
+          placeholder={route.params.forWhich === 'makePost' ? '식당 or 지역 식당 검색' : '장소 or 지역 장소 검색'}
           value={textInputValue}
           onChangeText={onChangeTextHandler}
           onEndEditing={onEndEditingHandler}
         />
-        <Text style={styles.example}>ex) 맛있는식당 or 서울 맛있는식당</Text>
+        <Text style={styles.example}>
+          {route.params.forWhich === 'makePost'
+            ? 'ex) 식당이름 or 서울 강남 식당이름'
+            : 'ex) 장소이름 or 서울 강남 장소이름'}
+        </Text>
+        <Text style={styles.example}>Tip. 지역이름을 붙이면 찾기 쉬워요</Text>
       </View>
       <FlatList
         style={[styles.searchResult, searchResult.length !== 0 && styles.hasResult]}
