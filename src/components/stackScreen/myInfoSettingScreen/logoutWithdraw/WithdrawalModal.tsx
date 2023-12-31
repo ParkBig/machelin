@@ -13,6 +13,7 @@ import { useResetRecoilState } from 'recoil';
 import { UseNavigation } from 'types/screenType';
 import { deleteToken } from 'util/tokenDB';
 import { clickedMyInfoListTypeState } from 'store/toggleState';
+import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 
 interface Props {
   toggleWithdrawalModal: boolean;
@@ -23,8 +24,8 @@ export default function WithdrawalModal({ toggleWithdrawalModal, setToggleWithdr
   const { navigate } = useNavigation<UseNavigation<'MyInfoSettingScreen'>>();
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const resetClickedMyInfoListType = useResetRecoilState(clickedMyInfoListTypeState);
-  const { myInfo, reMyInfo } = useMyInfoQuery();
-  const { mutate } = useMutation(withdrawalQuery, {
+  const { reMyInfo } = useMyInfoQuery();
+  const { mutate, isLoading } = useMutation(withdrawalQuery, {
     onSuccess: async res => {
       if (res.ok) {
         await deleteToken();
@@ -71,6 +72,7 @@ export default function WithdrawalModal({ toggleWithdrawalModal, setToggleWithdr
           </Button>
         </View>
       </View>
+      {isLoading && <LoadingOverlay style={styles.loadingOverlay} />}
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}
         setToggleAlertModal={setToggleAlertModal}
@@ -122,5 +124,12 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: 'bold',
+  },
+  loadingOverlay: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
   },
 });

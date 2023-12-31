@@ -1,7 +1,7 @@
 import { BottomTabScreenProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
-import { GooglePlace } from './types';
+import { GooglePlace, IStamp } from './types';
 
 export type RootBottomTabParamList = {
   MainScreen: undefined;
@@ -12,17 +12,19 @@ export type RootBottomTabParamList = {
 export type RootStackParamList = {
   BottomTabScreen: undefined;
   MyMapScreen: undefined;
-  RegionalSearchMapScreen: undefined;
   LoginScreen: undefined;
   FindMyIdScreen: undefined;
   MakeStampScreen: undefined;
   MyInfoSettingScreen: undefined;
   ChangeMyNicknameScreen: undefined;
+  RegionalSearchMapScreen: undefined;
   MobileVerificationScreen: undefined;
-  ChangeMyActivityZoneScreen: undefined;
   ChangeMyPreferFoodsScreen: undefined;
+  ChangeMyActivityZoneScreen: undefined;
   ChangeMyPreferRestaurantScreen: undefined;
-  FindRestaurantInfoForMakePostScreen: undefined;
+  FindRestaurantInfoScreen: {
+    forWhich: 'makePost' | 'stamp';
+  };
   SignUpScreen: {
     mobile: string;
   };
@@ -35,6 +37,9 @@ export type RootStackParamList = {
   RestaurantDetailScreen: {
     restaurantName: string;
     restaurantId: string;
+  };
+  StampDetailScreen: {
+    stamp: IStamp;
   };
 };
 export type AllParmList = {
@@ -47,17 +52,19 @@ export type AllParmList = {
   // StackScreen
   BottomTabScreen: undefined;
   MyMapScreen: undefined;
-  RegionalSearchMapScreen: undefined;
   LoginScreen: undefined;
   FindMyIdScreen: undefined;
   MakeStampScreen: undefined;
   MyInfoSettingScreen: undefined;
   ChangeMyNicknameScreen: undefined;
+  RegionalSearchMapScreen: undefined;
   MobileVerificationScreen: undefined;
-  ChangeMyActivityZoneScreen: undefined;
   ChangeMyPreferFoodsScreen: undefined;
+  ChangeMyActivityZoneScreen: undefined;
   ChangeMyPreferRestaurantScreen: undefined;
-  FindRestaurantInfoForMakePostScreen: undefined;
+  FindRestaurantInfoScreen: {
+    forWhich: 'makePost' | 'stamp';
+  };
   SignUpScreen: {
     mobile: string;
   };
@@ -70,6 +77,9 @@ export type AllParmList = {
   RestaurantDetailScreen: {
     restaurantName: string;
     restaurantId: string;
+  };
+  StampDetailScreen: {
+    stamp: IStamp;
   };
 };
 export type UseNavigation<T extends keyof AllParmList> = NavigationProp<AllParmList, T>;

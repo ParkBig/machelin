@@ -9,8 +9,10 @@ import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import BriefRestaurantInfo from 'components/common/card/BriefRestaurantInfo';
 import { useState } from 'react';
 import useRegionalRestaurantSearchQuery from 'query/hooks/restaurants/useRegionalRestaurantSearchQuery';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 export default function Results() {
+  const netInfo = useNetInfo();
   const { navigate } = useNavigation<UseNavigation<'RegionalSearchScreen'>>();
   const [refreshing, setRefreshing] = useState(false);
   const { restaurants, fetchNextPageRestaurants, isFetchingNextPage, reRestaurants, restaurantsIsLoading } =
@@ -34,37 +36,43 @@ export default function Results() {
 
   return (
     <View style={styles.wrap}>
-      {restaurantsIsExist ? (
-        <>
-          <FlatList
-            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}
-            style={styles.flatList}
-            showsVerticalScrollIndicator={false}
-            onEndReached={onEndReachedHandler}
-            data={restaurants?.pages}
-            keyExtractor={(_, index) => String(index)}
-            renderItem={({ item }) => {
-              const navigateHandler = () => {
-                navigate('RestaurantDetailScreen', {
-                  restaurantId: item.place_id,
-                  restaurantName: item.name,
-                });
-              };
+      {netInfo.isConnected ? (
+        restaurantsIsExist ? (
+          <>
+            <FlatList
+              refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}
+              style={styles.flatList}
+              showsVerticalScrollIndicator={false}
+              onEndReached={onEndReachedHandler}
+              data={restaurants?.pages}
+              keyExtractor={(_, index) => String(index)}
+              renderItem={({ item }) => {
+                const navigateHandler = () => {
+                  navigate('RestaurantDetailScreen', {
+                    restaurantId: item.place_id,
+                    restaurantName: item.name,
+                  });
+                };
 
-              return <BriefRestaurantInfo restaurant={item} isList={true} fnc={navigateHandler} />;
-            }}
-            ListFooterComponent={() => (
-              <View style={styles.listFooterComponent}>
-                <Text style={styles.text}>- 마슐랭 -</Text>
-              </View>
-            )}
-          />
-          <Button style={styles.button} onPress={onPressHandler}>
-            <Ionicons style={styles.ionicons} size={35} name="map" color={Colors.mainWhite3} />
-          </Button>
-        </>
+                return <BriefRestaurantInfo restaurant={item} isList={true} fnc={navigateHandler} />;
+              }}
+              ListFooterComponent={() => (
+                <View style={styles.listFooterComponent}>
+                  <Text style={styles.text}>- 마슐랭 -</Text>
+                </View>
+              )}
+            />
+            <Button style={styles.button} onPress={onPressHandler}>
+              <Ionicons style={styles.ionicons} size={35} name="map" color={Colors.mainWhite3} />
+            </Button>
+          </>
+        ) : (
+          <NoResults />
+        )
       ) : (
-        <NoResults />
+        <View style={styles.netInfo}>
+          <Text>인터넷 연결이 불안정합니다</Text>
+        </View>
       )}
       {restaurantsIsLoading && <LoadingOverlay style={styles.defaultLoading} />}
       {isFetchingNextPage && <LoadingOverlay style={styles.moreDataLoading} />}
@@ -120,5 +128,10 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: 'bold',
     color: Colors.gray,
+  },
+  netInfo: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

@@ -12,7 +12,7 @@ interface Props {
 
 const MemoizedMarker = memo(({ stamp }: Props) => {
   return (
-    <Marker coordinate={{ latitude: +stamp.lat, longitude: +stamp.lng }} title={stamp.restaurantName}>
+    <Marker coordinate={{ latitude: +stamp.lat, longitude: +stamp.lng }} title={stamp.title}>
       <View style={styles.wrap}>
         <Ionicons name="paw" size={25} color={Colors.mainWhite3} />
       </View>

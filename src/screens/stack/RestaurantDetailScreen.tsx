@@ -24,6 +24,7 @@ export default function RestaurantDetailScreen({ route }: StackScreenPropsAbout<
   return (
     <>
       <ScrollView
+        showsVerticalScrollIndicator={false}
         style={styles.wrap}
         scrollEnabled={!restaurantDetailIsLoading}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}
@@ -32,7 +33,6 @@ export default function RestaurantDetailScreen({ route }: StackScreenPropsAbout<
         <RestaurantGrade />
         <Line style={styles.innerLine} />
         <RestaurantInfos />
-        {/* <Line style={styles.innerLine} /> */}
         <RestaurantReviews />
       </ScrollView>
       {restaurantDetailIsLoading && <LoadingOverlay style={styles.loadingOverlay} />}

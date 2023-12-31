@@ -28,7 +28,7 @@ export default function PostsHasRestaurant() {
           />
         ) : (
           <View style={styles.none}>
-            <Text>점수를 남긴 게시글이 없어요</Text>
+            <Text>식당을 태그한 게시글이 없어요</Text>
           </View>
         )
       ) : (

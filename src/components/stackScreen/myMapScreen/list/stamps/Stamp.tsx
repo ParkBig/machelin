@@ -2,18 +2,12 @@ import Button from 'components/common/layout/Button';
 import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Size } from 'const/global-styles';
-import Line from 'components/common/layout/Line';
 import { useNavigation } from '@react-navigation/native';
 import { UseNavigation } from 'types/screenType';
-import { useMutation } from 'react-query';
-import { deleteStampQuery } from 'query/stamps';
-import useUsersStampsQuery from 'query/hooks/users/useUsersStampsQuery';
-import { useState } from 'react';
-import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { useSetRecoilState } from 'recoil';
 import { focusedRestaurantState } from 'store/locationState';
-import YesOrNoModal from 'components/common/modal/YesOrNoModal';
 import { IStamp } from 'types/types';
+import { getCreatedDate } from 'util/dateTranslator';
 
 interface Props {
   stamp: IStamp;
@@ -21,19 +15,7 @@ interface Props {
 
 export default function Stamp({ stamp }: Props) {
   const { navigate } = useNavigation<UseNavigation<'MyMapScreen'>>();
-  const { reStamps } = useUsersStampsQuery();
   const setFocusedRestaurant = useSetRecoilState(focusedRestaurantState);
-  const [yesOrNoModal, setYesOrNoModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
-  const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
-  const { mutate } = useMutation(deleteStampQuery, {
-    onSuccess: res => {
-      if (res.ok) {
-        reStamps();
-      } else {
-        setToggleAlertModal({ toggle: true, alertMsg: res.msg });
-      }
-    },
-  });
 
   const onPressHandler = () => {
     setFocusedRestaurant({
@@ -45,43 +27,31 @@ export default function Stamp({ stamp }: Props) {
   };
 
   const navigateHandler = () => {
-    navigate('RestaurantDetailScreen', {
-      restaurantName: stamp.restaurantName,
-      restaurantId: stamp.restaurantId,
+    navigate('StampDetailScreen', {
+      stamp,
     });
   };
 
-  const deleteHandler = () => {
-    setYesOrNoModal({ toggle: true, alertMsg: '도장을 지울 건가요?' });
-  };
+  const createdDate = getCreatedDate(stamp.createdAt);
 
   return (
     <Button style={styles.wrap} onPress={onPressHandler}>
       <View style={styles.contents}>
-        <Text style={styles.titleText}>{stamp.restaurantName}</Text>
-        <Text>{stamp.address}</Text>
+        <Text style={styles.titleText} numberOfLines={1} ellipsizeMode="tail">
+          {stamp.title}
+        </Text>
+        {stamp.content && (
+          <Text numberOfLines={1} ellipsizeMode="tail">
+            {stamp.content}
+          </Text>
+        )}
+        <View>
+          <Text style={styles.dateText}>{createdDate}</Text>
+        </View>
       </View>
-      <Line style={styles.line} />
-      <View style={styles.buttons}>
-        <Button style={styles.button} onPress={deleteHandler}>
-          <Ionicons name="trash" size={30} color={Colors.googleBackground} />
-        </Button>
-        <Button style={styles.button} onPress={navigateHandler}>
-          <Ionicons name="chevron-forward" size={30} />
-        </Button>
-      </View>
-      <YesOrNoModal
-        toggleModal={yesOrNoModal.toggle}
-        setToggleAlertModal={setYesOrNoModal}
-        alertMsg={yesOrNoModal.alertMsg}
-        mutate={mutate}
-        argument={stamp.id}
-      />
-      <ConfirmAlertModal
-        toggleModal={toggleAlertModal.toggle}
-        setToggleAlertModal={setToggleAlertModal}
-        alertMsg={toggleAlertModal.alertMsg}
-      />
+      <Button style={styles.button} onPress={navigateHandler}>
+        <Ionicons name="chevron-forward" size={30} color={Colors.darkGray} />
+      </Button>
     </Button>
   );
 }
@@ -110,13 +80,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  line: {
-    height: '50%',
-    width: 2,
-    backgroundColor: Colors.mainGreen2,
-  },
   titleText: {
     fontWeight: 'bold',
     fontSize: Size.normalMiddle,
+  },
+  dateText: {
+    fontSize: Size.normalSmall,
+    color: Colors.gray
   },
 });

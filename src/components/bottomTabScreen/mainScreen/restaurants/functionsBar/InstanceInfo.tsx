@@ -1,3 +1,4 @@
+import { useNetInfo } from '@react-native-community/netinfo';
 import useNearbyRestaurantsSearchQuery from 'query/hooks/restaurants/useNearbyRestaurantsSearchQuery';
 import { StyleSheet, Text, View } from 'react-native';
 import { useRecoilValue } from 'recoil';
@@ -5,6 +6,7 @@ import { searchRadiusState } from 'store/locationState';
 import { mainSearchState } from 'store/searchState';
 
 export default function InstanceInfo() {
+  const netInfo = useNetInfo();
   const searchRadius = useRecoilValue(searchRadiusState);
   const { mainSearchValue } = useRecoilValue(mainSearchState);
   const { restaurants } = useNearbyRestaurantsSearchQuery();
@@ -13,16 +15,20 @@ export default function InstanceInfo() {
 
   return (
     <View style={styles.wrap}>
-      <View style={styles.instanceInfo}>
-        <View style={styles.title}>
-          <Text style={styles.text}>{mainSearchValue ? '검색결과' : '내주변'}</Text>
-          <Text style={styles.text}>({searchRadius}m)</Text>
-        </View>
-        <View style={styles.restaurantsLength}>
-          <Text style={styles.text}>{restaurantsLength}</Text>
-        </View>
-      </View>
-      <View style={styles.ad}></View>
+      {netInfo.isConnected && (
+        <>
+          <View style={styles.instanceInfo}>
+            <View style={styles.title}>
+              <Text style={styles.text}>{mainSearchValue ? '검색결과' : '내주변'}</Text>
+              <Text style={styles.text}>({searchRadius}m)</Text>
+            </View>
+            <View style={styles.restaurantsLength}>
+              <Text style={styles.text}>{restaurantsLength}</Text>
+            </View>
+          </View>
+          <View style={styles.ad}></View>
+        </>
+      )}
     </View>
   );
 }

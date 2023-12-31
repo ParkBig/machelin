@@ -10,7 +10,7 @@ export default function trimMySubLocality(mySubLocality: string | undefined): Ou
 
   const mySubLocalityArr = mySubLocality.split(' ');
 
-  if (mySubLocalityArr.length < 3) {
+  if (mySubLocalityArr.length < 2) {
     return { city: '', district: '' };
   }
 

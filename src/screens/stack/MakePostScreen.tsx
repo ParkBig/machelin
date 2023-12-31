@@ -19,11 +19,12 @@ export default function MakePostScreen({ route }: StackScreenPropsAbout<'MakePos
   }, []);
 
   return (
-    <ScrollView style={styles.wrap}>
+    <ScrollView style={styles.wrap} showsVerticalScrollIndicator={false}>
       <ChoseRestaurant />
       <WriterImg />
       <PostContents />
-      <Hashtag />
+      {/* will update */}
+      {/* <Hashtag /> */}
       {route.params.restaurantInfo && <StarScore />}
       <SelectPublic />
     </ScrollView>

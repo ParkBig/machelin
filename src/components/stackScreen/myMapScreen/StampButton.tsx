@@ -6,9 +6,12 @@ import { Colors } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
+import { useResetRecoilState } from 'recoil';
+import { makeStampState } from 'store/makeStampState';
 import { UseNavigation } from 'types/screenType';
 
 export default function StampButton() {
+  const resetMakeStampState = useResetRecoilState(makeStampState);
   const { navigate } = useNavigation<UseNavigation<'MyMapScreen'>>();
   const { myInfo } = useMyInfoQuery();
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
@@ -19,6 +22,7 @@ export default function StampButton() {
       return;
     }
 
+    resetMakeStampState();
     navigate('MakeStampScreen');
   };
 

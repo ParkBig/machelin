@@ -6,8 +6,8 @@ import { UseMutateFunction } from 'react-query';
 
 interface Props {
   toggleModal: boolean;
-  setToggleAlertModal: React.Dispatch<React.SetStateAction<ToggleState>>;
   alertMsg: string;
+  setToggleAlertModal: React.Dispatch<React.SetStateAction<ToggleState>>;
   mutate: UseMutateFunction<any, unknown, any, unknown>;
   argument: any;
 }
@@ -17,7 +17,7 @@ export interface ToggleState {
   alertMsg: string;
 }
 
-export default function YesOrNoModal({ toggleModal, setToggleAlertModal, alertMsg, mutate, argument }: Props) {
+export default function YesOrNoModal({ toggleModal, alertMsg, setToggleAlertModal, mutate, argument }: Props) {
   const okHandler = () => {
     mutate(argument);
     setToggleAlertModal({ toggle: false, alertMsg: '' });

@@ -3,7 +3,7 @@ import { useInfiniteQuery } from 'react-query';
 import useMyInfoQuery from './useMyInfoQuery';
 import { IPost } from 'types/types';
 
-export default function useUsersPostsQuery(targetId?: number) {
+export default function useUsersPostsQuery() {
   const { myInfo } = useMyInfoQuery();
   const myId = myInfo?.authUser?.id;
 
@@ -15,15 +15,11 @@ export default function useUsersPostsQuery(targetId?: number) {
     fetchNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery<PostQueryResponse, unknown, IPost>(
-    ['usersPostsTest', targetId, myId],
+    ['usersPosts', myId],
     async ({ pageParam = 1 }) => {
-      if (!targetId) {
-        return { ok: true, posts: null };
-      }
-
       const { data } = await axiosPosts.get('/usersPosts', {
         params: {
-          targetId,
+          targetId: myId,
           myId,
           page: pageParam,
         },

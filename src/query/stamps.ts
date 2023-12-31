@@ -14,23 +14,17 @@ axiosStamps.interceptors.request.use(async config => {
   return config;
 });
 
-interface MakeStampInput {
-  restaurantId: string;
-  lat: number;
-  lng: number;
-  restaurantName: string;
-  address: string;
-  rating: number;
-  totalRatings: number;
-}
-
 export const usersStampQuery = async () => {
   const { data } = await axiosStamps.get('/usersStamp');
   return data;
 };
 
-export const makeStampQuery = async (makeStampInput: MakeStampInput) => {
-  const { data } = await axiosStamps.post('/makeStamp', makeStampInput);
+export const makeStampQuery = async (makeStampInput: FormData) => {
+  const { data } = await axiosStamps.post('/makeStamp', makeStampInput, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return data;
 };
 

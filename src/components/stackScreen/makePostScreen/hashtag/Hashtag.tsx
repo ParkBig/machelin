@@ -25,7 +25,6 @@ export default function Hashtag() {
 
 const styles = StyleSheet.create({
   wrap: {
-    height: 50,
     width: '100%',
     paddingVertical: 10,
     flexDirection: 'row',

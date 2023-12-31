@@ -44,6 +44,7 @@ export default function useRegionalRestaurantSearchQuery() {
       const { data } = await axiosRestaurants.get('/restaurantsTextSearch', {
         params: {
           keyword,
+          isRestaurant: true,
           nextPageParams: pageParam ? pageParam : null,
         },
       });

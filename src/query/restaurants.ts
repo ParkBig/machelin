@@ -15,6 +15,12 @@ axiosRestaurants.interceptors.request.use(async config => {
   return config;
 });
 
+interface RestaurantsTextSearchQueryInput {
+  keyword: string;
+  isRestaurant: boolean;
+  nextPageParams?: string;
+}
+
 export const nearbyRestaurantsSearchQuery = async (
   lat: number,
   lng: number,
@@ -35,10 +41,11 @@ export const nearbyRestaurantsSearchQuery = async (
   return data;
 };
 
-export const restaurantsTextSearchQuery = async (keyword: string, nextPageParams?: string) => {
+export const restaurantsTextSearchQuery = async ({ keyword, isRestaurant, nextPageParams }: RestaurantsTextSearchQueryInput) => {
   const { data } = await axiosRestaurants.get('/restaurantsTextSearch', {
     params: {
       keyword,
+      isRestaurant,
       nextPageParams: nextPageParams ? nextPageParams : null,
     },
   });

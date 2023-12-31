@@ -7,8 +7,10 @@ import { useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';
 import { GooglePlace } from 'types/types';
+import { StackScreenPropsAbout } from 'types/screenType';
+import BriefRestaurantInfoForStamp from 'components/stackScreen/makeStampScreen/BriefRestaurantInfoForStamp';
 
-export default function FindRestaurantInfoForMakePostScreen() {
+export default function FindRestaurantInfoScreen({ route }: StackScreenPropsAbout<'FindRestaurantInfoScreen'>) {
   const [textInputValue, setTextInputValue] = useState('');
   const [searchResult, setSearchResult] = useState<GooglePlace[]>([]);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
@@ -29,7 +31,7 @@ export default function FindRestaurantInfoForMakePostScreen() {
 
   const onEndEditingHandler = () => {
     if (textInputValue) {
-      mutate(textInputValue);
+      mutate({ keyword: textInputValue, isRestaurant: false });
     }
   };
 
@@ -38,20 +40,31 @@ export default function FindRestaurantInfoForMakePostScreen() {
       <View style={styles.search}>
         <TextInput
           style={styles.textInput}
-          placeholder="식당이름 or 지역이름 식당이름 검색"
+          placeholder={route.params.forWhich === 'makePost' ? '식당 or 지역 식당 검색' : '장소 or 지역 장소 검색'}
           value={textInputValue}
           onChangeText={onChangeTextHandler}
           onEndEditing={onEndEditingHandler}
         />
-        <Text style={styles.example}>ex) 맛있는식당 or 서울 맛있는식당</Text>
+        <Text style={styles.example}>
+          {route.params.forWhich === 'makePost'
+            ? 'ex) 식당이름 or 서울 강남 식당이름'
+            : 'ex) 장소이름 or 서울 강남 장소이름'}
+        </Text>
+        <Text style={styles.example}>Tip. 지역이름을 붙이면 찾기 쉬워요</Text>
       </View>
       <FlatList
-        style={[styles.searchResult, searchResult.length !==0 && styles.hasResult]}
+        style={[styles.searchResult, searchResult.length !== 0 && styles.hasResult]}
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item.place_id}
         ItemSeparatorComponent={() => <Line style={styles.line} />}
         data={searchResult}
-        renderItem={({ item }) => <BriefRestaurantInfoForTag restaurantInfo={item} />}
+        renderItem={({ item }) =>
+          route.params.forWhich === 'makePost' ? (
+            <BriefRestaurantInfoForTag restaurantInfo={item} />
+          ) : (
+            <BriefRestaurantInfoForStamp restaurantInfo={item} />
+          )
+        }
       />
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}
@@ -86,11 +99,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   searchResult: {
-    flex: 1
+    flex: 1,
   },
   hasResult: {
     borderTopWidth: 1,
-    borderTopColor: Colors.superLightGray
+    borderTopColor: Colors.superLightGray,
   },
   line: {
     width: '100%',
