@@ -72,7 +72,7 @@ export default function LeaveAComment({ postId }: Props) {
 const styles = StyleSheet.create({
   wrap: {
     width: '100%',
-    height: 50,
+    height: 60,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

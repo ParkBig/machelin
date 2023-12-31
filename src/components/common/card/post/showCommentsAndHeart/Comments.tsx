@@ -12,10 +12,9 @@ export default function Comments({ postId }: Props) {
   const { comments, commentsIsLoading } = usePostsCommentsQuery(postId);
 
   return (
-    <>
+    <View style={styles.FlatWrap}>
       {comments && !commentsIsLoading && (
         <FlatList
-          style={styles.FlatWrap}
           showsVerticalScrollIndicator={false}
           data={comments.comments}
           keyExtractor={item => `${item.id}`}
@@ -45,7 +44,7 @@ export default function Comments({ postId }: Props) {
           }}
         />
       )}
-    </>
+    </View>
   );
 }
 

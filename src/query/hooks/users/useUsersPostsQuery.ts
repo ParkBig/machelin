@@ -15,7 +15,7 @@ export default function useUsersPostsQuery() {
     fetchNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery<PostQueryResponse, unknown, IPost>(
-    ['usersPostsTest', myId],
+    ['usersPosts', myId],
     async ({ pageParam = 1 }) => {
       const { data } = await axiosPosts.get('/usersPosts', {
         params: {
