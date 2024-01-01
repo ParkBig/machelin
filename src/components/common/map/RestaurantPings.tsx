@@ -2,8 +2,6 @@ import useNearbyRestaurantsSearchQuery from 'query/hooks/restaurants/useNearbyRe
 import { memo } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
-import { useRecoilValue } from 'recoil';
-import { focusedRestaurantState } from 'store/locationState';
 import { GooglePlace } from 'types/types';
 
 interface Props {
@@ -11,23 +9,13 @@ interface Props {
 }
 
 const MemoizedMarker = memo(({ restaurantInfo }: Props) => {
-  const focusedRestaurant = useRecoilValue(focusedRestaurantState);
-
   return (
     <Marker
       coordinate={{ latitude: restaurantInfo.geometry.location.lat, longitude: restaurantInfo.geometry.location.lng }}
       title={restaurantInfo.name}
     >
       <View style={styles.wrap}>
-        <Image
-          source={
-            focusedRestaurant.id === restaurantInfo.place_id
-              ? require('assets/png/restaurant-red-ping.png')
-              : require('assets/png/restaurant-ping.png')
-          }
-          style={styles.image}
-          resizeMode="cover"
-        />
+        <Image source={require('assets/png/restaurant-ping.png')} style={styles.image} resizeMode="cover" />
       </View>
     </Marker>
   );

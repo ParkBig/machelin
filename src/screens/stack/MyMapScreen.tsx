@@ -8,9 +8,9 @@ import useUsersBookmarksQuery from 'query/hooks/users/useUsersBookmarksQuery';
 import { StyleSheet, View } from 'react-native';
 
 export default function MyMapScreen() {
-  const { myInfo, myInfoIsLoading } = useMyInfoQuery();
-  const { postsIsLoading } = useUsersPostForMyMapQuery(myInfo?.authUser?.id);
-  const { bookmarksIsLoading } = useUsersBookmarksQuery(myInfo?.authUser?.id);
+  const { myInfoIsLoading } = useMyInfoQuery();
+  const { postsIsLoading } = useUsersPostForMyMapQuery();
+  const { bookmarksIsLoading } = useUsersBookmarksQuery();
 
   return (
     <View style={styles.wrap}>
