@@ -3,6 +3,8 @@ import useUsersBookmarksQuery from 'query/hooks/users/useUsersBookmarksQuery';
 import { memo } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
+import { useRecoilValue } from 'recoil';
+import { clickedMyMapListTypeState } from 'store/toggleState';
 import { Bookmark } from 'types/types';
 
 interface Props {
@@ -31,14 +33,15 @@ const styles = StyleSheet.create({
 });
 
 export default function BookmarkPings() {
-  const { myInfo } = useMyInfoQuery();
-  const { bookmarks } = useUsersBookmarksQuery(myInfo?.authUser?.id);
+  const { bookmarks } = useUsersBookmarksQuery();
+  const clickedMyMapListType = useRecoilValue(clickedMyMapListTypeState);
 
   return (
     <>
-      {bookmarks?.bookmarks?.map((bookmark, index) => (
-        <MemoizedMarker key={`${bookmark.id}_${index}`} bookmark={bookmark} />
-      ))}
+      {clickedMyMapListType === 'bookmarks' &&
+        bookmarks?.bookmarks?.map((bookmark, index) => (
+          <MemoizedMarker key={`${bookmark.id}_${index}`} bookmark={bookmark} />
+        ))}
     </>
   );
 }

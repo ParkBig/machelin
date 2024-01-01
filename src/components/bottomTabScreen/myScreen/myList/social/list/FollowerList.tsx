@@ -9,7 +9,7 @@ import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 
 export default function FollowerList() {
   const { myInfo } = useMyInfoQuery();
-  const { followers, followersIsLoading, isReFollowers } = useUsersFollowersQuery(myInfo?.authUser?.id);
+  const { followers, followersIsLoading, isReFollowers } = useUsersFollowersQuery();
   const followersExist = followers?.followers && followers.followers.length !== 0 ? true : false;
 
   return (

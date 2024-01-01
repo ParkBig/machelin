@@ -6,34 +6,31 @@ import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import useUsersPostForMyMapQuery from 'query/hooks/posts/useUsersPostForMyMapQuery';
 import useUsersBookmarksQuery from 'query/hooks/users/useUsersBookmarksQuery';
 import ToMyLocation from 'components/bottomTabScreen/mainScreen/restaurants/functionsBar/functionButtons/ToMyLocation';
-import { WhichOneClickedState } from '../List';
 import useUsersStampsQuery from 'query/hooks/users/useUsersStampsQuery';
+import { useRecoilState } from 'recoil';
+import { ClickedMyMapListTypeState, clickedMyMapListTypeState } from 'store/toggleState';
 
-interface Props {
-  whichOneClicked: WhichOneClickedState;
-  setWhichOneClicked: React.Dispatch<React.SetStateAction<WhichOneClickedState>>;
-}
-
-export default function FunctionsBar({ whichOneClicked, setWhichOneClicked }: Props) {
+export default function FunctionsBar() {
   const { myInfo } = useMyInfoQuery();
   const { stamps } = useUsersStampsQuery();
-  const { posts } = useUsersPostForMyMapQuery(myInfo?.authUser?.id);
-  const { bookmarks } = useUsersBookmarksQuery(myInfo?.authUser?.id);
+  const { posts } = useUsersPostForMyMapQuery();
+  const { bookmarks } = useUsersBookmarksQuery();
+  const [clickedMyMapListType, setClickedMyMapListType] = useRecoilState(clickedMyMapListTypeState);
 
   const stampsLength = stamps?.stamps.length ? stamps.stamps.length : 0;
   const bookmarksLength = bookmarks?.bookmarks?.length ? bookmarks?.bookmarks?.length : 0;
   const postsLength = posts?.posts?.length ? posts?.posts.length : 0;
 
-  const changeWhichOneClickedStateHandler = (clicked: WhichOneClickedState) => {
+  const changeWhichOneClickedStateHandler = (clicked: ClickedMyMapListTypeState) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    if (whichOneClicked) {
-      if (whichOneClicked === clicked) {
-        setWhichOneClicked(null);
+    if (clickedMyMapListType) {
+      if (clickedMyMapListType === clicked) {
+        setClickedMyMapListType(null);
       } else {
-        setWhichOneClicked(clicked);
+        setClickedMyMapListType(clicked);
       }
     } else {
-      setWhichOneClicked(clicked);
+      setClickedMyMapListType(clicked);
     }
   };
 
@@ -43,7 +40,7 @@ export default function FunctionsBar({ whichOneClicked, setWhichOneClicked }: Pr
         <Button style={styles.button} onPress={changeWhichOneClickedStateHandler.bind(null, 'stamps')}>
           <Ionicons
             style={styles.ionicons}
-            name={whichOneClicked === 'stamps' ? 'paw' : 'paw-outline'}
+            name={clickedMyMapListType === 'stamps' ? 'paw' : 'paw-outline'}
             size={25}
             color={Colors.mainWhite3}
           />
@@ -52,7 +49,7 @@ export default function FunctionsBar({ whichOneClicked, setWhichOneClicked }: Pr
         <Button style={styles.button} onPress={changeWhichOneClickedStateHandler.bind(null, 'bookmarks')}>
           <Ionicons
             style={styles.ionicons}
-            name={whichOneClicked === 'bookmarks' ? 'bookmarks' : 'bookmarks-outline'}
+            name={clickedMyMapListType === 'bookmarks' ? 'bookmarks' : 'bookmarks-outline'}
             size={25}
             color={Colors.mainWhite3}
           />
@@ -61,7 +58,7 @@ export default function FunctionsBar({ whichOneClicked, setWhichOneClicked }: Pr
         <Button style={styles.button} onPress={changeWhichOneClickedStateHandler.bind(null, 'posts')}>
           <Ionicons
             style={styles.ionicons}
-            name={whichOneClicked === 'posts' ? 'reader' : 'reader-outline'}
+            name={clickedMyMapListType === 'posts' ? 'reader' : 'reader-outline'}
             size={25}
             color={Colors.mainWhite3}
           />

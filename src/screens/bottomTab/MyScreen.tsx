@@ -19,12 +19,12 @@ import { clickedMyInfoListTypeState } from 'store/toggleState';
 export default function MyScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [contentsHeight, setContentHeight] = useState(0);
-  const { myInfo, myInfoIsLoading, reMyInfo } = useMyInfoQuery();
+  const { myInfoIsLoading, reMyInfo } = useMyInfoQuery();
   const clickedMyInfoListType = useRecoilValue(clickedMyInfoListTypeState);
-  const { reBookmarks } = useUsersBookmarksQuery(myInfo?.authUser?.id);
+  const { reBookmarks } = useUsersBookmarksQuery();
   const { rePosts, fetchNextPagePosts } = useUsersPostsQuery();
-  const { reFollowers } = useUsersFollowersQuery(myInfo?.authUser?.id);
-  const { reFollows } = useUsersFollowsQuery(myInfo?.authUser?.id);
+  const { reFollowers } = useUsersFollowersQuery();
+  const { reFollows } = useUsersFollowsQuery();
 
   const onRefreshHandler = () => {
     setRefreshing(true);

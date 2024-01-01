@@ -11,7 +11,7 @@ export default function MyLocationPing() {
 
   return (
     <>
-      {myLocation.isGetLocation && (
+      {myLocation.isGetLocation &&  (
         <Marker
           coordinate={{ latitude: myLocation.latitude, longitude: myLocation.longitude }}
           pinColor="default"

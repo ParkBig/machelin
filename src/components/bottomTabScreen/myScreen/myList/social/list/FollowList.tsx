@@ -10,7 +10,7 @@ import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 
 export default function FollowList() {
   const { myInfo } = useMyInfoQuery();
-  const { follows, followsIsLoading, isReFollows } = useUsersFollowsQuery(myInfo?.authUser?.id);
+  const { follows, followsIsLoading, isReFollows } = useUsersFollowsQuery();
   const followsExist = follows?.follows && follows.follows.length !== 0 ? true : false;
 
   return (
