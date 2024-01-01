@@ -1,13 +1,17 @@
 import { axiosUsers } from 'query/user';
 import { useQuery } from 'react-query';
 import { UserInfo } from 'types/types';
+import useMyInfoQuery from './useMyInfoQuery';
 
 interface Data {
   ok: boolean;
   follows: UserInfo[];
 }
 
-export default function useUsersFollowsQuery(userId?: number) {
+export default function useUsersFollowsQuery() {
+  const { myInfo } = useMyInfoQuery();
+  const userId = myInfo?.authUser?.id;
+
   const {
     isLoading: followsIsLoading,
     isError,

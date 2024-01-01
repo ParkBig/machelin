@@ -8,7 +8,7 @@ import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 export default function Bookmarks() {
   const { myInfo } = useMyInfoQuery();
-  const { bookmarks, bookmarksIsLoading } = useUsersBookmarksQuery(myInfo?.authUser?.id);
+  const { bookmarks, bookmarksIsLoading } = useUsersBookmarksQuery();
   const bookmarksIsExist = bookmarks?.bookmarks && bookmarks.bookmarks.length !== 0 ? true : false;
 
   return (

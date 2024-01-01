@@ -32,3 +32,9 @@ export const clickedExploreUserInfoListTypeState = atom<ClickedMyInfoListTypeSta
   default: 'posts',
 });
 
+export type ClickedMyMapListTypeState = 'bookmarks' | 'posts' | 'stamps' | null;
+
+export const clickedMyMapListTypeState = atom<ClickedMyMapListTypeState>({
+  key: 'clickedMyMapListTypeState',
+  default: null,
+})

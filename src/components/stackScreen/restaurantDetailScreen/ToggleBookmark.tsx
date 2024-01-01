@@ -16,8 +16,8 @@ interface Props {
 
 export default function ToggleBookmark({ restaurantId }: Props) {
   const { restaurantDetail, restaurantDetailIsLoading } = useRestaurantDetailQuery(restaurantId);
-  const { myInfo, reMyInfo } = useMyInfoQuery();
-  const { bookmarks, reBookmarks } = useUsersBookmarksQuery(myInfo?.authUser?.id);
+  const { reMyInfo } = useMyInfoQuery();
+  const { bookmarks, reBookmarks } = useUsersBookmarksQuery();
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
   const { mutate } = useMutation(toggleBookmarkQuery, {

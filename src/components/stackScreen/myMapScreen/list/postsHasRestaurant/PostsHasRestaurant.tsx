@@ -9,7 +9,7 @@ import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 
 export default function PostsHasRestaurant() {
   const { myInfo } = useMyInfoQuery();
-  const { posts, postsIsLoading } = useUsersPostForMyMapQuery(myInfo?.authUser?.id);
+  const { posts, postsIsLoading } = useUsersPostForMyMapQuery();
   const postsIsExist = posts?.posts && posts.posts.length !== 0 ? true : false;
 
   return (

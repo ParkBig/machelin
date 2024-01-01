@@ -21,7 +21,7 @@ interface Props {
 
 export default function Hearts({ postId, postsLikes, rePosts }: Props) {
   const { myInfo } = useMyInfoQuery();
-  const { usersPostLikesDislikes, reUsersPostLikesDislikes } = useUsersPostLikesDislikesQuery(myInfo?.authUser?.id);
+  const { usersPostLikesDislikes, reUsersPostLikesDislikes } = useUsersPostLikesDislikesQuery();
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const { mutate } = useMutation(togglePostLikeDislike, {
     onSuccess: res => {
