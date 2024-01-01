@@ -5,6 +5,8 @@ import { IStamp } from 'types/types';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from 'const/global-styles';
 import useUsersStampsQuery from 'query/hooks/users/useUsersStampsQuery';
+import { clickedMyMapListTypeState } from 'store/toggleState';
+import { useRecoilValue } from 'recoil';
 
 interface Props {
   stamp: IStamp;
@@ -33,6 +35,12 @@ const styles = StyleSheet.create({
 
 export default function StampPings() {
   const { stamps } = useUsersStampsQuery();
+  const clickedMyMapListType = useRecoilValue(clickedMyMapListTypeState);
 
-  return <>{stamps?.stamps?.map((stamp, index) => <MemoizedMarker key={`${stamp.id}_${index}`} stamp={stamp} />)}</>;
+  return (
+    <>
+      {clickedMyMapListType === 'stamps' &&
+        stamps?.stamps?.map((stamp, index) => <MemoizedMarker key={`${stamp.id}_${index}`} stamp={stamp} />)}
+    </>
+  );
 }

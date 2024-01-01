@@ -1,6 +1,7 @@
 import { axiosPosts } from 'query/posts';
 import { useQuery } from 'react-query';
 import { IPost } from 'types/types';
+import useMyInfoQuery from '../users/useMyInfoQuery';
 
 interface Data {
   ok: boolean;
@@ -8,7 +9,10 @@ interface Data {
   posts: IPost[];
 }
 
-export default function useUsersPostForMyMapQuery(userId?: number) {
+export default function useUsersPostForMyMapQuery() {
+  const { myInfo } = useMyInfoQuery();
+  const userId = myInfo?.authUser?.id;
+
   const {
     data: posts,
     refetch: rePosts,

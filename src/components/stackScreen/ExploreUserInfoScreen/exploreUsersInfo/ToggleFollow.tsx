@@ -16,7 +16,7 @@ interface Props {
 export default function ToggleFollow({ exploreUserId }: Props) {
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const { myInfo, reMyInfo } = useMyInfoQuery();
-  const { follows, reFollows } = useUsersFollowsQuery(myInfo?.authUser.id);
+  const { follows, reFollows } = useUsersFollowsQuery();
   const { mutate } = useMutation(toggleFriendStateQuery, {
     onSuccess: res => {
       if (res.ok) {

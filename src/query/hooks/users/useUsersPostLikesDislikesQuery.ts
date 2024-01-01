@@ -1,6 +1,7 @@
 import { axiosPosts } from 'query/posts';
 import { useQuery } from 'react-query';
 import { Like } from 'types/types';
+import useMyInfoQuery from './useMyInfoQuery';
 
 interface Data {
   ok: boolean;
@@ -9,7 +10,10 @@ interface Data {
   usersDislikes: Like[];
 }
 
-export default function useUsersPostLikesDislikesQuery(userId?: number) {
+export default function useUsersPostLikesDislikesQuery() {
+  const { myInfo } = useMyInfoQuery();
+  const userId = myInfo?.authUser?.id
+
   const { data: usersPostLikesDislikes, refetch: reUsersPostLikesDislikes } = useQuery<Data>(
     ['usersPostLikesDislikes', userId],
     async () => {

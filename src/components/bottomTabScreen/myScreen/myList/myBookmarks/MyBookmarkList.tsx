@@ -10,7 +10,7 @@ import AvailableAfterLogin from 'components/common/modal/AvailableAfterLogin';
 
 export default function MyBookmarkList() {
   const { myInfo } = useMyInfoQuery();
-  const { bookmarks, bookmarksIsLoading, isReBookmarks } = useUsersBookmarksQuery(myInfo?.authUser?.id);
+  const { bookmarks, bookmarksIsLoading, isReBookmarks } = useUsersBookmarksQuery();
   const bookmarksExist = bookmarks?.bookmarks && bookmarks.bookmarks.length !== 0 ? true : false;
 
   return (
