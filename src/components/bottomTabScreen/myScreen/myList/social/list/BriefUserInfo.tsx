@@ -14,7 +14,7 @@ interface Props {
 }
 
 export default function BriefUserInfo({ userInfo }: Props) {
-  const navigation = useNavigation<UseNavigation<'MyScreen'>>();
+  const navigation = useNavigation<UseNavigation<'MyScreen' | 'ExploreUserInfoScreen'>>();
   const [isOpenInfo, setIsOpenInfo] = useState(false);
 
   const bookmarks = userInfo.bookmarks?.length;

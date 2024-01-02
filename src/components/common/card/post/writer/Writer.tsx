@@ -15,7 +15,7 @@ export default function Writer({ posts }: Props) {
   return (
     <>
       <View style={styles.wrap}>
-        <Info pfp={posts.owner.pfp} nickname={posts.owner.nickname} />
+        <Info pfp={posts.owner.pfp} nickname={posts.owner.nickname} userInfoId={posts.owner.id} />
         <Options postId={posts.id} ownerId={posts.owner.id} isPublic={posts.isPublic} />
       </View>
       <View>
