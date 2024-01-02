@@ -6,9 +6,9 @@ export default function MyEmail() {
 
   return (
     <View style={styles.wrap}>
-      <Text style={styles.titleText}>이메일</Text>
-      <View style={styles.email}>
-        <Text>{myInfo?.authUser?.email}</Text>
+      <Text style={styles.titleText}>아이디</Text>
+      <View style={styles.loginId}>
+        <Text>{myInfo?.authUser?.loginId}</Text>
       </View>
     </View>
   );
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   titleText: {
     fontWeight: 'bold',
   },
-  email: {
+  loginId: {
     flexDirection: 'row',
     alignItems: 'center',
     opacity: 0.7,

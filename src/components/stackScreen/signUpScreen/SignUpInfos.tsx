@@ -10,7 +10,7 @@ import { useMutation } from 'react-query';
 import { UseNavigation, UseRouter } from 'types/screenType';
 
 interface Infos {
-  email: string;
+  loginId: string;
   password: string;
   passwordCheck: string;
   nickname: string;
@@ -19,7 +19,7 @@ interface Infos {
 export default function SignUpInfos() {
   const { navigate } = useNavigation<UseNavigation<'SignUpScreen'>>();
   const { params } = useRoute<UseRouter<'SignUpScreen'>>();
-  const [infos, setInfos] = useState<Infos>({ email: '', password: '', passwordCheck: '', nickname: '' });
+  const [infos, setInfos] = useState<Infos>({ loginId: '', password: '', passwordCheck: '', nickname: '' });
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const { mutate, isLoading } = useMutation(signUpQuery, {
     onSuccess: res => {
@@ -34,19 +34,14 @@ export default function SignUpInfos() {
     },
   });
 
-  const setInfosHandler = (which: 'email' | 'password' | 'nickname' | 'passwordCheck', text: string) => {
+  const setInfosHandler = (which: 'loginId' | 'password' | 'nickname' | 'passwordCheck', text: string) => {
     setInfos(prev => ({ ...prev, [which]: text }));
   };
 
   const signUpHandler = () => {
     const mobile = params.mobile;
-    const { email, password, passwordCheck, nickname } = infos;
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const { loginId, password, passwordCheck, nickname } = infos;
 
-    if (!emailRegex.test(email)) {
-      setToggleAlertModal({ toggle: true, alertMsg: '이메일 양식을 지켜주세요' });
-      return;
-    }
     if (password !== passwordCheck) {
       setToggleAlertModal({ toggle: true, alertMsg: '비밀번호가 일치하지 않아요' });
       return;
@@ -56,7 +51,7 @@ export default function SignUpInfos() {
       return;
     }
 
-    mutate({ email, password, nickname, mobile });
+    mutate({ loginId, password, nickname, mobile });
   };
 
   return (
@@ -66,10 +61,10 @@ export default function SignUpInfos() {
           style={styles.input}
           autoCorrect={false}
           autoCapitalize="none"
-          keyboardType="email-address"
-          placeholder="이메일 입력"
-          onChangeText={setInfosHandler.bind(null, 'email')}
-          value={infos.email}
+          keyboardType="default"
+          placeholder="아이디 입력"
+          onChangeText={setInfosHandler.bind(null, 'loginId')}
+          value={infos.loginId}
         />
         <TextInput
           style={styles.input}
