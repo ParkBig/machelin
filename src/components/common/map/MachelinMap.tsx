@@ -3,7 +3,7 @@ import MapView, { MapPressEvent } from 'react-native-maps';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { MapLocationState, focusedRestaurantState, mapLocationState, myLocationState } from 'store/locationState';
 import { PermissionStatus, getCurrentPositionAsync, requestForegroundPermissionsAsync } from 'expo-location';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 interface Props {
   onPress?: (event: MapPressEvent) => void;
@@ -48,17 +48,19 @@ export default function MachelinMap({ onPress, children }: Props) {
       }
 
       const getMyLocation = await getCurrentPositionAsync();
+      const latitude = getMyLocation.coords.latitude;
+      const longitude = getMyLocation.coords.longitude;
 
       setMyLocation({
         isGetLocation: true,
-        latitude: getMyLocation.coords.latitude,
-        longitude: getMyLocation.coords.longitude,
+        latitude,
+        longitude,
       });
 
       setMapLocation(prev => ({
         ...prev,
-        latitude: getMyLocation.coords.latitude,
-        longitude: getMyLocation.coords.longitude,
+        latitude,
+        longitude,
       }));
     };
 
@@ -66,16 +68,18 @@ export default function MachelinMap({ onPress, children }: Props) {
   }, [setMyLocation, setMapLocation]);
 
   return (
-    <MapView
-      ref={mapRef}
-      style={styles.map}
-      region={mapLocation}
-      initialRegion={mapLocation}
-      onPress={onPress}
-      onRegionChangeComplete={onRegionChangeHandler}
-    >
-      {children}
-    </MapView>
+    <View style={styles.map}>
+      <MapView
+        ref={mapRef}
+        style={styles.map}
+        region={mapLocation}
+        initialRegion={mapLocation}
+        onPress={onPress}
+        onRegionChangeComplete={onRegionChangeHandler}
+      >
+        {children}
+      </MapView>
+    </View>
   );
 }
 
