@@ -13,7 +13,11 @@ interface Props {
 
 const MemoizedMarker = memo(({ bookmark }: Props) => {
   return (
-    <Marker coordinate={{ latitude: +bookmark.lat, longitude: +bookmark.lng }} title={bookmark.restaurantName}>
+    <Marker
+      tracksViewChanges={true}
+      coordinate={{ latitude: +bookmark.lat, longitude: +bookmark.lng }}
+      title={bookmark.restaurantName}
+    >
       <View style={styles.wrap}>
         <Image source={require('assets/png/bookmark-ping.png')} style={styles.image} resizeMode="cover" />
       </View>
