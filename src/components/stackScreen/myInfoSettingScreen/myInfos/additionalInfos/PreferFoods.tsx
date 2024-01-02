@@ -17,6 +17,8 @@ export default function PreferFoods() {
     navigate('ChangeMyPreferFoodsScreen');
   };
 
+  const preferFoods = myInfo?.authUser.preferFoods.length ? myInfo?.authUser.preferFoods.join(', ') : null;
+
   return (
     <View style={styles.wrap}>
       <View style={styles.title}>
@@ -26,11 +28,6 @@ export default function PreferFoods() {
       <Button style={styles.preferFoodsWrap} onPress={navigateToChangeMyPreferFoodsHandler}>
         <View style={styles.preferFoods}>
           {preferFoods ? <Text>{preferFoods}</Text> : <Text style={styles.noneText}>선호음식이 없어요...</Text>}
-          {/* {myInfo?.authUser.preferFoods.length === 0 ? (
-            <Text style={styles.noneText}>선호음식이 없어요...</Text>
-          ) : (
-            myInfo?.authUser.preferFoods.map((preferFood, i) => <Text key={preferFood + i}>{preferFood}</Text>)
-          )} */}
         </View>
         <Ionicons name="chevron-forward-outline" size={20} />
       </Button>
