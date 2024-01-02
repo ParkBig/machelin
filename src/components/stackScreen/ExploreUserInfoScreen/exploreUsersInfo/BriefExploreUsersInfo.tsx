@@ -23,7 +23,7 @@ export default function BriefExploreUsersInfo() {
           <Text style={styles.nickname}>{exploreUser?.exploreUser.nickname}</Text>
         </View>
         <View>
-          <Text style={styles.email}>{exploreUser?.exploreUser.email}</Text>
+          <Text style={styles.loginId}>{exploreUser?.exploreUser.loginId}</Text>
         </View>
       </View>
     </View>
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   nickname: {
     fontSize: 25,
   },
-  email: {
+  loginId: {
     fontSize: 15,
     color: Colors.gray,
   },

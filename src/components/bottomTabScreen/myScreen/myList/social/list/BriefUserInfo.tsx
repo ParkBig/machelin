@@ -38,12 +38,12 @@ export default function BriefUserInfo({ userInfo }: Props) {
           <Image style={styles.image} source={userInfo.pfp ? { uri: userInfo.pfp } : require('assets/png/user.png')} />
         </View>
         <View style={styles.info}>
-          <View style={styles.nameEmail}>
+          <View style={styles.nameLoginId}>
             <View>
               <Text style={styles.nicknameText}>{userInfo.nickname} </Text>
             </View>
             <View>
-              <Text style={styles.emailText}>{userInfo.email}</Text>
+              <Text style={styles.loginIdText}>{userInfo.loginId}</Text>
             </View>
           </View>
           <ToggleFollow exploreUserId={userInfo.id} />
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 5,
   },
-  nameEmail: {
+  nameLoginId: {
     flex: 1,
     justifyContent: 'center',
     flexWrap: 'wrap',
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   nicknameText: {
     fontSize: Size.normalMiddle,
   },
-  emailText: {
+  loginIdText: {
     color: Colors.darkGray,
   },
   rankText: {

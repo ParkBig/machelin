@@ -12,13 +12,13 @@ import { UseNavigation } from 'types/screenType';
 import { storeToken } from 'util/tokenDB';
 
 interface Infos {
-  email: string;
+  loginId: string;
   password: string;
 }
 
 export default function LoginInfos() {
   const { navigate } = useNavigation<UseNavigation<'LoginScreen'>>();
-  const [infos, setInfos] = useState<Infos>({ email: '', password: '' });
+  const [infos, setInfos] = useState<Infos>({ loginId: '', password: '' });
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const { reMyInfo, myInfo } = useMyInfoQuery();
 
@@ -36,13 +36,13 @@ export default function LoginInfos() {
     },
   });
 
-  const setInfosHandler = (which: 'email' | 'password', text: string) => {
+  const setInfosHandler = (which: 'loginId' | 'password', text: string) => {
     setInfos(prev => ({ ...prev, [which]: text }));
   };
 
   const loginHandler = () => {
-    const { email, password } = infos;
-    mutate({ email, password });
+    const { loginId, password } = infos;
+    mutate({ loginId, password });
   };
 
   useEffect(() => {
@@ -58,10 +58,10 @@ export default function LoginInfos() {
           style={styles.input}
           autoCorrect={false}
           autoCapitalize="none"
-          keyboardType="email-address"
-          placeholder="이메일"
-          onChangeText={setInfosHandler.bind(null, 'email')}
-          value={infos.email}
+          keyboardType="default"
+          placeholder="아이디"
+          onChangeText={setInfosHandler.bind(null, 'loginId')}
+          value={infos.loginId}
         />
         <TextInput
           style={styles.input}
