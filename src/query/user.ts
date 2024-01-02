@@ -3,7 +3,7 @@ import axios from 'axios';
 import Constants from 'expo-constants';
 
 export const axiosUsers = axios.create({
-  baseURL: `${Constants.manifest?.extra?.EXPO_PROD_SERVER_URL}/users`,
+  baseURL: `${Constants.manifest?.extra?.EXPO_DEV_SERVER_URL}/users`,
 });
 
 axiosUsers.interceptors.request.use(async config => {
@@ -15,7 +15,7 @@ axiosUsers.interceptors.request.use(async config => {
 });
 
 interface LoginInput {
-  email: string;
+  loginId: string;
   password: string;
 }
 
