@@ -85,9 +85,7 @@ export default function MachelinMap({ onPress, children }: Props) {
 
 const styles = StyleSheet.create({
   map: {
-    position: 'absolute',
     height: '100%',
     width: '100%',
-    zIndex: 1,
   },
 });

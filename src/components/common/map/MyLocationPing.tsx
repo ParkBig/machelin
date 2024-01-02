@@ -1,5 +1,6 @@
 import { Colors, Shadow } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
+import { useEffect, useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
 import { useRecoilValue } from 'recoil';
@@ -8,12 +9,23 @@ import { myLocationState } from 'store/locationState';
 export default function MyLocationPing() {
   const { myInfo } = useMyInfoQuery();
   const myLocation = useRecoilValue(myLocationState);
+  const [isTrack, setIsTrack] = useState(false);
+
+  useEffect(() => {
+    setIsTrack(true);
+
+    const trackOut = setTimeout(() => {
+      setIsTrack(false);
+    }, 600);
+
+    return () => clearInterval(trackOut);
+  }, [myLocation]);
 
   return (
     <>
-      {myLocation.isGetLocation &&  (
+      {myLocation.isGetLocation && (
         <Marker
-          tracksViewChanges={true}
+          tracksViewChanges={isTrack}
           coordinate={{ latitude: myLocation.latitude, longitude: myLocation.longitude }}
           pinColor="default"
           title="내위치"

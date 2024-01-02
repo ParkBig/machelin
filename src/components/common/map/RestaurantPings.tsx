@@ -11,7 +11,7 @@ interface Props {
 const MemoizedMarker = memo(({ restaurantInfo }: Props) => {
   return (
     <Marker
-      tracksViewChanges={true}
+      tracksViewChanges={false}
       coordinate={{ latitude: restaurantInfo.geometry.location.lat, longitude: restaurantInfo.geometry.location.lng }}
       title={restaurantInfo.name}
     >
