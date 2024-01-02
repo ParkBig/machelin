@@ -106,9 +106,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.mainWhite1,
     gap: 20,
   },
-  email: {
-    width: '100%',
-  },
   phoneNumber: {
     width: '100%',
     gap: 20,

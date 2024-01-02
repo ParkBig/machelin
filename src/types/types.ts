@@ -105,6 +105,7 @@ export interface UserInfo {
   updatedAt: Date;
   role: 'ADMIN' | 'USER';
   mobile: string;
+  loginId: string;
   email: string;
   password: string;
   nickname: string;

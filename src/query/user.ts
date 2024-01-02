@@ -15,7 +15,7 @@ axiosUsers.interceptors.request.use(async config => {
 });
 
 interface LoginInput {
-  email: string;
+  loginId: string;
   password: string;
 }
 

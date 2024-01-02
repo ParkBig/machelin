@@ -27,8 +27,8 @@ export default function BriefLoginInfo() {
           <Text style={styles.nickname}>{myInfo?.authUser?.nickname}</Text>
         </View>
         <View>
-          <Text style={styles.email} ellipsizeMode="tail">
-            {myInfo?.authUser?.email}
+          <Text style={styles.loginId} ellipsizeMode="tail">
+            {myInfo?.authUser?.loginId}
           </Text>
         </View>
       </View>
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   nickname: {
     fontSize: 25,
   },
-  email: {
+  loginId: {
     fontSize: 15,
     color: Colors.gray,
   },
