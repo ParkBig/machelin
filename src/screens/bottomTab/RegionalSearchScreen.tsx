@@ -25,11 +25,13 @@ export default function RegionalSearchScreen() {
       }
 
       const getMyLocation = await getCurrentPositionAsync();
+      const latitude = getMyLocation.coords.latitude;
+      const longitude = getMyLocation.coords.longitude;
 
       setMyLocation({
         isGetLocation: true,
-        latitude: getMyLocation.coords.latitude,
-        longitude: getMyLocation.coords.longitude,
+        latitude,
+        longitude,
       });
     };
 

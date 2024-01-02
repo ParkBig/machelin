@@ -13,6 +13,7 @@ export default function MyLocationPing() {
     <>
       {myLocation.isGetLocation &&  (
         <Marker
+          tracksViewChanges={true}
           coordinate={{ latitude: myLocation.latitude, longitude: myLocation.longitude }}
           pinColor="default"
           title="내위치"
