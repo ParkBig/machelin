@@ -8,6 +8,8 @@ export default function AdditionalInfos() {
 
   if (!myInfo?.authUser) return null;
 
+  const preferFoods = myInfo?.authUser.preferFoods.length ? myInfo?.authUser.preferFoods.join(', ') : null;
+
   return (
     <View style={styles.wrap}>
       <View style={styles.info}>
@@ -29,11 +31,7 @@ export default function AdditionalInfos() {
           <Line style={styles.line} />
         </View>
         <View style={styles.medalsEarned}>
-          {myInfo.authUser.preferFoods.length === 0 ? (
-            <Text style={styles.noneText}>선호음식이 없어요...</Text>
-          ) : (
-            myInfo.authUser.preferFoods.map((preferFood, i) => <Text key={preferFood + i}>{preferFood}</Text>)
-          )}
+          {preferFoods ? <Text>{preferFoods}</Text> : <Text style={styles.noneText}>선호음식이 없어요...</Text>}
         </View>
       </View>
       <View style={styles.info}>

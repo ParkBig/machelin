@@ -1,6 +1,5 @@
-import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import useUsersBookmarksQuery from 'query/hooks/users/useUsersBookmarksQuery';
-import { memo } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
 import { useRecoilValue } from 'recoil';
@@ -12,8 +11,25 @@ interface Props {
 }
 
 const MemoizedMarker = memo(({ bookmark }: Props) => {
+  const [isTrack, setIsTrack] = useState(false);
+  const clickedMyMapListType = useRecoilValue(clickedMyMapListTypeState);
+
+  useEffect(() => {
+    setIsTrack(true);
+
+    const trackOut = setTimeout(() => {
+      setIsTrack(false);
+    }, 600);
+
+    return () => clearInterval(trackOut);
+  }, [clickedMyMapListType]);
+
   return (
-    <Marker coordinate={{ latitude: +bookmark.lat, longitude: +bookmark.lng }} title={bookmark.restaurantName}>
+    <Marker
+      tracksViewChanges={isTrack}
+      coordinate={{ latitude: +bookmark.lat, longitude: +bookmark.lng }}
+      title={bookmark.restaurantName}
+    >
       <View style={styles.wrap}>
         <Image source={require('assets/png/bookmark-ping.png')} style={styles.image} resizeMode="cover" />
       </View>

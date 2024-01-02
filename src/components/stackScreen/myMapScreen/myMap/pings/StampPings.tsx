@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
 import { IStamp } from 'types/types';
@@ -13,8 +13,22 @@ interface Props {
 }
 
 const MemoizedMarker = memo(({ stamp }: Props) => {
+  const [isTrack, setIsTrack] = useState(false);
+  const clickedMyMapListType = useRecoilValue(clickedMyMapListTypeState);
+
+  useEffect(() => {
+    setIsTrack(true);
+
+    const trackOut = setTimeout(() => {
+      setIsTrack(false);
+    }, 600);
+
+    return () => clearInterval(trackOut);
+  }, [clickedMyMapListType]);
+
+
   return (
-    <Marker coordinate={{ latitude: +stamp.lat, longitude: +stamp.lng }} title={stamp.title}>
+    <Marker tracksViewChanges={isTrack} coordinate={{ latitude: +stamp.lat, longitude: +stamp.lng }} title={stamp.title}>
       <View style={styles.wrap}>
         <Ionicons name="paw" size={25} color={Colors.mainWhite3} />
       </View>
