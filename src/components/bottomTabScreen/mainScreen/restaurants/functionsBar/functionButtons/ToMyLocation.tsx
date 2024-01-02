@@ -21,17 +21,19 @@ export default function ToMyLocation() {
     }
 
     const getMyLocation = await getCurrentPositionAsync();
+    const latitude = getMyLocation.coords.latitude;
+    const longitude = getMyLocation.coords.longitude;
 
     setMyLocation({
       isGetLocation: true,
-      latitude: getMyLocation.coords.latitude,
-      longitude: getMyLocation.coords.longitude,
+      latitude,
+      longitude,
     });
 
     setMapLocation(prev => ({
       ...prev,
-      latitude: getMyLocation.coords.latitude,
-      longitude: getMyLocation.coords.longitude,
+      latitude,
+      longitude,
     }));
   };
 
