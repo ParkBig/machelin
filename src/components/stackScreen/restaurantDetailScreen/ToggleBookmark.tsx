@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Button from 'components/common/layout/Button';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { Colors } from 'const/global-styles';
-import { toggleBookmarkQuery } from 'query/bookmarks';
+import { toggleBookmarkQuery } from 'query/api/bookmarks';
 import useRestaurantDetailQuery from 'query/hooks/restaurants/useRestaurantDetailQuery';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import useUsersBookmarksQuery from 'query/hooks/users/useUsersBookmarksQuery';

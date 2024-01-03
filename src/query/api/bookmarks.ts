@@ -1,18 +1,6 @@
-import axios from 'axios';
-import Constants from 'expo-constants';
-import { takeToken } from 'util/tokenDB';
+import { createAxiosInstance } from './api';
 
-export const axiosBookmarks = axios.create({
-  baseURL: `${Constants.manifest?.extra?.EXPO_DEV_SERVER_URL}/bookmark`,
-});
-
-axiosBookmarks.interceptors.request.use(async config => {
-  const token = await takeToken();
-  if (token) {
-    config.headers['token'] = token;
-  }
-  return config;
-});
+export const axiosBookmarks = createAxiosInstance('bookmark');
 
 interface ToggleBookmarkInput {
   restaurantId: string;

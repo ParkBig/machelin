@@ -1,4 +1,3 @@
-import { toggleFriendStateQuery } from 'query/user';
 import { StyleSheet, Text, View } from 'react-native';
 import { useMutation } from 'react-query';
 import { Ionicons } from '@expo/vector-icons';
@@ -8,6 +7,7 @@ import useUsersFollowsQuery from 'query/hooks/users/useUsersFollowsQuery';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useState } from 'react';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
+import { toggleFriendStateQuery } from 'query/api/user';
 
 interface Props {
   exploreUserId: number;

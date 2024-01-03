@@ -2,13 +2,13 @@ import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmA
 import Line from 'components/common/layout/Line';
 import BriefRestaurantInfoForTag from 'components/stackScreen/findRestaurantInfoForMakePostScreen/BriefRestaurantInfoForTag';
 import { Colors } from 'const/global-styles';
-import { restaurantsTextSearchQuery } from 'query/restaurants';
 import { useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';
 import { GooglePlace } from 'types/types';
 import { StackScreenPropsAbout } from 'types/screenType';
 import BriefRestaurantInfoForStamp from 'components/stackScreen/makeStampScreen/BriefRestaurantInfoForStamp';
+import { restaurantsTextSearchQuery } from 'query/api/restaurants';
 
 export default function FindRestaurantInfoScreen({ route }: StackScreenPropsAbout<'FindRestaurantInfoScreen'>) {
   const [textInputValue, setTextInputValue] = useState('');

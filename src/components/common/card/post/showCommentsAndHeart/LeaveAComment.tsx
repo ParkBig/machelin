@@ -1,6 +1,6 @@
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { Colors } from 'const/global-styles';
-import { makeCommentQuery } from 'query/comments';
+import { makeCommentQuery } from 'query/api/comments';
 import usePostsCommentsQuery from 'query/hooks/posts/usePostsCommentsQuery';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useState } from 'react';
