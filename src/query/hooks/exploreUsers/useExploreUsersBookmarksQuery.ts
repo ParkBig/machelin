@@ -1,4 +1,4 @@
-import { axiosBookmarks } from 'query/bookmarks';
+import { axiosBookmarks } from 'query/api/bookmarks';
 import { useQuery } from 'react-query';
 import { Bookmark } from 'types/types';
 

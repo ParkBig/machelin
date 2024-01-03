@@ -2,11 +2,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from 'const/global-styles';
 import { useMutation } from 'react-query';
-import { modifyUserPreferFoodQuery } from 'query/user';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useState } from 'react';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import Button from 'components/common/layout/Button';
+import { modifyUserPreferFoodQuery } from 'query/api/user';
 
 interface Props {
   preferFood: string;

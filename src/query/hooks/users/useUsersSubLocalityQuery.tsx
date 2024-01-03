@@ -1,4 +1,4 @@
-import { axiosUsers } from 'query/user';
+import { axiosUsers } from 'query/api/user';
 import { useQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { myLocationState } from 'store/locationState';

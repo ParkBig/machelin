@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import useMyInfoQuery from './useMyInfoQuery';
-import { axiosStamps } from 'query/stamps';
 import { IStamp } from 'types/types';
+import { axiosStamps } from 'query/api/stamps';
 
 interface Data {
   ok: boolean;

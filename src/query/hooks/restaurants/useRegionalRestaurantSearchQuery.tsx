@@ -1,4 +1,3 @@
-import { axiosRestaurants } from 'query/restaurants';
 import { useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
@@ -6,6 +5,7 @@ import { regionalRestaurantSearchInputState } from 'store/searchState';
 import { GooglePlace } from 'types/types';
 import useUsersSubLocalityQuery from '../users/useUsersSubLocalityQuery';
 import trimMySubLocality from 'util/ trimMySubLocality';
+import { axiosRestaurants } from 'query/api/restaurants';
 
 interface Data {
   ok: boolean;
@@ -27,9 +27,9 @@ export default function useRegionalRestaurantSearchQuery() {
   const keyword =
     city === '전체'
       ? myCity
-        ? `${myCity} ${searchText ? searchText : ''}`
-        : `서울 강남 ${searchText ? searchText : ''}`
-      : `${city} ${district === '전체' ? '' : district} ${searchText ? searchText : ''}`;
+        ? `대한민국 ${myCity} ${searchText ? searchText : ''}`
+        : `대한민국서울 강남 ${searchText ? searchText : ''}`
+      : `대한민국 ${city} ${district === '전체' ? '' : district} ${searchText ? searchText : ''}`;
 
   const {
     data: restaurants,

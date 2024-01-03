@@ -9,11 +9,11 @@ import {
   requestMediaLibraryPermissionsAsync,
 } from 'expo-image-picker';
 import { useMutation } from 'react-query';
-import { modifyUserImageQuery } from 'query/user';
 import mime from 'mime';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useState } from 'react';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
+import { modifyUserImageQuery } from 'query/api/user';
 
 export default function MyImage() {
   const { myInfo, reMyInfo } = useMyInfoQuery();

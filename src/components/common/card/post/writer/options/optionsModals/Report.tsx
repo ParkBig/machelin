@@ -5,10 +5,10 @@ import RadioGroup, { RadioButtonProps } from 'react-native-radio-buttons-group';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
-import { reportPostQuery } from 'query/posts';
 import { WhichOneSelectedState } from './OptionsModals';
 import { Ionicons } from '@expo/vector-icons';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
+import { reportPostQuery } from 'query/api/posts';
 
 interface Props {
   postId: number;

@@ -6,9 +6,9 @@ import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmA
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useMutation } from 'react-query';
-import { modifyPostPublicStateQuery } from 'query/posts';
 import useUsersPostsQuery from 'query/hooks/users/useUsersPostsQuery';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
+import { modifyPostPublicStateQuery } from 'query/api/posts';
 
 interface Props {
   postId: number;

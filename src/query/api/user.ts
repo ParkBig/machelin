@@ -1,18 +1,7 @@
 import { deleteToken, takeToken } from 'util/tokenDB';
-import axios from 'axios';
-import Constants from 'expo-constants';
+import { createAxiosInstance } from './api';
 
-export const axiosUsers = axios.create({
-  baseURL: `${Constants.manifest?.extra?.EXPO_DEV_SERVER_URL}/users`,
-});
-
-axiosUsers.interceptors.request.use(async config => {
-  const token = await takeToken();
-  if (token) {
-    config.headers['token'] = token;
-  }
-  return config;
-});
+export const axiosUsers = createAxiosInstance('users');
 
 interface LoginInput {
   loginId: string;

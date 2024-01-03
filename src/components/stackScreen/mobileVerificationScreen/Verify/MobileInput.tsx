@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { LayoutAnimation, StyleSheet, Text, TextInput, View } from 'react-native';
 import ReVerifyModal from './ReVerifyModal';
 import { useMutation } from 'react-query';
-import { sendSignUpVerificationQuery } from 'query/user';
 import VerificationInput from './VerificationInput';
+import { sendSignUpVerificationQuery } from 'query/api/user';
 
 export default function MobileInput() {
   const [isClickedSendVerify, setIsClickedSendVerify] = useState(false);

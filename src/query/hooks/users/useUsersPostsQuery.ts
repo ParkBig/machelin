@@ -1,7 +1,7 @@
-import { PostQueryResponse, axiosPosts } from 'query/posts';
 import { useInfiniteQuery } from 'react-query';
 import useMyInfoQuery from './useMyInfoQuery';
 import { IPost } from 'types/types';
+import { PostQueryResponse, axiosPosts } from 'query/api/posts';
 
 export default function useUsersPostsQuery() {
   const { myInfo } = useMyInfoQuery();
