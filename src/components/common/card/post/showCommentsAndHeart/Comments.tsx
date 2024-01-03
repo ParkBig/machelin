@@ -21,13 +21,12 @@ export default function Comments({ postId }: Props) {
           renderItem={({ item }) => {
             const timeAgo = getPreviousDate(item.createdAt);
 
+            const imageSource = item.owner.pfp ? { uri: item.owner.pfp } : require('assets/png/user.png');
+
             return (
               <View style={styles.wrap}>
                 <View style={styles.imgWrap}>
-                  <Image
-                    style={styles.img}
-                    source={item.owner.pfp ? { uri: item.owner.pfp } : require('assets/png/user.png')}
-                  />
+                  <Image style={styles.img} source={imageSource} />
                 </View>
                 <View style={styles.userNameNComment}>
                   <View style={styles.userInfo}>

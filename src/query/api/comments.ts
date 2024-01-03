@@ -1,18 +1,6 @@
-import axios from 'axios';
-import { takeToken } from 'util/tokenDB';
-import Constants from 'expo-constants';
+import { createAxiosInstance } from './api';
 
-export const axiosComments = axios.create({
-  baseURL: `${Constants.manifest?.extra?.EXPO_PROD_SERVER_URL}/comments`,
-});
-
-axiosComments.interceptors.request.use(async config => {
-  const token = await takeToken();
-  if (token) {
-    config.headers['token'] = token;
-  }
-  return config;
-});
+export const axiosComments = createAxiosInstance('comments');
 
 interface MakeCommentQueryInput {
   postId: number;

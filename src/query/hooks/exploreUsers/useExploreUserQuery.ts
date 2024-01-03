@@ -1,4 +1,4 @@
-import { axiosUsers } from 'query/user';
+import { axiosUsers } from 'query/api/user';
 import { useQuery } from 'react-query';
 import { UserInfo } from 'types/types';
 

@@ -1,8 +1,8 @@
 import Button from 'components/common/layout/Button';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { Colors, Size, Shadow } from 'const/global-styles';
+import { modifyUserPreferRestaurantQuery } from 'query/api/user';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
-import { modifyUserPreferRestaurantQuery } from 'query/user';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';

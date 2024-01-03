@@ -4,7 +4,6 @@ import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmA
 import Line from 'components/common/layout/Line';
 import { Colors, Shadow } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
-import { withdrawalQuery } from 'query/user';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Modal from 'react-native-modal';
@@ -14,6 +13,7 @@ import { UseNavigation } from 'types/screenType';
 import { deleteToken } from 'util/tokenDB';
 import { clickedMyInfoListTypeState } from 'store/toggleState';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
+import { withdrawalQuery } from 'query/api/user';
 
 interface Props {
   toggleWithdrawalModal: boolean;

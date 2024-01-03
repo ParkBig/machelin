@@ -4,9 +4,9 @@ import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmA
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { Colors, Size } from 'const/global-styles';
 import mime from 'mime';
+import { makeStampQuery } from 'query/api/stamps';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import useUsersStampsQuery from 'query/hooks/users/useUsersStampsQuery';
-import { makeStampQuery } from 'query/stamps';
 import { useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { useMutation } from 'react-query';

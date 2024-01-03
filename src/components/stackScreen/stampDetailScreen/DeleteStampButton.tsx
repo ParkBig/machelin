@@ -4,13 +4,13 @@ import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmA
 import YesOrNoModal from 'components/common/modal/YesOrNoModal';
 import { Colors, Size } from 'const/global-styles';
 import useUsersStampsQuery from 'query/hooks/users/useUsersStampsQuery';
-import { deleteStampQuery } from 'query/stamps';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useMutation } from 'react-query';
 import { UseNavigation, UseRouter } from 'types/screenType';
 import { Ionicons } from '@expo/vector-icons';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
+import { deleteStampQuery } from 'query/api/stamps';
 
 export default function DeleteStampButton() {
   const { params } = useRoute<UseRouter<'StampDetailScreen'>>();

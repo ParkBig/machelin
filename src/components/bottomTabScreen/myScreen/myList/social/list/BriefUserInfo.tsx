@@ -31,11 +31,13 @@ export default function BriefUserInfo({ userInfo }: Props) {
     navigation.push('ExploreUserInfoScreen', { userId: +userInfo.id });
   };
 
+  const imageSource = userInfo.pfp ? { uri: userInfo.pfp } : require('assets/png/user.png');
+
   return (
     <View style={styles.wrap}>
       <View style={styles.basicInfo}>
         <View style={styles.imageWrap}>
-          <Image style={styles.image} source={userInfo.pfp ? { uri: userInfo.pfp } : require('assets/png/user.png')} />
+          <Image style={styles.image} source={imageSource} />
         </View>
         <View style={styles.info}>
           <View style={styles.nameLoginId}>

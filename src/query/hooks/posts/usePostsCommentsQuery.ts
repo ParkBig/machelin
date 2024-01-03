@@ -1,4 +1,4 @@
-import { axiosComments } from 'query/comments';
+import { axiosComments } from 'query/api/comments';
 import { useQuery } from 'react-query';
 import { Comment } from 'types/types';
 

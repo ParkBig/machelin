@@ -6,7 +6,6 @@ import { getCurrentPositionAsync } from 'expo-location';
 import mime from 'mime';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import useUsersPostsQuery from 'query/hooks/users/useUsersPostsQuery';
-import { makePostQuery } from 'query/posts';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { useMutation, useQueryClient } from 'react-query';
@@ -16,6 +15,7 @@ import { makePostState } from 'store/makePostState';
 import { GooglePlace } from 'types/types';
 import { UseNavigation } from 'types/screenType';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
+import { makePostQuery } from 'query/api/posts';
 
 interface Props {
   restaurantInfo: GooglePlace | null;

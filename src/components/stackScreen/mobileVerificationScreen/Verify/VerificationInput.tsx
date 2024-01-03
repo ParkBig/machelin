@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import Button from 'components/common/layout/Button';
 import { Colors, Shadow, Size } from 'const/global-styles';
-import { checkSignUpVerificationQuery } from 'query/user';
+import { checkSignUpVerificationQuery } from 'query/api/user';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';

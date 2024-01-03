@@ -1,19 +1,6 @@
-import axios from 'axios';
-import { takeToken } from 'util/tokenDB';
-import Constants from 'expo-constants';
+import { createAxiosInstance } from './api';
 
-export const axiosRestaurants = axios.create({
-  baseURL: `${Constants.manifest?.extra?.EXPO_PROD_SERVER_URL}/restaurants`,
-});
-
-axiosRestaurants.interceptors.request.use(async config => {
-  const token = await takeToken();
-  if (token) {
-    config.headers['token'] = token;
-  }
-
-  return config;
-});
+export const axiosRestaurants = createAxiosInstance('restaurants');
 
 interface RestaurantsTextSearchQueryInput {
   keyword: string;
@@ -41,7 +28,11 @@ export const nearbyRestaurantsSearchQuery = async (
   return data;
 };
 
-export const restaurantsTextSearchQuery = async ({ keyword, isRestaurant, nextPageParams }: RestaurantsTextSearchQueryInput) => {
+export const restaurantsTextSearchQuery = async ({
+  keyword,
+  isRestaurant,
+  nextPageParams,
+}: RestaurantsTextSearchQueryInput) => {
   const { data } = await axiosRestaurants.get('/restaurantsTextSearch', {
     params: {
       keyword,

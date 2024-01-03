@@ -1,7 +1,7 @@
-import { axiosPosts } from 'query/posts';
 import { useQuery } from 'react-query';
 import { Like } from 'types/types';
 import useMyInfoQuery from './useMyInfoQuery';
+import { axiosPosts } from 'query/api/posts';
 
 interface Data {
   ok: boolean;

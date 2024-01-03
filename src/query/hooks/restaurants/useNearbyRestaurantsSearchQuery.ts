@@ -1,4 +1,4 @@
-import { axiosRestaurants } from 'query/restaurants';
+import { axiosRestaurants } from 'query/api/restaurants';
 import { useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';

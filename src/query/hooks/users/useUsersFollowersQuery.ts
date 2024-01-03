@@ -1,7 +1,7 @@
-import { axiosUsers } from 'query/user';
 import { useQuery } from 'react-query';
 import { UserInfo } from 'types/types';
 import useMyInfoQuery from './useMyInfoQuery';
+import { axiosUsers } from 'query/api/user';
 
 interface Data {
   ok: boolean;
