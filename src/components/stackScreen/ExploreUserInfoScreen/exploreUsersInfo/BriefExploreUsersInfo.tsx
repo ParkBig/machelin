@@ -8,15 +8,14 @@ export default function BriefExploreUsersInfo() {
   const { params } = useRoute<UseRouter<'ExploreUserInfoScreen'>>();
   const { exploreUser } = useExploreUserQuery(params.userId);
 
+  const imageSource = exploreUser?.exploreUser?.pfp
+    ? { uri: exploreUser?.exploreUser?.pfp }
+    : require('assets/png/user.png');
+
   return (
     <View style={styles.wrap}>
       <View style={styles.php}>
-        <Image
-          style={styles.image}
-          source={
-            exploreUser?.exploreUser?.pfp ? { uri: exploreUser?.exploreUser?.pfp } : require('assets/png/user.png')
-          }
-        />
+        <Image style={styles.image} source={imageSource} />
       </View>
       <View style={styles.infos}>
         <View>

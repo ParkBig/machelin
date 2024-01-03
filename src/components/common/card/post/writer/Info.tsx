@@ -27,10 +27,12 @@ export default function Info({ pfp, nickname, userInfoId }: Props) {
     }
   };
 
+  const imageSource = pfp ? { uri: pfp } : require('assets/png/user.png');
+
   return (
     <View style={styles.writerInfo}>
       <Button>
-        <Image style={styles.writerImage} source={pfp ? { uri: pfp } : require('assets/png/user.png')} />
+        <Image style={styles.writerImage} source={imageSource} />
       </Button>
       <Button style={styles.writer} onPress={exploreUserInfoHandler}>
         <Text style={styles.writerText}>{nickname}</Text>

@@ -55,7 +55,7 @@ export default function MyImage() {
       payloadFormData.append('image', {
         uri,
         type: mime.getType(uri),
-        name: `user${myInfo?.authUser.id}_pfp_${now}`,
+        name: `user${myInfo?.authUser?.id}_pfp_${now}`,
       });
 
       mutate(payloadFormData);
@@ -63,7 +63,7 @@ export default function MyImage() {
   };
 
   const changeToDefaultImageHandler = () => {
-    if (!myInfo?.authUser.pfp) return;
+    if (!myInfo?.authUser?.pfp) return;
 
     const payloadFormData = new FormData();
     payloadFormData.append('image', '');
@@ -71,13 +71,15 @@ export default function MyImage() {
     mutate(payloadFormData);
   };
 
+  const imageSource = myInfo?.authUser?.pfp ? { uri: myInfo?.authUser?.pfp } : require('assets/png/user.png');
+
   return (
     <>
       <View style={styles.wrap}>
         <View style={styles.pfp}>
           <Image
             style={styles.image}
-            source={myInfo?.authUser?.pfp ? { uri: myInfo?.authUser?.pfp } : require('assets/png/user.png')}
+            source={imageSource}
             resizeMode="contain"
           />
           <Button style={styles.changeImageButton} onPress={changeImageHandler}>
