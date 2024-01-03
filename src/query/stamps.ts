@@ -3,7 +3,7 @@ import { takeToken } from 'util/tokenDB';
 import Constants from 'expo-constants';
 
 export const axiosStamps = axios.create({
-  baseURL: `${Constants.manifest?.extra?.EXPO_PROD_SERVER_URL}/stamps`,
+  baseURL: `${Constants.manifest?.extra?.EXPO_DEV_SERVER_URL}/stamps`,
 });
 
 axiosStamps.interceptors.request.use(async config => {
