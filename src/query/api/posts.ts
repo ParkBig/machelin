@@ -1,19 +1,7 @@
-import axios from 'axios';
 import { IPost } from 'types/types';
-import { takeToken } from 'util/tokenDB';
-import Constants from 'expo-constants';
+import { createAxiosInstance } from './api';
 
-export const axiosPosts = axios.create({
-  baseURL: `${Constants.manifest?.extra?.EXPO_PROD_SERVER_URL}/posts`,
-});
-
-axiosPosts.interceptors.request.use(async config => {
-  const token = await takeToken();
-  if (token) {
-    config.headers['token'] = token;
-  }
-  return config;
-});
+export const axiosPosts = createAxiosInstance('posts');
 
 interface ReportPostInput {
   postId: number;
@@ -122,7 +110,7 @@ export const reportPostQuery = async (reportPostInput: ReportPostInput) => {
 export const modifyPostPublicStateQuery = async (modifyPostPublicStateInput: ModifyPostPublicStateInput) => {
   const { data } = await axiosPosts.post('/modifyPostPublicState', modifyPostPublicStateInput);
   return data;
-}
+};
 
 export const deletePostQuery = async (id: number) => {
   const { data } = await axiosPosts.delete('/deletePost', {
@@ -131,4 +119,4 @@ export const deletePostQuery = async (id: number) => {
     },
   });
   return data;
-}
+};

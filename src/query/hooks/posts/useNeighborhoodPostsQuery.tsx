@@ -1,4 +1,4 @@
-import { axiosPosts } from 'query/posts';
+import { axiosPosts } from 'query/api/posts';
 import { useInfiniteQuery } from 'react-query';
 import { IPost } from 'types/types';
 

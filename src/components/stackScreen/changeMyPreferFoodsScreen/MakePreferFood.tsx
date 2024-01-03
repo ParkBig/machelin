@@ -1,7 +1,7 @@
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { Colors, Size } from 'const/global-styles';
+import { modifyUserPreferFoodQuery } from 'query/api/user';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
-import { modifyUserPreferFoodQuery } from 'query/user';
 import { useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';

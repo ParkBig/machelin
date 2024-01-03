@@ -1,4 +1,4 @@
-import { axiosRestaurants } from 'query/restaurants';
+import { axiosRestaurants } from 'query/api/restaurants';
 import { useInfiniteQuery } from 'react-query';
 import { IPost } from 'types/types';
 

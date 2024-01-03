@@ -14,13 +14,12 @@ export default function BriefLoginInfo() {
     navigate('MyInfoSettingScreen');
   };
 
+  const imageSource = myInfo?.authUser?.pfp ? { uri: myInfo?.authUser?.pfp } : require('assets/png/user.png');
+
   return (
     <View style={styles.wrap}>
       <View style={styles.php}>
-        <Image
-          style={styles.image}
-          source={myInfo?.authUser?.pfp ? { uri: myInfo?.authUser?.pfp } : require('assets/png/user.png')}
-        />
+        <Image style={styles.image} source={imageSource} />
       </View>
       <View style={styles.infos}>
         <View>

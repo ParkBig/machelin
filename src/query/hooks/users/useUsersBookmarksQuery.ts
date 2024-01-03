@@ -1,7 +1,7 @@
-import { axiosBookmarks } from 'query/bookmarks';
 import { useQuery } from 'react-query';
 import { Bookmark } from 'types/types';
 import useMyInfoQuery from './useMyInfoQuery';
+import { axiosBookmarks } from 'query/api/bookmarks';
 
 interface Data {
   ok: boolean;

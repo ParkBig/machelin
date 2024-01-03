@@ -1,18 +1,6 @@
-import axios from 'axios';
-import { takeToken } from 'util/tokenDB';
-import Constants from 'expo-constants';
+import { createAxiosInstance } from './api';
 
-export const axiosStamps = axios.create({
-  baseURL: `${Constants.manifest?.extra?.EXPO_PROD_SERVER_URL}/stamps`,
-});
-
-axiosStamps.interceptors.request.use(async config => {
-  const token = await takeToken();
-  if (token) {
-    config.headers['token'] = token;
-  }
-  return config;
-});
+export const axiosStamps = createAxiosInstance('stamps');
 
 export const usersStampQuery = async () => {
   const { data } = await axiosStamps.get('/usersStamp');
