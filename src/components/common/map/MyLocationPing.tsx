@@ -9,6 +9,8 @@ export default function MyLocationPing() {
   const { myInfo } = useMyInfoQuery();
   const myLocation = useRecoilValue(myLocationState);
 
+  const imageSource = myInfo?.authUser?.pfp ? { uri: myInfo?.authUser?.pfp } : require('assets/png/user.png');
+
   return (
     <>
       {myLocation.isGetLocation && (
@@ -19,11 +21,7 @@ export default function MyLocationPing() {
           title="내위치"
         >
           <View style={styles.wrap}>
-            {myInfo?.authUser?.pfp ? (
-              <Image source={{ uri: myInfo?.authUser?.pfp }} style={styles.image} resizeMode="cover" />
-            ) : (
-              <Image source={require('assets/png/user.png')} style={styles.image} resizeMode="cover" />
-            )}
+            <Image source={imageSource} style={styles.image} resizeMode="cover" />
           </View>
         </Marker>
       )}

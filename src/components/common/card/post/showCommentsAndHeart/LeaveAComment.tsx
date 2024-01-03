@@ -43,14 +43,13 @@ export default function LeaveAComment({ postId }: Props) {
     mutate({ postId, comment });
   };
 
+  const imageSource = myInfo?.authUser?.pfp ? { uri: myInfo?.authUser?.pfp } : require('assets/png/user.png');
+
   return (
     <>
       <View style={styles.wrap}>
         <View style={styles.writerImgWrap}>
-          <Image
-            style={styles.writerImg}
-            source={myInfo?.authUser?.pfp ? { uri: myInfo?.authUser?.pfp } : require('assets/png/user.png')}
-          />
+          <Image style={styles.writerImg} source={imageSource} />
         </View>
         <TextInput
           style={styles.textInput}
