@@ -62,9 +62,10 @@ export default function Results() {
                 </View>
               )}
             />
-            <Button style={styles.button} onPress={onPressHandler}>
+            {/* will update */}
+            {/* <Button style={styles.button} onPress={onPressHandler}>
               <Ionicons style={styles.ionicons} size={35} name="map" color={Colors.mainWhite3} />
-            </Button>
+            </Button> */}
           </>
         ) : (
           <NoResults />
