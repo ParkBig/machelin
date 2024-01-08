@@ -19,7 +19,7 @@ export default function Info({ pfp, nickname, userInfoId }: Props) {
     >();
 
   const exploreUserInfoHandler = () => {
-    if (myInfo?.authUser.id === userInfoId) {
+    if (myInfo?.authUser?.id === userInfoId) {
       navigation.navigate('MyScreen');
     } else {
       //@ts-ignore
