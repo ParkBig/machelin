@@ -60,7 +60,7 @@ export default function MakeStampButton() {
         payloadFormData.append('images', {
           uri: makeStampValues.images[i],
           type: mime.getType(makeStampValues.images[i]),
-          name: `user${myInfo?.authUser.id}_stampImage${now}_${i + 1}`,
+          name: `user${myInfo?.authUser?.id}_stampImage${now}_${i + 1}`,
         });
       }
     }

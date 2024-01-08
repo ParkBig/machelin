@@ -7,8 +7,8 @@ import Button from 'components/common/layout/Button';
 import Hearts from './Hearts';
 import { Colors, Size } from 'const/global-styles';
 import { InfiniteData, QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
-import { PostQueryResponse } from 'query/posts';
 import { RestaurantPosts } from 'query/hooks/restaurants/useRestaurantPostsQuery';
+import { PostQueryResponse } from 'query/api/posts';
 
 interface Props {
   posts: IPost;
