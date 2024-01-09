@@ -17,7 +17,7 @@ export default function SearchList() {
 
   return (
     <View>
-      {userList?.users.map(user => user.id !== myInfo?.authUser.id && <BriefUserInfo key={user.id} userInfo={user} />)}
+      {userList?.users.map(user => user.id !== myInfo?.authUser?.id && <BriefUserInfo key={user.id} userInfo={user} />)}
     </View>
   );
 }

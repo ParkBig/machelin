@@ -1,32 +1,32 @@
 import Button from 'components/common/layout/Button';
 import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { InfiniteData, QueryObserverResult, RefetchOptions, RefetchQueryFilters, useMutation } from 'react-query';
+import { useMutation } from 'react-query';
 import { Colors, Size } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useState } from 'react';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import useUsersPostLikesDislikesQuery from 'query/hooks/users/useUsersPostLikesDislikesQuery';
-import { RestaurantPosts } from 'query/hooks/restaurants/useRestaurantPostsQuery';
-import { IPost, Like } from 'types/types';
-import { PostQueryResponse, togglePostLikeDislike } from 'query/api/posts';
+import { Like } from 'types/types';
+import { togglePostLikeDislike } from 'query/api/posts';
 
 interface Props {
   postId: number;
   postsLikes: Like[];
-  rePosts: <TPageData>(
-    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-  ) => Promise<QueryObserverResult<PostQueryResponse | RestaurantPosts | InfiniteData<IPost>, unknown>>;
 }
 
-export default function Hearts({ postId, postsLikes, rePosts }: Props) {
+export default function Hearts({ postId, postsLikes }: Props) {
   const { myInfo } = useMyInfoQuery();
+  const [likesCount, setLikesCount] = useState(postsLikes.length);
   const { usersPostLikesDislikes, reUsersPostLikesDislikes } = useUsersPostLikesDislikesQuery();
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
+
+  const isHeart = usersPostLikesDislikes?.usersLikes?.find(like => like.post.id === postId);
+  const isHeartBroken = usersPostLikesDislikes?.usersDislikes?.find(dislike => dislike.post.id === postId);
+
   const { mutate } = useMutation(togglePostLikeDislike, {
     onSuccess: res => {
       if (res.ok) {
-        rePosts();
         reUsersPostLikesDislikes();
       } else {
         setToggleAlertModal({ toggle: true, alertMsg: res.msg });
@@ -43,12 +43,20 @@ export default function Hearts({ postId, postsLikes, rePosts }: Props) {
       return;
     }
 
+    if (which === 'like') {
+      if (isHeart) {
+        setLikesCount(prev => prev - 1);
+      } else {
+        setLikesCount(prev => prev + 1);
+      }
+    } else {
+      if (isHeart) {
+        setLikesCount(prev => prev - 1);
+      }
+    }
+
     mutate({ postId, which });
   };
-
-  const isHeart = usersPostLikesDislikes?.usersLikes?.find(like => like.post.id === postId);
-  const isHeartBroken = usersPostLikesDislikes?.usersDislikes?.find(dislike => dislike.post.id === postId);
-  const likesCount = postsLikes.length;
 
   return (
     <>
