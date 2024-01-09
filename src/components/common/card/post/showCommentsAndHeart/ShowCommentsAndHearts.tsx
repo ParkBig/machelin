@@ -6,18 +6,12 @@ import { Ionicons } from '@expo/vector-icons';
 import Button from 'components/common/layout/Button';
 import Hearts from './Hearts';
 import { Colors, Size } from 'const/global-styles';
-import { InfiniteData, QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
-import { PostQueryResponse } from 'query/posts';
-import { RestaurantPosts } from 'query/hooks/restaurants/useRestaurantPostsQuery';
 
 interface Props {
   posts: IPost;
-  rePosts: <TPageData>(
-    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-  ) => Promise<QueryObserverResult<PostQueryResponse | RestaurantPosts | InfiniteData<IPost>, unknown>>;
 }
 
-export default function ShowCommentsAndHearts({ posts, rePosts }: Props) {
+export default function ShowCommentsAndHearts({ posts }: Props) {
   const [toggleComments, setToggleComments] = useState(false);
 
   const toggleCommentsHandler = () => {
@@ -31,7 +25,7 @@ export default function ShowCommentsAndHearts({ posts, rePosts }: Props) {
         <Text style={styles.text}>댓글보기</Text>
         {posts.comments.length !== 0 && <Text style={styles.text}>{posts.comments.length}</Text>}
       </Button>
-      <Hearts postId={posts.id} postsLikes={posts.likes} rePosts={rePosts} />
+      <Hearts postId={posts.id} postsLikes={posts.likes} />
       <CommentsModal postId={posts.id} toggleModal={toggleComments} toggleModalHandler={toggleCommentsHandler} />
     </View>
   );

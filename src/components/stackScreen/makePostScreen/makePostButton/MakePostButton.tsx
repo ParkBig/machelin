@@ -75,7 +75,7 @@ export default function MakePostButton({ restaurantInfo }: Props) {
         payloadFormData.append('images', {
           uri: makePostInfo.images[i],
           type: mime.getType(makePostInfo.images[i]),
-          name: `user${myInfo?.authUser.id}_postImage${now}_${i + 1}`,
+          name: `user${myInfo?.authUser?.id}_postImage${now}_${i + 1}`,
         });
       }
     }

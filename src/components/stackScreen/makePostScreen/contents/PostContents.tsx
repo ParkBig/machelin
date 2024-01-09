@@ -26,9 +26,12 @@ export default function PostContents() {
 const styles = StyleSheet.create({
   wrap: {
     width: '100%',
+    minHeight: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingVertical: 20,
     borderBottomColor: Colors.mainGreen1,
-    borderBottomWidth: 1.5,
+    borderBottomWidth: 2,
   },
   textInput: {
     width: '100%',

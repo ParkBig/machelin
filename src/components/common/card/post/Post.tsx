@@ -4,22 +4,16 @@ import ShowCommentsAndHearts from './showCommentsAndHeart/ShowCommentsAndHearts'
 import PostingImages from './postingImages/PostingImages';
 import PostBriefRestaurantInfo from './postBriefRestaurantInfo/PostBriefRestaurantInfo';
 import HashTags from './hashtags/HashTags';
-import { InfiniteData, QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
-import { PostQueryResponse } from 'query/posts';
 import Content from './content/Content';
 import { Colors } from 'const/global-styles';
 import { IPost } from 'types/types';
-import { RestaurantPosts } from 'query/hooks/restaurants/useRestaurantPostsQuery';
 
 interface Props {
   posts: IPost;
-  rePosts: <TPageData>(
-    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-  ) => Promise<QueryObserverResult<PostQueryResponse | RestaurantPosts | InfiniteData<IPost>, unknown>>;
   isDetailScreen: boolean;
 }
 
-export default function Post({ posts, rePosts, isDetailScreen }: Props) {
+export default function Post({ posts, isDetailScreen }: Props) {
   return (
     <View style={styles.wrap}>
       <PostBriefRestaurantInfo posts={posts} isDetailScreen={isDetailScreen} />
@@ -27,7 +21,7 @@ export default function Post({ posts, rePosts, isDetailScreen }: Props) {
       <PostingImages images={posts.images} />
       <Content contents={posts.contents} />
       <HashTags hashtags={posts.hashtags} />
-      <ShowCommentsAndHearts posts={posts} rePosts={rePosts} />
+      <ShowCommentsAndHearts posts={posts} />
     </View>
   );
 }

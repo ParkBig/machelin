@@ -14,6 +14,6 @@ export default function WriterImg() {
 const styles = StyleSheet.create({
   wrap: {
     borderBottomColor: Colors.mainGreen1,
-    borderBottomWidth: 1.5,
+    borderBottomWidth: 2,
   },
 });
