@@ -42,7 +42,7 @@ export default function NeighborhoodPosts() {
             showsVerticalScrollIndicator={false}
             keyExtractor={(_, index) => String(index)}
             data={neighborhoodPosts?.pages}
-            renderItem={({ item }) => <Post posts={item} rePosts={reNeighborhoodPosts} isDetailScreen={false} />}
+            renderItem={({ item }) => <Post posts={item} isDetailScreen={false} />}
             ItemSeparatorComponent={() => <Line style={styles.line} />}
           />
         ) : (

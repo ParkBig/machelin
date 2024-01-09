@@ -27,7 +27,7 @@ export default function MachelinReviews() {
           showsVerticalScrollIndicator={false}
           keyExtractor={(_, index) => String(index)}
           data={restaurantPosts?.pages}
-          renderItem={({ item }) => <Post posts={item} rePosts={reRestaurantPosts} isDetailScreen={true} />}
+          renderItem={({ item }) => <Post posts={item} isDetailScreen={true} />}
           ListHeaderComponent={() => <Line style={styles.line} />}
           ItemSeparatorComponent={() => <Line style={styles.line} />}
           ListFooterComponent={() =>
