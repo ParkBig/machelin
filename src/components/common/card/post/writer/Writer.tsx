@@ -1,8 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Info from './Info';
 import { IPost } from 'types/types';
-import { Colors } from 'const/global-styles';
-import { getCreatedDate } from 'util/dateTranslator';
+import { Size } from 'const/global-styles';
 import Options from './options/Options';
 
 interface Props {
@@ -10,18 +9,21 @@ interface Props {
 }
 
 export default function Writer({ posts }: Props) {
-  const createdDate = getCreatedDate(posts.createdAt);
+  const isNotice = posts.postType === 'notice' ? true : false;
 
   return (
-    <>
-      <View style={styles.wrap}>
-        <Info pfp={posts.owner.pfp} nickname={posts.owner.nickname} userInfoId={posts.owner.id} />
-        <Options postId={posts.id} ownerId={posts.owner.id} isPublic={posts.isPublic} />
-      </View>
-      <View>
-        <Text style={styles.dateText}>{createdDate}</Text>
-      </View>
-    </>
+    <View style={styles.wrap}>
+      {isNotice ? (
+        <View>
+          <Text style={styles.noticeText}>전체 공지</Text>
+        </View>
+      ) : (
+        <>
+          <Info pfp={posts.owner.pfp} nickname={posts.owner.nickname} userInfoId={posts.owner.id} />
+          <Options postId={posts.id} ownerId={posts.owner.id} isPublic={posts.isPublic} />
+        </>
+      )}
+    </View>
   );
 }
 
@@ -33,7 +35,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  dateText: {
-    color: Colors.gray,
+  noticeText: {
+    fontSize: Size.bigSmall,
   },
 });
