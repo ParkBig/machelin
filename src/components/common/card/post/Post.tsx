@@ -7,6 +7,7 @@ import HashTags from './hashtags/HashTags';
 import Content from './content/Content';
 import { Colors } from 'const/global-styles';
 import { IPost } from 'types/types';
+import CreatedAt from './createdAt/CreatedAt';
 
 interface Props {
   posts: IPost;
@@ -18,6 +19,7 @@ export default function Post({ posts, isDetailScreen }: Props) {
     <View style={styles.wrap}>
       <PostBriefRestaurantInfo posts={posts} isDetailScreen={isDetailScreen} />
       <Writer posts={posts} />
+      <CreatedAt createdAt={posts.createdAt} />
       <PostingImages images={posts.images} />
       <Content contents={posts.contents} />
       <HashTags hashtags={posts.hashtags} />
