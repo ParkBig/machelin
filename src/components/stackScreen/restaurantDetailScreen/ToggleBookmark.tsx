@@ -16,7 +16,7 @@ interface Props {
 
 export default function ToggleBookmark({ restaurantId }: Props) {
   const { restaurantDetail, restaurantDetailIsLoading } = useRestaurantDetailQuery(restaurantId);
-  const { reMyInfo } = useMyInfoQuery();
+  const { myInfo, reMyInfo } = useMyInfoQuery();
   const { bookmarks, reBookmarks } = useUsersBookmarksQuery();
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
@@ -35,6 +35,11 @@ export default function ToggleBookmark({ restaurantId }: Props) {
   });
 
   const toggleBookmarkHandler = () => {
+    if (!myInfo?.authUser) {
+      setToggleAlertModal({ toggle: true, alertMsg: '로그인 후 이용가능합니다' });
+      return;
+    }
+
     if (!restaurantDetail || restaurantDetailIsLoading) {
       setToggleAlertModal({ toggle: true, alertMsg: '잠시후 다시 시도해주세요' });
       return;
