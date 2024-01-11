@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import MapView, { MapPressEvent } from 'react-native-maps';
+import MapView, { MapPressEvent, PROVIDER_GOOGLE } from 'react-native-maps';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { MapLocationState, focusedRestaurantState, mapLocationState, myLocationState } from 'store/locationState';
 import { PermissionStatus, getCurrentPositionAsync, requestForegroundPermissionsAsync } from 'expo-location';
 import { StyleSheet, View } from 'react-native';
 import MapLoadFail from './MapLoadFail';
+import { Colors } from 'const/global-styles';
 
 interface Props {
   onPress?: (event: MapPressEvent) => void;
@@ -96,6 +97,12 @@ export default function MachelinMap({ onPress, children }: Props) {
       ) : (
         <MapView
           ref={mapRef}
+          loadingEnabled={true}
+          loadingIndicatorColor={Colors.mainGreen2}
+          loadingBackgroundColor={Colors.mainWhite1}
+          showsMyLocationButton={false}
+          showsCompass={false}
+          provider={PROVIDER_GOOGLE}
           style={styles.map}
           region={mapLocation}
           initialRegion={mapLocation}
