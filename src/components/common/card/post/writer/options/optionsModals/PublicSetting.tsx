@@ -1,5 +1,5 @@
 import Button from 'components/common/layout/Button';
-import { Colors, Size } from 'const/global-styles';
+import { Size } from 'const/global-styles';
 import { StyleSheet, Text, View } from 'react-native';
 import { WhichOneSelectedState } from './OptionsModals';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
@@ -26,6 +26,7 @@ export default function PublicSetting({ postId, isPublic, setWhichOneSelected, t
     onSuccess: res => {
       if (res.ok) {
         rePosts();
+        setWhichOneSelected(null);
         toggleModalHandler();
       } else {
         setToggleAlertModal({ toggle: true, alertMsg: res.msg });
