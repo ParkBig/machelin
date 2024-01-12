@@ -11,6 +11,8 @@ export default function PreferFoods() {
   const { navigate } = useNavigation<UseNavigation<'ChangeMyPreferFoodsScreen'>>();
   const { myInfo } = useMyInfoQuery();
 
+  const preferFoods = myInfo?.authUser.preferFoods.length ? myInfo?.authUser.preferFoods.join(', ') : null;
+
   const navigateToChangeMyPreferFoodsHandler = () => {
     navigate('ChangeMyPreferFoodsScreen');
   };

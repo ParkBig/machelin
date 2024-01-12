@@ -12,7 +12,7 @@
   "dependencies": {
     "@eslint/create-config": "^0.4.6",
     "@expo/config-plugins": "~6.0.0",
-    "@react-native-community/netinfo": "^11.2.1",
+    "@react-native-community/netinfo": "9.3.7",
     "@react-native-community/slider": "^4.4.2",
     "@react-native-picker/picker": "^2.4.8",
     "@react-navigation/bottom-tabs": "^6.5.8",
