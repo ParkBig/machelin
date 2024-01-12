@@ -1,4 +1,4 @@
-import NoticePosts from 'components/topTabScreen/NoticePostsScreen/NoticePosts';
+import NoticePosts from 'components/topTabScreen/noticePostsScreen/NoticePosts';
 import { Colors } from 'const/global-styles';
 import { StyleSheet, View } from 'react-native';
 

@@ -66,9 +66,5 @@ export default function useRegionalRestaurantSearchQuery() {
     }
   };
 
-  useEffect(() => {
-    reRestaurants();
-  }, [isTyping, city, district, reRestaurants]);
-
   return { restaurants, restaurantsIsLoading, reRestaurants, fetchNextPageRestaurants, isFetchingNextPage };
 }

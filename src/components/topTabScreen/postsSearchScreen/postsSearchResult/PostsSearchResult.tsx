@@ -3,55 +3,59 @@ import Post from 'components/common/card/post/Post';
 import Line from 'components/common/layout/Line';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { Colors } from 'const/global-styles';
-import useNoticePostsQuery from 'query/hooks/posts/useNoticePostsQuery';
+import usePostsSearchQuery from 'query/hooks/posts/usePostsSearchQuery';
 import { useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { RefreshControl } from 'react-native-gesture-handler';
-import NoNoticePost from './NoNoticePost';
+import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
+import NoPostsSearchResult from './NoPostsSearchResult';
+import LetsSearch from 'components/common/components/LetsSearch';
 
-export default function NoticePosts() {
+export default function PostsSearchResult() {
   const netInfo = useNetInfo();
   const [refreshing, setRefreshing] = useState(false);
-  const { noticePosts, noticePostsIsLoading, isFetchingNextPage, reNoticePosts, fetchNextPageNoticePosts } =
-    useNoticePostsQuery();
+  const { postsSearch, fetchNextPagePostsSearch, isFetchingNextPage, rePostsSearch, postsSearchIsLoading } =
+    usePostsSearchQuery();
 
   const onRefreshHandler = () => {
     setRefreshing(true);
-    reNoticePosts();
+    rePostsSearch();
     setRefreshing(false);
   };
 
   const onEndReachedHandler = () => {
-    fetchNextPageNoticePosts();
+    fetchNextPagePostsSearch();
   };
 
   return (
     <View style={styles.wrap}>
       {netInfo.isConnected ? (
-        noticePosts?.pages && noticePosts?.pages.length !== 0 ? (
-          <FlatList
-            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}
-            onEndReached={onEndReachedHandler}
-            showsVerticalScrollIndicator={false}
-            keyExtractor={(_, index) => String(index)}
-            data={noticePosts?.pages}
-            renderItem={({ item }) => <Post posts={item} />}
-            ItemSeparatorComponent={() => <Line style={styles.line} />}
-            ListFooterComponent={() => (
-              <View style={styles.listFooterComponent}>
-                <Text style={styles.text}>- 마슐랭 -</Text>
-              </View>
-            )}
-          />
+        postsSearch?.pages ? (
+          postsSearch?.pages.length !== 0 ? (
+            <FlatList
+              refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}
+              onEndReached={onEndReachedHandler}
+              showsVerticalScrollIndicator={false}
+              keyExtractor={(_, index) => String(index)}
+              data={postsSearch?.pages}
+              renderItem={({ item }) => <Post posts={item} />}
+              ItemSeparatorComponent={() => <Line style={styles.line} />}
+              ListFooterComponent={() => (
+                <View style={styles.listFooterComponent}>
+                  <Text style={styles.text}>- 마슐랭 -</Text>
+                </View>
+              )}
+            />
+          ) : (
+            <NoPostsSearchResult />
+          )
         ) : (
-          <NoNoticePost />
+          <LetsSearch />
         )
       ) : (
         <View style={styles.netInfo}>
           <Text>인터넷 연결이 불안정합니다</Text>
         </View>
       )}
-      {noticePostsIsLoading && <LoadingOverlay style={styles.defaultLoading} />}
+      {postsSearchIsLoading && <LoadingOverlay style={styles.defaultLoading} />}
       {isFetchingNextPage && <LoadingOverlay style={styles.moreDataLoading} />}
     </View>
   );

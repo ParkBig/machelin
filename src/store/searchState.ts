@@ -1,6 +1,11 @@
 import { SearchName, SearchSubName } from 'const/administrativeDistrict';
 import { atom } from 'recoil';
 
+interface MainSearchState {
+  isTyping: boolean;
+  mainSearchValue: string;
+}
+
 interface RegionalRestaurantSearchInputState {
   isTyping: boolean;
   searchText: string;
@@ -10,9 +15,9 @@ interface RegionalRestaurantSearchInputState {
   };
 }
 
-interface MainSearchState {
+interface PostSearchInputState {
   isTyping: boolean;
-  mainSearchValue: string;
+  searchText: string;
 }
 
 export const mainSearchState = atom<MainSearchState>({
@@ -38,4 +43,12 @@ export const regionalRestaurantSearchInputState = atom<RegionalRestaurantSearchI
 export const searchNickNameState = atom<string>({
   key: 'searchNickNameState',
   default: '',
+});
+
+export const postSearchInputState = atom<PostSearchInputState>({
+  key: 'postSearchInputState',
+  default: {
+    isTyping: false,
+    searchText: '',
+  },
 });

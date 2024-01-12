@@ -11,7 +11,7 @@ export type RootBottomTabParamList = {
   MyScreen: undefined;
 };
 export type RootTopTabParamList = {
-  SearchPostsScreen: undefined;
+  PostsSearchScreen: undefined;
   NoticePostsScreen: undefined;
   PromotionPostsScreen: undefined;
 };
@@ -58,7 +58,7 @@ export type AllParmList = {
   MyScreen: undefined;
 
   // topTabScreen
-  SearchPostsScreen: undefined;
+  PostsSearchScreen: undefined;
   NoticePostsScreen: undefined;
   PromotionPostsScreen: undefined;
 
