@@ -25,6 +25,7 @@ export default function Delete({ postId, setWhichOneSelected, toggleModalHandler
     onSuccess: res => {
       if (res.ok) {
         rePosts();
+        setWhichOneSelected(null);
         toggleModalHandler();
       } else {
         setToggleAlertModal({ toggle: true, alertMsg: res.msg });
