@@ -24,6 +24,7 @@ import FindRestaurantInfoScreen from 'screens/stack/FindRestaurantInfoScreen';
 import MakeStampButton from 'components/stackScreen/makeStampScreen/MakeStampButton';
 import StampDetailScreen from 'screens/stack/StampDetailScreen';
 import DeleteStampButton from 'components/stackScreen/stampDetailScreen/DeleteStampButton';
+import TermsOfUseScreen from 'screens/stack/TermsOfUseScreen';
 
 export default function StackScreen() {
   return (
@@ -88,6 +89,11 @@ export default function StackScreen() {
         options={{
           title: '회원가입',
         }}
+      />
+      <RootStack.Screen
+        name="TermsOfUseScreen"
+        component={TermsOfUseScreen}
+        options={{ title: '개인정보취급방침 동의' }}
       />
       <RootStack.Screen name="FindMyIdScreen" component={FindMyIdScreen} options={{ title: '나의 계정 찾기' }} />
       <RootStack.Screen
