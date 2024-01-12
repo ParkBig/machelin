@@ -19,7 +19,7 @@ const MemoizedMarker = memo(({ post }: Props) => {
 
     const trackOut = setTimeout(() => {
       setIsTrack(false);
-    }, 600);
+    }, 500);
 
     return () => clearInterval(trackOut);
   }, [clickedMyMapListType]);
@@ -46,12 +46,10 @@ const styles = StyleSheet.create({
 
 export default function PostPings() {
   const { posts } = useUsersPostForMyMapQuery();
-  const clickedMyMapListType = useRecoilValue(clickedMyMapListTypeState);
 
   return (
     <>
-      {clickedMyMapListType === 'posts' &&
-        posts?.posts?.map((post, index) => <MemoizedMarker key={`${post.id}_${index}`} post={post} />)}
+      {posts?.posts?.map((post, index) => <MemoizedMarker key={`${post.id}_${index}`} post={post} />)}
     </>
   );
 }
