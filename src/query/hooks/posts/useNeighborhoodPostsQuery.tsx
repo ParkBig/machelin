@@ -13,6 +13,7 @@ export default function useNeighborhoodPostsQuery(subLocality: string = '') {
   const {
     data: neighborhoodPosts,
     isLoading: neighborhoodPostsIsLoading,
+    isRefetching: isReNeighborhoodPosts,
     refetch: reNeighborhoodPosts,
     hasNextPage,
     fetchNextPage,
@@ -49,6 +50,7 @@ export default function useNeighborhoodPostsQuery(subLocality: string = '') {
   return {
     neighborhoodPosts,
     neighborhoodPostsIsLoading,
+    isReNeighborhoodPosts,
     reNeighborhoodPosts,
     fetchNextPageRestaurants,
     isFetchingNextPage,
