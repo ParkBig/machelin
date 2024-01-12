@@ -9,18 +9,23 @@ interface Props {
 }
 
 export default function Writer({ posts }: Props) {
-  const isNotice = posts.postType === 'allNotice' || posts.postType === 'localNotice' ? true : false;
+  const postType =
+    posts.postType === 'allNotice' || posts.postType === 'localNotice'
+      ? 'notice'
+      : posts.postType === 'allAd' || posts.postType === 'localAd'
+      ? 'ad'
+      : 'post';
 
   return (
     <View style={styles.wrap}>
-      {isNotice ? (
-        <View>
+      {postType === 'notice' ? (
+        <View style={styles.notice}>
           <Text style={styles.noticeText}>전체 공지</Text>
         </View>
       ) : (
         <>
           <Info pfp={posts.owner.pfp} nickname={posts.owner.nickname} userInfoId={posts.owner.id} />
-          <Options postId={posts.id} ownerId={posts.owner.id} isPublic={posts.isPublic} />
+          {postType === 'post' && <Options postId={posts.id} ownerId={posts.owner.id} isPublic={posts.isPublic} />}
         </>
       )}
     </View>
@@ -35,7 +40,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  notice: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   noticeText: {
     fontSize: Size.bigSmall,
+    fontWeight: 'bold',
   },
 });
