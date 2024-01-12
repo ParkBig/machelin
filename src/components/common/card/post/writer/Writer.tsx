@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function Writer({ posts }: Props) {
-  const isNotice = posts.postType === 'notice' ? true : false;
+  const isNotice = posts.postType === 'allNotice' || posts.postType === 'localNotice' ? true : false;
 
   return (
     <View style={styles.wrap}>

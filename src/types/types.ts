@@ -155,7 +155,7 @@ export interface IPost {
   id: number;
   createdAt: Date;
   hasProblem: boolean;
-  postType: 'post' | 'notice' | 'localAd' | 'allAd';
+  postType: 'post' | 'localAd' | 'allAd' | 'allNotice' | 'localNotice';
   hasRestaurantTag: boolean;
   restaurantLat: number;
   restaurantLng: number;
