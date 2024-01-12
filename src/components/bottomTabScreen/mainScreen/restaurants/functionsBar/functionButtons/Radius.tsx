@@ -24,9 +24,9 @@ export default function Radius() {
 
 const styles = StyleSheet.create({
   button: {
-    height: 45,
-    width: 45,
-    borderRadius: 22.5,
+    height: 50,
+    width: 50,
+    borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.mainGreen2,
