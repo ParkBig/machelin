@@ -1,23 +1,21 @@
+import { Colors, Size } from 'const/global-styles';
+import useNoticePostsQuery from 'query/hooks/posts/useNoticePostsQuery';
 import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors, Size } from 'const/global-styles';
-import useUsersSubLocalityQuery from 'query/hooks/users/useUsersSubLocalityQuery';
-import useNeighborhoodPostsQuery from 'query/hooks/posts/useNeighborhoodPostsQuery';
 import Button from 'components/common/layout/Button';
 
-export default function NoNeighborhoodPosts() {
-  const { mySubLocality } = useUsersSubLocalityQuery();
-  const { reNeighborhoodPosts } = useNeighborhoodPostsQuery(mySubLocality?.subLocality);
+export default function NoNoticePost() {
+  const { reNoticePosts } = useNoticePostsQuery();
 
-  const reNeighborhoodPostsHandler = () => {
-    reNeighborhoodPosts();
+  const reNoticePostsHandler = () => {
+    reNoticePosts();
   };
 
   return (
     <View style={styles.wrap}>
       <Ionicons name="reader-outline" size={100} color={Colors.gray} />
-      <Button style={styles.button} onPress={reNeighborhoodPostsHandler}>
-        <Text style={styles.text}>주변 소식이 없어요</Text>
+      <Button style={styles.button} onPress={reNoticePostsHandler}>
+        <Text style={styles.text}>공지사항이 없어요</Text>
         <Ionicons name="refresh" size={30} />
       </Button>
     </View>
@@ -27,6 +25,7 @@ export default function NoNeighborhoodPosts() {
 const styles = StyleSheet.create({
   wrap: {
     flex: 1,
+    backgroundColor: Colors.mainWhite1,
     justifyContent: 'center',
     alignItems: 'center',
     gap: 10,
