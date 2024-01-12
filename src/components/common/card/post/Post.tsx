@@ -8,6 +8,7 @@ import Content from './content/Content';
 import { Colors } from 'const/global-styles';
 import { IPost } from 'types/types';
 import CreatedAt from './createdAt/CreatedAt';
+import HasProblem from './hasProblem/HasProblem';
 
 interface Props {
   posts: IPost;
@@ -16,6 +17,7 @@ interface Props {
 export default function Post({ posts }: Props) {
   return (
     <View style={styles.wrap}>
+      <HasProblem posts={posts} />
       <PostBriefRestaurantInfo posts={posts} />
       <Writer posts={posts} />
       <CreatedAt createdAt={posts.createdAt} />
