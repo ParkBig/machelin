@@ -21,7 +21,6 @@ export const verifyLocationPermissions = async (
   }
 
   if (locationPermissionInformation?.status === LocationPermissionsStatus.DENIED) {
-    Alert.alert('위치 접근권한이 필요합니다');
     const permissionResponse = await requestPermission();
     return permissionResponse.granted;
   }
@@ -39,10 +38,9 @@ export const verifyMediaLibraryPermissions = async (
   }
 
   if (mediaLibraryPermissionInfo?.status === ImagePermissionStatus.DENIED) {
-    Alert.alert('앨범 접근권한이 필요합니다');
     const permissionRes = await reqMediaLibraryPermission();
     return permissionRes.granted;
-  }2
+  }
 
   return true;
 };
@@ -57,11 +55,8 @@ export const verifyCameraPermissions = async (
   }
 
   if (cameraPermissionInfo?.status === CameraPermissionsStatus.DENIED) {
-    Alert.alert('접근 권한이 필요합니다', '카메라 접근 권한을 허용해 주세요.', [
-      {
-        onPress: openAppSettings,
-      },
-    ]);
+    const permissionRes = await reqCameraPermission();
+    return permissionRes.granted;
   }
 
   return true;
