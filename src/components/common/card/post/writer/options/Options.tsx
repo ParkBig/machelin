@@ -4,6 +4,8 @@ import { Colors } from 'const/global-styles';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import OptionsModals from './optionsModals/OptionsModals';
+import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
+import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 
 interface Props {
   postId: number;
@@ -12,9 +14,16 @@ interface Props {
 }
 
 export default function Options({ postId, ownerId, isPublic }: Props) {
+  const { myInfo } = useMyInfoQuery()
   const [toggleReportModal, setToggleReportModal] = useState(false);
+  const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
   const toggleReportModalHandler = () => {
+    if (!myInfo?.authUser) {
+      setToggleAlertModal({ toggle: true, alertMsg: '로그인 후 이용가능합니다' });
+      return;
+    }
+
     setToggleReportModal(prev => !prev);
   };
 
@@ -29,6 +38,11 @@ export default function Options({ postId, ownerId, isPublic }: Props) {
         isPublic={isPublic}
         toggleModal={toggleReportModal}
         toggleModalHandler={toggleReportModalHandler}
+      />
+      <ConfirmAlertModal
+        toggleModal={toggleAlertModal.toggle}
+        setToggleAlertModal={setToggleAlertModal}
+        alertMsg={toggleAlertModal.alertMsg}
       />
     </>
   );

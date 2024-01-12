@@ -41,7 +41,7 @@ export default function useNeighborhoodPostsQuery(subLocality: string = '') {
     }
   );
 
-  const fetchNextPageRestaurants = () => {
+  const fetchNextPageNeighborhoodPosts = () => {
     if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
@@ -52,7 +52,7 @@ export default function useNeighborhoodPostsQuery(subLocality: string = '') {
     neighborhoodPostsIsLoading,
     isReNeighborhoodPosts,
     reNeighborhoodPosts,
-    fetchNextPageRestaurants,
+    fetchNextPageNeighborhoodPosts,
     isFetchingNextPage,
   };
 }

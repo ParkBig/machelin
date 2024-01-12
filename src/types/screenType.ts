@@ -1,6 +1,7 @@
 import { BottomTabScreenProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
+import { MaterialTopTabScreenProps, createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { GooglePlace, IStamp } from './types';
 
 export type RootBottomTabParamList = {
@@ -9,8 +10,14 @@ export type RootBottomTabParamList = {
   NeighborhoodPostsScreen: undefined;
   MyScreen: undefined;
 };
+export type RootTopTabParamList = {
+  PostsSearchScreen: undefined;
+  NoticePostsScreen: undefined;
+  PromotionPostsScreen: undefined;
+};
 export type RootStackParamList = {
   BottomTabScreen: undefined;
+  TopTabScreen: undefined;
   MyMapScreen: undefined;
   LoginScreen: undefined;
   FindMyIdScreen: undefined;
@@ -50,8 +57,14 @@ export type AllParmList = {
   NeighborhoodPostsScreen: undefined;
   MyScreen: undefined;
 
+  // topTabScreen
+  PostsSearchScreen: undefined;
+  NoticePostsScreen: undefined;
+  PromotionPostsScreen: undefined;
+
   // StackScreen
   BottomTabScreen: undefined;
+  TopTabScreen: undefined;
   MyMapScreen: undefined;
   LoginScreen: undefined;
   FindMyIdScreen: undefined;
@@ -86,8 +99,10 @@ export type AllParmList = {
 };
 export type UseNavigation<T extends keyof AllParmList> = NavigationProp<AllParmList, T>;
 export type UseRouter<T extends keyof AllParmList> = RouteProp<AllParmList, T>;
-export type StackScreenPropsAbout<T extends keyof AllParmList> = NativeStackScreenProps<AllParmList, T>;
 export type BottomTabScreenPropsAbout<T extends keyof AllParmList> = BottomTabScreenProps<AllParmList, T>;
+export type TopTamScreenPropsAbout<T extends keyof AllParmList> = MaterialTopTabScreenProps<AllParmList, T>
+export type StackScreenPropsAbout<T extends keyof AllParmList> = NativeStackScreenProps<AllParmList, T>;
 
 export const RootBottomTab = createBottomTabNavigator<RootBottomTabParamList>();
+export const RootTobTab = createMaterialTopTabNavigator<RootTopTabParamList>();
 export const RootStack = createNativeStackNavigator<RootStackParamList>();
