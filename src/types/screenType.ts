@@ -15,6 +15,7 @@ export type RootStackParamList = {
   LoginScreen: undefined;
   FindMyIdScreen: undefined;
   MakeStampScreen: undefined;
+  TermsOfUseScreen: undefined;
   MyInfoSettingScreen: undefined;
   ChangeMyNicknameScreen: undefined;
   RegionalSearchMapScreen: undefined;
@@ -55,6 +56,7 @@ export type AllParmList = {
   LoginScreen: undefined;
   FindMyIdScreen: undefined;
   MakeStampScreen: undefined;
+  TermsOfUseScreen: undefined;
   MyInfoSettingScreen: undefined;
   ChangeMyNicknameScreen: undefined;
   RegionalSearchMapScreen: undefined;

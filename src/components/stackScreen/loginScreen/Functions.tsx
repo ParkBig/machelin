@@ -7,12 +7,12 @@ import { UseNavigation } from 'types/screenType';
 export default function Functions() {
   const { navigate } = useNavigation<UseNavigation<'LoginScreen'>>();
 
-  const goToSignUpHandler = () => {
-    navigate('MobileVerificationScreen');
-  };
-
   const goToFindEmailHandler = () => {
     navigate('FindMyIdScreen');
+  };
+
+  const goToTermsOfUseScreenHandler = () => {
+    navigate('TermsOfUseScreen');
   };
 
   return (
@@ -20,7 +20,7 @@ export default function Functions() {
       <Button onPress={goToFindEmailHandler}>
         <Text style={styles.text}>계정이 기억나지 않나요?</Text>
       </Button>
-      <Button onPress={goToSignUpHandler}>
+      <Button onPress={goToTermsOfUseScreenHandler}>
         <Text style={styles.text}>회원가입</Text>
       </Button>
     </View>
@@ -37,6 +37,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: Colors.gray,
-    textDecorationLine: 'underline'
-  }
+    textDecorationLine: 'underline',
+  },
 });
