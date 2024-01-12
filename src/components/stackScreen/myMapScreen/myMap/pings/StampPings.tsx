@@ -5,8 +5,8 @@ import { IStamp } from 'types/types';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from 'const/global-styles';
 import useUsersStampsQuery from 'query/hooks/users/useUsersStampsQuery';
-import { clickedMyMapListTypeState } from 'store/toggleState';
 import { useRecoilValue } from 'recoil';
+import { clickedMyMapListTypeState } from 'store/toggleState';
 
 interface Props {
   stamp: IStamp;
@@ -21,14 +21,17 @@ const MemoizedMarker = memo(({ stamp }: Props) => {
 
     const trackOut = setTimeout(() => {
       setIsTrack(false);
-    }, 600);
+    }, 500);
 
     return () => clearInterval(trackOut);
   }, [clickedMyMapListType]);
 
-
   return (
-    <Marker tracksViewChanges={isTrack} coordinate={{ latitude: +stamp.lat, longitude: +stamp.lng }} title={stamp.title}>
+    <Marker
+      tracksViewChanges={isTrack}
+      coordinate={{ latitude: +stamp.lat, longitude: +stamp.lng }}
+      title={stamp.title}
+    >
       <View style={styles.wrap}>
         <Ionicons name="paw" size={25} color={Colors.mainWhite3} />
       </View>
@@ -49,12 +52,6 @@ const styles = StyleSheet.create({
 
 export default function StampPings() {
   const { stamps } = useUsersStampsQuery();
-  const clickedMyMapListType = useRecoilValue(clickedMyMapListTypeState);
 
-  return (
-    <>
-      {clickedMyMapListType === 'stamps' &&
-        stamps?.stamps?.map((stamp, index) => <MemoizedMarker key={`${stamp.id}_${index}`} stamp={stamp} />)}
-    </>
-  );
+  return <>{stamps?.stamps?.map((stamp, index) => <MemoizedMarker key={`${stamp.id}_${index}`} stamp={stamp} />)}</>;
 }

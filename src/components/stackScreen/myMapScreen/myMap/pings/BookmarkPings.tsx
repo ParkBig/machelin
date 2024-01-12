@@ -19,7 +19,7 @@ const MemoizedMarker = memo(({ bookmark }: Props) => {
 
     const trackOut = setTimeout(() => {
       setIsTrack(false);
-    }, 600);
+    }, 500);
 
     return () => clearInterval(trackOut);
   }, [clickedMyMapListType]);
@@ -50,14 +50,12 @@ const styles = StyleSheet.create({
 
 export default function BookmarkPings() {
   const { bookmarks } = useUsersBookmarksQuery();
-  const clickedMyMapListType = useRecoilValue(clickedMyMapListTypeState);
 
   return (
     <>
-      {clickedMyMapListType === 'bookmarks' &&
-        bookmarks?.bookmarks?.map((bookmark, index) => (
-          <MemoizedMarker key={`${bookmark.id}_${index}`} bookmark={bookmark} />
-        ))}
+      {bookmarks?.bookmarks?.map((bookmark, index) => (
+        <MemoizedMarker key={`${bookmark.id}_${index}`} bookmark={bookmark} />
+      ))}
     </>
   );
 }
