@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Info from './Info';
 import { IPost } from 'types/types';
-import { Size } from 'const/global-styles';
 import Options from './options/Options';
+import Notice from './Notice';
 
 interface Props {
   posts: IPost;
@@ -10,18 +10,18 @@ interface Props {
 
 export default function Writer({ posts }: Props) {
   const postType =
-    posts.postType === 'allNotice' || posts.postType === 'localNotice'
-      ? 'notice'
+    posts.postType === 'allNotice'
+      ? 'allNotice'
+      : posts.postType === 'localNotice'
+      ? 'localNotice'
       : posts.postType === 'allAd' || posts.postType === 'localAd'
       ? 'ad'
       : 'post';
 
   return (
     <View style={styles.wrap}>
-      {postType === 'notice' ? (
-        <View style={styles.notice}>
-          <Text style={styles.noticeText}>전체 공지</Text>
-        </View>
+      {postType === 'allNotice' || postType === 'localNotice' ? (
+        <Notice postType={postType} ownerSubLocality={posts.ownerSubLocality} />
       ) : (
         <>
           <Info pfp={posts.owner.pfp} nickname={posts.owner.nickname} userInfoId={posts.owner.id} />
@@ -39,14 +39,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  notice: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  noticeText: {
-    fontSize: Size.bigSmall,
-    fontWeight: 'bold',
   },
 });
