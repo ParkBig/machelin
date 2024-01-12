@@ -1,10 +1,11 @@
+import NoticePosts from 'components/topTabScreen/NoticePostsScreen/NoticePosts';
 import { Colors } from 'const/global-styles';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 export default function NoticePostsScreen() {
   return (
     <View style={styles.wrap}>
-      <Text>NoticePostsScreen</Text>
+      <NoticePosts />
     </View>
   );
 }

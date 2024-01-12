@@ -1,59 +1,57 @@
+import { useNetInfo } from '@react-native-community/netinfo';
 import Post from 'components/common/card/post/Post';
+import Line from 'components/common/layout/Line';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { Colors } from 'const/global-styles';
-import useNeighborhoodPostsQuery from 'query/hooks/posts/useNeighborhoodPostsQuery';
-import useUsersSubLocalityQuery from 'query/hooks/users/useUsersSubLocalityQuery';
+import useNoticePostsQuery from 'query/hooks/posts/useNoticePostsQuery';
 import { useState } from 'react';
-import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
-import NoNeighborhoodPosts from './NoNeighborhoodPosts';
-import { useNetInfo } from '@react-native-community/netinfo';
-import Line from 'components/common/layout/Line';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { RefreshControl } from 'react-native-gesture-handler';
+import NoNoticePost from './NoNoticePost';
 
-export default function NeighborhoodPosts() {
+export default function NoticePosts() {
   const netInfo = useNetInfo();
   const [refreshing, setRefreshing] = useState(false);
-  const { mySubLocality, reMySubLocality, mySubLocalityIsLoading } = useUsersSubLocalityQuery();
-  const {
-    neighborhoodPosts,
-    neighborhoodPostsIsLoading,
-    reNeighborhoodPosts,
-    fetchNextPageNeighborhoodPosts,
-    isFetchingNextPage,
-  } = useNeighborhoodPostsQuery(mySubLocality?.subLocality);
+  const { noticePosts, noticePostsIsLoading, isFetchingNextPage, reNoticePosts, fetchNextPageNoticePosts } =
+    useNoticePostsQuery();
 
   const onRefreshHandler = () => {
     setRefreshing(true);
-    reMySubLocality();
-    reNeighborhoodPosts();
+    reNoticePosts();
     setRefreshing(false);
   };
 
   const onEndReachedHandler = () => {
-    fetchNextPageNeighborhoodPosts();
+    fetchNextPageNoticePosts();
   };
 
   return (
     <View style={styles.wrap}>
       {netInfo.isConnected ? (
-        neighborhoodPosts?.pages.length !== 0 ? (
+        noticePosts?.pages.length !== 0 ? (
           <FlatList
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}
             onEndReached={onEndReachedHandler}
             showsVerticalScrollIndicator={false}
             keyExtractor={(_, index) => String(index)}
-            data={neighborhoodPosts?.pages}
+            data={noticePosts?.pages}
             renderItem={({ item }) => <Post posts={item} />}
             ItemSeparatorComponent={() => <Line style={styles.line} />}
+            ListFooterComponent={() => (
+              <View style={styles.listFooterComponent}>
+                <Text style={styles.text}>- 마슐랭 -</Text>
+              </View>
+            )}
           />
         ) : (
-          <NoNeighborhoodPosts />
+          <NoNoticePost />
         )
       ) : (
         <View style={styles.netInfo}>
           <Text>인터넷 연결이 불안정합니다</Text>
         </View>
       )}
-      {(mySubLocalityIsLoading || neighborhoodPostsIsLoading) && <LoadingOverlay style={styles.defaultLoading} />}
+      {noticePostsIsLoading && <LoadingOverlay style={styles.defaultLoading} />}
       {isFetchingNextPage && <LoadingOverlay style={styles.moreDataLoading} />}
     </View>
   );
@@ -87,5 +85,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  listFooterComponent: {
+    height: 90,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontWeight: 'bold',
+    color: Colors.gray,
   },
 });
