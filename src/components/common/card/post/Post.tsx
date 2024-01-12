@@ -5,7 +5,7 @@ import PostingImages from './postingImages/PostingImages';
 import PostBriefRestaurantInfo from './postBriefRestaurantInfo/PostBriefRestaurantInfo';
 import HashTags from './hashtags/HashTags';
 import Content from './content/Content';
-import { Colors } from 'const/global-styles';
+import { Colors, Shadow } from 'const/global-styles';
 import { IPost } from 'types/types';
 import CreatedAt from './createdAt/CreatedAt';
 import HasProblem from './hasProblem/HasProblem';
@@ -33,9 +33,7 @@ const styles = StyleSheet.create({
   wrap: {
     width: '100%',
     padding: 15,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: Colors.mainGreen1,
     backgroundColor: Colors.mainWhite1,
+    ...Shadow,
   },
 });
