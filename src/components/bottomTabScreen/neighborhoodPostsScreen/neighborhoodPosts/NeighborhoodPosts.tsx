@@ -16,6 +16,7 @@ export default function NeighborhoodPosts() {
   const {
     neighborhoodPosts,
     neighborhoodPostsIsLoading,
+    isReNeighborhoodPosts,
     reNeighborhoodPosts,
     fetchNextPageRestaurants,
     isFetchingNextPage,
@@ -42,7 +43,7 @@ export default function NeighborhoodPosts() {
             showsVerticalScrollIndicator={false}
             keyExtractor={(_, index) => String(index)}
             data={neighborhoodPosts?.pages}
-            renderItem={({ item }) => <Post posts={item} isDetailScreen={false} />}
+            renderItem={({ item }) => <Post posts={item} />}
             ItemSeparatorComponent={() => <Line style={styles.line} />}
           />
         ) : (
@@ -53,7 +54,7 @@ export default function NeighborhoodPosts() {
           <Text>인터넷 연결이 불안정합니다</Text>
         </View>
       )}
-      {(mySubLocalityIsLoading || neighborhoodPostsIsLoading) && <LoadingOverlay style={styles.defaultLoading} />}
+      {(mySubLocalityIsLoading || neighborhoodPostsIsLoading || isReNeighborhoodPosts) && <LoadingOverlay style={styles.defaultLoading} />}
       {isFetchingNextPage && <LoadingOverlay style={styles.moreDataLoading} />}
     </View>
   );

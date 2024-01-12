@@ -3,17 +3,22 @@ import { StyleSheet, Text, View } from 'react-native';
 import { IPost } from 'types/types';
 import { Ionicons } from '@expo/vector-icons';
 import Button from 'components/common/layout/Button';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useNavigationState } from '@react-navigation/native';
 import { UseNavigation } from 'types/screenType';
 import Line from 'components/common/layout/Line';
 
 interface Props {
   posts: IPost;
-  isDetailScreen: boolean;
 }
 
-export default function PostBriefRestaurantInfo({ posts, isDetailScreen }: Props) {
-  const { navigate } = useNavigation<UseNavigation<'MyScreen' | 'ExploreUserInfoScreen' | 'RegionalSearchScreen'>>();
+export default function PostBriefRestaurantInfo({ posts }: Props) {
+  if (!posts.restaurantId) return null;
+
+  const { navigate } =
+    useNavigation<
+      UseNavigation<'MyScreen' | 'ExploreUserInfoScreen' | 'RestaurantDetailScreen' | 'NeighborhoodPostsScreen'>
+    >();
+  const navigationState = useNavigationState(state => state);
 
   const goToDetailRestaurantHandler = () => {
     navigate('RestaurantDetailScreen', {
@@ -22,7 +27,12 @@ export default function PostBriefRestaurantInfo({ posts, isDetailScreen }: Props
     });
   };
 
-  if (!posts.restaurantId) return null;
+  const whichScreen =
+    navigationState.routes[navigationState.index].name === 'RestaurantDetailScreen'
+      ? 'RestaurantDetailScreen'
+      : navigationState.routes[navigationState.index].name === 'NeighborhoodPostsScreen'
+      ? 'NeighborhoodPostsScreen'
+      : 'else';
 
   return (
     <>
@@ -43,7 +53,7 @@ export default function PostBriefRestaurantInfo({ posts, isDetailScreen }: Props
             </Text>
           </View>
         </View>
-        {!isDetailScreen && (
+        {whichScreen !== 'RestaurantDetailScreen' && (
           <Button style={styles.button} onPress={goToDetailRestaurantHandler}>
             <Ionicons name="chevron-forward" size={25} color={Colors.darkGray} />
           </Button>

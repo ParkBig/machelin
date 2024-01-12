@@ -23,6 +23,7 @@ export default function Report({ postId, setWhichOneSelected, toggleModalHandler
   const { mutate, isLoading } = useMutation(reportPostQuery, {
     onSuccess: res => {
       if (res.ok) {
+        setWhichOneSelected(null);
         toggleModalHandler();
       } else {
         setToggleAlertModal({ toggle: true, alertMsg: res.msg });
