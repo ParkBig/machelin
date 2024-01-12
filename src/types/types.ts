@@ -154,6 +154,7 @@ export interface Like {
 export interface IPost {
   id: number;
   createdAt: Date;
+  hasProblem: boolean;
   postType: 'post' | 'notice' | 'localAd' | 'allAd';
   hasRestaurantTag: boolean;
   restaurantLat: number;
