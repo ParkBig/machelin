@@ -1,47 +1,40 @@
-import Post from 'components/common/card/post/Post';
+import { useNetInfo } from '@react-native-community/netinfo';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { Colors } from 'const/global-styles';
-import useNeighborhoodPostsQuery from 'query/hooks/posts/useNeighborhoodPostsQuery';
-import useUsersSubLocalityQuery from 'query/hooks/users/useUsersSubLocalityQuery';
+import usersPostsLikedQuery from 'query/hooks/users/usersPostsLikedQuery';
 import { useState } from 'react';
-import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
-import NoNeighborhoodPosts from './NoNeighborhoodPosts';
-import { useNetInfo } from '@react-native-community/netinfo';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import NoPostsLiked from './NoPostsLiked';
+import { RefreshControl } from 'react-native-gesture-handler';
+import Post from 'components/common/card/post/Post';
 import Line from 'components/common/layout/Line';
 
-export default function NeighborhoodPosts() {
+export default function PostsLiked() {
   const netInfo = useNetInfo();
   const [refreshing, setRefreshing] = useState(false);
-  const { mySubLocality, reMySubLocality, mySubLocalityIsLoading } = useUsersSubLocalityQuery();
-  const {
-    neighborhoodPosts,
-    neighborhoodPostsIsLoading,
-    reNeighborhoodPosts,
-    fetchNextPageNeighborhoodPosts,
-    isFetchingNextPage,
-  } = useNeighborhoodPostsQuery(mySubLocality?.subLocality);
+  const { postsLiked, postsLikedIsLoading, rePostsLiked, fetchNextPagePosts, isFetchingNextPage } =
+    usersPostsLikedQuery();
 
   const onRefreshHandler = () => {
     setRefreshing(true);
-    reMySubLocality();
-    reNeighborhoodPosts();
+    rePostsLiked();
     setRefreshing(false);
   };
 
   const onEndReachedHandler = () => {
-    fetchNextPageNeighborhoodPosts();
+    fetchNextPagePosts();
   };
 
   return (
     <View style={styles.wrap}>
       {netInfo.isConnected ? (
-        neighborhoodPosts?.pages.length !== 0 ? (
+        postsLiked?.pages && postsLiked.pages.length !== 0 ? (
           <FlatList
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}
             onEndReached={onEndReachedHandler}
             showsVerticalScrollIndicator={false}
             keyExtractor={(_, index) => String(index)}
-            data={neighborhoodPosts?.pages}
+            data={postsLiked.pages}
             renderItem={({ item }) => <Post posts={item} />}
             ItemSeparatorComponent={() => <Line style={styles.line} />}
             ListFooterComponent={() => (
@@ -51,14 +44,14 @@ export default function NeighborhoodPosts() {
             )}
           />
         ) : (
-          <NoNeighborhoodPosts />
+          <NoPostsLiked />
         )
       ) : (
         <View style={styles.netInfo}>
           <Text>인터넷 연결이 불안정합니다</Text>
         </View>
       )}
-      {(mySubLocalityIsLoading || neighborhoodPostsIsLoading) && <LoadingOverlay style={styles.defaultLoading} />}
+      {postsLikedIsLoading && <LoadingOverlay style={styles.defaultLoading} />}
       {isFetchingNextPage && <LoadingOverlay style={styles.moreDataLoading} />}
     </View>
   );
@@ -67,6 +60,16 @@ export default function NeighborhoodPosts() {
 const styles = StyleSheet.create({
   wrap: {
     flex: 1,
+    backgroundColor: Colors.lightGrayOpacity1,
+  },
+  netInfo: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  line: {
+    width: '100%',
+    height: 30,
     backgroundColor: Colors.lightGrayOpacity1,
   },
   defaultLoading: {
@@ -82,16 +85,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     justifyContent: 'flex-end',
     position: 'absolute',
-  },
-  line: {
-    width: '100%',
-    height: 30,
-    backgroundColor: Colors.lightGrayOpacity1,
-  },
-  netInfo: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   listFooterComponent: {
     height: 90,

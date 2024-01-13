@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomColor: Colors.mainGreen1,
-    borderBottomWidth: 1.5,
+    borderBottomWidth: 2,
   },
   textInput: {
     width: '100%',

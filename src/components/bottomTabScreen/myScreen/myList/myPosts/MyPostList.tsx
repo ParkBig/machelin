@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import NoPost from './NoPost';
 import { Colors } from 'const/global-styles';
 import useUsersPostsQuery from 'query/hooks/users/useUsersPostsQuery';
@@ -26,7 +26,11 @@ export default function MyPostList() {
             keyExtractor={(_, index) => String(index)}
             renderItem={({ item }) => <Post posts={item} />}
             ItemSeparatorComponent={() => <Line style={styles.line} />}
-            ListFooterComponent={() => <Line style={styles.line} />}
+            ListFooterComponent={() => (
+              <View style={styles.listFooterComponent}>
+                <Text style={styles.text}>- 마슐랭 -</Text>
+              </View>
+            )}
           />
         ) : (
           <NoPost />
@@ -72,5 +76,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     position: 'absolute',
+  },
+  listFooterComponent: {
+    height: 90,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontWeight: 'bold',
+    color: Colors.gray,
   },
 });
