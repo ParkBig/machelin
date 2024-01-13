@@ -52,7 +52,7 @@ export default function MachelinReviews() {
     <>
       <View style={styles.reviewTitle}>
         <View style={styles.title}>
-          <Ionicons name='restaurant' size={30} color={Colors.mainWhite3} />
+          <Ionicons name="restaurant" size={30} color={Colors.mainWhite3} />
           <Text style={styles.titleText}>마슐랭리뷰</Text>
         </View>
         <Button style={styles.makePostButton} onPress={goToMakePostHandler}>
@@ -74,7 +74,9 @@ export default function MachelinReviews() {
                 <Text style={styles.text}>더보기</Text>
               </Button>
             ) : (
-              <Line style={styles.line} />
+              <View style={styles.listFooterComponent}>
+                <Text style={styles.listFooterText}>- 마슐랭 -</Text>
+              </View>
             )
           }
         />
@@ -139,5 +141,15 @@ const styles = StyleSheet.create({
   text: {
     color: Colors.darkGray,
     fontWeight: 'bold',
+  },
+  listFooterComponent: {
+    height: 90,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  listFooterText: {
+    fontWeight: 'bold',
+    color: Colors.gray,
   },
 });

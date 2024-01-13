@@ -44,6 +44,11 @@ export default function NeighborhoodPosts() {
             data={neighborhoodPosts?.pages}
             renderItem={({ item }) => <Post posts={item} />}
             ItemSeparatorComponent={() => <Line style={styles.line} />}
+            ListFooterComponent={() => (
+              <View style={styles.listFooterComponent}>
+                <Text style={styles.text}>- 마슐랭 -</Text>
+              </View>
+            )}
           />
         ) : (
           <NoNeighborhoodPosts />
@@ -87,5 +92,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  listFooterComponent: {
+    height: 90,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontWeight: 'bold',
+    color: Colors.gray,
   },
 });
