@@ -1,6 +1,7 @@
 import { Colors, Size } from 'const/global-styles';
 import { Platform, StatusBar } from 'react-native';
 import NoticePostsScreen from 'screens/topTab/NoticePostsScreen';
+import PostsLikedScreen from 'screens/topTab/PostsLikedScreen';
 import PostsSearchScreen from 'screens/topTab/PostsSearchScreen';
 import { RootTobTab } from 'types/screenType';
 
@@ -21,6 +22,7 @@ export default function TopTabScreen() {
       }}
     >
       <RootTobTab.Screen name="PostsSearchScreen" component={PostsSearchScreen} options={{ title: '게시글 검색' }} />
+      <RootTobTab.Screen name="PostsLikedScreen" component={PostsLikedScreen} options={{ title: '좋아요' }} />
       <RootTobTab.Screen name="NoticePostsScreen" component={NoticePostsScreen} options={{ title: '공지사항' }} />
     </RootTobTab.Navigator>
   );

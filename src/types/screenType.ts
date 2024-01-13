@@ -13,6 +13,7 @@ export type RootBottomTabParamList = {
 export type RootTopTabParamList = {
   PostsSearchScreen: undefined;
   NoticePostsScreen: undefined;
+  PostsLikedScreen: undefined;
   PromotionPostsScreen: undefined;
 };
 export type RootStackParamList = {
@@ -60,6 +61,7 @@ export type AllParmList = {
   // topTabScreen
   PostsSearchScreen: undefined;
   NoticePostsScreen: undefined;
+  PostsLikedScreen: undefined;
   PromotionPostsScreen: undefined;
 
   // StackScreen
