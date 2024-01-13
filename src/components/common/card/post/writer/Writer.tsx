@@ -24,8 +24,12 @@ export default function Writer({ posts }: Props) {
         <Notice postType={postType} ownerSubLocality={posts.ownerSubLocality} />
       ) : (
         <>
-          <Info pfp={posts.owner.pfp} nickname={posts.owner.nickname} userInfoId={posts.owner.id} />
-          {postType === 'post' && <Options postId={posts.id} ownerId={posts.owner.id} isPublic={posts.isPublic} />}
+          {posts.owner && (
+            <>
+              <Info pfp={posts.owner.pfp} nickname={posts.owner.nickname} userInfoId={posts.owner.id} />
+              {postType === 'post' && <Options postId={posts.id} ownerId={posts.owner.id} isPublic={posts.isPublic} />}
+            </>
+          )}
         </>
       )}
     </View>

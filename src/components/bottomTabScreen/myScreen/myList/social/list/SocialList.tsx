@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 import { Colors } from 'const/global-styles';
-import FollowList from './FollowList';
-import FollowerList from './FollowerList';
-import SearchList from './SearchList';
+import SearchList from './searchList/SearchList';
+import FollowList from './followList/FollowList';
+import FollowerList from './followerList/FollowerList';
 
 interface Props {
   isFollow: boolean;
