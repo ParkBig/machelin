@@ -1,6 +1,5 @@
 import ChoseRestaurant from 'components/stackScreen/makePostScreen/choseRestaurant/ChoseRestaurant';
 import PostContents from 'components/stackScreen/makePostScreen/contents/PostContents';
-import Hashtag from 'components/stackScreen/makePostScreen/hashtag/Hashtag';
 import SelectPublic from 'components/stackScreen/makePostScreen/selectPublic/SelectPublic';
 import StarScore from 'components/stackScreen/makePostScreen/starScore/StarScore';
 import WriterImg from 'components/stackScreen/makePostScreen/writerImg/WriterImg';
@@ -21,10 +20,9 @@ export default function MakePostScreen({ route }: StackScreenPropsAbout<'MakePos
   return (
     <ScrollView style={styles.wrap} showsVerticalScrollIndicator={false}>
       <PostContents />
+      {/* <Hashtag /> */}
       <WriterImg />
       <ChoseRestaurant />
-      {/* will update */}
-      {/* <Hashtag /> */}
       {route.params.restaurantInfo && <StarScore />}
       <SelectPublic />
     </ScrollView>
