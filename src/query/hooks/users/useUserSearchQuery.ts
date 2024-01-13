@@ -1,5 +1,7 @@
 import { axiosUsers } from 'query/api/user';
 import { useQuery } from 'react-query';
+import { useRecoilValue } from 'recoil';
+import { searchNickNameState } from 'store/searchState';
 import { UserInfo } from 'types/types';
 
 interface Data {
@@ -7,25 +9,27 @@ interface Data {
   users: UserInfo[];
 }
 
-export default function useUserSearchQuery(nickname: string) {
+export default function useUserSearchQuery() {
+  const searchNickName = useRecoilValue(searchNickNameState);
+
   const {
     data: userList,
     refetch: reUserList,
-    isLoading,
+    isLoading: userListIsLoading,
   } = useQuery<Data>(
-    ['userList', nickname],
+    ['userList', searchNickName],
     async () => {
       const { data } = await axiosUsers.get('/findUsers', {
         params: {
-          nickname,
+          nickname: searchNickName,
         },
       });
       return data;
     },
     {
-      enabled: !!nickname,
+      enabled: !!searchNickName,
     }
   );
 
-  return { userList, isLoading, reUserList };
+  return { userList, userListIsLoading, reUserList };
 }
