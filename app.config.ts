@@ -6,7 +6,7 @@ config();
 const expoConfig: ExpoConfig = {
   name: '마슐랭',
   slug: 'machelin',
-  version: '1.0.21',
+  version: '1.0.22',
   orientation: 'portrait',
   icon: './src/assets/icon.png',
   userInterfaceStyle: 'light',
@@ -17,11 +17,11 @@ const expoConfig: ExpoConfig = {
   },
   assetBundlePatterns: ['**/*'],
   ios: {
-    buildNumber: '1.0.21',
+    buildNumber: '1.0.22',
     supportsTablet: true,
   },
   android: {
-    versionCode: 14,
+    versionCode: 15,
     adaptiveIcon: {
       foregroundImage: './src/assets/adaptive-icon.png',
       backgroundColor: '#ffffff',
