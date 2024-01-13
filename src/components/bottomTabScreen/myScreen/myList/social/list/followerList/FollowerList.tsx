@@ -1,37 +1,36 @@
-import { View } from 'react-native';
-import BriefUserInfo from './BriefUserInfo';
-import NoSocial from './NoSocial';
-import useUsersFollowsQuery from 'query/hooks/users/useUsersFollowsQuery';
+import { StyleSheet, View } from 'react-native';
+import useUsersFollowersQuery from 'query/hooks/users/useUsersFollowersQuery';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { FlatList } from 'react-native-gesture-handler';
-import { StyleSheet } from 'react-native';
 import AvailableAfterLogin from 'components/common/modal/AvailableAfterLogin';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
+import BriefUserInfo from '../BriefUserInfo';
+import NoSocial from '../NoSocial';
 
-export default function FollowList() {
+export default function FollowerList() {
   const { myInfo } = useMyInfoQuery();
-  const { follows, followsIsLoading, isReFollows } = useUsersFollowsQuery();
-  const followsExist = follows?.follows && follows.follows.length !== 0 ? true : false;
+  const { followers, followersIsLoading, isReFollowers } = useUsersFollowersQuery();
+  const followersExist = followers?.followers && followers.followers.length !== 0 ? true : false;
 
   return (
     <View>
       {myInfo?.authUser ? (
-        followsExist ? (
+        followersExist ? (
           <FlatList
             scrollEnabled={false}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ gap: 5 }}
-            data={follows?.follows}
+            data={followers?.followers}
             keyExtractor={item => `${item.id}`}
             renderItem={({ item }) => <BriefUserInfo key={item.id} userInfo={item} />}
           />
         ) : (
-          <NoSocial type="follow" />
+          <NoSocial type="follower" />
         )
       ) : (
         <AvailableAfterLogin />
       )}
-      {(followsIsLoading || isReFollows) && <LoadingOverlay style={styles.loadingOverlay} />}
+      {(followersIsLoading || isReFollowers) && <LoadingOverlay style={styles.loadingOverlay} />}
     </View>
   );
 }
