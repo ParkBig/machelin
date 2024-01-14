@@ -6,6 +6,7 @@ import ReVerifyModal from './ReVerifyModal';
 import { useMutation } from 'react-query';
 import VerificationInput from './VerificationInput';
 import { sendSignUpVerificationQuery } from 'query/api/user';
+import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 
 export default function MobileInput() {
   const [isClickedSendVerify, setIsClickedSendVerify] = useState(false);
@@ -13,8 +14,8 @@ export default function MobileInput() {
   const [isEditable, setIsEditable] = useState(true);
   const [toggleConfirmReVerifyModal, setToggleConfirmReVerifyModal] = useState(false);
   const [alertMsg, setAlertMsg] = useState('');
-  
-  const { mutate } = useMutation(sendSignUpVerificationQuery, {
+
+  const { mutate, isLoading } = useMutation(sendSignUpVerificationQuery, {
     onSuccess: res => {
       if (!isClickedSendVerify && res.ok) {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -43,6 +44,7 @@ export default function MobileInput() {
       setToggleConfirmReVerifyModal(true);
       return;
     }
+
     setAlertMsg('');
     mutate(phoneNumber);
   };
@@ -67,10 +69,16 @@ export default function MobileInput() {
           <Text style={styles.alertText}>{alertMsg}</Text>
         </View>
         {!isClickedSendVerify ? (
-          <Button style={styles.button} onPress={doVerifyHandler}>
-            <Text style={styles.buttonText}>인증번호 발송</Text>
-          </Button>
-        ) : <VerificationInput isClickedSendVerify={isClickedSendVerify} phoneNumber={phoneNumber} />}
+          isLoading ? (
+            <LoadingOverlay style={styles.button} />
+          ) : (
+            <Button style={styles.button} onPress={doVerifyHandler}>
+              <Text style={styles.buttonText}>인증번호 발송</Text>
+            </Button>
+          )
+        ) : (
+          <VerificationInput isClickedSendVerify={isClickedSendVerify} phoneNumber={phoneNumber} />
+        )}
       </View>
       <ReVerifyModal
         toggleModal={toggleConfirmReVerifyModal}
