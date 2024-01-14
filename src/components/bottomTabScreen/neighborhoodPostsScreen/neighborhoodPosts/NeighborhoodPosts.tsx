@@ -12,14 +12,15 @@ import Line from 'components/common/layout/Line';
 export default function NeighborhoodPosts() {
   const netInfo = useNetInfo();
   const [refreshing, setRefreshing] = useState(false);
-  const { mySubLocality, reMySubLocality, mySubLocalityIsLoading } = useUsersSubLocalityQuery();
+  const { reMySubLocality, mySubLocalityIsLoading } = useUsersSubLocalityQuery();
   const {
     neighborhoodPosts,
     neighborhoodPostsIsLoading,
+    isReNeighborhoodPosts,
     reNeighborhoodPosts,
     fetchNextPageNeighborhoodPosts,
     isFetchingNextPage,
-  } = useNeighborhoodPostsQuery(mySubLocality?.subLocality);
+  } = useNeighborhoodPostsQuery();
 
   const onRefreshHandler = () => {
     setRefreshing(true);
@@ -58,7 +59,7 @@ export default function NeighborhoodPosts() {
           <Text>인터넷 연결이 불안정합니다</Text>
         </View>
       )}
-      {(mySubLocalityIsLoading || neighborhoodPostsIsLoading) && <LoadingOverlay style={styles.defaultLoading} />}
+      {(mySubLocalityIsLoading || neighborhoodPostsIsLoading || isReNeighborhoodPosts) && <LoadingOverlay style={styles.defaultLoading} />}
       {isFetchingNextPage && <LoadingOverlay style={styles.moreDataLoading} />}
     </View>
   );

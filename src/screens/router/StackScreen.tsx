@@ -25,7 +25,7 @@ import MakeStampButton from 'components/stackScreen/makeStampScreen/MakeStampBut
 import StampDetailScreen from 'screens/stack/StampDetailScreen';
 import DeleteStampButton from 'components/stackScreen/stampDetailScreen/DeleteStampButton';
 import TermsOfUseScreen from 'screens/stack/TermsOfUseScreen';
-import TopTabScreen from './TopTabScreen';
+import NeighborHoodPostsTopTabScreen from './NeighborHoodPostsTopTabScreen';
 
 export default function StackScreen() {
   return (
@@ -39,7 +39,7 @@ export default function StackScreen() {
       }}
     >
       <RootStack.Screen name="BottomTabScreen" component={BottomTabScreen} options={{ headerShown: false }} />
-      <RootStack.Screen name="TopTabScreen" component={TopTabScreen} options={{ headerShown: false }} />
+      <RootStack.Screen name="NeighborHoodPostsTopTabScreen" component={NeighborHoodPostsTopTabScreen} options={{ headerShown: false }} />
       <RootStack.Screen
         name="MakePostScreen"
         component={MakePostScreen}

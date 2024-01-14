@@ -5,7 +5,7 @@ import PostsLikedScreen from 'screens/topTab/PostsLikedScreen';
 import PostsSearchScreen from 'screens/topTab/PostsSearchScreen';
 import { RootTobTab } from 'types/screenType';
 
-export default function TopTabScreen() {
+export default function NeighborHoodPostsTopTabScreen() {
   return (
     <RootTobTab.Navigator
       style={{
