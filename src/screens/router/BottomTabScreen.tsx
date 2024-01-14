@@ -25,7 +25,7 @@ export default function BottomTabScreen() {
         name="MainScreen"
         component={MainScreen}
         options={{
-          title: '내주변',
+          title: '마슐랭',
           tabBarIcon: () => <Ionicons name="map" size={Size.bigMiddle} color={Colors.mainWhite3} />,
         }}
       />
@@ -52,7 +52,7 @@ export default function BottomTabScreen() {
           unmountOnBlur: true,
           headerShown: true,
           headerTitleAlign: 'left',
-          title: '마슐랭',
+          title: '내정보',
           headerTitleStyle: {
             fontWeight: 'bold',
             color: Colors.mainWhite3,

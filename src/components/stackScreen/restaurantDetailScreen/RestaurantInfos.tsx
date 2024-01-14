@@ -139,5 +139,4 @@ const styles = StyleSheet.create({
   closeText: {
     color: Colors.googleBackground,
   },
-  linkingButtonText: {},
 });
