@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Linking, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Size } from 'const/global-styles';
 import { useState } from 'react';
@@ -17,40 +17,54 @@ export default function RestaurantInfos() {
     setIsOpenTimeInfo(prev => !prev);
   };
 
+  const test = async () => {
+    if (!restaurantDetail?.restaurantDetail) {
+      return;
+    }
+
+    const supported = await Linking.canOpenURL(
+      `https://www.google.com/search?q=${restaurantDetail?.restaurantDetail?.name}`
+    );
+
+    if (supported) {
+      await Linking.openURL(`https://www.google.com/search?q=${restaurantDetail?.restaurantDetail?.name}`);
+    }
+  };
+
   return (
     <View style={styles.infos}>
       {restaurantDetail?.restaurantDetail?.formatted_address && (
         <View style={styles.info}>
-          <Ionicons name="restaurant" size={25} color={Colors.mainGreen2} />
+          <Ionicons name="restaurant" size={30} color={Colors.mainGreen2} />
           <View style={styles.infoContent}>
             <Text style={styles.name}>{restaurantDetail?.restaurantDetail?.name}</Text>
           </View>
         </View>
       )}
-      {restaurantDetail?.restaurantDetail?.formatted_phone_number && (
-        <View style={styles.info}>
-          <Ionicons name="call" size={25} color={Colors.mainGreen2} />
-          <View style={styles.infoContent}>
-            <Text>{restaurantDetail?.restaurantDetail?.formatted_phone_number}</Text>
-          </View>
-        </View>
-      )}
       {restaurantDetail?.restaurantDetail?.formatted_address && (
         <View style={styles.info}>
-          <Ionicons name="location" size={25} color={Colors.mainGreen2} />
+          <Ionicons name="location" size={30} color={Colors.mainGreen2} />
           <View style={styles.infoContent}>
             <Text>{restaurantDetail?.restaurantDetail?.formatted_address}</Text>
           </View>
         </View>
       )}
+      {restaurantDetail?.restaurantDetail?.formatted_phone_number && (
+        <View style={styles.info}>
+          <Ionicons name="call" size={30} color={Colors.mainGreen2} />
+          <View style={styles.infoContent}>
+            <Text>{restaurantDetail?.restaurantDetail?.formatted_phone_number}</Text>
+          </View>
+        </View>
+      )}
       {restaurantDetail?.restaurantDetail?.opening_hours && (
         <View style={styles.info}>
-          <Ionicons name="time" size={25} color={Colors.mainGreen2} />
+          <Ionicons name="time" size={30} color={Colors.mainGreen2} />
           <Button style={styles.timeInfo} onPress={toggleTimeInfo}>
             <Text>
               {restaurantDetail?.restaurantDetail?.opening_hours?.weekday_text[dayOfWeek - 1 < 0 ? 6 : dayOfWeek - 1]}
             </Text>
-            <Ionicons name={isOpenTimeInfo ? 'chevron-up' : 'chevron-down'} size={25} color={Colors.mainGreen2} />
+            <Ionicons name={isOpenTimeInfo ? 'chevron-up' : 'chevron-down'} size={30} color={Colors.mainGreen2} />
           </Button>
         </View>
       )}
@@ -72,6 +86,13 @@ export default function RestaurantInfos() {
           </View>
         </View>
       )}
+      <View style={styles.info}>
+        <Ionicons name="logo-google" size={30} color={Colors.mainGreen2} />
+        <Button style={styles.infoContent} onPress={test}>
+          <Text>구글 검색해 보기</Text>
+          <Ionicons name="chevron-forward" size={30} color={Colors.mainGreen2} />
+        </Button>
+      </View>
     </View>
   );
 }
@@ -85,13 +106,15 @@ const styles = StyleSheet.create({
   },
   info: {
     width: '100%',
-    minHeight: 40,
+    minHeight: 50,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
   },
   infoContent: {
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     flexWrap: 'wrap',
   },
@@ -116,4 +139,5 @@ const styles = StyleSheet.create({
   closeText: {
     color: Colors.googleBackground,
   },
+  linkingButtonText: {},
 });
