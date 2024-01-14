@@ -1,6 +1,7 @@
 import { axiosPosts } from 'query/api/posts';
 import { useInfiniteQuery } from 'react-query';
 import { IPost } from 'types/types';
+import useUsersSubLocalityQuery from '../users/useUsersSubLocalityQuery';
 
 interface Data {
   ok: boolean;
@@ -9,7 +10,10 @@ interface Data {
   nextPage: string;
 }
 
-export default function useNeighborhoodPostsQuery(subLocality: string = '') {
+export default function useNeighborhoodPostsQuery() {
+  const { mySubLocality } = useUsersSubLocalityQuery();
+  const subLocality = mySubLocality?.subLocality
+
   const {
     data: neighborhoodPosts,
     isLoading: neighborhoodPostsIsLoading,
