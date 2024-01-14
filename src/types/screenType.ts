@@ -18,7 +18,7 @@ export type RootTopTabParamList = {
 };
 export type RootStackParamList = {
   BottomTabScreen: undefined;
-  TopTabScreen: undefined;
+  NeighborHoodPostsTopTabScreen: undefined;
   MyMapScreen: undefined;
   LoginScreen: undefined;
   FindMyIdScreen: undefined;
@@ -66,7 +66,7 @@ export type AllParmList = {
 
   // StackScreen
   BottomTabScreen: undefined;
-  TopTabScreen: undefined;
+  NeighborHoodPostsTopTabScreen: undefined;
   MyMapScreen: undefined;
   LoginScreen: undefined;
   FindMyIdScreen: undefined;

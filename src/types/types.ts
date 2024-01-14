@@ -151,11 +151,13 @@ export interface Like {
   post: IPost;
 }
 
+export type PostType = 'POST' | 'LOCAL_AD' | 'ALL_AD' | 'LOCAL_NOTICE' | 'ALL_NOTICE';
+
 export interface IPost {
   id: number;
   createdAt: Date;
   hasProblem: boolean;
-  postType: 'post' | 'localAd' | 'allAd' | 'allNotice' | 'localNotice';
+  postType: PostType;
   ownerSubLocality: string;
   expirationDate: number;
   hasRestaurantTag: boolean;

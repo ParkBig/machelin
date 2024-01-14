@@ -25,7 +25,7 @@ export default function Options() {
   };
 
   const goToTobTabScreenHandler = () => {
-    navigate('TopTabScreen');
+    navigate('NeighborHoodPostsTopTabScreen');
   };
 
   return (

@@ -10,24 +10,24 @@ interface Props {
 
 export default function Writer({ posts }: Props) {
   const postType =
-    posts.postType === 'allNotice'
-      ? 'allNotice'
-      : posts.postType === 'localNotice'
-      ? 'localNotice'
-      : posts.postType === 'allAd' || posts.postType === 'localAd'
-      ? 'ad'
-      : 'post';
+    posts.postType === 'ALL_NOTICE'
+      ? 'ALL_NOTICE'
+      : posts.postType === 'LOCAL_NOTICE'
+      ? 'LOCAL_NOTICE'
+      : posts.postType === 'ALL_AD' || posts.postType === 'LOCAL_AD'
+      ? 'LOCAL_AD'
+      : 'POST';
 
   return (
     <View style={styles.wrap}>
-      {postType === 'allNotice' || postType === 'localNotice' ? (
+      {postType === 'ALL_NOTICE' || postType === 'LOCAL_NOTICE' ? (
         <Notice postType={postType} ownerSubLocality={posts.ownerSubLocality} />
       ) : (
         <>
           {posts.owner && (
             <>
               <Info pfp={posts.owner.pfp} nickname={posts.owner.nickname} userInfoId={posts.owner.id} />
-              {postType === 'post' && <Options postId={posts.id} ownerId={posts.owner.id} isPublic={posts.isPublic} />}
+              {postType === 'POST' && <Options postId={posts.id} ownerId={posts.owner.id} isPublic={posts.isPublic} />}
             </>
           )}
         </>

@@ -4,7 +4,7 @@ import { Colors, Size } from 'const/global-styles';
 import trimMySubLocality from 'util/ trimMySubLocality';
 
 interface Props {
-  postType: 'allNotice' | 'localNotice';
+  postType: 'ALL_NOTICE' | 'LOCAL_NOTICE';
   ownerSubLocality: string;
 }
 
@@ -13,7 +13,7 @@ export default function Notice({ postType, ownerSubLocality }: Props) {
 
   return (
     <View style={styles.notice}>
-      {postType === 'allNotice' ? (
+      {postType === 'ALL_NOTICE' ? (
         <>
           <Ionicons name="restaurant" size={20} color={Colors.mainGreen2} />
           <Text style={styles.noticeText}>전체 공지</Text>

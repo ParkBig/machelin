@@ -22,7 +22,7 @@ export default function Post({ posts }: Props) {
       <Writer posts={posts} />
       <CreatedAt createdAt={posts.createdAt} />
       <PostingImages images={posts.images} />
-      <Content contents={posts.contents} />
+      <Content contents={posts.contents} postType={posts.postType} />
       <HashTags hashtags={posts.hashtags} />
       <ShowCommentsAndHearts posts={posts} />
     </View>
