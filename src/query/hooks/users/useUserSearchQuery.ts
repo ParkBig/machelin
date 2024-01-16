@@ -10,24 +10,24 @@ interface Data {
 }
 
 export default function useUserSearchQuery() {
-  const searchNickName = useRecoilValue(searchNickNameState);
+  const { isTyping, searchText } = useRecoilValue(searchNickNameState);
 
   const {
     data: userList,
     refetch: reUserList,
     isLoading: userListIsLoading,
   } = useQuery<Data>(
-    ['userList', searchNickName],
+    ['userList', searchText],
     async () => {
       const { data } = await axiosUsers.get('/findUsers', {
         params: {
-          nickname: searchNickName,
+          nickname: searchText,
         },
       });
       return data;
     },
     {
-      enabled: !!searchNickName,
+      enabled: isTyping ? false : searchText ? true : false,
     }
   );
 

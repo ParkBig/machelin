@@ -2,11 +2,9 @@ import { RootStack } from 'types/screenType';
 import { Colors } from 'const/global-styles';
 import BottomTabScreen from './BottomTabScreen';
 import MakePostScreen from 'screens/stack/MakePostScreen';
-import MyMapScreen from 'screens/stack/MyMapScreen';
 import RestaurantDetailScreen from 'screens/stack/RestaurantDetailScreen';
 import LoginScreen from 'screens/stack/LoginScreen';
 import SignUpScreen from 'screens/stack/SignUpScreen';
-import MyInfoSettingScreen from 'screens/stack/MyInfoSettingScreen';
 import ChangeMyNicknameScreen from 'screens/stack/ChangeMyNicknameScreen';
 import ExploreUserInfoScreen from 'screens/stack/ExploreUserInfoScreen';
 import MobileVerificationScreen from 'screens/stack/MobileVerificationScreen';
@@ -18,7 +16,6 @@ import ToggleBookmark from 'components/stackScreen/restaurantDetailScreen/Toggle
 import FindMyIdScreen from 'screens/stack/FindMyIdScreen';
 import RegionalSearchMapScreen from 'screens/stack/RegionalSearchMapScreen';
 import MakePostButton from 'components/stackScreen/makePostScreen/makePostButton/MakePostButton';
-import StampButton from 'components/stackScreen/myMapScreen/StampButton';
 import MakeStampScreen from 'screens/stack/MakeStampScreen';
 import FindRestaurantInfoScreen from 'screens/stack/FindRestaurantInfoScreen';
 import MakeStampButton from 'components/stackScreen/makeStampScreen/MakeStampButton';
@@ -26,6 +23,7 @@ import StampDetailScreen from 'screens/stack/StampDetailScreen';
 import DeleteStampButton from 'components/stackScreen/stampDetailScreen/DeleteStampButton';
 import TermsOfUseScreen from 'screens/stack/TermsOfUseScreen';
 import NeighborHoodPostsTopTabScreen from './NeighborHoodPostsTopTabScreen';
+import SettingScreen from 'screens/stack/SettingScreen';
 
 export default function StackScreen() {
   return (
@@ -39,7 +37,11 @@ export default function StackScreen() {
       }}
     >
       <RootStack.Screen name="BottomTabScreen" component={BottomTabScreen} options={{ headerShown: false }} />
-      <RootStack.Screen name="NeighborHoodPostsTopTabScreen" component={NeighborHoodPostsTopTabScreen} options={{ headerShown: false }} />
+      <RootStack.Screen
+        name="NeighborHoodPostsTopTabScreen"
+        component={NeighborHoodPostsTopTabScreen}
+        options={{ headerShown: false }}
+      />
       <RootStack.Screen
         name="MakePostScreen"
         component={MakePostScreen}
@@ -54,14 +56,6 @@ export default function StackScreen() {
         options={({ route }) => ({
           title: route.params.forWhich === 'makePost' ? '식당태그하기' : '장소태그하기',
         })}
-      />
-      <RootStack.Screen
-        name="MyMapScreen"
-        component={MyMapScreen}
-        options={{
-          title: '나의 지도',
-          headerRight: () => <StampButton />,
-        }}
       />
       <RootStack.Screen
         name="RestaurantDetailScreen"
@@ -95,16 +89,9 @@ export default function StackScreen() {
       <RootStack.Screen
         name="TermsOfUseScreen"
         component={TermsOfUseScreen}
-        options={{ title: '개인정보취급방침 동의' }}
+        options={{ title: '전화번호 인증하기' }}
       />
       <RootStack.Screen name="FindMyIdScreen" component={FindMyIdScreen} options={{ title: '나의 계정 찾기' }} />
-      <RootStack.Screen
-        name="MyInfoSettingScreen"
-        component={MyInfoSettingScreen}
-        options={{
-          title: '내 정보 수정',
-        }}
-      />
       <RootStack.Screen
         name="ChangeMyNicknameScreen"
         component={ChangeMyNicknameScreen}
@@ -162,6 +149,13 @@ export default function StackScreen() {
         options={{
           title: '나의 도장',
           headerRight: () => <DeleteStampButton />,
+        }}
+      />
+      <RootStack.Screen 
+        name='SettingScreen'
+        component={SettingScreen}
+        options={{
+          title: '설정',
         }}
       />
     </RootStack.Navigator>

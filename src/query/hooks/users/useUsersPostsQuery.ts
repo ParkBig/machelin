@@ -11,6 +11,7 @@ export default function useUsersPostsQuery() {
     data: posts,
     isLoading: postsIsLoading,
     refetch: rePosts,
+    isRefetching: isRePosts,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
@@ -24,7 +25,7 @@ export default function useUsersPostsQuery() {
           page: pageParam,
         },
       });
-      
+
       return data;
     },
     {
@@ -41,5 +42,5 @@ export default function useUsersPostsQuery() {
     }
   };
 
-  return { posts, postsIsLoading, rePosts, fetchNextPagePosts, isFetchingNextPage };
+  return { posts, postsIsLoading, rePosts, fetchNextPagePosts, isFetchingNextPage, isRePosts };
 }

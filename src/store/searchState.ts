@@ -20,6 +20,11 @@ interface PostSearchInputState {
   searchText: string;
 }
 
+interface SearchNickNameState {
+  isTyping: boolean;
+  searchText: string;
+}
+
 export const mainSearchState = atom<MainSearchState>({
   key: 'mainSearchState',
   default: {
@@ -40,9 +45,12 @@ export const regionalRestaurantSearchInputState = atom<RegionalRestaurantSearchI
   },
 });
 
-export const searchNickNameState = atom<string>({
+export const searchNickNameState = atom<SearchNickNameState>({
   key: 'searchNickNameState',
-  default: '',
+  default: {
+    isTyping: false,
+    searchText: '',
+  },
 });
 
 export const postSearchInputState = atom<PostSearchInputState>({

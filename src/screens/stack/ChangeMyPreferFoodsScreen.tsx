@@ -1,5 +1,6 @@
 import MakePreferFood from 'components/stackScreen/changeMyPreferFoodsScreen/MakePreferFood';
 import PreferFoods from 'components/stackScreen/changeMyPreferFoodsScreen/PreferFoods';
+import { Colors } from 'const/global-styles';
 import { ScrollView, StyleSheet } from 'react-native';
 
 export default function ChangeMyPreferFoodsScreen() {
@@ -16,5 +17,6 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     paddingHorizontal: 20,
+    backgroundColor: Colors.mainWhite1,
   },
 });

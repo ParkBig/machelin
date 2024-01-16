@@ -1,13 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Size } from 'const/global-styles';
-import useUsersSubLocalityQuery from 'query/hooks/users/useUsersSubLocalityQuery';
 import useNeighborhoodPostsQuery from 'query/hooks/posts/useNeighborhoodPostsQuery';
 import Button from 'components/common/layout/Button';
 
 export default function NoNeighborhoodPosts() {
-  const { mySubLocality } = useUsersSubLocalityQuery();
-  const { reNeighborhoodPosts } = useNeighborhoodPostsQuery(mySubLocality?.subLocality);
+  const { reNeighborhoodPosts } = useNeighborhoodPostsQuery();
 
   const reNeighborhoodPostsHandler = () => {
     reNeighborhoodPosts();

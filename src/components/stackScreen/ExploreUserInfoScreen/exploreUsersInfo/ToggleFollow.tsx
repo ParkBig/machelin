@@ -8,6 +8,7 @@ import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useState } from 'react';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { toggleFriendStateQuery } from 'query/api/user';
+import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 
 interface Props {
   exploreUserId: number;
@@ -16,7 +17,8 @@ interface Props {
 export default function ToggleFollow({ exploreUserId }: Props) {
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const { myInfo, reMyInfo } = useMyInfoQuery();
-  const { follows, reFollows } = useUsersFollowsQuery();
+  const { follows, reFollows, isReFollows } = useUsersFollowsQuery();
+
   const { mutate } = useMutation(toggleFriendStateQuery, {
     onSuccess: res => {
       if (res.ok) {
@@ -44,17 +46,21 @@ export default function ToggleFollow({ exploreUserId }: Props) {
     ? myInfo.authUser.id === exploreUserId
       ? 'body'
       : isMyFollow
-      ? 'person'
-      : 'person-add-outline'
+        ? 'person'
+        : 'person-add-outline'
     : 'person-add-outline';
 
   return (
     <>
       <View style={styles.wrap}>
-        <Button style={styles.button} onPress={toggleFriendStateQueryHandler}>
-          <Ionicons name={iconName} size={20} color={Colors.mainWhite3} />
-          {iconName === 'person' ? null : <Text style={styles.text}>{iconName === 'body' ? 'Me' : '팔로우'}</Text>}
-        </Button>
+        {isReFollows ? (
+          <LoadingOverlay style={styles.loadingOverlay} />
+        ) : (
+          <Button style={styles.button} onPress={toggleFriendStateQueryHandler}>
+            <Ionicons name={iconName} size={20} color={Colors.mainWhite3} />
+            {iconName === 'person' ? null : <Text style={styles.text}>{iconName === 'body' ? 'Me' : '팔로우'}</Text>}
+          </Button>
+        )}
       </View>
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}
@@ -84,5 +90,9 @@ const styles = StyleSheet.create({
   text: {
     color: Colors.mainWhite3,
     fontWeight: 'bold',
+  },
+  loadingOverlay: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

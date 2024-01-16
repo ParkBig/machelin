@@ -52,7 +52,7 @@ export default function OptionsModals({ postId, toggleModal, ownerId, isPublic, 
       />
     );
 
-  const isMyScreen = navigationState.routes[navigationState.index].name === 'MyScreen' ? true : false;
+  const isMyScreen = navigationState.routes[navigationState.index].name === 'MyPostsScreen' ? true : false;
 
   return (
     <Modal

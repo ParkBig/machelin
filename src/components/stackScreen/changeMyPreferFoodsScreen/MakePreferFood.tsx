@@ -10,6 +10,7 @@ export default function MakePreferFood() {
   const [makePreferFoodValue, setMakePreferFoodValue] = useState('');
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const { myInfo, reMyInfo } = useMyInfoQuery();
+  
   const { mutate } = useMutation(modifyUserPreferFoodQuery, {
     onSuccess: res => {
       if (res.ok) {

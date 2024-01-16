@@ -12,11 +12,12 @@ export default function ChangeMyNicknameScreen({ navigation }: StackScreenPropsA
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const [nickname, setNickname] = useState('');
   const { reMyInfo } = useMyInfoQuery();
+
   const { mutate } = useMutation(modifyUserNicknameQuery, {
     onSuccess: res => {
       if (res.ok) {
         reMyInfo();
-        navigation.navigate('MyInfoSettingScreen');
+        navigation.goBack();
       } else {
         setToggleAlertModal({ toggle: true, alertMsg: res.msg });
       }
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
     ...Shadow,
   },
   text: {
-    color: Colors.mainBlue1,
+    color: Colors.mainWhite3,
     fontSize: Size.normalBig,
     fontWeight: 'bold',
   },

@@ -1,4 +1,4 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Button from 'components/common/layout/Button';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
@@ -7,7 +7,7 @@ import { signUpQuery } from 'query/api/user';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';
-import { UseNavigation, UseRouter } from 'types/screenType';
+import { UseNavigation } from 'types/screenType';
 
 interface Infos {
   loginId: string;
@@ -18,9 +18,9 @@ interface Infos {
 
 export default function SignUpInfos() {
   const { navigate } = useNavigation<UseNavigation<'SignUpScreen'>>();
-  const { params } = useRoute<UseRouter<'SignUpScreen'>>();
   const [infos, setInfos] = useState<Infos>({ loginId: '', password: '', passwordCheck: '', nickname: '' });
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
+
   const { mutate, isLoading } = useMutation(signUpQuery, {
     onSuccess: res => {
       if (res.ok) {
@@ -39,7 +39,6 @@ export default function SignUpInfos() {
   };
 
   const signUpHandler = () => {
-    const mobile = params.mobile;
     const { loginId, password, passwordCheck, nickname } = infos;
 
     if (password !== passwordCheck) {
@@ -51,7 +50,7 @@ export default function SignUpInfos() {
       return;
     }
 
-    mutate({ loginId, password, nickname, mobile });
+    mutate({ loginId, password, nickname });
   };
 
   return (
