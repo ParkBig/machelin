@@ -14,11 +14,12 @@ export default function ChangeMyActivityZoneScreen({
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const [activityZone, setActivityZone] = useState('');
   const { reMyInfo } = useMyInfoQuery();
+  
   const { mutate } = useMutation(modifyUserActivityZoneQuery, {
     onSuccess: res => {
       if (res.ok) {
         reMyInfo();
-        navigation.navigate('MyInfoSettingScreen');
+        navigation.goBack();
       } else {
         setToggleAlertModal({ toggle: true, alertMsg: res.msg });
       }

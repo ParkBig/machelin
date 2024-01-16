@@ -1,12 +1,12 @@
 import { useRoute } from '@react-navigation/native';
-import NoBookmark from 'components/bottomTabScreen/myScreen/myList/myBookmarks/NoBookmark';
 import { Colors } from 'const/global-styles';
 import useExploreUsersBookmarksQuery from 'query/hooks/exploreUsers/useExploreUsersBookmarksQuery';
 import { StyleSheet, View } from 'react-native';
 import { UseRouter } from 'types/screenType';
-import BriefBookmarkInfo from 'components/bottomTabScreen/myScreen/myList/myBookmarks/BriefBookmarkInfo';
 import { FlatList } from 'react-native-gesture-handler';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
+import BriefBookmarkInfo from 'components/topTabScreen/myBookMarkScreen/BriefBookmarkInfo';
+import NoBookmark from './NoBookmark';
 
 export default function UsersBookmarkList() {
   const { params } = useRoute<UseRouter<'ExploreUserInfoScreen'>>();

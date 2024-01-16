@@ -2,11 +2,15 @@ import { Colors, Size } from 'const/global-styles';
 import { Ionicons } from '@expo/vector-icons';
 import MainScreen from 'screens/bottomTab/MainScreen';
 import RegionalSearchScreen from 'screens/bottomTab/RegionalSearchScreen';
-import MyScreen from 'screens/bottomTab/MyScreen';
 import NeighborhoodPostsScreen from 'screens/bottomTab/NeighborhoodPostsScreen';
 import { RootBottomTab } from 'types/screenType';
+import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
+import LoginSignUpTopTabScreen from './LoginSignUpTopTabScreen';
+import MyTopTabScreen from './MyTopTabScreen';
 
 export default function BottomTabScreen() {
+  const { myInfo } = useMyInfoQuery();
+
   return (
     <RootBottomTab.Navigator
       screenOptions={{
@@ -25,7 +29,7 @@ export default function BottomTabScreen() {
         name="MainScreen"
         component={MainScreen}
         options={{
-          title: '마슐랭',
+          title: '내주변',
           tabBarIcon: () => <Ionicons name="map" size={Size.bigMiddle} color={Colors.mainWhite3} />,
         }}
       />
@@ -47,19 +51,10 @@ export default function BottomTabScreen() {
       />
       <RootBottomTab.Screen
         name="MyScreen"
-        component={MyScreen}
+        component={myInfo?.authUser ? MyTopTabScreen : LoginSignUpTopTabScreen}
         options={{
-          unmountOnBlur: true,
-          headerShown: true,
-          headerTitleAlign: 'left',
-          title: '내정보',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-            color: Colors.mainWhite3,
-          },
-          headerStyle: {
-            backgroundColor: Colors.mainGreen2,
-          },
+          headerShown: false,
+          title: '마슐랭',
           tabBarIcon: () => <Ionicons name="restaurant" size={Size.bigMiddle} color={Colors.mainWhite3} />,
         }}
       />

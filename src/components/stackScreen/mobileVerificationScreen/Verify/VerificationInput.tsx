@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import Button from 'components/common/layout/Button';
 import { Colors, Shadow, Size } from 'const/global-styles';
 import { checkSignUpVerificationQuery } from 'query/api/user';
+import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { useMutation } from 'react-query';
@@ -14,14 +15,15 @@ interface Props {
 
 export default function VerificationInput({ isClickedSendVerify, phoneNumber }: Props) {
   const { navigate } = useNavigation<UseNavigation<'MobileVerificationScreen'>>();
+  const { reMyInfo } = useMyInfoQuery();
   const [verificationCode, setVerificationCode] = useState('');
   const [alertMsg, setAlertMsg] = useState('');
+
   const { mutate } = useMutation(checkSignUpVerificationQuery, {
     onSuccess: res => {
       if (res.ok) {
-        navigate('SignUpScreen', {
-          mobile: phoneNumber,
-        });
+        reMyInfo();
+        navigate('MyInfoScreen');
         return;
       }
       if (!res.ok && res.msg) {

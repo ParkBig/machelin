@@ -1,7 +1,7 @@
 import { useRoute } from '@react-navigation/native';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
-import BriefUserInfo from 'components/bottomTabScreen/myScreen/myList/social/list/BriefUserInfo';
-import NoSocial from 'components/bottomTabScreen/myScreen/myList/social/list/NoSocial';
+import BriefUserInfo from 'components/topTabScreen/myInfoScreen/social/list/common/BriefUserInfo';
+import NoSocial from 'components/topTabScreen/myInfoScreen/social/list/common/NoSocial';
 import useExploreUsersFollowersQuery from 'query/hooks/exploreUsers/useExploreUsersFollowersQuery';
 import { StyleSheet, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';

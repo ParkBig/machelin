@@ -2,12 +2,12 @@ import { useRoute } from '@react-navigation/native';
 import { Colors } from 'const/global-styles';
 import { StyleSheet, View } from 'react-native';
 import { UseRouter } from 'types/screenType';
-import NoPost from 'components/bottomTabScreen/myScreen/myList/myPosts/NoPost';
 import useExploreUsersPostsQuery from 'query/hooks/exploreUsers/useExploreUsersPostsQuery';
 import Post from 'components/common/card/post/Post';
 import { FlatList } from 'react-native-gesture-handler';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import Line from 'components/common/layout/Line';
+import NoPost from './NoPost';
 
 export default function UsersPostList() {
   const { params } = useRoute<UseRouter<'ExploreUserInfoScreen'>>();
@@ -24,7 +24,6 @@ export default function UsersPostList() {
           data={posts?.pages}
           keyExtractor={(_, index) => String(index)}
           renderItem={({ item }) => <Post posts={item} />}
-          ListHeaderComponent={() => <Line style={styles.line} />}
           ItemSeparatorComponent={() => <Line style={styles.line} />}
           ListFooterComponent={() => <Line style={styles.line} />}
         />
