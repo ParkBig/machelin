@@ -10,7 +10,6 @@ interface LoginInput {
 
 interface SignUpInput extends LoginInput {
   nickname: string;
-  mobile: string;
 }
 
 interface ModifyUserNicknameInput {

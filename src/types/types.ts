@@ -103,8 +103,10 @@ export interface UserInfo {
   id: number;
   createdAt: Date;
   updatedAt: Date;
+  latestLogin: Date;
+  isVerified: boolean;
   role: 'ADMIN' | 'USER';
-  mobile: string;
+  mobile: string | null;
   loginId: string;
   email: string;
   password: string;

@@ -22,11 +22,6 @@ export const toggleRadiusSettingState = atom<boolean>({
 
 export type ClickedMyInfoListTypeState = 'bookMark' | 'posts' | 'follow';
 
-export const clickedMyInfoListTypeState = atom<ClickedMyInfoListTypeState>({
-  key: 'clickedMyInfoListTypeState',
-  default: 'posts',
-});
-
 export const clickedExploreUserInfoListTypeState = atom<ClickedMyInfoListTypeState>({
   key: 'clickedExploreUserInfoListTypeState',
   default: 'posts',
@@ -37,4 +32,11 @@ export type ClickedMyMapListTypeState = 'bookmarks' | 'posts' | 'stamps' | null;
 export const clickedMyMapListTypeState = atom<ClickedMyMapListTypeState>({
   key: 'clickedMyMapListTypeState',
   default: null,
-})
+});
+
+export type WhichClickedInMyInfoSocialState = 'follow' | 'follower' | 'search' | null;
+
+export const whichClickedInMyInfoSocialState = atom<WhichClickedInMyInfoSocialState>({
+  key: 'whichClickedInMyInfoSocialState',
+  default: null,
+});

@@ -34,7 +34,7 @@ export default function FindMyIdScreen() {
       if (res.ok) {
         await storeToken(res.token);
         reMyInfo();
-        navigate('MyScreen');
+        navigate('MyInfoScreen');
       } else {
         setToggleAlertModal({ toggle: true, alertMsg: res.msg });
       }

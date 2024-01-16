@@ -16,7 +16,7 @@ export default function PostBriefRestaurantInfo({ posts }: Props) {
 
   const { navigate } =
     useNavigation<
-      UseNavigation<'MyScreen' | 'ExploreUserInfoScreen' | 'RestaurantDetailScreen' | 'NeighborhoodPostsScreen'>
+      UseNavigation<'MyPostsScreen' | 'ExploreUserInfoScreen' | 'RestaurantDetailScreen' | 'NeighborhoodPostsScreen'>
     >();
   const navigationState = useNavigationState(state => state);
 

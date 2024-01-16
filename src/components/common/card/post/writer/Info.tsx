@@ -15,12 +15,12 @@ export default function Info({ pfp, nickname, userInfoId }: Props) {
   const { myInfo } = useMyInfoQuery();
   const navigation =
     useNavigation<
-      UseNavigation<'RestaurantDetailScreen' | 'NeighborhoodPostsScreen' | 'MyScreen' | 'ExploreUserInfoScreen'>
+      UseNavigation<'RestaurantDetailScreen' | 'NeighborhoodPostsScreen' | 'MyInfoScreen' | 'ExploreUserInfoScreen'>
     >();
 
   const exploreUserInfoHandler = () => {
     if (myInfo?.authUser?.id === userInfoId) {
-      navigation.navigate('MyScreen');
+      navigation.navigate('MyInfoScreen');
     } else {
       //@ts-ignore
       navigation.push('ExploreUserInfoScreen', { userId: userInfoId });

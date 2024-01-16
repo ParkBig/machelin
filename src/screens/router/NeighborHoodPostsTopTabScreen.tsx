@@ -1,8 +1,8 @@
 import { Colors, Size } from 'const/global-styles';
 import { Platform, StatusBar } from 'react-native';
-import NoticePostsScreen from 'screens/topTab/NoticePostsScreen';
-import PostsLikedScreen from 'screens/topTab/PostsLikedScreen';
-import PostsSearchScreen from 'screens/topTab/PostsSearchScreen';
+import NoticePostsScreen from 'screens/topTab/neighborHoodPostsTopTabScreen/NoticePostsScreen';
+import PostsLikedScreen from 'screens/topTab/neighborHoodPostsTopTabScreen/PostsLikedScreen';
+import PostsSearchScreen from 'screens/topTab/neighborHoodPostsTopTabScreen/PostsSearchScreen';
 import { RootTobTab } from 'types/screenType';
 
 export default function NeighborHoodPostsTopTabScreen() {
@@ -13,7 +13,7 @@ export default function NeighborHoodPostsTopTabScreen() {
         backgroundColor: Colors.mainGreen2,
       }}
       screenOptions={{
-        tabBarStyle: { backgroundColor: Colors.mainGreen2, elevation: 0, shadowOpacity: 0,  },
+        tabBarStyle: { backgroundColor: Colors.mainGreen2, elevation: 0, shadowOpacity: 0 },
         tabBarActiveTintColor: Colors.mainWhite3,
         tabBarLabelStyle: { fontWeight: 'bold', fontSize: Size.normalBig },
         tabBarIndicatorStyle: {

@@ -11,20 +11,27 @@ export type RootBottomTabParamList = {
   MyScreen: undefined;
 };
 export type RootTopTabParamList = {
+  LoginSignUpScreen: undefined;
+  HowToUseScreen: undefined;
+
+  MyInfoScreen: undefined;
+  MyPostsScreen: undefined;
+  MyBookMarkScreen: undefined;
+  MyMapScreen: undefined;
+
   PostsSearchScreen: undefined;
   NoticePostsScreen: undefined;
   PostsLikedScreen: undefined;
-  PromotionPostsScreen: undefined;
 };
 export type RootStackParamList = {
   BottomTabScreen: undefined;
   NeighborHoodPostsTopTabScreen: undefined;
-  MyMapScreen: undefined;
   LoginScreen: undefined;
+  SignUpScreen: undefined;
+  SettingScreen: undefined;
   FindMyIdScreen: undefined;
   MakeStampScreen: undefined;
   TermsOfUseScreen: undefined;
-  MyInfoSettingScreen: undefined;
   ChangeMyNicknameScreen: undefined;
   RegionalSearchMapScreen: undefined;
   MobileVerificationScreen: undefined;
@@ -33,9 +40,6 @@ export type RootStackParamList = {
   ChangeMyPreferRestaurantScreen: undefined;
   FindRestaurantInfoScreen: {
     forWhich: 'makePost' | 'stamp';
-  };
-  SignUpScreen: {
-    mobile: string;
   };
   ExploreUserInfoScreen: {
     userId: number;
@@ -59,20 +63,27 @@ export type AllParmList = {
   MyScreen: undefined;
 
   // topTabScreen
+  LoginSignUpScreen: undefined;
+  HowToUseScreen: undefined;
+
+  MyInfoScreen: undefined;
+  MyPostsScreen: undefined;
+  MyBookMarkScreen: undefined;
+  MyMapScreen: undefined;
+
   PostsSearchScreen: undefined;
   NoticePostsScreen: undefined;
   PostsLikedScreen: undefined;
-  PromotionPostsScreen: undefined;
 
   // StackScreen
   BottomTabScreen: undefined;
   NeighborHoodPostsTopTabScreen: undefined;
-  MyMapScreen: undefined;
   LoginScreen: undefined;
+  SignUpScreen: undefined;
+  SettingScreen: undefined;
   FindMyIdScreen: undefined;
   MakeStampScreen: undefined;
   TermsOfUseScreen: undefined;
-  MyInfoSettingScreen: undefined;
   ChangeMyNicknameScreen: undefined;
   RegionalSearchMapScreen: undefined;
   MobileVerificationScreen: undefined;
@@ -81,9 +92,6 @@ export type AllParmList = {
   ChangeMyPreferRestaurantScreen: undefined;
   FindRestaurantInfoScreen: {
     forWhich: 'makePost' | 'stamp';
-  };
-  SignUpScreen: {
-    mobile: string;
   };
   ExploreUserInfoScreen: {
     userId: number;
