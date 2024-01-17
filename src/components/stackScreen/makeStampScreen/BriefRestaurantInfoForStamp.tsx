@@ -13,8 +13,15 @@ interface Props {
 }
 
 export default function BriefRestaurantInfoForStamp({ restaurantInfo }: Props) {
-  const { goBack } = useNavigation<UseNavigation<'MakeStampScreen'>>();
+  const { goBack, navigate } = useNavigation<UseNavigation<'MakeStampScreen'>>();
   const setMakeStampValues = useSetRecoilState(makeStampState);
+
+  const gotoRestaurantDetailScreenHandler = () => {
+    navigate('RestaurantDetailScreen', {
+      restaurantId: restaurantInfo.place_id,
+      restaurantName: restaurantInfo.name,
+    });
+  };
 
   const onPressHandler = () => {
     const restaurantInfoParams = {
@@ -29,14 +36,14 @@ export default function BriefRestaurantInfoForStamp({ restaurantInfo }: Props) {
 
   return (
     <View style={styles.wrap}>
-      <View style={styles.info}>
+      <Button style={styles.info} onPress={gotoRestaurantDetailScreenHandler}>
         <View style={styles.name}>
           <Text style={styles.nameText}>{restaurantInfo.name}</Text>
         </View>
         <View style={styles.address}>
           <Text style={styles.addressText}>{restaurantInfo.formatted_address}</Text>
         </View>
-      </View>
+      </Button>
       <Button style={styles.button} onPress={onPressHandler}>
         <Ionicons name="paw" size={30} color={Colors.mainGreen2} />
       </Button>

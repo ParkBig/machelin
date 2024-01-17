@@ -12,6 +12,13 @@ interface Props {
 export default function BriefRestaurantInfoForTag({ restaurantInfo }: Props) {
   const { navigate } = useNavigation<UseNavigation<'FindRestaurantInfoScreen'>>();
 
+  const gotoRestaurantDetailScreenHandler = () => {
+    navigate('RestaurantDetailScreen', {
+      restaurantId: restaurantInfo.place_id,
+      restaurantName: restaurantInfo.name,
+    });
+  };
+
   const onPressHandler = () => {
     navigate('MakePostScreen', {
       restaurantInfo: restaurantInfo,
@@ -20,14 +27,14 @@ export default function BriefRestaurantInfoForTag({ restaurantInfo }: Props) {
 
   return (
     <View style={styles.wrap}>
-      <View style={styles.info}>
+      <Button style={styles.info} onPress={gotoRestaurantDetailScreenHandler}>
         <View style={styles.name}>
           <Text style={styles.nameText}>{restaurantInfo.name}</Text>
         </View>
         <View style={styles.address}>
           <Text style={styles.addressText}>{restaurantInfo.formatted_address}</Text>
         </View>
-      </View>
+      </Button>
       <Button style={styles.button} onPress={onPressHandler}>
         <Text style={styles.tagText}>태그</Text>
       </Button>
