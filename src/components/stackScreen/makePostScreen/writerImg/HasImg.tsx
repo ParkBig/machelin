@@ -10,7 +10,7 @@ export default function HasImg() {
 
   return (
     <View style={styles.wrap}>
-      <Swiper>
+      <Swiper loop={false}>
         {images.map(image => <PickedImage uri={image} key={image} />)}
       </Swiper>
     </View>

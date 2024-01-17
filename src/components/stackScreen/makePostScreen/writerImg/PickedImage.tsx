@@ -21,7 +21,7 @@ export default function PickedImage({ uri }: Props) {
       <Button style={styles.button} onPress={deleteImageHandler}>
         <Ionicons name="close-circle" size={40} color={Colors.mainGreen1} />
       </Button>
-      <Image style={styles.image} source={{ uri }} />
+      <Image style={styles.image} source={{ uri }} resizeMode='contain' />
     </View>
   );
 }
