@@ -1,5 +1,5 @@
 import Button from 'components/common/layout/Button';
-import { Size } from 'const/global-styles';
+import { Colors, Size } from 'const/global-styles';
 import { StyleSheet, Text, View } from 'react-native';
 import { WhichOneSelectedState } from './OptionsModals';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
@@ -57,23 +57,30 @@ export default function PublicSetting({ postId, isPublic, setWhichOneSelected, t
   return (
     <>
       <View style={styles.title}>
-        <Ionicons name="lock-open" size={Size.bigMiddle} />
-        <Text style={styles.titleText}>공개범위 설정</Text>
+        <Text style={styles.titleText}>공개범위</Text>
       </View>
-      <Button style={styles.option} onPress={changePublicHandler.bind(null, true)}>
-        <Text style={styles.text}>전체공개</Text>
-        {publicOrNot && <Ionicons name="checkmark-sharp" size={Size.bigMiddle} />}
-      </Button>
-      <Button style={styles.option} onPress={changePublicHandler.bind(null, false)}>
-        <Text style={styles.text}>나만보기</Text>
-        {!publicOrNot && <Ionicons name="checkmark-sharp" size={Size.bigMiddle} />}
-      </Button>
+      <View style={styles.selection}>
+        <Button style={styles.selectButton} onPress={changePublicHandler.bind(null, true)}>
+          <View style={styles.selectionTitle}>
+            <Ionicons name="people-outline" size={Size.bigBig} />
+            <Text>전체공개</Text>
+          </View>
+          {publicOrNot && <Ionicons name="checkmark-sharp" size={Size.bigMiddle} />}
+        </Button>
+        <Button style={styles.selectButton} onPress={changePublicHandler.bind(null, false)}>
+          <View style={styles.selectionTitle}>
+            <Ionicons name="lock-open-outline" size={Size.bigBig} />
+            <Text>나만보기</Text>
+          </View>
+          {!publicOrNot && <Ionicons name="checkmark-sharp" size={Size.bigMiddle} />}
+        </Button>
+      </View>
       <View style={styles.buttons}>
         <Button style={styles.button} onPress={closeSelectedHandler}>
-          <Text style={styles.text}>취소</Text>
+          <Text style={styles.buttonText}>취소</Text>
         </Button>
         <Button style={styles.button} onPress={confirmHandler}>
-          <Text style={styles.text}>확인</Text>
+          <Text style={styles.buttonText}>확인</Text>
         </Button>
       </View>
       {isLoading && <LoadingOverlay style={styles.loadingOverlay} />}
@@ -88,10 +95,30 @@ export default function PublicSetting({ postId, isPublic, setWhichOneSelected, t
 
 const styles = StyleSheet.create({
   title: {
+    height: 60,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomColor: Colors.mainGreen2,
+    borderBottomWidth: 1,
+  },
+  selection: {
+    width: '100%',
+    paddingVertical: 20,
+    gap: 10,
+  },
+  selectButton: {
+    height: 60,
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    justifyContent: 'space-between',
+  },
+  selectionTitle: {
+    height: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
   },
   option: {
     width: '100%',
@@ -103,19 +130,25 @@ const styles = StyleSheet.create({
   buttons: {
     width: '100%',
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 20,
   },
   button: {
     flex: 1,
-    height: 40,
+    height: 60,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor :Colors.mainGreen2,
+  },
+  buttonText: {
+    color: Colors.mainWhite3,
+    fontWeight: 'bold',
   },
   titleText: {
     fontSize: Size.normalMiddle,
     fontWeight: 'bold',
-  },
-  text: {
-    fontSize: Size.normalMiddle,
   },
   loadingOverlay: {
     width: '100%',

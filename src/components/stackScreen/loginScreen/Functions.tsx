@@ -12,7 +12,7 @@ export default function Functions() {
   };
 
   const goToTermsOfUseScreenHandler = () => {
-    navigate('TermsOfUseScreen');
+    navigate('SignUpScreen');
   };
 
   return (

@@ -3,6 +3,7 @@ import useUserSearchQuery from 'query/hooks/users/useUserSearchQuery';
 import { FlatList, StyleSheet, View } from 'react-native';
 import BriefUserInfo from '../common/BriefUserInfo';
 import NoSearchList from '../common/NoSearchList';
+import { ScreenHeight } from 'const/dimenstions';
 
 export default function SearchList() {
   const { userList, userListIsLoading } = useUserSearchQuery();
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
   wrap: {
     width: '100%',
     minHeight: 300,
+    maxHeight: ScreenHeight,
   },
   loadingOverlay: {
     width: '100%',

@@ -13,7 +13,8 @@ export default function Header() {
   const [textInputValue, setTextInputValue] = useState('');
   const [mainSearch, setMainSearch] = useRecoilState(mainSearchState);
   const searchRadius = useRecoilValue(searchRadiusState);
-  const [{ toggleRestaurantSearch }, setMainScreenToggles] = useRecoilState(mainScreenTogglesState);
+  const [{ toggleRestaurantSearch, toggleRestaurantList }, setMainScreenToggles] =
+    useRecoilState(mainScreenTogglesState);
 
   const initMainSearchHandler = () => {
     setTextInputValue('');
@@ -45,6 +46,12 @@ export default function Header() {
   const onSubmitEditingHandler = () => {
     setMainScreenToggles(prev => ({ ...prev, toggleRestaurantSearch: !prev.toggleRestaurantSearch }));
     setMainSearch({ isTyping: false, mainSearchValue: textInputValue });
+  };
+
+  const onFocusHandler = () => {
+    if (toggleRestaurantList) {
+      setMainScreenToggles(prev => ({ ...prev, toggleRestaurantList: false }));
+    }
   };
 
   return (
@@ -83,6 +90,7 @@ export default function Header() {
               keyboardType="web-search"
               autoCapitalize="none"
               style={styles.searchInput}
+              onFocus={onFocusHandler}
               onChangeText={onChangeTextHandler}
               onSubmitEditing={onSubmitEditingHandler}
               value={textInputValue}
