@@ -43,10 +43,12 @@ export default function MyImage() {
     }
 
     const result = await launchImageLibraryAsync({
-      mediaTypes: MediaTypeOptions.All,
+      mediaTypes: MediaTypeOptions.Images,
+      allowsMultipleSelection: false,
       allowsEditing: true,
       aspect: [4, 4],
       quality: 0.2,
+      selectionLimit: 1,
     });
 
     if (!result.canceled) {
