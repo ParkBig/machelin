@@ -59,7 +59,7 @@ export default function FindMyIdScreen() {
 
   useEffect(() => {
     if (myInfo?.authUser) {
-      navigate('MyInfoScreen');
+      navigate('MyScreen');
     }
   }, [myInfo]);
 

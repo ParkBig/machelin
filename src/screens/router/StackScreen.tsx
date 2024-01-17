@@ -86,11 +86,7 @@ export default function StackScreen() {
           title: '회원가입',
         }}
       />
-      <RootStack.Screen
-        name="TermsOfUseScreen"
-        component={TermsOfUseScreen}
-        options={{ title: '전화번호 인증하기' }}
-      />
+      <RootStack.Screen name="TermsOfUseScreen" component={TermsOfUseScreen} options={{ title: '전화번호 인증하기' }} />
       <RootStack.Screen name="FindMyIdScreen" component={FindMyIdScreen} options={{ title: '나의 계정 찾기' }} />
       <RootStack.Screen
         name="ChangeMyNicknameScreen"
@@ -151,8 +147,8 @@ export default function StackScreen() {
           headerRight: () => <DeleteStampButton />,
         }}
       />
-      <RootStack.Screen 
-        name='SettingScreen'
+      <RootStack.Screen
+        name="SettingScreen"
         component={SettingScreen}
         options={{
           title: '설정',

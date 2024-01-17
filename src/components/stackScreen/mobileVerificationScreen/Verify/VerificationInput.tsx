@@ -23,7 +23,7 @@ export default function VerificationInput({ isClickedSendVerify, phoneNumber }: 
     onSuccess: res => {
       if (res.ok) {
         reMyInfo();
-        navigate('MyInfoScreen');
+        navigate('MyScreen');
         return;
       }
       if (!res.ok && res.msg) {
