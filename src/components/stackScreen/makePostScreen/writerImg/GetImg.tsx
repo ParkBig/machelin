@@ -25,13 +25,19 @@ export default function GetImg() {
     }
 
     const result = await launchImageLibraryAsync({
-      mediaTypes: MediaTypeOptions.All,
+      mediaTypes: MediaTypeOptions.Images,
       allowsMultipleSelection: true,
       aspect: [4, 3],
       quality: 0.2,
+      selectionLimit: 5,
     });
 
     if (!result.canceled) {
+      if (result.assets.length > 5) {
+        setToggleAlertModal({ toggle: true, alertMsg: '사진은 최대 5개까지 가능합니다.' });
+        return;
+      }
+
       const getImages = result.assets.map(asset => asset.uri);
       setMakePostInfo(prev => ({ ...prev, images: [...prev.images, ...getImages] }));
     }
