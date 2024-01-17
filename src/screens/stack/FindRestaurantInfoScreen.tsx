@@ -9,13 +9,14 @@ import { GooglePlace } from 'types/types';
 import { StackScreenPropsAbout } from 'types/screenType';
 import BriefRestaurantInfoForStamp from 'components/stackScreen/makeStampScreen/BriefRestaurantInfoForStamp';
 import { restaurantsTextSearchQuery } from 'query/api/restaurants';
+import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 
 export default function FindRestaurantInfoScreen({ route }: StackScreenPropsAbout<'FindRestaurantInfoScreen'>) {
   const [textInputValue, setTextInputValue] = useState('');
   const [searchResult, setSearchResult] = useState<GooglePlace[]>([]);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
-  const { mutate } = useMutation(restaurantsTextSearchQuery, {
+  const { mutate, isLoading } = useMutation(restaurantsTextSearchQuery, {
     onSuccess: res => {
       if (res.ok) {
         setSearchResult(res.restaurants);
@@ -66,6 +67,7 @@ export default function FindRestaurantInfoScreen({ route }: StackScreenPropsAbou
           )
         }
       />
+      {isLoading && <LoadingOverlay style={styles.loading} />}
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}
         setToggleAlertModal={setToggleAlertModal}
@@ -109,5 +111,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 1,
     backgroundColor: Colors.superLightGray,
+  },
+  loading: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
   },
 });

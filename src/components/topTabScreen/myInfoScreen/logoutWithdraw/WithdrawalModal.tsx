@@ -4,7 +4,7 @@ import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmA
 import Line from 'components/common/layout/Line';
 import { Colors, Shadow } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { useMutation } from 'react-query';
@@ -21,14 +21,13 @@ interface Props {
 export default function WithdrawalModal({ toggleWithdrawalModal, setToggleWithdrawalModal }: Props) {
   const { navigate } = useNavigation<UseNavigation<'MyInfoScreen'>>();
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
-  const { reMyInfo } = useMyInfoQuery();
+  const { myInfo, reMyInfo } = useMyInfoQuery();
 
   const { mutate, isLoading } = useMutation(withdrawalQuery, {
     onSuccess: async res => {
       if (res.ok) {
         await deleteToken();
         reMyInfo();
-        navigate('MyScreen');
       } else {
         setToggleAlertModal({ toggle: true, alertMsg: res.msg });
       }
@@ -41,6 +40,12 @@ export default function WithdrawalModal({ toggleWithdrawalModal, setToggleWithdr
   const withdrawHandler = () => {
     mutate();
   };
+
+  useEffect(() => {
+    if (!myInfo?.authUser) {
+      navigate('MyScreen');
+    }
+  }, [myInfo]);
 
   return (
     <Modal

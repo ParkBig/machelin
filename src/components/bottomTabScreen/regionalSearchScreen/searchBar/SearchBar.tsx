@@ -35,7 +35,7 @@ export default function SearchBar() {
         style={styles.searchInput}
         autoCorrect={false}
         autoCapitalize="none"
-        placeholder="식당이름 or 지역이름 식당이름 검색"
+        placeholder="식당이름 or 키워드 검색"
         onFocus={onFocusHandler}
         onEndEditing={searchHandler}
         onChangeText={searchTextChangeHandler}

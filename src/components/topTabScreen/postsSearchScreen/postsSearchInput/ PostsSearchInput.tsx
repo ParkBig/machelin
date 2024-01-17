@@ -28,7 +28,7 @@ export default function PostsSearchInput() {
     <View style={styles.wrap}>
       <TextInput
         style={styles.textInput}
-        placeholder="게시글 검색 (키워드 or 작성자 or 지역)"
+        placeholder="게시글 검색"
         autoCorrect={false}
         autoCapitalize="none"
         onFocus={onFocusHandler}
@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
     flex: 1,
     borderBottomWidth: 1,
     borderBottomColor: Colors.mainGreen2,
-    fontSize: Size.normalBig,
   },
   ionicons: {
     width: 50,

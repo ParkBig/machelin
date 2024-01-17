@@ -46,8 +46,8 @@ export default function RegionalSearchScreen() {
 
   return (
     <SafeAreaView style={styles.wrap}>
-      <SearchBar />
       <AreaPicker />
+      <SearchBar />
       <Results />
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}

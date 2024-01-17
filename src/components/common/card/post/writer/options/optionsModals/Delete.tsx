@@ -1,15 +1,15 @@
 import Button from 'components/common/layout/Button';
-import { Size } from 'const/global-styles';
+import { Colors, Size } from 'const/global-styles';
 import { StyleSheet } from 'react-native';
 import { Text, View } from 'react-native';
 import { WhichOneSelectedState } from './OptionsModals';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { useState } from 'react';
-import { Ionicons } from '@expo/vector-icons';
 import { useMutation } from 'react-query';
 import useUsersPostsQuery from 'query/hooks/users/useUsersPostsQuery';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { deletePostQuery } from 'query/api/posts';
+import Line from 'components/common/layout/Line';
 
 interface Props {
   postId: number;
@@ -47,9 +47,9 @@ export default function Delete({ postId, setWhichOneSelected, toggleModalHandler
   return (
     <>
       <View style={styles.title}>
-        <Ionicons name="trash" size={Size.bigMiddle} />
         <Text style={styles.titleText}>정말 삭제하시겠습니까?</Text>
       </View>
+      <Line style={styles.line} />
       <View style={styles.buttons}>
         <Button style={styles.button} onPress={closeSelectedHandler}>
           <Text style={styles.buttonText}>아니요</Text>
@@ -70,28 +70,37 @@ export default function Delete({ postId, setWhichOneSelected, toggleModalHandler
 
 const styles = StyleSheet.create({
   title: {
+    height: 60,
     width: '100%',
-    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: 10,
+  },
+  line: {
+    height: 20,
+    width: '100%',
   },
   buttons: {
-    height: 50,
     width: '100%',
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 20,
   },
   button: {
     flex: 1,
-    height: 40,
+    height: 60,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor :Colors.mainGreen2,
   },
   titleText: {
     fontSize: Size.normalMiddle,
     fontWeight: 'bold',
   },
   buttonText: {
-    fontSize: Size.normalMiddle,
+    color: Colors.mainWhite3,
+    fontWeight: 'bold',
   },
   loadingOverlay: {
     width: '100%',

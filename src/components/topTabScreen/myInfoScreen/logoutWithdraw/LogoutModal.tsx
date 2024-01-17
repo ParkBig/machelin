@@ -3,6 +3,7 @@ import Button from 'components/common/layout/Button';
 import Line from 'components/common/layout/Line';
 import { Colors, Shadow } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
+import { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { UseNavigation } from 'types/screenType';
@@ -15,13 +16,18 @@ interface Props {
 
 export default function LogoutModal({ toggleLogoutModal, setToggleLogoutModal }: Props) {
   const { navigate } = useNavigation<UseNavigation<'MyInfoScreen'>>();
-  const { reMyInfo } = useMyInfoQuery();
+  const { myInfo, reMyInfo } = useMyInfoQuery();
 
   const logoutHandler = async () => {
     await deleteToken();
     reMyInfo();
-    navigate('MyScreen');
   };
+
+  useEffect(() => {
+    if (!myInfo?.authUser) {
+      navigate('MyScreen');
+    }
+  }, [myInfo]);
 
   return (
     <Modal
