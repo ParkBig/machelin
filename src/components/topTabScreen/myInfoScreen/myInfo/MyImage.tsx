@@ -15,10 +15,12 @@ import { useState } from 'react';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { modifyUserImageQuery } from 'query/api/user';
 import GotoSettingScreenButton from './GotoSettingScreenButton';
+import UserImageModal from 'components/common/modal/UserImageModal';
 
 export default function MyImage() {
   const { myInfo, reMyInfo } = useMyInfoQuery();
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
+  const [toggleImageModal, setToggleImageModal] = useState(false);
 
   const { mutate } = useMutation(modifyUserImageQuery, {
     onSuccess: res => {
@@ -72,13 +74,26 @@ export default function MyImage() {
     mutate(payloadFormData);
   };
 
+  const toggleImageModalHandler = () => {
+    setToggleImageModal(prev => !prev);
+  };
+
   const imageSource = myInfo?.authUser?.pfp ? { uri: myInfo?.authUser?.pfp } : require('assets/png/user.png');
 
   return (
     <>
       <View style={styles.wrap}>
         <View style={styles.pfp}>
-          <Image style={styles.image} source={imageSource} resizeMode="contain" />
+          <Button style={styles.image} onPress={toggleImageModalHandler}>
+            <Image style={styles.image} source={imageSource} resizeMode="contain" />
+            {toggleImageModal && (
+              <UserImageModal
+                imageSource={imageSource}
+                toggleModal={toggleImageModal}
+                toggleModalHandler={toggleImageModalHandler}
+              />
+            )}
+          </Button>
           <Button style={styles.changeImageButton} onPress={changeImageHandler}>
             <Ionicons name="camera" size={Size.colossalSmall} />
           </Button>
