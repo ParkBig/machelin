@@ -1,6 +1,6 @@
 import { Colors, Size } from 'const/global-styles';
 import { StyleSheet, Text, View } from 'react-native';
-import { IPost } from 'types/types';
+import { IPost, PostNavigation } from 'types/types';
 import { Ionicons } from '@expo/vector-icons';
 import Button from 'components/common/layout/Button';
 import { useNavigation, useNavigationState } from '@react-navigation/native';
@@ -14,10 +14,7 @@ interface Props {
 export default function PostBriefRestaurantInfo({ posts }: Props) {
   if (!posts.restaurantId) return null;
 
-  const { navigate } =
-    useNavigation<
-      UseNavigation<'MyPostsScreen' | 'ExploreUserInfoScreen' | 'RestaurantDetailScreen' | 'NeighborhoodPostsScreen'>
-    >();
+  const { navigate } = useNavigation<UseNavigation<PostNavigation>>();
   const navigationState = useNavigationState(state => state);
 
   const goToDetailRestaurantHandler = () => {
@@ -31,8 +28,8 @@ export default function PostBriefRestaurantInfo({ posts }: Props) {
     navigationState.routes[navigationState.index].name === 'RestaurantDetailScreen'
       ? 'RestaurantDetailScreen'
       : navigationState.routes[navigationState.index].name === 'NeighborhoodPostsScreen'
-      ? 'NeighborhoodPostsScreen'
-      : 'else';
+        ? 'NeighborhoodPostsScreen'
+        : 'else';
 
   return (
     <>
