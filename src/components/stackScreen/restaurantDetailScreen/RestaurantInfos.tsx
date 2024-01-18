@@ -100,8 +100,7 @@ export default function RestaurantInfos() {
 const styles = StyleSheet.create({
   infos: {
     width: '100%',
-    paddingVertical: 25,
-    paddingHorizontal: 15,
+    padding: 15,
     gap: 10,
   },
   info: {
