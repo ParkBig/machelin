@@ -1,7 +1,4 @@
-import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
-import Button from 'components/common/layout/Button';
-import { Ionicons } from '@expo/vector-icons';
-import { Colors } from 'const/global-styles';
+import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';import { Colors } from 'const/global-styles';
 import { useNavigation } from '@react-navigation/native';
 import { UseNavigation } from 'types/screenType';
 import NoResults from './NoResults';
@@ -28,10 +25,6 @@ export default function Results() {
 
   const onEndReachedHandler = () => {
     fetchNextPageRestaurants();
-  };
-
-  const onPressHandler = () => {
-    navigate('RegionalSearchMapScreen');
   };
 
   return (
@@ -62,10 +55,6 @@ export default function Results() {
                 </View>
               )}
             />
-            {/* will update */}
-            {/* <Button style={styles.button} onPress={onPressHandler}>
-              <Ionicons style={styles.ionicons} size={35} name="map" color={Colors.mainWhite3} />
-            </Button> */}
           </>
         ) : (
           <NoResults />
