@@ -14,7 +14,6 @@ import ChangeMyPreferRestaurantScreen from 'screens/stack/ChangeMyPreferRestaura
 import ToggleFollow from 'components/stackScreen/ExploreUserInfoScreen/exploreUsersInfo/ToggleFollow';
 import ToggleBookmark from 'components/stackScreen/restaurantDetailScreen/ToggleBookmark';
 import FindMyIdScreen from 'screens/stack/FindMyIdScreen';
-import RegionalSearchMapScreen from 'screens/stack/RegionalSearchMapScreen';
 import MakePostButton from 'components/stackScreen/makePostScreen/makePostButton/MakePostButton';
 import MakeStampScreen from 'screens/stack/MakeStampScreen';
 import FindRestaurantInfoScreen from 'screens/stack/FindRestaurantInfoScreen';
@@ -124,13 +123,6 @@ export default function StackScreen() {
           title: '탐험중...',
           headerRight: () => <ToggleFollow exploreUserId={route.params.userId} />,
         })}
-      />
-      <RootStack.Screen
-        name="RegionalSearchMapScreen"
-        component={RegionalSearchMapScreen}
-        options={{
-          title: '검색 결과',
-        }}
       />
       <RootStack.Screen
         name="MakeStampScreen"

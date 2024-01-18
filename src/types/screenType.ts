@@ -33,7 +33,6 @@ export type RootStackParamList = {
   MakeStampScreen: undefined;
   TermsOfUseScreen: undefined;
   ChangeMyNicknameScreen: undefined;
-  RegionalSearchMapScreen: undefined;
   MobileVerificationScreen: undefined;
   ChangeMyPreferFoodsScreen: undefined;
   ChangeMyActivityZoneScreen: undefined;
@@ -90,7 +89,6 @@ export type AllParmList = {
   MakeStampScreen: undefined;
   TermsOfUseScreen: undefined;
   ChangeMyNicknameScreen: undefined;
-  RegionalSearchMapScreen: undefined;
   MobileVerificationScreen: undefined;
   ChangeMyPreferFoodsScreen: undefined;
   ChangeMyActivityZoneScreen: undefined;
