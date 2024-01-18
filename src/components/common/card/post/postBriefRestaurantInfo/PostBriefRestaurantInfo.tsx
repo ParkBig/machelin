@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Button from 'components/common/layout/Button';
 import { useNavigation, useNavigationState } from '@react-navigation/native';
 import { UseNavigation } from 'types/screenType';
-import Line from 'components/common/layout/Line';
+import WhenRestaurantDetailScreen from './WhenRestaurantDetailScreen';
 
 interface Props {
   posts: IPost;
@@ -33,31 +33,30 @@ export default function PostBriefRestaurantInfo({ posts }: Props) {
 
   return (
     <>
-      {whichScreen !== 'RestaurantDetailScreen' && (
-        <>
-          <View style={styles.wrap}>
-            <View style={styles.ratingNIcon}>
-              <Ionicons style={styles.ionicons} size={25} name="star" color="yellow" />
-              <View style={styles.rating}>
-                <Text style={styles.ratingText}>{posts.rating} / 5</Text>
-              </View>
+      {whichScreen === 'RestaurantDetailScreen' ? (
+        <WhenRestaurantDetailScreen rating={posts.rating} />
+      ) : (
+        <View style={styles.wrap}>
+          <View style={styles.ratingNIcon}>
+            <Ionicons style={styles.ionicons} size={25} name="star" color="yellow" />
+            <View style={styles.rating}>
+              <Text style={styles.ratingText}>{posts.rating} / 5</Text>
             </View>
-            <View style={styles.info}>
-              <View style={styles.name}>
-                <Text style={styles.nameText}>{posts.restaurantName}</Text>
-              </View>
-              <View style={styles.restaurantAddress}>
-                <Text numberOfLines={1} ellipsizeMode="tail" style={styles.addressText}>
-                  {posts.restaurantAddress}
-                </Text>
-              </View>
-            </View>
-            <Button style={styles.button} onPress={goToDetailRestaurantHandler}>
-              <Ionicons name="chevron-forward" size={25} color={Colors.darkGray} />
-            </Button>
           </View>
-          <Line style={styles.line} />
-        </>
+          <View style={styles.info}>
+            <View style={styles.name}>
+              <Text style={styles.nameText}>{posts.restaurantName}</Text>
+            </View>
+            <View style={styles.restaurantAddress}>
+              <Text numberOfLines={1} ellipsizeMode="tail" style={styles.addressText}>
+                {posts.restaurantAddress}
+              </Text>
+            </View>
+          </View>
+          <Button style={styles.button} onPress={goToDetailRestaurantHandler}>
+            <Ionicons name="chevron-forward" size={25} color={Colors.darkGray} />
+          </Button>
+        </View>
       )}
     </>
   );
@@ -65,7 +64,7 @@ export default function PostBriefRestaurantInfo({ posts }: Props) {
 
 const styles = StyleSheet.create({
   wrap: {
-    paddingTop: 10,
+    paddingVertical: 10,
     width: '100%',
     flexDirection: 'row',
   },

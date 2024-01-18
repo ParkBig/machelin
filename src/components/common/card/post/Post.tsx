@@ -18,9 +18,9 @@ export default function Post({ posts }: Props) {
   return (
     <View style={styles.wrap}>
       <HasProblem posts={posts} />
-      <PostBriefRestaurantInfo posts={posts} />
       <Writer posts={posts} />
       <CreatedAt createdAt={posts.createdAt} />
+      <PostBriefRestaurantInfo posts={posts} />
       <PostingImages images={posts.images} />
       <Content contents={posts.contents} postType={posts.postType} />
       <HashTags hashtags={posts.hashtags} />
