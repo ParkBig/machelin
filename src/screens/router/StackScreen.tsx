@@ -24,6 +24,7 @@ import DeleteStampButton from 'components/stackScreen/stampDetailScreen/DeleteSt
 import TermsOfUseScreen from 'screens/stack/TermsOfUseScreen';
 import NeighborHoodPostsTopTabScreen from './NeighborHoodPostsTopTabScreen';
 import SettingScreen from 'screens/stack/SettingScreen';
+import RestaurantDetailMapScreen from 'screens/stack/RestaurantDetailMapScreen';
 
 export default function StackScreen() {
   return (
@@ -153,6 +154,11 @@ export default function StackScreen() {
         options={{
           title: '설정',
         }}
+      />
+      <RootStack.Screen
+        name="RestaurantDetailMapScreen"
+        component={RestaurantDetailMapScreen}
+        options={{ title: '지도로 위치보기' }}
       />
     </RootStack.Navigator>
   );

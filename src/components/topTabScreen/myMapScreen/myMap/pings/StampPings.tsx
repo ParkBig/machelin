@@ -10,22 +10,10 @@ import { clickedMyMapListTypeState } from 'store/toggleState';
 
 interface Props {
   stamp: IStamp;
+  isTrack: boolean;
 }
 
-const MemoizedMarker = memo(({ stamp }: Props) => {
-  const [isTrack, setIsTrack] = useState(false);
-  const clickedMyMapListType = useRecoilValue(clickedMyMapListTypeState);
-
-  useEffect(() => {
-    setIsTrack(true);
-
-    const trackOut = setTimeout(() => {
-      setIsTrack(false);
-    }, 500);
-
-    return () => clearInterval(trackOut);
-  }, [clickedMyMapListType]);
-
+const MemoizedMarker = memo(({ stamp, isTrack }: Props) => {
   return (
     <Marker
       tracksViewChanges={isTrack}
@@ -52,6 +40,24 @@ const styles = StyleSheet.create({
 
 export default function StampPings() {
   const { stamps } = useUsersStampsQuery();
+  const [isTrack, setIsTrack] = useState(false);
+  const clickedMyMapListType = useRecoilValue(clickedMyMapListTypeState);
 
-  return <>{stamps?.stamps?.map((stamp, index) => <MemoizedMarker key={`${stamp.id}_${index}`} stamp={stamp} />)}</>;
+  useEffect(() => {
+    setIsTrack(true);
+
+    const trackOut = setTimeout(() => {
+      setIsTrack(false);
+    }, 500);
+
+    return () => clearInterval(trackOut);
+  }, [clickedMyMapListType]);
+
+  return (
+    <>
+      {stamps?.stamps?.map((stamp, index) => (
+        <MemoizedMarker key={`${stamp.id}_${index}`} stamp={stamp} isTrack={isTrack} />
+      ))}
+    </>
+  );
 }

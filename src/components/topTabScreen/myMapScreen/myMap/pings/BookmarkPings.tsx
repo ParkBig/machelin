@@ -8,22 +8,10 @@ import { Bookmark } from 'types/types';
 
 interface Props {
   bookmark: Bookmark;
+  isTrack: boolean;
 }
 
-const MemoizedMarker = memo(({ bookmark }: Props) => {
-  const [isTrack, setIsTrack] = useState(false);
-  const clickedMyMapListType = useRecoilValue(clickedMyMapListTypeState);
-
-  useEffect(() => {
-    setIsTrack(true);
-
-    const trackOut = setTimeout(() => {
-      setIsTrack(false);
-    }, 500);
-
-    return () => clearInterval(trackOut);
-  }, [clickedMyMapListType]);
-
+const MemoizedMarker = memo(({ bookmark, isTrack }: Props) => {
   return (
     <Marker
       tracksViewChanges={isTrack}
@@ -50,11 +38,23 @@ const styles = StyleSheet.create({
 
 export default function BookmarkPings() {
   const { bookmarks } = useUsersBookmarksQuery();
+  const [isTrack, setIsTrack] = useState(false);
+  const clickedMyMapListType = useRecoilValue(clickedMyMapListTypeState);
+
+  useEffect(() => {
+    setIsTrack(true);
+
+    const trackOut = setTimeout(() => {
+      setIsTrack(false);
+    }, 500);
+
+    return () => clearInterval(trackOut);
+  }, [clickedMyMapListType]);
 
   return (
     <>
       {bookmarks?.bookmarks?.map((bookmark, index) => (
-        <MemoizedMarker key={`${bookmark.id}_${index}`} bookmark={bookmark} />
+        <MemoizedMarker key={`${bookmark.id}_${index}`} bookmark={bookmark} isTrack={isTrack} />
       ))}
     </>
   );
