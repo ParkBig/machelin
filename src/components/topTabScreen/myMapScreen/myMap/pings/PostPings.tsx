@@ -8,22 +8,10 @@ import { IPost } from 'types/types';
 
 interface Props {
   post: IPost;
+  isTrack: boolean;
 }
 
-const MemoizedMarker = memo(({ post }: Props) => {
-  const [isTrack, setIsTrack] = useState(false);
-  const clickedMyMapListType = useRecoilValue(clickedMyMapListTypeState);
-
-  useEffect(() => {
-    setIsTrack(true);
-
-    const trackOut = setTimeout(() => {
-      setIsTrack(false);
-    }, 500);
-
-    return () => clearInterval(trackOut);
-  }, [clickedMyMapListType]);
-
+const MemoizedMarker = memo(({ post, isTrack }: Props) => {
   return (
     <Marker tracksViewChanges={isTrack} coordinate={{ latitude: +post.restaurantLat, longitude: +post.restaurantLng }} title={post.restaurantName}>
       <View style={styles.wrap}>
@@ -46,10 +34,22 @@ const styles = StyleSheet.create({
 
 export default function PostPings() {
   const { posts } = useUsersPostForMyMapQuery();
+  const [isTrack, setIsTrack] = useState(false);
+  const clickedMyMapListType = useRecoilValue(clickedMyMapListTypeState);
+
+  useEffect(() => {
+    setIsTrack(true);
+
+    const trackOut = setTimeout(() => {
+      setIsTrack(false);
+    }, 500);
+
+    return () => clearInterval(trackOut);
+  }, [clickedMyMapListType]);
 
   return (
     <>
-      {posts?.posts?.map((post, index) => <MemoizedMarker key={`${post.id}_${index}`} post={post} />)}
+      {posts?.posts?.map((post, index) => <MemoizedMarker key={`${post.id}_${index}`} post={post} isTrack={isTrack} />)}
     </>
   );
 }

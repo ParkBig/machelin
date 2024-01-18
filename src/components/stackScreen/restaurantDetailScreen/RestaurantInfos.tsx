@@ -1,4 +1,4 @@
-import { Linking, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Size } from 'const/global-styles';
 import { useState } from 'react';
@@ -15,20 +15,6 @@ export default function RestaurantInfos() {
 
   const toggleTimeInfo = () => {
     setIsOpenTimeInfo(prev => !prev);
-  };
-
-  const test = async () => {
-    if (!restaurantDetail?.restaurantDetail) {
-      return;
-    }
-
-    const supported = await Linking.canOpenURL(
-      `https://www.google.com/search?q=${restaurantDetail?.restaurantDetail?.name}`
-    );
-
-    if (supported) {
-      await Linking.openURL(`https://www.google.com/search?q=${restaurantDetail?.restaurantDetail?.name}`);
-    }
   };
 
   return (
@@ -86,13 +72,6 @@ export default function RestaurantInfos() {
           </View>
         </View>
       )}
-      <View style={styles.info}>
-        <Ionicons name="logo-google" size={30} color={Colors.mainGreen2} />
-        <Button style={styles.infoContent} onPress={test}>
-          <Text>구글 검색해 보기</Text>
-          <Ionicons name="chevron-forward" size={30} color={Colors.mainGreen2} />
-        </Button>
-      </View>
     </View>
   );
 }
@@ -101,7 +80,7 @@ const styles = StyleSheet.create({
   infos: {
     width: '100%',
     padding: 15,
-    gap: 10,
+    gap: 5,
   },
   info: {
     width: '100%',
