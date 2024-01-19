@@ -51,15 +51,17 @@ export default function SearchBar() {
 const styles = StyleSheet.create({
   wrap: {
     width: '100%',
-    marginTop: 10,
+    height: 60,
     flexDirection: 'row',
-    borderRadius: 8,
-    borderWidth: 1.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    borderWidth: 1,
     borderColor: Colors.mainGreen2,
     overflow: 'hidden',
   },
   searchIcon: {
-    height: 50,
+    height: 60,
     width: 50,
     justifyContent: 'center',
     alignItems: 'center',

@@ -1,19 +1,15 @@
-import { useIsFocused } from '@react-navigation/native';
-import AreaPicker from 'components/bottomTabScreen/regionalSearchScreen/areaPicker/AreaPicker';
+import Header from 'components/bottomTabScreen/regionalSearchScreen/header/Header';
 import Results from 'components/bottomTabScreen/regionalSearchScreen/results/Results';
-import SearchBar from 'components/bottomTabScreen/regionalSearchScreen/searchBar/SearchBar';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { Colors } from 'const/global-styles';
 import { PermissionStatus, getCurrentPositionAsync, requestForegroundPermissionsAsync } from 'expo-location';
 import { useEffect, useState } from 'react';
 import { Platform, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
-import { useResetRecoilState, useSetRecoilState } from 'recoil';
-import { focusedRestaurantState, myLocationState } from 'store/locationState';
+import { useSetRecoilState } from 'recoil';
+import { myLocationState } from 'store/locationState';
 
 export default function RegionalSearchScreen() {
-  const thisScreenIsFocused = useIsFocused();
   const setMyLocation = useSetRecoilState(myLocationState);
-  const resetFocusedRestaurant = useResetRecoilState(focusedRestaurantState);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
   useEffect(() => {
@@ -38,16 +34,9 @@ export default function RegionalSearchScreen() {
     myLocation();
   }, []);
 
-  useEffect(() => {
-    if (thisScreenIsFocused) {
-      resetFocusedRestaurant();
-    }
-  }, [thisScreenIsFocused]);
-
   return (
     <SafeAreaView style={styles.wrap}>
-      <AreaPicker />
-      <SearchBar />
+      <Header />
       <Results />
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}
@@ -60,9 +49,10 @@ export default function RegionalSearchScreen() {
 
 const styles = StyleSheet.create({
   wrap: {
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     flex: 1,
-    paddingHorizontal: 15,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    paddingHorizontal: 10,
     backgroundColor: Colors.mainWhite1,
+    gap: 10,
   },
 });
