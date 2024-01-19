@@ -12,7 +12,14 @@ interface Data {
 
 export default function useNeighborhoodPostsQuery() {
   const { mySubLocality } = useUsersSubLocalityQuery();
-  const subLocality = mySubLocality?.subLocality
+
+  const subLocality = mySubLocality
+    ? mySubLocality.ok
+      ? mySubLocality.isKorea
+        ? mySubLocality.localityArr.slice(0, -1).join(' ')
+        : mySubLocality.localityArr[0]
+      : ''
+    : '';
 
   const {
     data: neighborhoodPosts,
@@ -35,7 +42,7 @@ export default function useNeighborhoodPostsQuery() {
       return data;
     },
     {
-      enabled: !!subLocality,
+      enabled: subLocality !== '' ? (mySubLocality ? (mySubLocality.ok ? true : false) : false) : false,
       select: data => {
         return { pages: data.pages.flatMap(page => page.neighborhoodPosts), pageParams: data.pageParams };
       },

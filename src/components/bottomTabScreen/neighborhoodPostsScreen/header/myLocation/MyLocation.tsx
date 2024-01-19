@@ -8,15 +8,14 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useSetRecoilState } from 'recoil';
 import { myLocationState } from 'store/locationState';
-import trimMySubLocality from 'util/ trimMySubLocality';
 
 export default function MyLocation() {
   const { mySubLocality } = useUsersSubLocalityQuery();
-  const { city, district } = trimMySubLocality(mySubLocality?.subLocality);
   const setMyLocation = useSetRecoilState(myLocationState);
+  const [myLocationString, setMyLocationString] = useState('');
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
-  const myLocation = async () => {
+  const getMyLocationHandler = async () => {
     const { status } = await requestForegroundPermissionsAsync();
     if (status !== PermissionStatus.GRANTED) {
       setToggleAlertModal({ toggle: true, alertMsg: '위치 접근 권한이 필요합니다' });
@@ -35,15 +34,25 @@ export default function MyLocation() {
   };
 
   useEffect(() => {
-    myLocation();
-  }, [mySubLocality?.subLocality]);
+    getMyLocationHandler();
+
+    if (mySubLocality && mySubLocality.ok) {
+      if (mySubLocality.isKorea) {
+        setMyLocationString(mySubLocality.localityArr.slice(1).join(" "));
+      } else {
+        setMyLocationString(mySubLocality.localityArr[0]);
+      }
+    } else {
+      setMyLocationString('위치를 찾을 수 없음');
+    }
+  }, [mySubLocality]);
 
   return (
     <>
-      <Button style={styles.wrap} onPress={myLocation}>
+      <Button style={styles.wrap} onPress={getMyLocationHandler}>
         <Ionicons name="location" size={30} color={Colors.mainWhite3} />
         <View style={styles.location}>
-          <Text style={styles.text}>{!city && !district ? '내위치' : `${city} ${district}`}</Text>
+          <Text style={styles.text}>{myLocationString}</Text>
         </View>
       </Button>
       <ConfirmAlertModal
