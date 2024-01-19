@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
-import { useRecoilValue } from 'recoil';
-import { regionalRestaurantSearchInputState } from 'store/searchState';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { regionalRestaurantSearchInputState, regionalSearchState } from 'store/searchState';
 import { GooglePlace } from 'types/types';
 import useUsersSubLocalityQuery from '../users/useUsersSubLocalityQuery';
-import trimMySubLocality from 'util/ trimMySubLocality';
 import { axiosRestaurants } from 'query/api/restaurants';
+import { useEffect } from 'react';
 
 interface Data {
   ok: boolean;
@@ -16,20 +15,14 @@ interface Data {
 
 export default function useRegionalRestaurantSearchQuery() {
   const { mySubLocality } = useUsersSubLocalityQuery();
-  const {
-    isTyping,
-    searchText,
-    location: { city, district },
-  } = useRecoilValue(regionalRestaurantSearchInputState);
+  const { isTyping, searchText } = useRecoilValue(regionalRestaurantSearchInputState);
+  const [keyword, setKeyword] = useRecoilState(regionalSearchState);
 
-  const { city: myCity } = trimMySubLocality(mySubLocality?.subLocality);
-
-  const keyword =
-    city === '전체'
-      ? myCity
-        ? `대한민국 ${myCity} ${searchText ? searchText : ''}`
-        : `대한민국서울 강남 ${searchText ? searchText : ''}`
-      : `대한민국 ${city} ${district === '전체' ? '' : district} ${searchText ? searchText : ''}`;
+  useEffect(() => {
+    if (mySubLocality) {
+      setKeyword(mySubLocality.localityArr.slice(1).join(' '));
+    }
+  }, [mySubLocality, setKeyword]);
 
   const {
     data: restaurants,
@@ -44,7 +37,7 @@ export default function useRegionalRestaurantSearchQuery() {
       const { data } = await axiosRestaurants.get('/restaurantsTextSearch', {
         params: {
           keyword,
-          isRestaurant: true,
+          isRestaurant: searchText ? 'false' : 'true',
           nextPageParams: pageParam ? pageParam : null,
         },
       });
@@ -52,7 +45,7 @@ export default function useRegionalRestaurantSearchQuery() {
       return data;
     },
     {
-      enabled: isTyping ? false : true,
+      enabled: keyword ? (isTyping ? false : true) : false,
       select: data => ({ pages: data.pages.flatMap(page => page.restaurants), pageParams: data.pageParams }),
       getNextPageParam: lastPage => {
         return lastPage.next_page_token || null;

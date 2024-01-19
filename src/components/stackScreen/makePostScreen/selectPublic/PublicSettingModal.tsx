@@ -20,7 +20,6 @@ export default function PublicSettingModal({ togglePublicModal, toggleModal }: P
 
   return (
     <Modal
-      backdropColor="transparent"
       style={styles.modal}
       isVisible={togglePublicModal}
       onSwipeComplete={toggleModal}
@@ -31,7 +30,7 @@ export default function PublicSettingModal({ togglePublicModal, toggleModal }: P
     >
       <View style={styles.wrap}>
         <View style={styles.title}>
-          <Text>공개 범위</Text>
+          <Text style={styles.titleText}>공개범위</Text>
         </View>
         <View style={styles.selection}>
           <Button style={styles.selectButton} onPress={changePublicSettingHandler.bind(null, true)}>
@@ -50,7 +49,7 @@ export default function PublicSettingModal({ togglePublicModal, toggleModal }: P
           </Button>
         </View>
         <Button style={styles.doneButton} onPress={toggleModal}>
-          <Text>완료</Text>
+          <Text style={styles.doneButtonText}>완료</Text>
         </Button>
       </View>
     </Modal>
@@ -64,27 +63,25 @@ const styles = StyleSheet.create({
   },
   wrap: {
     padding: 15,
-    borderTopWidth: 2,
-    borderTopColor: Colors.mainGreen2,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    gap: 10,
-    backgroundColor: Colors.mainWhite3,
+    backgroundColor: Colors.mainWhite1,
+    gap: 20,
   },
   title: {
-    height: 50,
+    height: 60,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomColor: Colors.mainGreen2,
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
   },
   selection: {
     gap: 5,
   },
   selectButton: {
     width: '100%',
-    height: 50,
+    height: 60,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -97,10 +94,18 @@ const styles = StyleSheet.create({
   },
   doneButton: {
     width: '100%',
-    height: 50,
+    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
     backgroundColor: Colors.mainGreen1,
+  },
+  doneButtonText: {
+    fontWeight: 'bold',
+    color: Colors.mainWhite3,
+  },
+  titleText: {
+    fontWeight: 'bold',
+    fontSize: Size.normalMiddle,
   },
 });

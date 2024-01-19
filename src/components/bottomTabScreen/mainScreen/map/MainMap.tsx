@@ -4,7 +4,7 @@ import { focusedRestaurantState, mapLocationState } from 'store/locationState';
 import { mainScreenTogglesState } from 'store/toggleState';
 import MachelinMap from 'components/common/map/MachelinMap';
 import MyLocationPing from 'components/common/map/MyLocationPing';
-import RestaurantPings from 'components/common/map/RestaurantPings';
+import RestaurantPings from './RestaurantPings';
 
 export default function MainMap() {
   const setMapLocation = useSetRecoilState(mapLocationState);

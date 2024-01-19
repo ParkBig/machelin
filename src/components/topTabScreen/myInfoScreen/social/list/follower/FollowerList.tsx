@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import BriefUserInfo from '../common/BriefUserInfo';
 import NoSocial from '../common/NoSocial';
+import { ScreenHeight } from 'const/dimenstions';
 
 export default function FollowerList() {
   const { followers, followersIsLoading, isReFollowers } = useUsersFollowersQuery();
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
   wrap: {
     width: '100%',
     minHeight: 300,
+    maxHeight: ScreenHeight,
   },
   loadingOverlay: {
     width: '100%',

@@ -154,6 +154,14 @@ export interface Like {
 }
 
 export type PostType = 'POST' | 'LOCAL_AD' | 'ALL_AD' | 'LOCAL_NOTICE' | 'ALL_NOTICE';
+export type PostNavigation =
+  | 'RestaurantDetailScreen'
+  | 'NeighborhoodPostsScreen'
+  | 'MyPostsScreen'
+  | 'ExploreUserInfoScreen'
+  | 'PostsSearchScreen'
+  | 'NoticePostsScreen'
+  | 'PostsLikedScreen';
 
 export interface IPost {
   id: number;

@@ -16,7 +16,7 @@ export default function MyTopTabScreen() {
       screenOptions={{
         tabBarStyle: { backgroundColor: Colors.mainGreen2, elevation: 0, shadowOpacity: 0 },
         tabBarActiveTintColor: Colors.mainWhite3,
-        tabBarLabelStyle: { fontWeight: 'bold', fontSize: Size.normalBig },
+        tabBarLabelStyle: { fontWeight: 'bold' },
         tabBarIndicatorStyle: {
           backgroundColor: Colors.mainWhite3,
         },
@@ -29,7 +29,7 @@ export default function MyTopTabScreen() {
         name="MyMapScreen"
         component={MyMapScreen}
         options={{
-          title: '나의 지도',
+          title: '나의지도',
         }}
       />
     </RootTobTab.Navigator>

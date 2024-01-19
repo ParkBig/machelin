@@ -14,7 +14,7 @@ export default function LoginSignUpTopTabScreen() {
       screenOptions={{
         tabBarStyle: { backgroundColor: Colors.mainGreen2, elevation: 0, shadowOpacity: 0 },
         tabBarActiveTintColor: Colors.mainWhite3,
-        tabBarLabelStyle: { fontWeight: 'bold', fontSize: Size.normalBig },
+        tabBarLabelStyle: { fontWeight: 'bold' },
         tabBarIndicatorStyle: {
           backgroundColor: Colors.mainWhite3,
         },

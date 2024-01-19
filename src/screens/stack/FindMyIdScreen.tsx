@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import Button from 'components/common/layout/Button';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
+import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { Colors, Size } from 'const/global-styles';
 import { checkFindMyIdVerificationQuery, sendFindMyIdVerificationQuery } from 'query/api/user';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { useMutation } from 'react-query';
@@ -13,13 +14,13 @@ import { storeToken } from 'util/tokenDB';
 
 export default function FindMyIdScreen() {
   const { navigate } = useNavigation<UseNavigation<'FindMyIdScreen'>>();
-  const { reMyInfo } = useMyInfoQuery();
+  const { myInfo, reMyInfo } = useMyInfoQuery();
   const [isEditable, setIsEditable] = useState(true);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
-  const { mutate: sendVerifyMutate } = useMutation(sendFindMyIdVerificationQuery, {
+  const { mutate: sendVerifyMutate, isLoading } = useMutation(sendFindMyIdVerificationQuery, {
     onSuccess: res => {
       if (res.ok) {
         setIsEditable(false);
@@ -34,7 +35,6 @@ export default function FindMyIdScreen() {
       if (res.ok) {
         await storeToken(res.token);
         reMyInfo();
-        navigate('MyInfoScreen');
       } else {
         setToggleAlertModal({ toggle: true, alertMsg: res.msg });
       }
@@ -57,6 +57,12 @@ export default function FindMyIdScreen() {
     }
   };
 
+  useEffect(() => {
+    if (myInfo?.authUser) {
+      navigate('MyScreen');
+    }
+  }, [myInfo]);
+
   return (
     <>
       <View style={styles.wrap}>
@@ -69,7 +75,9 @@ export default function FindMyIdScreen() {
             placeholder="(-) 없이 입력해주세요."
             keyboardType="phone-pad"
           />
-          {isEditable && (
+          {isEditable && isLoading ? (
+            <LoadingOverlay style={styles.button} />
+          ) : (
             <Button style={styles.button} onPress={onPressHandler.bind(null, true)}>
               <Text style={styles.buttonText}>인증번호 발송</Text>
             </Button>

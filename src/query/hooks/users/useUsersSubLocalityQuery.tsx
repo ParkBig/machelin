@@ -6,7 +6,8 @@ import { myLocationState } from 'store/locationState';
 interface Data {
   ok: boolean;
   msg: string;
-  subLocality: string;
+  localityArr: string[];
+  isKorea: boolean;
 }
 
 export default function useUsersSubLocalityQuery() {

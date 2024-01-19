@@ -10,6 +10,7 @@ import { RefreshControl } from 'react-native-gesture-handler';
 import Line from 'components/common/layout/Line';
 import RestaurantReviews from 'components/stackScreen/restaurantDetailScreen/restaurantReviews/RestaurantReviews';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
+import RestaurantInfoFunction from 'components/stackScreen/restaurantDetailScreen/RestaurantInfoFunction';
 
 export default function RestaurantDetailScreen({ route }: StackScreenPropsAbout<'RestaurantDetailScreen'>) {
   const [refreshing, setRefreshing] = useState(false);
@@ -33,6 +34,8 @@ export default function RestaurantDetailScreen({ route }: StackScreenPropsAbout<
         <RestaurantGrade />
         <Line style={styles.innerLine} />
         <RestaurantInfos />
+        <Line style={styles.innerLine} />
+        <RestaurantInfoFunction />
         <RestaurantReviews />
       </ScrollView>
       {restaurantDetailIsLoading && <LoadingOverlay style={styles.loadingOverlay} />}

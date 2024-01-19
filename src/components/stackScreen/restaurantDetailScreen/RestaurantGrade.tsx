@@ -5,12 +5,10 @@ import useRestaurantDetailQuery from 'query/hooks/restaurants/useRestaurantDetai
 import { Text, View } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { UseRouter } from 'types/screenType';
-import postRating from 'util/postRating';
 
 export default function RestaurantGrade() {
   const { params } = useRoute<UseRouter<'RestaurantDetailScreen'>>();
   const { restaurantDetail } = useRestaurantDetailQuery(params.restaurantId);
-  const { rating, total } = postRating(restaurantDetail?.machelinPosts);
 
   return (
     <View style={styles.grades}>
@@ -21,8 +19,8 @@ export default function RestaurantGrade() {
       </View>
       <View style={styles.grade}>
         <Ionicons name="restaurant" size={30} color={Colors.mainGreen2} />
-        <Text>{rating} / 5 </Text>
-        <Text style={styles.totalText}>({total})</Text>
+        <Text>{restaurantDetail?.machelinRating} / 5 </Text>
+        <Text style={styles.totalText}>({restaurantDetail?.machelinTotal})</Text>
       </View>
     </View>
   );
@@ -31,7 +29,7 @@ export default function RestaurantGrade() {
 const styles = StyleSheet.create({
   grades: {
     width: '100%',
-    paddingVertical: 20,
+    height: 60,
     paddingHorizontal: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',

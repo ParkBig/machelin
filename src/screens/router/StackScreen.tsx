@@ -14,7 +14,6 @@ import ChangeMyPreferRestaurantScreen from 'screens/stack/ChangeMyPreferRestaura
 import ToggleFollow from 'components/stackScreen/ExploreUserInfoScreen/exploreUsersInfo/ToggleFollow';
 import ToggleBookmark from 'components/stackScreen/restaurantDetailScreen/ToggleBookmark';
 import FindMyIdScreen from 'screens/stack/FindMyIdScreen';
-import RegionalSearchMapScreen from 'screens/stack/RegionalSearchMapScreen';
 import MakePostButton from 'components/stackScreen/makePostScreen/makePostButton/MakePostButton';
 import MakeStampScreen from 'screens/stack/MakeStampScreen';
 import FindRestaurantInfoScreen from 'screens/stack/FindRestaurantInfoScreen';
@@ -24,6 +23,7 @@ import DeleteStampButton from 'components/stackScreen/stampDetailScreen/DeleteSt
 import TermsOfUseScreen from 'screens/stack/TermsOfUseScreen';
 import NeighborHoodPostsTopTabScreen from './NeighborHoodPostsTopTabScreen';
 import SettingScreen from 'screens/stack/SettingScreen';
+import RestaurantDetailMapScreen from 'screens/stack/RestaurantDetailMapScreen';
 
 export default function StackScreen() {
   return (
@@ -86,11 +86,7 @@ export default function StackScreen() {
           title: '회원가입',
         }}
       />
-      <RootStack.Screen
-        name="TermsOfUseScreen"
-        component={TermsOfUseScreen}
-        options={{ title: '전화번호 인증하기' }}
-      />
+      <RootStack.Screen name="TermsOfUseScreen" component={TermsOfUseScreen} options={{ title: '전화번호 인증하기' }} />
       <RootStack.Screen name="FindMyIdScreen" component={FindMyIdScreen} options={{ title: '나의 계정 찾기' }} />
       <RootStack.Screen
         name="ChangeMyNicknameScreen"
@@ -129,13 +125,6 @@ export default function StackScreen() {
         })}
       />
       <RootStack.Screen
-        name="RegionalSearchMapScreen"
-        component={RegionalSearchMapScreen}
-        options={{
-          title: '검색 결과',
-        }}
-      />
-      <RootStack.Screen
         name="MakeStampScreen"
         component={MakeStampScreen}
         options={{
@@ -151,12 +140,17 @@ export default function StackScreen() {
           headerRight: () => <DeleteStampButton />,
         }}
       />
-      <RootStack.Screen 
-        name='SettingScreen'
+      <RootStack.Screen
+        name="SettingScreen"
         component={SettingScreen}
         options={{
           title: '설정',
         }}
+      />
+      <RootStack.Screen
+        name="RestaurantDetailMapScreen"
+        component={RestaurantDetailMapScreen}
+        options={{ title: '지도로 위치보기' }}
       />
     </RootStack.Navigator>
   );

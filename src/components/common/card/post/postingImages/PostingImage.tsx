@@ -14,13 +14,7 @@ export default function PostingImage({ image }: Props) {
     });
   }, []);
 
-  return (
-    <Image
-      style={[styles.image]}
-      source={{ uri: image }}
-      resizeMode={imageSize.height > imageSize.width ? 'contain' : 'cover'}
-    />
-  );
+  return <Image style={styles.image} source={{ uri: image }} resizeMode="contain" />;
 }
 
 const styles = StyleSheet.create({

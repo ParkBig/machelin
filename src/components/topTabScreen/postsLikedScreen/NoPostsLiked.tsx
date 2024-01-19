@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 10,
-    opacity: 0.7,
   },
   text: {
     fontSize: Size.normalBig,

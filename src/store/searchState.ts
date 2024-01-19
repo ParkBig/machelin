@@ -39,8 +39,8 @@ export const regionalRestaurantSearchInputState = atom<RegionalRestaurantSearchI
     isTyping: false,
     searchText: '',
     location: {
-      city: '전체',
-      district: '전체',
+      city: '내위치',
+      district: '내위치',
     },
   },
 });
@@ -60,3 +60,9 @@ export const postSearchInputState = atom<PostSearchInputState>({
     searchText: '',
   },
 });
+
+export const regionalSearchState = atom<string>({
+  key: 'regionalSearchState',
+  default: ''
+});
+

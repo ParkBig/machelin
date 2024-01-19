@@ -1,4 +1,5 @@
 export type SearchName =
+  | '내위치'
   | '전체'
   | '서울'
   | '부산'
@@ -15,7 +16,7 @@ export type SearchName =
   | '경상도'
   | '제주도';
 export type SearchSubName =
-  | '전체'
+  | '내위치'
   | Seoul
   | Daegu
   | Incheon
@@ -256,6 +257,7 @@ type GyeongsangDo =
 type JeJuDo = '제주' | '서귀포' | '전체';
 
 export const administrativeDistrictName: SearchName[] = [
+  '내위치',
   '전체',
   '서울',
   '부산',
@@ -273,8 +275,24 @@ export const administrativeDistrictName: SearchName[] = [
   '제주도',
 ];
 
-export type SubName = "전체"[] | Seoul[] | Busan[] | Daegu[] | Incheon[] | Gwangju[] | Daejeon[] | Ulsan[] | Sejong[] | GyeonggiDo[] | GangwonDo[] | ChungcheongDo[] | JeollaDo[] | GyeongsangDo[] | JeJuDo[]
+export type SubName =
+  | '전체'[]
+  | Seoul[]
+  | Busan[]
+  | Daegu[]
+  | Incheon[]
+  | Gwangju[]
+  | Daejeon[]
+  | Ulsan[]
+  | Sejong[]
+  | GyeonggiDo[]
+  | GangwonDo[]
+  | ChungcheongDo[]
+  | JeollaDo[]
+  | GyeongsangDo[]
+  | JeJuDo[];
 export interface AdministrativeDistrict {
+  내위치: '내위치'[];
   전체: '전체'[];
   서울: Seoul[];
   부산: Busan[];
@@ -293,6 +311,7 @@ export interface AdministrativeDistrict {
 }
 
 export const administrativeDistrict: AdministrativeDistrict = {
+  내위치: ['내위치'],
   전체: ['전체'],
   서울: [
     '전체',

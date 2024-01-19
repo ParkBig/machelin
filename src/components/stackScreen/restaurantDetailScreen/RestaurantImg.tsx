@@ -17,7 +17,7 @@ export default function RestaurantImg() {
       {images.length === 0 ? (
         <Image source={{ uri: 'https://maps.gstatic.com/tactile/pane/default_geocode-1x.png' }} style={styles.img} />
       ) : (
-        <Swiper>
+        <Swiper loop={false}>
           {images.map((image, index) => (
             <Image key={`${image}_${index}`} source={{ uri: image }} resizeMode="cover" style={styles.img} />
           ))}

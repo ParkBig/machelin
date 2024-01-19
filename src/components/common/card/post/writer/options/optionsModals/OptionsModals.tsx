@@ -9,6 +9,7 @@ import PublicSetting from './PublicSetting';
 import { Ionicons } from '@expo/vector-icons';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useNavigationState } from '@react-navigation/native';
+import Line from 'components/common/layout/Line';
 
 interface Props {
   postId: number;
@@ -69,20 +70,24 @@ export default function OptionsModals({ postId, toggleModal, ownerId, isPublic, 
           <>
             <Button style={styles.button} onPress={changeWhichOneSelectedHandler.bind(null, 'report')}>
               <Ionicons name="alert" size={Size.bigMiddle} />
-              <Text style={styles.text}>신고하기</Text>
+              <Text>신고하기</Text>
             </Button>
             {myInfo?.authUser && myInfo.authUser.id === ownerId && isMyScreen && (
               <>
                 <Button style={styles.button} onPress={changeWhichOneSelectedHandler.bind(null, 'delete')}>
                   <Ionicons name="trash" size={Size.bigMiddle} />
-                  <Text style={styles.text}>삭제하기</Text>
+                  <Text>삭제하기</Text>
                 </Button>
                 <Button style={styles.button} onPress={changeWhichOneSelectedHandler.bind(null, 'publicSetting')}>
                   <Ionicons name="lock-open" size={Size.bigMiddle} />
-                  <Text style={styles.text}>공개설정</Text>
+                  <Text>공개설정</Text>
                 </Button>
               </>
             )}
+            <Line style={styles.line} />
+            <Button style={styles.closeButton} onPress={closeModalHandler}>
+              <Text style={styles.closeButtonText}>닫기</Text>
+            </Button>
           </>
         ) : (
           renderSelected
@@ -95,28 +100,37 @@ export default function OptionsModals({ postId, toggleModal, ownerId, isPublic, 
 const styles = StyleSheet.create({
   modal: {
     margin: 0,
-    marginBottom: 60,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
   wrap: {
     padding: 20,
-    width: '70%',
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
     backgroundColor: Colors.mainWhite1,
-    borderRadius: 5,
-    gap: 20,
-    ...Shadow,
   },
   button: {
     width: '100%',
-    height: 40,
+    height: 60,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
   },
-  text: {
-    fontSize: Size.normalMiddle,
+  line: {
+    height: 20,
+  },
+  closeButton: {
+    height: 60,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    backgroundColor: Colors.mainGreen2,
+  },
+  closeButtonText: {
+    color: Colors.mainWhite3,
+    fontWeight: 'bold',
   },
 });

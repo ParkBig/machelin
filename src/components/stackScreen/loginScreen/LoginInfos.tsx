@@ -47,7 +47,7 @@ export default function LoginInfos() {
 
   useEffect(() => {
     if (myInfo?.authUser) {
-      navigate('MyInfoScreen');
+      navigate('MyScreen');
     }
   }, [myInfo]);
 

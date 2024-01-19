@@ -1,12 +1,11 @@
 import Button from 'components/common/layout/Button';
-import { Size } from 'const/global-styles';
+import { Colors, Size } from 'const/global-styles';
 import { StyleSheet, Text, View } from 'react-native';
 import RadioGroup, { RadioButtonProps } from 'react-native-radio-buttons-group';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { WhichOneSelectedState } from './OptionsModals';
-import { Ionicons } from '@expo/vector-icons';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { reportPostQuery } from 'query/api/posts';
 
@@ -47,7 +46,6 @@ export default function Report({ postId, setWhichOneSelected, toggleModalHandler
   return (
     <>
       <View style={styles.title}>
-        <Ionicons name="alert" size={Size.bigMiddle} />
         <Text style={styles.titleText}>신고하기</Text>
       </View>
       <View style={styles.reports}>
@@ -55,15 +53,15 @@ export default function Report({ postId, setWhichOneSelected, toggleModalHandler
           radioButtons={reportButtons}
           onPress={setSelectedButton}
           selectedId={selectedButton}
-          containerStyle={{ justifyContent: 'center', alignItems: 'center' }}
+          containerStyle={{ justifyContent: 'center', alignItems: 'center', gap: 20, }}
         />
       </View>
       <View style={styles.buttons}>
         <Button style={styles.button} onPress={closeSelectedHandler}>
-          <Text>취소</Text>
+          <Text style={styles.buttonText}>취소</Text>
         </Button>
         <Button style={styles.button} onPress={reportHandler}>
-          <Text>확인</Text>
+          <Text style={styles.buttonText}>확인</Text>
         </Button>
       </View>
       {isLoading && <LoadingOverlay style={styles.loadingOverlay} />}
@@ -78,25 +76,35 @@ export default function Report({ postId, setWhichOneSelected, toggleModalHandler
 
 const styles = StyleSheet.create({
   title: {
+    height: 60,
     width: '100%',
-    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: 10,
+    borderBottomColor: Colors.mainGreen2,
+    borderBottomWidth: 1,
   },
   reports: {
     width: '100%',
+    paddingVertical: 20,
   },
   buttons: {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    gap: 20,
   },
   button: {
     flex: 1,
-    height: 40,
+    height: 60,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor :Colors.mainGreen2,
+  },
+  buttonText: {
+    color: Colors.mainWhite3,
+    fontWeight: 'bold',
   },
   titleText: {
     fontWeight: 'bold',
