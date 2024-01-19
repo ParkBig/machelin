@@ -32,7 +32,7 @@ export default function FindRestaurantInfoScreen({ route }: StackScreenPropsAbou
 
   const onEndEditingHandler = () => {
     if (textInputValue) {
-      mutate({ keyword: textInputValue, isRestaurant: false });
+      mutate({ keyword: textInputValue, isRestaurant: 'false' });
     }
   };
 

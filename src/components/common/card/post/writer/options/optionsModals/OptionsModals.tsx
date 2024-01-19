@@ -110,8 +110,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     backgroundColor: Colors.mainWhite1,
-    borderRadius: 5,
-    ...Shadow,
   },
   button: {
     width: '100%',

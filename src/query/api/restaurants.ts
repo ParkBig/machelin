@@ -4,7 +4,7 @@ export const axiosRestaurants = createAxiosInstance('restaurants');
 
 interface RestaurantsTextSearchQueryInput {
   keyword: string;
-  isRestaurant: boolean;
+  isRestaurant: string;
   nextPageParams?: string;
 }
 

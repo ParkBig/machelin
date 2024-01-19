@@ -1,9 +1,10 @@
 import { useInfiniteQuery } from 'react-query';
-import { useRecoilValue } from 'recoil';
-import { regionalRestaurantSearchInputState } from 'store/searchState';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { regionalRestaurantSearchInputState, regionalSearchState } from 'store/searchState';
 import { GooglePlace } from 'types/types';
 import useUsersSubLocalityQuery from '../users/useUsersSubLocalityQuery';
 import { axiosRestaurants } from 'query/api/restaurants';
+import { useEffect } from 'react';
 
 interface Data {
   ok: boolean;
@@ -14,14 +15,14 @@ interface Data {
 
 export default function useRegionalRestaurantSearchQuery() {
   const { mySubLocality } = useUsersSubLocalityQuery();
-  const {
-    isTyping,
-    searchText,
-    location: { city, district },
-  } = useRecoilValue(regionalRestaurantSearchInputState);
+  const { isTyping, searchText } = useRecoilValue(regionalRestaurantSearchInputState);
+  const [keyword, setKeyword] = useRecoilState(regionalSearchState);
 
-  // have to change
-  const keyword = city + district;
+  useEffect(() => {
+    if (mySubLocality) {
+      setKeyword(mySubLocality.localityArr.slice(1).join(' '));
+    }
+  }, [mySubLocality, setKeyword]);
 
   const {
     data: restaurants,
@@ -36,7 +37,7 @@ export default function useRegionalRestaurantSearchQuery() {
       const { data } = await axiosRestaurants.get('/restaurantsTextSearch', {
         params: {
           keyword,
-          isRestaurant: true,
+          isRestaurant: searchText ? 'false' : 'true',
           nextPageParams: pageParam ? pageParam : null,
         },
       });
@@ -44,7 +45,7 @@ export default function useRegionalRestaurantSearchQuery() {
       return data;
     },
     {
-      enabled: isTyping ? false : true,
+      enabled: keyword ? (isTyping ? false : true) : false,
       select: data => ({ pages: data.pages.flatMap(page => page.restaurants), pageParams: data.pageParams }),
       getNextPageParam: lastPage => {
         return lastPage.next_page_token || null;
