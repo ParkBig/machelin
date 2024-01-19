@@ -16,6 +16,7 @@ import { GooglePlace } from 'types/types';
 import { UseNavigation } from 'types/screenType';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { makePostQuery } from 'query/api/posts';
+import useUsersSubLocalityQuery from 'query/hooks/users/useUsersSubLocalityQuery';
 
 interface Props {
   restaurantInfo: GooglePlace | null;
@@ -25,6 +26,7 @@ export default function MakePostButton({ restaurantInfo }: Props) {
   const { goBack } = useNavigation<UseNavigation<'MakePostScreen'>>();
   const queryClient = useQueryClient();
   const { myInfo, reMyInfo } = useMyInfoQuery();
+  const { mySubLocality, reMySubLocality } = useUsersSubLocalityQuery();
   const { rePosts } = useUsersPostsQuery();
   const makePostInfo = useRecoilValue(makePostState);
   const [myLocation, setMyLocation] = useRecoilState(myLocationState);
@@ -51,11 +53,16 @@ export default function MakePostButton({ restaurantInfo }: Props) {
 
   const makePostHandler = async () => {
     if (makePostInfo.contents.length < 1) {
-      setToggleAlertModal({ toggle: true, alertMsg: '내용을 1글자 이상 적어주세요' });
+      setToggleAlertModal({ toggle: true, alertMsg: '내용을 적어주세요' });
       return;
     }
     if (restaurantInfo && makePostInfo.rating === 0) {
       setToggleAlertModal({ toggle: true, alertMsg: '점수를 1점이상 평가해주세요' });
+      return;
+    }
+    if (!mySubLocality || !mySubLocality.ok) {
+      reMySubLocality();
+      setToggleAlertModal({ toggle: true, alertMsg: '잠시 후 다시 시도해 주세요' });
       return;
     }
 
@@ -64,8 +71,12 @@ export default function MakePostButton({ restaurantInfo }: Props) {
     payloadFormData.append('isPublic', String(makePostInfo.isPublic));
     payloadFormData.append('rating', String(makePostInfo.rating));
     payloadFormData.append('hashtags', makePostInfo.hashtags);
-    payloadFormData.append('userLat', String(myLocation.latitude));
-    payloadFormData.append('userLng', String(myLocation.longitude));
+
+    if (mySubLocality.isKorea) {
+      payloadFormData.append('ownerSubLocality', mySubLocality.localityArr.join(' '));
+    } else {
+      payloadFormData.append('ownerSubLocality', mySubLocality.localityArr[0]);
+    }
 
     if (makePostInfo.images.length) {
       const now = Date.now();
