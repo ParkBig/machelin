@@ -15,7 +15,7 @@ export default function PreferFoods() {
     navigate('ChangeMyPreferFoodsScreen');
   };
 
-  const preferFoods = myInfo?.authUser.preferFoods.length ? myInfo?.authUser.preferFoods.join(', ') : null;
+  const preferFoods = myInfo?.authUser?.preferFoods.length ? myInfo?.authUser.preferFoods.join(', ') : null;
 
   return (
     <View style={styles.wrap}>

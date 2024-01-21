@@ -15,7 +15,7 @@ export default function MedalsEarned() {
       </View>
       <Button style={styles.medalsEarnedWrap}>
         <View style={styles.medalsEarned}>
-          {myInfo?.authUser.medalsEarned.length === 0 ? (
+          {myInfo?.authUser?.medalsEarned.length === 0 ? (
             <Text style={styles.noneText}>획득한메달이 없어요...</Text>
           ) : (
             myInfo?.authUser.medalsEarned.map((medalEarned, i) => <Text key={medalEarned + i}>{medalEarned}</Text>)

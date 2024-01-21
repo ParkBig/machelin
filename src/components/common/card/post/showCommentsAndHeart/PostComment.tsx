@@ -18,7 +18,7 @@ export default function PostComment({ comment }: Props) {
   const timeAgo = getPreviousDate(comment.createdAt);
 
   const goToUsersScreenHandler = () => {
-    if (comment.owner.id === myInfo?.authUser.id) {
+    if (comment.owner.id === myInfo?.authUser?.id) {
       navigate('MyScreen');
       return;
     } else {

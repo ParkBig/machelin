@@ -35,7 +35,7 @@ export default function MakePreferFood() {
       return;
     }
 
-    if (myInfo?.authUser.preferFoods.includes(makePreferFoodValue)) {
+    if (myInfo?.authUser?.preferFoods.includes(makePreferFoodValue)) {
       setToggleAlertModal({ toggle: true, alertMsg: '이미 같은 내용이 있습니다.' });
       return;
     }

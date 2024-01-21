@@ -22,7 +22,7 @@ export default function ActivityZone() {
         <Line style={styles.line} />
       </View>
       <Button style={styles.activityZone} onPress={navigateToChangeMyActivityZoneHandler}>
-        {!myInfo?.authUser.activityZone ? (
+        {!myInfo?.authUser?.activityZone ? (
           <Text style={styles.noneText}>활동구역이 없어요...</Text>
         ) : (
           <Text>{myInfo.authUser.activityZone}</Text>

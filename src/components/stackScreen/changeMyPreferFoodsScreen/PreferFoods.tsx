@@ -7,7 +7,7 @@ export default function PreferFoods() {
   
   return (
     <View style={styles.wrap}>
-      {myInfo?.authUser.preferFoods.map((preferFood, i) => <PreferFood key={preferFood + i} preferFood={preferFood} />)}
+      {myInfo?.authUser?.preferFoods.map((preferFood, i) => <PreferFood key={preferFood + i} preferFood={preferFood} />)}
     </View>
   );
 }

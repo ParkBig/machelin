@@ -22,7 +22,7 @@ export default function PreferRestaurant() {
         <Line style={styles.line} />
       </View>
       <Button style={styles.preferRestaurant} onPress={navigateToChangeMyPreferRestaurantHandler}>
-        {!myInfo?.authUser.preferRestaurant ? (
+        {!myInfo?.authUser?.preferRestaurant ? (
           <Text style={styles.noneText}>최애식당이 없어요...</Text>
         ) : (
           <Text>{myInfo?.authUser.preferRestaurant}</Text>
