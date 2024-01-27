@@ -31,10 +31,10 @@ export default function Options() {
   return (
     <View style={styles.options}>
       <Button style={styles.button} onPress={goToMakePostHandler}>
-        <Ionicons style={styles.ionicons} name="add" size={30} color={Colors.mainWhite3} />
+        <Ionicons name="add" size={30} color={Colors.mainWhite3} />
       </Button>
       <Button style={styles.button} onPress={goToTobTabScreenHandler}>
-        <Ionicons style={styles.ionicons} name="search" size={30} color={Colors.mainWhite3} />
+        <Ionicons name="search" size={30} color={Colors.mainWhite3} />
       </Button>
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}
@@ -58,11 +58,5 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 10,
     borderColor: Colors.mainWhite3,
-  },
-  ionicons: {
-    height: '100%',
-    width: '100%',
-    textAlign: 'center',
-    textAlignVertical: 'center',
   },
 });

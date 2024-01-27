@@ -43,7 +43,7 @@ export default function MyLocation() {
         setMyLocationString(mySubLocality.localityArr[0]);
       }
     } else {
-      setMyLocationString('위치를 찾을 수 없음');
+      setMyLocationString('위치를 찾는 중...');
     }
   }, [mySubLocality]);
 
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+    gap: 5,
   },
   location: {
     flex: 1,
