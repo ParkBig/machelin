@@ -5,8 +5,8 @@ import RegionalSearchScreen from 'screens/bottomTab/RegionalSearchScreen';
 import NeighborhoodPostsScreen from 'screens/bottomTab/NeighborhoodPostsScreen';
 import { RootBottomTab } from 'types/screenType';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
-import LoginSignUpTopTabScreen from './LoginSignUpTopTabScreen';
 import MyTopTabScreen from './MyTopTabScreen';
+import LoginSignUpScreen from 'screens/topTab/loginSignUpTopTabScreen/LoginSignUpScreen';
 
 export default function BottomTabScreen() {
   const { myInfo } = useMyInfoQuery();
@@ -51,7 +51,7 @@ export default function BottomTabScreen() {
       />
       <RootBottomTab.Screen
         name="MyScreen"
-        component={myInfo?.authUser ? MyTopTabScreen : LoginSignUpTopTabScreen}
+        component={myInfo?.authUser ? MyTopTabScreen : LoginSignUpScreen}
         options={{
           headerShown: false,
           title: '마슐랭',

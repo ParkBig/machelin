@@ -27,6 +27,7 @@ export default function LoginSignUpScreen() {
 const styles = StyleSheet.create({
   wrap: {
     flex: 1,
+    paddingTop: 60,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.mainWhite1,
