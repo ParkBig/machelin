@@ -1,16 +1,16 @@
-import { Colors, Size } from 'const/global-styles';
-import { Platform, StatusBar } from 'react-native';
+import { Colors } from 'const/global-styles';
 import MyBookMarkScreen from 'screens/topTab/myTopTabScreen/MyBookMarkScreen';
 import MyInfoScreen from 'screens/topTab/myTopTabScreen/MyInfoScreen';
 import MyPostsScreen from 'screens/topTab/myTopTabScreen/MyPostsScreen';
 import { RootTobTab } from 'types/screenType';
 import MyMapScreen from 'screens/topTab/myTopTabScreen/MyMapScreen';
+import { StatusBarHeight } from 'const/dimenstions';
 
 export default function MyTopTabScreen() {
   return (
     <RootTobTab.Navigator
       style={{
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        paddingTop: StatusBarHeight,
         backgroundColor: Colors.mainGreen2,
       }}
       screenOptions={{

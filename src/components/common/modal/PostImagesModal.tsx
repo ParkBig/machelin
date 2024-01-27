@@ -1,10 +1,11 @@
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import Modal from 'react-native-modal';
 import Button from '../layout/Button';
 import { Ionicons } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 import { Colors } from 'const/global-styles';
 import PostingImage from '../card/post/postingImages/PostingImage';
+import { StatusBarHeight } from 'const/dimenstions';
 
 interface Props {
   images: string[];
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    top: 10,
+    top: StatusBarHeight && Platform.OS === 'android' ? 10 : StatusBarHeight,
     left: 0,
     zIndex: 10,
   },

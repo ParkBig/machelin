@@ -1,6 +1,6 @@
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, Platform, StyleSheet, View } from 'react-native';
 import Modal from 'react-native-modal';
-import { ScreenWidth } from 'const/dimenstions';
+import { ScreenWidth, StatusBarHeight } from 'const/dimenstions';
 import Button from '../layout/Button';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from 'const/global-styles';
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    top: 10,
+    top: StatusBarHeight && Platform.OS === 'android' ? 10 : StatusBarHeight,
     left: 0,
   },
   imageWrap: {
