@@ -5,14 +5,11 @@ import Button from 'components/common/layout/Button';
 import useRestaurantDetailQuery from 'query/hooks/restaurants/useRestaurantDetailQuery';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { UseNavigation, UseRouter } from 'types/screenType';
-import { useSetRecoilState } from 'recoil';
-import { mapLocationState } from 'store/locationState';
 
 export default function RestaurantInfoFunction() {
   const { params } = useRoute<UseRouter<'RestaurantDetailScreen'>>();
   const { navigate } = useNavigation<UseNavigation<'RestaurantDetailScreen'>>();
   const { restaurantDetail } = useRestaurantDetailQuery(params.restaurantId);
-  const setMapLocation = useSetRecoilState(mapLocationState);
 
   const searchGoogleHandler = async () => {
     const supported = await Linking.canOpenURL(
@@ -34,12 +31,6 @@ export default function RestaurantInfoFunction() {
       restaurantLat: restaurantDetail.restaurantDetail.geometry.location.lat,
       restaurantLng: restaurantDetail.restaurantDetail.geometry.location.lng,
     });
-
-    setMapLocation(prev => ({
-      ...prev,
-      latitude: restaurantDetail.restaurantDetail.geometry.location.lat,
-      longitude: restaurantDetail.restaurantDetail.geometry.location.lng,
-    }));
   };
 
   return (

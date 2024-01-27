@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import MapView, { MapPressEvent, PROVIDER_GOOGLE } from 'react-native-maps';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { MapLocationState, focusedRestaurantState, mapLocationState, myLocationState } from 'store/locationState';
-import { PermissionStatus, getCurrentPositionAsync, requestForegroundPermissionsAsync } from 'expo-location';
+import { useRecoilValue } from 'recoil';
+import { focusedRestaurantState, mapLocationState, myLocationState } from 'store/locationState';
 import { StyleSheet, View } from 'react-native';
 import MapLoadFail from './MapLoadFail';
 import { Colors } from 'const/global-styles';
@@ -16,9 +15,8 @@ export default function MachelinMap({ onPress, children }: Props) {
   const mapRef = useRef<MapView>(null);
   const [isMapReady, setIsMapReady] = useState(false);
   const [isMapLoadFail, setIsMapLoadFail] = useState(false);
-  const setMyLocation = useSetRecoilState(myLocationState);
   const focusedRestaurant = useRecoilValue(focusedRestaurantState);
-  const [mapLocation, setMapLocation] = useRecoilState(mapLocationState);
+  const mapLocation = useRecoilValue(mapLocationState);
 
   const reloadHandler = () => {
     setIsMapReady(false);
@@ -27,16 +25,6 @@ export default function MachelinMap({ onPress, children }: Props) {
 
   const onMapReadyHandler = () => {
     setIsMapReady(true);
-  };
-
-  const onRegionChangeHandler = (region: MapLocationState) => {
-    const { latitude, longitude, latitudeDelta, longitudeDelta } = region;
-    setMapLocation({
-      latitude,
-      longitude,
-      latitudeDelta,
-      longitudeDelta,
-    });
   };
 
   useEffect(() => {
@@ -54,31 +42,16 @@ export default function MachelinMap({ onPress, children }: Props) {
   }, [focusedRestaurant]);
 
   useEffect(() => {
-    const getLocation = async () => {
-      const { status } = await requestForegroundPermissionsAsync();
-      if (status !== PermissionStatus.GRANTED) {
-        return;
-      }
-
-      const getMyLocation = await getCurrentPositionAsync();
-      const latitude = getMyLocation.coords.latitude;
-      const longitude = getMyLocation.coords.longitude;
-
-      setMyLocation({
-        isGetLocation: true,
-        latitude,
-        longitude,
-      });
-
-      setMapLocation(prev => ({
-        ...prev,
-        latitude,
-        longitude,
-      }));
-    };
-
-    getLocation();
-  }, [setMyLocation, setMapLocation]);
+    mapRef.current?.animateToRegion(
+      {
+        latitude: mapLocation.latitude,
+        longitude: mapLocation.longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      },
+      500
+    );
+  }, [mapLocation]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -108,7 +81,6 @@ export default function MachelinMap({ onPress, children }: Props) {
           initialRegion={mapLocation}
           onMapReady={onMapReadyHandler}
           onPress={onPress}
-          onRegionChangeComplete={onRegionChangeHandler}
         >
           {children}
         </MapView>
