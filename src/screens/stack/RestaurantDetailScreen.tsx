@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet } from 'react-native';
+import { RefreshControl, ScrollView, StyleSheet } from 'react-native';
 import { StackScreenPropsAbout } from 'types/screenType';
 import RestaurantInfos from 'components/stackScreen/restaurantDetailScreen/RestaurantInfos';
 import RestaurantGrade from 'components/stackScreen/restaurantDetailScreen/RestaurantGrade';
@@ -6,7 +6,6 @@ import RestaurantImg from 'components/stackScreen/restaurantDetailScreen/Restaur
 import { Colors } from 'const/global-styles';
 import { useState } from 'react';
 import useRestaurantDetailQuery from 'query/hooks/restaurants/useRestaurantDetailQuery';
-import { RefreshControl } from 'react-native-gesture-handler';
 import Line from 'components/common/layout/Line';
 import RestaurantReviews from 'components/stackScreen/restaurantDetailScreen/restaurantReviews/RestaurantReviews';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';

@@ -5,8 +5,7 @@ import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { Colors } from 'const/global-styles';
 import useNoticePostsQuery from 'query/hooks/posts/useNoticePostsQuery';
 import { useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { RefreshControl } from 'react-native-gesture-handler';
+import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import NoNoticePost from './NoNoticePost';
 
 export default function NoticePosts() {

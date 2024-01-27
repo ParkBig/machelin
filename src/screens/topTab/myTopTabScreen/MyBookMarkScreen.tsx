@@ -4,8 +4,7 @@ import NoBookmark from 'components/topTabScreen/myBookMarkScreen/NoBookmark';
 import { Colors } from 'const/global-styles';
 import useUsersBookmarksQuery from 'query/hooks/users/useUsersBookmarksQuery';
 import { useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
-import { RefreshControl } from 'react-native-gesture-handler';
+import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 
 export default function MyBookMarkScreen() {
   const { bookmarks, bookmarksIsLoading, reBookmarks, isReBookmarks } = useUsersBookmarksQuery();

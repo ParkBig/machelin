@@ -1,7 +1,6 @@
-import { StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { Colors } from 'const/global-styles';
 import useNearbyRestaurantsSearchQuery from 'query/hooks/restaurants/useNearbyRestaurantsSearchQuery';
-import { FlatList } from 'react-native-gesture-handler';
 import Line from 'components/common/layout/Line';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { useSetRecoilState } from 'recoil';

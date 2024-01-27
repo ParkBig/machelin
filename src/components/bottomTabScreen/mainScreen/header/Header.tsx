@@ -1,9 +1,8 @@
-import { LayoutAnimation, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { LayoutAnimation, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Shadow } from 'const/global-styles';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { mainScreenTogglesState } from 'store/toggleState';
-import { TextInput } from 'react-native-gesture-handler';
 import Button from 'components/common/layout/Button';
 import { mainSearchState } from 'store/searchState';
 import { useState } from 'react';

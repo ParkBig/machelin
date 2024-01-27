@@ -3,8 +3,7 @@ import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import BriefUserInfo from 'components/topTabScreen/myInfoScreen/social/list/common/BriefUserInfo';
 import NoSocial from 'components/topTabScreen/myInfoScreen/social/list/common/NoSocial';
 import useExploreUsersFollowersQuery from 'query/hooks/exploreUsers/useExploreUsersFollowersQuery';
-import { StyleSheet, View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { UseRouter } from 'types/screenType';
 
 export default function UsersFollowerList() {

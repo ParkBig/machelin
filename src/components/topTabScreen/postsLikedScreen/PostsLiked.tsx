@@ -3,9 +3,8 @@ import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { Colors } from 'const/global-styles';
 import usersPostsLikedQuery from 'query/hooks/users/usersPostsLikedQuery';
 import { useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import NoPostsLiked from './NoPostsLiked';
-import { RefreshControl } from 'react-native-gesture-handler';
 import Post from 'components/common/card/post/Post';
 import Line from 'components/common/layout/Line';
 

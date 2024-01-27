@@ -2,8 +2,7 @@ import Line from 'components/common/layout/Line';
 import { Colors } from 'const/global-styles';
 import useUsersPostForMyMapQuery from 'query/hooks/posts/useUsersPostForMyMapQuery';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
-import { StyleSheet, Text, View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import PostHasRestaurant from './PostHasRestaurant';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 

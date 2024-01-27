@@ -1,9 +1,8 @@
 import { useRoute } from '@react-navigation/native';
 import { Colors } from 'const/global-styles';
 import useExploreUsersBookmarksQuery from 'query/hooks/exploreUsers/useExploreUsersBookmarksQuery';
-import { StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { UseRouter } from 'types/screenType';
-import { FlatList } from 'react-native-gesture-handler';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import BriefBookmarkInfo from 'components/topTabScreen/myBookMarkScreen/BriefBookmarkInfo';
 import NoBookmark from './NoBookmark';

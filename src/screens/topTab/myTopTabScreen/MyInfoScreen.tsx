@@ -3,8 +3,7 @@ import Social from 'components/topTabScreen/myInfoScreen/social/Social';
 import { Colors } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useEffect, useRef, useState } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { RefreshControl } from 'react-native-gesture-handler';
+import { RefreshControl, ScrollView, StyleSheet } from 'react-native';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { whichClickedInMyInfoSocialState } from 'store/toggleState';
 
