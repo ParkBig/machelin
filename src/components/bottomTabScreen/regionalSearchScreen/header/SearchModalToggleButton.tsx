@@ -3,8 +3,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet } from 'react-native';
 import { Colors } from 'const/global-styles';
 import { useState } from 'react';
-import RegionalSearchModal from './RegionalSearchModal';
 import SearchState from './SearchState';
+import RegionalSearchModal from './searchModal/RegionalSearchModal';
 
 export default function SearchModalToggleButton() {
   const [toggleModal, setToggleModal] = useState(false);

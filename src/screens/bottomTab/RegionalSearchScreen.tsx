@@ -4,7 +4,7 @@ import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmA
 import { Colors } from 'const/global-styles';
 import { PermissionStatus, getCurrentPositionAsync, requestForegroundPermissionsAsync } from 'expo-location';
 import { useEffect, useState } from 'react';
-import { Platform, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
+import { Platform, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 import { useSetRecoilState } from 'recoil';
 import { myLocationState } from 'store/locationState';
 
@@ -35,24 +35,29 @@ export default function RegionalSearchScreen() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.wrap}>
-      <Header />
-      <Results />
-      <ConfirmAlertModal
-        toggleModal={toggleAlertModal.toggle}
-        setToggleAlertModal={setToggleAlertModal}
-        alertMsg={toggleAlertModal.alertMsg}
-      />
+    <SafeAreaView style={styles.safeAreaView}>
+      <View style={styles.wrap}>
+        <Header />
+        <Results />
+        <ConfirmAlertModal
+          toggleModal={toggleAlertModal.toggle}
+          setToggleAlertModal={setToggleAlertModal}
+          alertMsg={toggleAlertModal.alertMsg}
+        />
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  wrap: {
+  safeAreaView: {
     flex: 1,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-    paddingHorizontal: 10,
     backgroundColor: Colors.mainWhite1,
-    gap: 10,
   },
+  wrap: {
+    flex: 1,
+    paddingHorizontal: 10,
+    gap: 10,
+  }
 });

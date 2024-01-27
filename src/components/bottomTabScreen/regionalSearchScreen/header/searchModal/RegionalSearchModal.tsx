@@ -1,14 +1,13 @@
 import Button from 'components/common/layout/Button';
 import { Colors } from 'const/global-styles';
-import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import Modal from 'react-native-modal';
-import SearchPicker from '../areaPicker/SearchPicker';
-import SearchBar from '../searchBar/SearchBar';
 import { useEffect } from 'react';
 import useUsersSubLocalityQuery from 'query/hooks/users/useUsersSubLocalityQuery';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { regionalRestaurantSearchInputState, regionalSearchState } from 'store/searchState';
+import SearchBar from '../../searchBar/SearchBar';
+import RegionalSelection from './RegionalSelection';
 
 interface Props {
   toggleModal: boolean;
@@ -63,23 +62,15 @@ export default function RegionalSearchModal({ toggleModal, toggleModalHandler }:
     >
       <View style={styles.wrap}>
         <View style={styles.content}>
-          <View style={styles.pickers}>
-            <View style={styles.ionicons}>
-              <Ionicons name="location" size={35} color={Colors.mainGreen2} />
-            </View>
-            <SearchPicker which="city" />
-            <SearchPicker which="district" />
-          </View>
+          <RegionalSelection />
           <SearchBar />
-          <View>
-            <Text style={styles.tipText}>tip. 전체-전체 설정 후 지역 + 키워드 해외검색 가능</Text>
-          </View>
         </View>
-        <View style={styles.buttons}>
-          <Button style={styles.button} onPress={closeModalHandler}>
-            <Text style={styles.buttonText}>완료</Text>
-          </Button>
+        <View>
+          <Text style={styles.tipText}>tip. 전체-전체 설정 후 지역 + 키워드 해외검색 가능</Text>
         </View>
+        <Button style={styles.doneButton} onPress={closeModalHandler}>
+          <Text style={styles.doneButtonText}>완료</Text>
+        </Button>
       </View>
     </Modal>
   );
@@ -103,38 +94,21 @@ const styles = StyleSheet.create({
     width: '100%',
     gap: 20,
   },
-  pickers: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: Colors.mainGreen2,
-    borderRadius: 10,
-  },
-  ionicons: {
-    width: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttons: {
+  doneButton: {
     height: 60,
     width: '100%',
-    flexDirection: 'row',
-    gap: 10,
-  },
-  button: {
-    flex: 1,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.mainGreen2,
+    marginBottom: Platform.OS === 'ios' ? 10 : 0,
+    gap: 10,
   },
-  buttonText: {
+  doneButtonText: {
     fontWeight: 'bold',
     color: Colors.mainWhite3,
   },
   tipText: {
-    color: Colors.darkGray
-  }
+    color: Colors.darkGray,
+  },
 });

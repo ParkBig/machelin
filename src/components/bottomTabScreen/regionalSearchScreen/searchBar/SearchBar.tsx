@@ -29,7 +29,7 @@ export default function SearchBar() {
   return (
     <View style={styles.wrap}>
       <Button onPress={searchHandler} style={styles.searchIcon}>
-        <Ionicons style={styles.ionicons} name='search' size={30} color={Colors.mainGreen2} />
+        <Ionicons name='search' size={30} color={Colors.mainGreen2} />
       </Button>
       <TextInput
         style={styles.searchInput}
@@ -42,7 +42,7 @@ export default function SearchBar() {
         value={regionalRestaurantSearchInput.searchText}
       />
       <Button onPress={deleteHandler} style={styles.searchIcon}>
-        <Ionicons style={styles.ionicons} name="close" size={30} color={Colors.mainGreen2} />
+        <Ionicons name="close" size={30} color={Colors.mainGreen2} />
       </Button>
     </View>
   );
@@ -65,12 +65,6 @@ const styles = StyleSheet.create({
     width: 50,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  ionicons: {
-    width: '100%',
-    height: '100%',
-    textAlign: 'center',
-    textAlignVertical: 'center',
   },
   searchInput: {
     flex: 1,

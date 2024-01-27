@@ -9,10 +9,12 @@ interface MainSearchState {
 interface RegionalRestaurantSearchInputState {
   isTyping: boolean;
   searchText: string;
-  location: {
-    city: SearchName;
-    district: SearchSubName;
-  };
+  location: Location;
+}
+
+export interface Location {
+  city: SearchName;
+  district: SearchSubName;
 }
 
 interface PostSearchInputState {
@@ -63,6 +65,5 @@ export const postSearchInputState = atom<PostSearchInputState>({
 
 export const regionalSearchState = atom<string>({
   key: 'regionalSearchState',
-  default: ''
+  default: '',
 });
-
