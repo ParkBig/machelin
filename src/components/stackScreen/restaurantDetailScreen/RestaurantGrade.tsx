@@ -14,12 +14,12 @@ export default function RestaurantGrade() {
     <View style={styles.grades}>
       <View style={styles.grade}>
         <Ionicons name="logo-google" size={30} color={Colors.mainGreen2} />
-        <Text>{restaurantDetail?.restaurantDetail?.rating ? restaurantDetail?.restaurantDetail?.rating.toFixed(2) : 0} / 5</Text>
+        <Text>{restaurantDetail?.restaurantDetail?.rating ? restaurantDetail?.restaurantDetail?.rating : 0} / 5</Text>
         <Text style={styles.totalText}>({restaurantDetail?.restaurantDetail?.user_ratings_total ? restaurantDetail?.restaurantDetail?.user_ratings_total : 0})</Text>
       </View>
       <View style={styles.grade}>
         <Ionicons name="restaurant" size={30} color={Colors.mainGreen2} />
-        <Text>{restaurantDetail?.machelinRating} / 5 </Text>
+        <Text>{restaurantDetail?.machelinRating.toFixed(2)} / 5 </Text>
         <Text style={styles.totalText}>({restaurantDetail?.machelinTotal})</Text>
       </View>
     </View>
