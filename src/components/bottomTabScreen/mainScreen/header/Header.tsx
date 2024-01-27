@@ -1,4 +1,4 @@
-import { LayoutAnimation, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native';
+import { LayoutAnimation, Platform, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Shadow } from 'const/global-styles';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -7,6 +7,7 @@ import Button from 'components/common/layout/Button';
 import { mainSearchState } from 'store/searchState';
 import { useState } from 'react';
 import { searchRadiusState } from 'store/locationState';
+import { StatusBarHeight } from 'const/dimenstions';
 
 export default function Header() {
   const [textInputValue, setTextInputValue] = useState('');
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     position: 'absolute',
-    top: StatusBar.currentHeight ? StatusBar.currentHeight + 10 : 10,
+    top: StatusBarHeight && Platform.OS === 'android' ? StatusBarHeight + 10 : StatusBarHeight,
     zIndex: 2,
     gap: 10,
   },

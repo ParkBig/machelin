@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: StatusBarHeight && Platform.OS === 'android' ? 10 : StatusBarHeight,
     left: 0,
+    zIndex: 10,
   },
   imageWrap: {
     height: '100%',

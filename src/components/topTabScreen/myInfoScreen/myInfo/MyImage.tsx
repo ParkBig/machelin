@@ -31,7 +31,7 @@ export default function MyImage() {
       }
     },
     onError: () => {
-      setToggleAlertModal({ toggle: true, alertMsg: '서버가 잠시 아픈거 같아요...' });
+      setToggleAlertModal({ toggle: true, alertMsg: '잠시후 다시 시도해주세요' });
     },
   });
 
