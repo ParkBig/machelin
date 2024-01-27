@@ -58,7 +58,7 @@ export default function Header() {
       {!toggleRestaurantSearch && (
         <>
           <View style={styles.logo}>
-            <Ionicons style={styles.ionicons} name="restaurant" size={35} color={Colors.mainWhite3} />
+            <Ionicons name="restaurant" size={35} color={Colors.mainWhite3} />
           </View>
           {mainSearch.mainSearchValue && (
             <View style={styles.mainSearchWrap}>
@@ -68,7 +68,7 @@ export default function Header() {
                 </Text>
               </Button>
               <Button style={styles.initMainSearchButton} onPress={initMainSearchHandler}>
-                <Ionicons style={styles.ionicons} name="close-outline" size={35} color={Colors.mainGreen2} />
+                <Ionicons name="close-outline" size={35} color={Colors.mainGreen2} />
               </Button>
             </View>
           )}
@@ -76,12 +76,7 @@ export default function Header() {
       )}
       <View style={toggleRestaurantSearch ? styles.onSearch : styles.offSearch}>
         <Button onPress={toggleRestaurantSearchHandler} style={styles.searchIcon}>
-          <Ionicons
-            style={styles.ionicons}
-            name={toggleRestaurantSearch ? 'chevron-back' : 'search'}
-            size={30}
-            color={Colors.mainWhite3}
-          />
+          <Ionicons name={toggleRestaurantSearch ? 'chevron-back' : 'search'} size={30} color={Colors.mainWhite3} />
         </Button>
         {toggleRestaurantSearch && (
           <>
@@ -96,7 +91,7 @@ export default function Header() {
               placeholder={`키워드, 식당명을 통해 검색 (${searchRadius}m)`}
             />
             <Button style={styles.initMainSearchButton} onPress={initMainSearchHandler}>
-              <Ionicons style={styles.ionicons} name="close-outline" size={35} color={Colors.mainGreen2} />
+              <Ionicons name="close-outline" size={35} color={Colors.mainGreen2} />
             </Button>
           </>
         )}
@@ -125,12 +120,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: Colors.mainGreen2,
     ...Shadow,
-  },
-  ionicons: {
-    width: '100%',
-    height: '100%',
-    textAlign: 'center',
-    textAlignVertical: 'center',
   },
   mainSearchWrap: {
     flex: 1,

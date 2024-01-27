@@ -39,7 +39,6 @@ export default function FunctionsBar() {
       <View style={{ flexDirection: 'row', gap: 10 }}>
         <Button style={styles.button} onPress={changeWhichOneClickedStateHandler.bind(null, 'stamps')}>
           <Ionicons
-            style={styles.ionicons}
             name={clickedMyMapListType === 'stamps' ? 'paw' : 'paw-outline'}
             size={25}
             color={Colors.mainWhite3}
@@ -48,7 +47,6 @@ export default function FunctionsBar() {
         </Button>
         <Button style={styles.button} onPress={changeWhichOneClickedStateHandler.bind(null, 'bookmarks')}>
           <Ionicons
-            style={styles.ionicons}
             name={clickedMyMapListType === 'bookmarks' ? 'bookmarks' : 'bookmarks-outline'}
             size={25}
             color={Colors.mainWhite3}
@@ -57,7 +55,6 @@ export default function FunctionsBar() {
         </Button>
         <Button style={styles.button} onPress={changeWhichOneClickedStateHandler.bind(null, 'posts')}>
           <Ionicons
-            style={styles.ionicons}
             name={clickedMyMapListType === 'posts' ? 'reader' : 'reader-outline'}
             size={25}
             color={Colors.mainWhite3}
@@ -87,12 +84,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     backgroundColor: Colors.mainGreen2,
-  },
-  ionicons: {
-    width: 25,
-    height: 25,
-    textAlign: 'center',
-    textAlignVertical: 'center',
   },
   text: {
     fontSize: Size.smallBig,

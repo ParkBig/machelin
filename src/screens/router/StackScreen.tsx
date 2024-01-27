@@ -36,7 +36,7 @@ export default function StackScreen() {
         },
       }}
     >
-      <RootStack.Screen name="BottomTabScreen" component={BottomTabScreen} options={{ headerShown: false }} />
+      <RootStack.Screen name="BottomTabScreen" component={BottomTabScreen} options={{ headerShown: false, title: '' }} />
       <RootStack.Screen
         name="NeighborHoodPostsTopTabScreen"
         component={NeighborHoodPostsTopTabScreen}

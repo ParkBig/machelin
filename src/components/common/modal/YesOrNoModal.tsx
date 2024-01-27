@@ -55,7 +55,7 @@ export default function YesOrNoModal({ toggleModal, alertMsg, setToggleAlertModa
 const styles = StyleSheet.create({
   modal: {
     margin: 0,
-    marginBottom: 60,
+    marginBottom: 100,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },

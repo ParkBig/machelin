@@ -42,7 +42,7 @@ export default function ConfirmAlertModal({ toggleModal, setToggleAlertModal, al
 const styles = StyleSheet.create({
   modal: {
     margin: 0,
-    marginBottom: 60,
+    marginBottom: 100,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },

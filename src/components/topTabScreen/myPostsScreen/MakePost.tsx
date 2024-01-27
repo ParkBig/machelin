@@ -4,7 +4,7 @@ import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmA
 import { Colors } from 'const/global-styles';
 import { PermissionStatus, requestForegroundPermissionsAsync } from 'expo-location';
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { UseNavigation } from 'types/screenType';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -27,7 +27,7 @@ export default function MakePost() {
   return (
     <View style={styles.wrap}>
       <Button style={styles.button} onPress={goToMakePostHandler}>
-        <Ionicons style={styles.ionicons} name='reader' size={35} color={Colors.mainWhite3} />
+        <Ionicons name='reader' size={35} color={Colors.mainWhite3} />
       </Button>
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}
@@ -57,11 +57,5 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.mainGreen2,
     position: 'absolute',
     right: 20,
-  },
-  ionicons: {
-    width: '100%',
-    height: '100%',
-    textAlign: 'center',
-    textAlignVertical: 'center',
   },
 });

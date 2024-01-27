@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import Button from 'components/common/layout/Button';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
-import Line from 'components/common/layout/Line';
 import { Colors, Shadow } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useEffect, useState } from 'react';
@@ -68,7 +67,6 @@ export default function WithdrawalModal({ toggleWithdrawalModal, setToggleWithdr
           <Button style={styles.button} onPress={setToggleWithdrawalModal}>
             <Text style={styles.text}>아니요</Text>
           </Button>
-          <Line style={styles.line} />
           <Button style={styles.button} onPress={withdrawHandler}>
             <Text style={styles.text}>예</Text>
           </Button>
@@ -87,25 +85,23 @@ export default function WithdrawalModal({ toggleWithdrawalModal, setToggleWithdr
 const styles = StyleSheet.create({
   modal: {
     margin: 0,
-    marginBottom: 15,
     paddingHorizontal: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
   wrap: {
-    width: '100%',
+    width: '90%',
     padding: 15,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    borderColor: Colors.mainGreen1,
-    borderWidth: 2,
     ...Shadow,
     backgroundColor: Colors.mainWhite1,
   },
   title: {
     width: '100%',
-    alignItems: 'flex-start',
+    alignItems: 'center',
+    paddingVertical: 10,
     gap: 5,
   },
   buttons: {
@@ -118,11 +114,6 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  line: {
-    height: '50%',
-    width: 3,
-    backgroundColor: Colors.lightGray,
   },
   text: {
     fontWeight: 'bold',

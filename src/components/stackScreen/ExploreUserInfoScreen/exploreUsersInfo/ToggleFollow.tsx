@@ -75,11 +75,9 @@ const styles = StyleSheet.create({
   wrap: {
     justifyContent: 'center',
     alignItems: 'flex-start',
-    paddingVertical: 10,
   },
   button: {
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    padding: 10,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

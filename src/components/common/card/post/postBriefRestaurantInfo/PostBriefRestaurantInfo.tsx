@@ -38,7 +38,7 @@ export default function PostBriefRestaurantInfo({ posts }: Props) {
       ) : (
         <View style={styles.wrap}>
           <View style={styles.ratingNIcon}>
-            <Ionicons style={styles.ionicons} size={25} name="star" color="yellow" />
+            <Ionicons size={25} name="star" color="yellow" />
             <View style={styles.rating}>
               <Text style={styles.ratingText}>{posts.rating} / 5</Text>
             </View>
@@ -74,14 +74,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 5,
-  },
-  ionicons: {
-    width: 35,
-    height: 35,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    borderRadius: 10,
-    backgroundColor: Colors.mainGreen2,
   },
   rating: {
     justifyContent: 'center',

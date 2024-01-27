@@ -1,5 +1,5 @@
-import { Colors, Size } from 'const/global-styles';
-import { Platform, StatusBar } from 'react-native';
+import { StatusBarHeight } from 'const/dimenstions';
+import { Colors } from 'const/global-styles';
 import NoticePostsScreen from 'screens/topTab/neighborHoodPostsTopTabScreen/NoticePostsScreen';
 import PostsLikedScreen from 'screens/topTab/neighborHoodPostsTopTabScreen/PostsLikedScreen';
 import PostsSearchScreen from 'screens/topTab/neighborHoodPostsTopTabScreen/PostsSearchScreen';
@@ -9,7 +9,7 @@ export default function NeighborHoodPostsTopTabScreen() {
   return (
     <RootTobTab.Navigator
       style={{
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        paddingTop: StatusBarHeight,
         backgroundColor: Colors.mainGreen2,
       }}
       screenOptions={{

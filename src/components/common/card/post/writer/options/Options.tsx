@@ -2,7 +2,6 @@ import { Ionicons } from '@expo/vector-icons';
 import Button from 'components/common/layout/Button';
 import { Colors } from 'const/global-styles';
 import { useState } from 'react';
-import { StyleSheet } from 'react-native';
 import OptionsModals from './optionsModals/OptionsModals';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
@@ -14,7 +13,7 @@ interface Props {
 }
 
 export default function Options({ postId, ownerId, isPublic }: Props) {
-  const { myInfo } = useMyInfoQuery()
+  const { myInfo } = useMyInfoQuery();
   const [toggleReportModal, setToggleReportModal] = useState(false);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
@@ -30,7 +29,7 @@ export default function Options({ postId, ownerId, isPublic }: Props) {
   return (
     <>
       <Button onPress={toggleReportModalHandler}>
-        <Ionicons style={styles.ionicons} name="ellipsis-vertical" size={20} color={Colors.gray} />
+        <Ionicons name="ellipsis-vertical" size={20} color={Colors.gray} />
       </Button>
       <OptionsModals
         postId={postId}
@@ -47,11 +46,3 @@ export default function Options({ postId, ownerId, isPublic }: Props) {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  ionicons: {
-    paddingLeft: 5,
-    textAlign: 'right',
-    textAlignVertical: 'center',
-  },
-});

@@ -40,7 +40,7 @@ export default function ToMyLocation() {
   return (
     <>
       <Button style={styles.button} onPress={toMyLocationHandler}>
-        <Ionicons style={styles.ionicons} name="location" size={30} color={Colors.mainWhite3} />
+        <Ionicons name="location" size={30} color={Colors.mainWhite3} />
       </Button>
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}
@@ -60,11 +60,5 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.mainGreen2,
     borderRadius: 25,
     ...Shadow,
-  },
-  ionicons: {
-    width: '100%',
-    height: '100%',
-    textAlign: 'center',
-    textAlignVertical: 'center',
   },
 });
