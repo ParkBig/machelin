@@ -1,13 +1,24 @@
 import { MediaLibraryPermissionResponse, PermissionStatus as ImagePermissionStatus } from 'expo-image-picker';
 import { PermissionStatus as LocationPermissionsStatus, LocationPermissionResponse } from 'expo-location';
 import { CameraPermissionResponse, PermissionStatus as CameraPermissionsStatus } from 'expo-image-picker';
-import { Alert, Linking, Platform } from 'react-native';
+import messaging from '@react-native-firebase/messaging';
+import { Linking, Platform } from 'react-native';
 
 const openAppSettings = () => {
   if (Platform.OS === 'ios') {
     Linking.openURL('app-settings:');
   } else {
     Linking.openSettings();
+  }
+};
+
+export const verifyMessagingPermissions = async () => {
+  const authStatus = await messaging().requestPermission();
+  const enabled =
+    authStatus === messaging.AuthorizationStatus.AUTHORIZED || authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+  if (enabled) {
+    console.log('Authorization status:', authStatus);
   }
 };
 

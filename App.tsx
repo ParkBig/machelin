@@ -4,10 +4,11 @@ import Router from 'screens/router/Router';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useForegroundPermissions } from 'expo-location';
 import { useEffect } from 'react';
-import { verifyLocationPermissions, verifyMediaLibraryPermissions } from 'util/accessRight';
+import { verifyLocationPermissions, verifyMediaLibraryPermissions, verifyMessagingPermissions } from 'util/accessRight';
 import { useMediaLibraryPermissions } from 'expo-image-picker';
 import { Alert } from 'react-native';
 import { createAxiosInstance } from 'query/api/api';
+import messaging from '@react-native-firebase/messaging';
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,21 @@ export default function App() {
       await verifyMediaLibraryPermissions(mediaLibraryPermissionInfo, reqMediaLibraryPermission);
     })();
   }, [locationPermissionInformation, requestPermission, mediaLibraryPermissionInfo, reqMediaLibraryPermission]);
+
+  // const requestUserPermission = async () => {
+  //   const authStatus = await messaging().requestPermission();
+  //   const enabled =
+  //     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+  //     authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+  //   if (enabled) {
+  //     console.log("Authorization status:", authStatus);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   requestUserPermission();
+  // }, [])
 
   return (
     <QueryClientProvider client={queryClient}>
