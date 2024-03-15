@@ -59,7 +59,7 @@ export default function NeighborhoodPosts() {
           <Text>인터넷 연결이 불안정합니다</Text>
         </View>
       )}
-      {(mySubLocalityIsLoading || neighborhoodPostsIsLoading || isReNeighborhoodPosts) && <LoadingOverlay style={styles.defaultLoading} />}
+      {(mySubLocalityIsLoading || neighborhoodPostsIsLoading || (!isFetchingNextPage && isReNeighborhoodPosts)) && <LoadingOverlay style={styles.defaultLoading} />}
       {isFetchingNextPage && <LoadingOverlay style={styles.moreDataLoading} />}
     </View>
   );

@@ -9,7 +9,7 @@ import useUsersPostsQuery from 'query/hooks/users/useUsersPostsQuery';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { useMutation, useQueryClient } from 'react-query';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { myLocationState } from 'store/locationState';
 import { makePostState } from 'store/makePostState';
 import { GooglePlace } from 'types/types';
@@ -29,7 +29,7 @@ export default function MakePostButton({ restaurantInfo }: Props) {
   const { mySubLocality, reMySubLocality } = useUsersSubLocalityQuery();
   const { rePosts } = useUsersPostsQuery();
   const makePostInfo = useRecoilValue(makePostState);
-  const [myLocation, setMyLocation] = useRecoilState(myLocationState);
+  const setMyLocation = useSetRecoilState(myLocationState)
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
   const { mutate, isLoading } = useMutation(makePostQuery, {
