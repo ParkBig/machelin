@@ -17,9 +17,9 @@ interface Props {
 export default function ToggleFollow({ exploreUserId }: Props) {
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const { myInfo, reMyInfo } = useMyInfoQuery();
-  const { follows, reFollows, isReFollows } = useUsersFollowsQuery();
+  const { follows, reFollows } = useUsersFollowsQuery();
 
-  const { mutate } = useMutation(toggleFriendStateQuery, {
+  const { mutate, isLoading } = useMutation(toggleFriendStateQuery, {
     onSuccess: res => {
       if (res.ok) {
         reMyInfo();
@@ -53,7 +53,7 @@ export default function ToggleFollow({ exploreUserId }: Props) {
   return (
     <>
       <View style={styles.wrap}>
-        {isReFollows ? (
+        {isLoading ? (
           <LoadingOverlay style={styles.loadingOverlay} />
         ) : (
           <Button style={styles.button} onPress={toggleFriendStateQueryHandler}>
