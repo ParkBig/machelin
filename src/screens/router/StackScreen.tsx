@@ -47,7 +47,7 @@ export default function StackScreen() {
         component={MakePostScreen}
         options={({ route }) => ({
           title: '기록하기',
-          headerRight: () => <MakePostButton restaurantInfo={route.params.restaurantInfo} />,
+          headerRight: () => <MakePostButton restaurantInfo={route.params.restaurantInfo} prevScreen={route.params.prevScreen} />,
         })}
       />
       <RootStack.Screen

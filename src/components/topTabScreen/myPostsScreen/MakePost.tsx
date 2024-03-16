@@ -21,13 +21,14 @@ export default function MakePost() {
 
     navigate('MakePostScreen', {
       restaurantInfo: null,
+      prevScreen: 'MyPostsScreen',
     });
   };
 
   return (
     <View style={styles.wrap}>
       <Button style={styles.button} onPress={goToMakePostHandler}>
-        <Ionicons name='reader' size={35} color={Colors.mainWhite3} />
+        <Ionicons name="reader" size={35} color={Colors.mainWhite3} />
       </Button>
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}

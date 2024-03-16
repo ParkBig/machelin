@@ -50,6 +50,7 @@ export type RootStackParamList = {
   };
   MakePostScreen: {
     restaurantInfo: GooglePlace | null;
+    prevScreen: 'NeighborhoodPostsScreen' | 'RestaurantDetailScreen' | 'MyPostsScreen' | 'FindRestaurantInfoScreen';
   };
   RestaurantDetailScreen: {
     restaurantName: string;
@@ -106,6 +107,7 @@ export type AllParmList = {
   };
   MakePostScreen: {
     restaurantInfo: GooglePlace | null;
+    prevScreen: 'NeighborhoodPostsScreen' | 'RestaurantDetailScreen' | 'MyPostsScreen' | 'FindRestaurantInfoScreen';
   };
   RestaurantDetailScreen: {
     restaurantName: string;

@@ -22,6 +22,7 @@ export default function BriefRestaurantInfoForTag({ restaurantInfo }: Props) {
   const onPressHandler = () => {
     navigate('MakePostScreen', {
       restaurantInfo: restaurantInfo,
+      prevScreen: 'FindRestaurantInfoScreen',
     });
   };
 

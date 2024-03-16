@@ -21,6 +21,7 @@ export default function Options() {
 
     navigate('MakePostScreen', {
       restaurantInfo: null,
+      prevScreen: 'NeighborhoodPostsScreen',
     });
   };
 

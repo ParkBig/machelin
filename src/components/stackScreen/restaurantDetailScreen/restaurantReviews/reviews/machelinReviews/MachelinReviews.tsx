@@ -41,6 +41,7 @@ export default function MachelinReviews() {
 
     navigate('MakePostScreen', {
       restaurantInfo: restaurantDetail?.restaurantDetail,
+      prevScreen: 'RestaurantDetailScreen',
     });
   };
 

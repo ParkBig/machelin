@@ -9,7 +9,7 @@ import useUsersPostsQuery from 'query/hooks/users/useUsersPostsQuery';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { useMutation, useQueryClient } from 'react-query';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { myLocationState } from 'store/locationState';
 import { makePostState } from 'store/makePostState';
 import { GooglePlace } from 'types/types';
@@ -20,25 +20,28 @@ import useUsersSubLocalityQuery from 'query/hooks/users/useUsersSubLocalityQuery
 
 interface Props {
   restaurantInfo: GooglePlace | null;
+  prevScreen: 'NeighborhoodPostsScreen' | 'RestaurantDetailScreen' | 'MyPostsScreen' | 'FindRestaurantInfoScreen';
 }
 
-export default function MakePostButton({ restaurantInfo }: Props) {
+export default function MakePostButton({ restaurantInfo, prevScreen }: Props) {
   const { goBack } = useNavigation<UseNavigation<'MakePostScreen'>>();
   const queryClient = useQueryClient();
   const { myInfo, reMyInfo } = useMyInfoQuery();
   const { mySubLocality, reMySubLocality } = useUsersSubLocalityQuery();
   const { rePosts } = useUsersPostsQuery();
   const makePostInfo = useRecoilValue(makePostState);
-  const setMyLocation = useSetRecoilState(myLocationState)
+  const setMyLocation = useSetRecoilState(myLocationState);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
   const { mutate, isLoading } = useMutation(makePostQuery, {
     onSuccess: res => {
       if (res.ok) {
         reMyInfo();
-        rePosts();
-        queryClient.invalidateQueries('neighborhoodPosts');
-        if (restaurantInfo?.place_id) {
+        if (prevScreen === 'MyPostsScreen') {
+          rePosts();
+        } else if (prevScreen === 'NeighborhoodPostsScreen') {
+          queryClient.invalidateQueries('neighborhoodPosts');
+        } else if (prevScreen === 'RestaurantDetailScreen') {
           queryClient.invalidateQueries('restaurantPosts');
         }
         goBack();
