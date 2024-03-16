@@ -6,7 +6,7 @@ config();
 const expoConfig: ExpoConfig = {
   name: '마슐랭',
   slug: 'machelin',
-  version: '1.0.405',
+  version: '1.0.406',
   orientation: 'portrait',
   icon: './src/assets/icon.png',
   userInterfaceStyle: 'light',
@@ -17,7 +17,7 @@ const expoConfig: ExpoConfig = {
   },
   assetBundlePatterns: ['**/*'],
   ios: {
-    buildNumber: '1.0.405',
+    buildNumber: '1.0.406',
     supportsTablet: true,
     bundleIdentifier: 'com.parkbig.machelin',
     config: {
@@ -25,7 +25,7 @@ const expoConfig: ExpoConfig = {
     },
   },
   android: {
-    versionCode: 23,
+    versionCode: 24,
     adaptiveIcon: {
       foregroundImage: './src/assets/adaptive-icon.png',
       backgroundColor: '#ffffff',
@@ -37,13 +37,11 @@ const expoConfig: ExpoConfig = {
       },
     },
     package: 'com.parkbig.machelin',
-    googleServicesFile: './google-services.json',
   },
   web: {
     favicon: './src/assets/favicon.png',
   },
   plugins: [
-    '@react-native-firebase/app',
     [
       'expo-image-picker',
       {
