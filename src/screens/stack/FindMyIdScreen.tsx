@@ -74,12 +74,16 @@ export default function FindMyIdScreen() {
             placeholder="(-) 없이 입력해주세요."
             keyboardType="phone-pad"
           />
-          {isEditable && isLoading ? (
+          {isLoading ? (
             <LoadingOverlay style={styles.button} />
-          ) : (
+          ) : isEditable ? (
             <Button style={styles.button} onPress={onPressHandler.bind(null, true)}>
               <Text style={styles.buttonText}>인증번호 발송</Text>
             </Button>
+          ) : (
+            <View style={styles.sendDone}>
+              <Text style={styles.sendDoneText}>인증번호를 입력해주세요</Text>
+            </View>
           )}
         </View>
         {!isEditable && (
@@ -140,5 +144,16 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: Size.normalMiddle,
     color: Colors.mainWhite3,
+  },
+  sendDone: {
+    width: '100%',
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  sendDoneText: {
+    fontSize: Size.normalMiddle,
+    color: Colors.mainGreen2,
+    fontWeight: 'bold',
   },
 });
