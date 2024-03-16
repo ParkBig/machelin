@@ -8,21 +8,24 @@ import { verifyLocationPermissions, verifyMediaLibraryPermissions, verifyMessagi
 import { useMediaLibraryPermissions } from 'expo-image-picker';
 import { Alert } from 'react-native';
 import { createAxiosInstance } from 'query/api/api';
-import messaging from '@react-native-firebase/messaging';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 const queryClient = new QueryClient();
 
 export default function App() {
+  const netInfo = useNetInfo();
   const [locationPermissionInformation, requestPermission] = useForegroundPermissions();
   const [mediaLibraryPermissionInfo, reqMediaLibraryPermission] = useMediaLibraryPermissions();
 
   useEffect(() => {
     const versionCheck = async () => {
-      const axiosVersions = createAxiosInstance('versions');
-      const { data } = await axiosVersions.get('');
-
-      if (data.machelinCurrentVersion !== '1.0.404') {
-        Alert.alert('업데이트 알림', '원활한 사용을 위해 업데이트 해주세요');
+      if (netInfo.isConnected) {
+        const axiosVersions = createAxiosInstance('versions');
+        const { data } = await axiosVersions.get('');
+  
+        if (data.machelinCurrentVersion !== '1.0.404') {
+          Alert.alert('업데이트 알림', '원활한 사용을 위해 업데이트 해주세요');
+        }
       }
     };
 
