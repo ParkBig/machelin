@@ -1,4 +1,5 @@
 import MyInfo from 'components/topTabScreen/myInfoScreen/myInfo/MyInfo';
+import PleaseVerifyModal from 'components/topTabScreen/myInfoScreen/pleaseVerifyModal/PleaseVerifyModal';
 import Social from 'components/topTabScreen/myInfoScreen/social/Social';
 import { Colors } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
@@ -34,6 +35,7 @@ export default function MyInfoScreen() {
       showsVerticalScrollIndicator={false}
       style={styles.wrap}
     >
+      <PleaseVerifyModal />
       <MyInfo />
       <Social />
     </ScrollView>
