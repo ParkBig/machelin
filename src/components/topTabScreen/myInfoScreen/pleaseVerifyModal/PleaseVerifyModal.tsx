@@ -26,7 +26,6 @@ export default function PleaseVerifyModal() {
       isVisible={toggleModal}
       onSwipeComplete={closeModalHandler}
       onBackButtonPress={closeModalHandler}
-      onBackdropPress={closeModalHandler}
       swipeDirection={['down']}
       useNativeDriverForBackdrop
     >
@@ -45,7 +44,7 @@ export default function PleaseVerifyModal() {
 const styles = StyleSheet.create({
   modal: {
     margin: 0,
-    marginBottom: 50,
+    marginBottom: 100,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
