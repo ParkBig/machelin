@@ -76,7 +76,7 @@ export default function StackScreen() {
         name="MobileVerificationScreen"
         component={MobileVerificationScreen}
         options={{
-          headerShown: false,
+          title: '전화번호 인증하기'
         }}
       />
       <RootStack.Screen
