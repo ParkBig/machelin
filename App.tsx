@@ -4,34 +4,16 @@ import Router from 'screens/router/Router';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useForegroundPermissions } from 'expo-location';
 import { useEffect } from 'react';
-import { verifyLocationPermissions, verifyMediaLibraryPermissions, verifyMessagingPermissions } from 'util/accessRight';
+import { verifyLocationPermissions, verifyMediaLibraryPermissions } from 'util/accessRight';
 import { useMediaLibraryPermissions } from 'expo-image-picker';
-import { Alert } from 'react-native';
-import { createAxiosInstance } from 'query/api/api';
-import { useNetInfo } from '@react-native-community/netinfo';
 import { initTokenDB } from 'util/tokenDB';
+import VersionCheckModal from 'components/app/VersionCheckModal';
 
 const queryClient = new QueryClient();
 
 export default function App() {
-  const netInfo = useNetInfo();
   const [locationPermissionInformation, requestPermission] = useForegroundPermissions();
   const [mediaLibraryPermissionInfo, reqMediaLibraryPermission] = useMediaLibraryPermissions();
-
-  useEffect(() => {
-    const versionCheck = async () => {
-      if (netInfo.isConnected) {
-        const axiosVersions = createAxiosInstance('versions');
-        const { data } = await axiosVersions.get('');
-  
-        if (data.machelinCurrentVersion !== '25') {
-          Alert.alert('업데이트 알림', '원활한 사용을 위해 업데이트 해주세요');
-        }
-      }
-    };
-
-    versionCheck();
-  }, []);
 
   useEffect(() => {
     (async () => {
@@ -41,7 +23,7 @@ export default function App() {
   }, [locationPermissionInformation, requestPermission, mediaLibraryPermissionInfo, reqMediaLibraryPermission]);
 
   useEffect(() => {
-    initTokenDB()
+    initTokenDB();
   }, []);
 
   return (
@@ -49,6 +31,7 @@ export default function App() {
       <RecoilRoot>
         <StatusBar style="light" />
         <Router />
+        <VersionCheckModal />
       </RecoilRoot>
     </QueryClientProvider>
   );
