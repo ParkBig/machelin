@@ -9,6 +9,7 @@ import { useMediaLibraryPermissions } from 'expo-image-picker';
 import { Alert } from 'react-native';
 import { createAxiosInstance } from 'query/api/api';
 import { useNetInfo } from '@react-native-community/netinfo';
+import { initTokenDB } from 'util/tokenDB';
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,10 @@ export default function App() {
       await verifyMediaLibraryPermissions(mediaLibraryPermissionInfo, reqMediaLibraryPermission);
     })();
   }, [locationPermissionInformation, requestPermission, mediaLibraryPermissionInfo, reqMediaLibraryPermission]);
+
+  useEffect(() => {
+    initTokenDB()
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
