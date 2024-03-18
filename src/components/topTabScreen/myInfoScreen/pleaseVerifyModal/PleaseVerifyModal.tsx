@@ -4,13 +4,17 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Colors, Shadow, Size } from 'const/global-styles';
 import { useEffect, useState } from 'react';
 import Button from 'components/common/layout/Button';
+import { useNavigation } from '@react-navigation/native';
+import { UseNavigation } from 'types/screenType';
 
 export default function PleaseVerifyModal() {
   const { myInfo } = useMyInfoQuery();
   const [toggleModal, setToggleModal] = useState(false);
+  const { navigate } = useNavigation<UseNavigation<'MyInfoScreen'>>();
 
   const closeModalHandler = () => {
     setToggleModal(false);
+    navigate('MobileVerificationScreen');
   };
 
   useEffect(() => {
