@@ -12,9 +12,11 @@ import { makePostState } from 'store/makePostState';
 import { Colors, Size } from 'const/global-styles';
 import { useState } from 'react';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
+import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 
 export default function GetImg() {
   const setMakePostInfo = useSetRecoilState(makePostState);
+  const [isImagesLoading, setIsImagesLoading] = useState(false);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
   const addPhotosHandler = async () => {
@@ -24,6 +26,7 @@ export default function GetImg() {
       return;
     }
 
+    setIsImagesLoading(true);
     const result = await launchImageLibraryAsync({
       mediaTypes: MediaTypeOptions.Images,
       allowsMultipleSelection: true,
@@ -41,6 +44,8 @@ export default function GetImg() {
       const getImages = result.assets.map(asset => asset.uri);
       setMakePostInfo(prev => ({ ...prev, images: [...prev.images, ...getImages] }));
     }
+
+    setIsImagesLoading(false);
   };
 
   return (
@@ -48,12 +53,16 @@ export default function GetImg() {
       <View style={styles.wrap}>
         <View style={styles.textWrap}>
           <Ionicons name="images-outline" size={35} />
-          <Text>남겨볼까요?</Text>
+          {isImagesLoading ? <Text>로딩중...</Text> : <Text>남겨볼까요?</Text>}
         </View>
-        <Button style={styles.button} onPress={addPhotosHandler}>
-          <Text style={styles.buttonText}>사진추가하기</Text>
-          <Ionicons name="chevron-forward" size={25} color={Colors.darkGray} />
-        </Button>
+        {isImagesLoading ? (
+          <LoadingOverlay style={styles.loadingOverlay} size={40} color={Colors.mainGreen3} />
+        ) : (
+          <Button style={styles.button} onPress={addPhotosHandler}>
+            <Text style={styles.buttonText}>사진추가하기</Text>
+            <Ionicons name="chevron-forward" size={25} color={Colors.darkGray} />
+          </Button>
+        )}
       </View>
       <ConfirmAlertModal
         toggleModal={toggleAlertModal.toggle}
@@ -87,5 +96,11 @@ const styles = StyleSheet.create({
   buttonText: {
     color: Colors.darkGray,
     fontSize: Size.normalMiddle,
+  },
+  loadingOverlay: {
+    height: 100,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
