@@ -15,16 +15,16 @@ export default function Title() {
     whichClickedInMyInfoSocial === 'follow'
       ? 'follow'
       : whichClickedInMyInfoSocial === 'follower'
-      ? 'follower'
-      : whichClickedInMyInfoSocial === 'search'
-      ? 'search'
-      : null;
+        ? 'follower'
+        : whichClickedInMyInfoSocial === 'search'
+          ? 'search'
+          : null;
 
   const setWhichClickedInMyInfoSocialHandler = (which: WhichClickedInMyInfoSocialState) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     if (whichClickedInMyInfoSocial === which) {
       if (which === 'search') {
-        setSearchNickName({ isTyping: false, searchText: '' })
+        setSearchNickName({ isTyping: false, searchText: '' });
       }
 
       setWhichClickedInMyInfoSocial(null);
@@ -37,11 +37,17 @@ export default function Title() {
     <View style={styles.wrap}>
       {whichClicked !== 'search' && (
         <>
-          <Button style={styles.button} onPress={setWhichClickedInMyInfoSocialHandler.bind(null, 'follow')}>
-            <Text style={[styles.buttonText, whichClicked === 'follow' && { fontSize: Size.bigSmall }]}>팔로우</Text>
+          <Button
+            style={whichClicked === 'follow' ? styles.clickedButton : styles.button}
+            onPress={setWhichClickedInMyInfoSocialHandler.bind(null, 'follow')}
+          >
+            <Text style={styles.buttonText}>팔로우</Text>
           </Button>
-          <Button style={styles.button} onPress={setWhichClickedInMyInfoSocialHandler.bind(null, 'follower')}>
-            <Text style={[styles.buttonText, whichClicked === 'follower' && { fontSize: Size.bigSmall }]}>팔로워</Text>
+          <Button
+            style={whichClicked === 'follower' ? styles.clickedButton : styles.button}
+            onPress={setWhichClickedInMyInfoSocialHandler.bind(null, 'follower')}
+          >
+            <Text style={styles.buttonText}>팔로워</Text>
           </Button>
         </>
       )}
@@ -65,6 +71,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  clickedButton: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(214, 226, 250, 0.5)',
+    borderRadius: 10,
   },
   buttonText: {
     color: Colors.mainWhite3,
