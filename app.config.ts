@@ -6,7 +6,7 @@ config();
 const expoConfig: ExpoConfig = {
   name: '마슐랭',
   slug: 'machelin',
-  version: '1.0.406',
+  version: '1.0.407',
   orientation: 'portrait',
   icon: './src/assets/icon.png',
   userInterfaceStyle: 'light',
@@ -17,7 +17,7 @@ const expoConfig: ExpoConfig = {
   },
   assetBundlePatterns: ['**/*'],
   ios: {
-    buildNumber: '1.0.406',
+    buildNumber: '1.0.407',
     supportsTablet: true,
     bundleIdentifier: 'com.parkbig.machelin',
     config: {
@@ -25,7 +25,7 @@ const expoConfig: ExpoConfig = {
     },
   },
   android: {
-    versionCode: 24,
+    versionCode: 25,
     adaptiveIcon: {
       foregroundImage: './src/assets/adaptive-icon.png',
       backgroundColor: '#ffffff',

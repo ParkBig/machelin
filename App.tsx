@@ -24,7 +24,7 @@ export default function App() {
         const axiosVersions = createAxiosInstance('versions');
         const { data } = await axiosVersions.get('');
   
-        if (data.machelinCurrentVersion !== '1.0.406') {
+        if (data.machelinCurrentVersion !== '25') {
           Alert.alert('업데이트 알림', '원활한 사용을 위해 업데이트 해주세요');
         }
       }
