@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Size } from 'const/global-styles';
-import trimMySubLocality from 'util/ trimMySubLocality';
+import trimMySubLocality from 'util/trimMySubLocality';
 
 interface Props {
   postType: 'ALL_NOTICE' | 'LOCAL_NOTICE';
