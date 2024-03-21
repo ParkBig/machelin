@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import MapView, { MapPressEvent, PROVIDER_GOOGLE } from 'react-native-maps';
 import { useRecoilValue } from 'recoil';
-import { focusedRestaurantState, mapLocationState, myLocationState } from 'store/locationState';
+import { focusedRestaurantState, mapLocationState } from 'store/locationState';
 import { StyleSheet, View } from 'react-native';
 import MapLoadFail from './MapLoadFail';
 import { Colors } from 'const/global-styles';

@@ -1,4 +1,4 @@
-import { Colors, Shadow } from 'const/global-styles';
+import { Colors } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { Image, StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
@@ -15,12 +15,12 @@ export default function MyLocationPing() {
     <>
       {myLocation.isGetLocation && (
         <Marker
+          style={styles.wrap}
           tracksViewChanges={true}
           coordinate={{ latitude: myLocation.latitude, longitude: myLocation.longitude }}
-          pinColor="default"
-          title="내위치"
+          title={myInfo?.authUser?.nickname ? myInfo.authUser.nickname : '내위치'}
         >
-          <View style={styles.wrap}>
+          <View style={styles.imageWrap}>
             <Image source={imageSource} style={styles.image} resizeMode="cover" />
           </View>
         </Marker>
@@ -31,13 +31,16 @@ export default function MyLocationPing() {
 
 const styles = StyleSheet.create({
   wrap: {
-    height: 40,
-    width: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageWrap: {
+    height: 45,
+    width: 45,
     borderWidth: 1,
     borderColor: Colors.mainGreen2,
-    borderRadius: 20,
+    borderRadius: 22.5,
     overflow: 'hidden',
-    ...Shadow,
   },
   image: {
     width: '100%',
