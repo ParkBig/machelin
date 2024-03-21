@@ -40,3 +40,8 @@ export const whichClickedInMyInfoSocialState = atom<WhichClickedInMyInfoSocialSt
   key: 'whichClickedInMyInfoSocialState',
   default: null,
 });
+
+export const toggleNearbySearchState = atom({
+  key: 'toggleNearbySearchState',
+  default: false,
+});
