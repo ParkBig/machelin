@@ -1,8 +1,8 @@
-import { LayoutAnimation, Platform, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native';
+import { LayoutAnimation, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Shadow } from 'const/global-styles';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { mainScreenTogglesState } from 'store/toggleState';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { mainScreenTogglesState, toggleNearbySearchState } from 'store/toggleState';
 import Button from 'components/common/layout/Button';
 import { mainSearchState } from 'store/searchState';
 import { useState } from 'react';
@@ -15,6 +15,7 @@ export default function Header() {
   const searchRadius = useRecoilValue(searchRadiusState);
   const [{ toggleRestaurantSearch, toggleRestaurantList }, setMainScreenToggles] =
     useRecoilState(mainScreenTogglesState);
+  const setToggleNearbySearch = useSetRecoilState(toggleNearbySearchState);
 
   const initMainSearchHandler = () => {
     setTextInputValue('');
@@ -46,6 +47,10 @@ export default function Header() {
   const onSubmitEditingHandler = () => {
     setMainScreenToggles(prev => ({ ...prev, toggleRestaurantSearch: !prev.toggleRestaurantSearch }));
     setMainSearch({ isTyping: false, mainSearchValue: textInputValue });
+    
+    if (textInputValue.length > 0) {
+      setToggleNearbySearch(true);
+    }
   };
 
   const onFocusHandler = () => {
