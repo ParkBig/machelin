@@ -1,14 +1,13 @@
 import { StyleSheet, View } from 'react-native';
-import InstanceInfo from './InstanceInfo';
-import FunctionButtons from './functionButtons/FunctionButtons';
+import { useRecoilValue } from 'recoil';
+import { toggleNearbySearchState } from 'store/toggleState';
+import OnNearbySearch from './OnNearbySearch';
+import OffNearbySearch from './OffNearbySearch';
 
 export default function FunctionsBar() {
-  return (
-    <View style={styles.wrap}>
-      <InstanceInfo />
-      <FunctionButtons />
-    </View>
-  );
+  const toggleNearbySearch = useRecoilValue(toggleNearbySearchState);
+
+  return <View style={styles.wrap}>{toggleNearbySearch ? <OnNearbySearch /> : <OffNearbySearch />}</View>;
 }
 
 const styles = StyleSheet.create({
@@ -17,6 +16,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 10,
+    marginBottom: 5,
     gap: 10,
   },
 });

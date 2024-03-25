@@ -14,7 +14,6 @@ export default function FunctionButtons() {
 const styles = StyleSheet.create({
   wrap: {
     flexDirection: 'row',
-    paddingBottom: 5,
     gap: 10,
   },
 });

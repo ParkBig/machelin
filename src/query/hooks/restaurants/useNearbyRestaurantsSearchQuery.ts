@@ -4,6 +4,7 @@ import { useInfiniteQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { myLocationState, searchRadiusState } from 'store/locationState';
 import { mainSearchState } from 'store/searchState';
+import { toggleNearbySearchState } from 'store/toggleState';
 import { GooglePlace } from 'types/types';
 
 interface Data {
@@ -16,6 +17,7 @@ interface Data {
 export default function useNearbyRestaurantsSearchQuery() {
   const mainSearch = useRecoilValue(mainSearchState);
   const searchRadius = useRecoilValue(searchRadiusState);
+  const toggleNearbySearch = useRecoilValue(toggleNearbySearchState);
   const { isGetLocation, latitude, longitude } = useRecoilValue(myLocationState);
 
   const keyword = mainSearch.mainSearchValue ? mainSearch.mainSearchValue : '';
@@ -43,7 +45,7 @@ export default function useNearbyRestaurantsSearchQuery() {
       return data;
     },
     {
-      enabled: isGetLocation && !mainSearch.isTyping ? true : false,
+      enabled: isGetLocation && toggleNearbySearch && !mainSearch.isTyping ? true : false,
       select: data => ({ pages: data.pages.flatMap(page => page.restaurants), pageParams: data.pageParams }),
       getNextPageParam: lastPage => {
         return lastPage.next_page_token || null;

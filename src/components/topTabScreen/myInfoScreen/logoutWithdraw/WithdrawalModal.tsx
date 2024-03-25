@@ -4,7 +4,7 @@ import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmA
 import { Colors, Shadow } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { useMutation } from 'react-query';
 import { UseNavigation } from 'types/screenType';
@@ -21,6 +21,8 @@ export default function WithdrawalModal({ toggleWithdrawalModal, setToggleWithdr
   const { navigate } = useNavigation<UseNavigation<'MyInfoScreen'>>();
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const { myInfo, reMyInfo } = useMyInfoQuery();
+  const [placeholder, setPlaceholder] = useState('회원탈퇴');
+  const [areYouSure, setAreYouSure] = useState('');
 
   const { mutate, isLoading } = useMutation(withdrawalQuery, {
     onSuccess: async res => {
@@ -36,8 +38,17 @@ export default function WithdrawalModal({ toggleWithdrawalModal, setToggleWithdr
     },
   });
 
+  const onChangeTextHandler = (text: string) => {
+    setAreYouSure(text);
+  };
+
   const withdrawHandler = () => {
-    mutate();
+    if (areYouSure === '회원탈퇴') {
+      mutate();
+    } else {
+      setAreYouSure('');
+      setPlaceholder('정확히 입력해주세요');
+    }
   };
 
   useEffect(() => {
@@ -45,6 +56,11 @@ export default function WithdrawalModal({ toggleWithdrawalModal, setToggleWithdr
       navigate('MyScreen');
     }
   }, [myInfo]);
+
+  useEffect(() => {
+    setPlaceholder('회원탈퇴');
+    setAreYouSure('');
+  }, [toggleWithdrawalModal])
 
   return (
     <Modal
@@ -62,7 +78,14 @@ export default function WithdrawalModal({ toggleWithdrawalModal, setToggleWithdr
           <Text style={styles.text}>마슐랭</Text>
           <Text>"예"를 누르시면 즉시 회원 탈퇴되요</Text>
           <Text>정말 회원탈퇴 하시겠습니까?</Text>
+          <Text>"회원탈퇴"를 적어주세요</Text>
         </View>
+        <TextInput
+          style={styles.textInput}
+          placeholder={placeholder}
+          value={areYouSure}
+          onChangeText={onChangeTextHandler}
+        />
         <View style={styles.buttons}>
           <Button style={styles.button} onPress={setToggleWithdrawalModal}>
             <Text style={styles.text}>아니요</Text>
@@ -97,12 +120,21 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     ...Shadow,
     backgroundColor: Colors.mainWhite1,
+    gap: 10,
   },
   title: {
     width: '100%',
     alignItems: 'center',
     paddingVertical: 10,
     gap: 5,
+  },
+  textInput: {
+    width: '100%',
+    height: 50,
+    borderWidth: 1,
+    borderColor: Colors.mainGreen2,
+    borderRadius: 10,
+    textAlign: 'center',
   },
   buttons: {
     flexDirection: 'row',

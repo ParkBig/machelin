@@ -16,9 +16,11 @@ import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmA
 import { modifyUserImageQuery } from 'query/api/user';
 import GotoSettingScreenButton from './GotoSettingScreenButton';
 import UserImageModal from 'components/common/modal/UserImageModal';
+import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 
 export default function MyImage() {
   const { myInfo, reMyInfo } = useMyInfoQuery();
+  const [isImageLoading, setIsImageLoading] = useState(false);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const [toggleImageModal, setToggleImageModal] = useState(false);
 
@@ -29,6 +31,7 @@ export default function MyImage() {
       } else {
         setToggleAlertModal({ toggle: true, alertMsg: res.msg });
       }
+      setIsImageLoading(false);
     },
     onError: () => {
       setToggleAlertModal({ toggle: true, alertMsg: '잠시후 다시 시도해주세요' });
@@ -42,6 +45,7 @@ export default function MyImage() {
       return;
     }
 
+    setIsImageLoading(true);
     const result = await launchImageLibraryAsync({
       mediaTypes: MediaTypeOptions.Images,
       allowsMultipleSelection: false,
@@ -64,6 +68,8 @@ export default function MyImage() {
       });
 
       mutate(payloadFormData);
+    } else {
+      setIsImageLoading(false);
     }
   };
 
@@ -88,6 +94,7 @@ export default function MyImage() {
         <View style={styles.pfp}>
           <Button style={styles.image} onPress={toggleImageModalHandler}>
             <Image style={styles.image} source={imageSource} resizeMode="contain" />
+            {isImageLoading && <LoadingOverlay style={styles.loadingOverlay} />}
             {toggleImageModal && (
               <UserImageModal
                 imageSource={imageSource}
@@ -134,6 +141,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: 65,
+  },
+  loadingOverlay: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
   },
   changeImageButton: {
     height: 40,

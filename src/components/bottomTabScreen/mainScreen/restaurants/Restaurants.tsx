@@ -1,6 +1,6 @@
 import { View, StyleSheet, Text } from 'react-native';
 import { useRecoilValue } from 'recoil';
-import { mainScreenTogglesState } from 'store/toggleState';
+import { mainScreenTogglesState, toggleNearbySearchState } from 'store/toggleState';
 import RestaurantList from './restaurantList/RestaurantList';
 import RepresentationRestaurantInfo from './representationRestaurantInfo/RepresentationRestaurant';
 import FunctionsBar from './functionsBar/FunctionsBar';
@@ -9,10 +9,11 @@ import { Colors } from 'const/global-styles';
 
 export default function Restaurants() {
   const netInfo = useNetInfo();
+  const toggleNearbySearch = useRecoilValue(toggleNearbySearchState);
   const { toggleRestaurantList } = useRecoilValue(mainScreenTogglesState);
 
   return (
-    <View style={styles.wrap}>
+    <View style={[styles.wrap, toggleNearbySearch && styles.onNearbySearch]}>
       <FunctionsBar />
       {netInfo.isConnected ? (
         toggleRestaurantList ? (
@@ -34,6 +35,9 @@ const styles = StyleSheet.create({
     width: '100%',
     position: 'absolute',
     zIndex: 2,
+    bottom: 10,
+  },
+  onNearbySearch: {
     bottom: 0,
   },
   netInfo: {
