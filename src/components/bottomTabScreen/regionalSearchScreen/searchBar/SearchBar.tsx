@@ -22,10 +22,6 @@ export default function SearchBar() {
     setRegionalRestaurantSearchInput(prev => ({ ...prev, searchText }));
   };
 
-  const deleteHandler = () => {
-    setRegionalRestaurantSearchInput(prev => ({ ...prev, searchText: '' }));
-  };
-
   return (
     <View style={styles.wrap}>
       <Button onPress={searchHandler} style={styles.searchIcon}>
@@ -41,9 +37,6 @@ export default function SearchBar() {
         onChangeText={searchTextChangeHandler}
         value={regionalRestaurantSearchInput.searchText}
       />
-      <Button onPress={deleteHandler} style={styles.searchIcon}>
-        <Ionicons name="close" size={30} color={Colors.mainGreen2} />
-      </Button>
     </View>
   );
 }

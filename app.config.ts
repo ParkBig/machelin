@@ -35,7 +35,6 @@ const expoConfig: ExpoConfig = {
       googleMaps: {
         apiKey: process.env.EXPO_GOOGLE_ANDROID_MAPS_SDK_KEY,
       },
-      googleMobileAdsAppId: process.env.EXPO_ADMOB_ANDROID_APP_ID,
     },
     package: 'com.parkbig.machelin',
   },
@@ -58,6 +57,7 @@ const expoConfig: ExpoConfig = {
     EXPO_DEV_SERVER_URL: process.env.EXPO_DEV_SERVER_URL,
     EXPO_GOOGLE_MAPS_SERVICE_KEY: process.env.EXPO_GOOGLE_MAPS_SERVICE_KEY,
     EXPO_GOOGLE_IOS_MAPS_SDK_KEY: process.env.EXPO_GOOGLE_IOS_MAPS_SDK_KEY,
+    EXPO_GOOGLE_ANDROID_MAPS_SDK_KEY: process.env.EXPO_GOOGLE_ANDROID_MAPS_SDK_KEY,
   },
 };
 

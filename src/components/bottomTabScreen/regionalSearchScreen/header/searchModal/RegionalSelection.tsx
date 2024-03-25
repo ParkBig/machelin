@@ -26,21 +26,6 @@ export default function RegionalSelection() {
     setToggleRegionalModal(prev => ({ toggle: !prev.toggle, which }));
   };
 
-  useEffect(() => {
-    setRegionalRestaurantSearchInput(prev => {
-      const location = prev.location;
-      if (location.city === '내위치') {
-        location.district = '내위치';
-        const newLocation: Location = { ...location, district: '내위치' };
-        return { ...prev, location: newLocation };
-      } else {
-        location.district = '전체';
-        const newLocation: Location = { ...location, district: '전체' };
-        return { ...prev, location: newLocation };
-      }
-    });
-  }, [city, setRegionalRestaurantSearchInput]);
-
   return (
     <View style={styles.wrap}>
       <View style={styles.ionicons}>

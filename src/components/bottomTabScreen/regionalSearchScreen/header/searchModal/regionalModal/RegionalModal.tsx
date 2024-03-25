@@ -30,8 +30,18 @@ export default function RegionalModal({ toggleModal, toggleModalHandler, which }
 
   const changeRegionalHandler = (itemValue: any) => {
     setRegionalRestaurantSearchInput(prev => {
-      const newLocation = { ...prev.location, [whichValue]: itemValue };
-      return { ...prev, location: newLocation, isTyping: false };
+      if (whichValue === 'city') {
+        if (itemValue === '내위치') {
+          const newLocation = { ...prev.location, city: itemValue, district: itemValue };
+          return { ...prev, location: newLocation, isTyping: false };
+        } else {
+          const newLocation = { ...prev.location, city: itemValue, district: '전체' };
+          return { ...prev, location: newLocation, isTyping: false };
+        }
+      } else {
+        const newLocation = { ...prev.location, district: itemValue };
+        return { ...prev, location: newLocation, isTyping: false };
+      }
     });
     toggleModalHandler();
   };
