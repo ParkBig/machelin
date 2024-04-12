@@ -45,3 +45,10 @@ export const toggleNearbySearchState = atom({
   key: 'toggleNearbySearchState',
   default: false,
 });
+
+export type WhichSelectedPostsState = 'neighborPosts' | 'allPosts';
+
+export const whichSelectedPostsState = atom<WhichSelectedPostsState>({
+  key: 'whichSelectedPostsState',
+  default: 'neighborPosts',
+});

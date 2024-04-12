@@ -11,8 +11,8 @@ export const Colors = {
   mainBlue1: '#0084ffab',
   mainBlue2: '#037df0a1',
   mainBlue3: '#b6dbde9f',
-  mainBlue4: '#bcd3f09f',
-  mainBlue5: '#d6e2fa',
+  mainBlue4: '#bcd3f09ff',
+  mainBlue5: '#adc8ff',
 
   /** gray color~ */
   superLightGray: '#e1dddd',
