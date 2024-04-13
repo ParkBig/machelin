@@ -1,6 +1,6 @@
 import { LayoutAnimation, StyleSheet } from 'react-native';
-import { useSetRecoilState } from 'recoil';
-import { mainScreenTogglesState } from 'store/toggleState';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { mainScreenTogglesState, toggleNearbySearchState } from 'store/toggleState';
 import { Colors } from 'const/global-styles';
 import Button from 'components/common/layout/Button';
 import useNearbyRestaurantsSearchQuery from 'query/hooks/restaurants/useNearbyRestaurantsSearchQuery';
@@ -8,6 +8,7 @@ import BriefRestaurantInfo from 'components/common/card/BriefRestaurantInfo';
 
 export default function RepresentationRestaurantInfo() {
   const { restaurants } = useNearbyRestaurantsSearchQuery();
+  const toggleNearbySearch = useRecoilValue(toggleNearbySearchState)
   const setMainScreenToggles = useSetRecoilState(mainScreenTogglesState);
 
   const openRestaurantListHandler = () => {
@@ -17,7 +18,7 @@ export default function RepresentationRestaurantInfo() {
 
   return (
     <>
-      {restaurants && restaurants.pages.length !== 0 && (
+      {toggleNearbySearch && restaurants && restaurants.pages.length !== 0 && (
         <Button onPress={openRestaurantListHandler} style={styles.button}>
           <BriefRestaurantInfo restaurant={restaurants.pages[0]} isList={false} fnc={openRestaurantListHandler} />
         </Button>
