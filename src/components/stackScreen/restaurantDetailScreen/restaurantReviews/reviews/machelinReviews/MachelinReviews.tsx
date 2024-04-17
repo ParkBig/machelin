@@ -65,7 +65,7 @@ export default function MachelinReviews() {
           scrollEnabled={false}
           style={styles.posts}
           showsVerticalScrollIndicator={false}
-          keyExtractor={(_, index) => String(index)}
+          keyExtractor={(item) => String(item.id)}
           data={restaurantPosts?.pages}
           renderItem={({ item }) => <Post posts={item} />}
           ItemSeparatorComponent={() => <Line style={styles.line} />}

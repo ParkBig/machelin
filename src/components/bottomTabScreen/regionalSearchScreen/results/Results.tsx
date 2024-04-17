@@ -38,7 +38,7 @@ export default function Results() {
               showsVerticalScrollIndicator={false}
               onEndReached={onEndReachedHandler}
               data={restaurants?.pages}
-              keyExtractor={(_, index) => String(index)}
+              keyExtractor={(item) => item.place_id}
               renderItem={({ item }) => {
                 const navigateHandler = () => {
                   navigate('RestaurantDetailScreen', {

@@ -34,7 +34,7 @@ export default function PostsSearchResult() {
               refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}
               onEndReached={onEndReachedHandler}
               showsVerticalScrollIndicator={false}
-              keyExtractor={(_, index) => String(index)}
+              keyExtractor={(item) => String(item.id)}
               data={postsSearch?.pages}
               renderItem={({ item }) => <Post posts={item} />}
               ItemSeparatorComponent={() => <Line style={styles.line} />}

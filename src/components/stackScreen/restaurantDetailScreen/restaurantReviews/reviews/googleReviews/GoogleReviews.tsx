@@ -25,7 +25,7 @@ export default function GoogleReviews() {
           scrollEnabled={false}
           style={styles.reviews}
           showsVerticalScrollIndicator={false}
-          keyExtractor={(_, index) => String(index)}
+          keyExtractor={(item, index) => `${item.author_name}_${index}`}
           data={reviews}
           renderItem={({ item }) => <GoogleReview review={item} />}
           ItemSeparatorComponent={() => <Line style={styles.line} />}

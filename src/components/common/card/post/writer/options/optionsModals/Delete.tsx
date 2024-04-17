@@ -5,7 +5,7 @@ import { Text, View } from 'react-native';
 import { WhichOneSelectedState } from './OptionsModals';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { useState } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import useUsersPostsQuery from 'query/hooks/users/useUsersPostsQuery';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
 import { deletePostQuery } from 'query/api/posts';
@@ -18,13 +18,13 @@ interface Props {
 }
 
 export default function Delete({ postId, setWhichOneSelected, toggleModalHandler }: Props) {
-  const { rePosts } = useUsersPostsQuery();
+  const queryClient = useQueryClient();
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
   const { mutate, isLoading } = useMutation(deletePostQuery, {
     onSuccess: res => {
       if (res.ok) {
-        rePosts();
+        queryClient.refetchQueries('usersPosts')
         setWhichOneSelected(null);
         toggleModalHandler();
       } else {

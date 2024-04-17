@@ -33,7 +33,7 @@ export default function AllPosts() {
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}
             onEndReached={onEndReachedHandler}
             showsVerticalScrollIndicator={false}
-            keyExtractor={(_, index) => String(index)}
+            keyExtractor={(item) => String(item.id)}
             data={allPosts?.pages}
             renderItem={({ item }) => <Post posts={item} />}
             ItemSeparatorComponent={() => <Line style={styles.line} />}
