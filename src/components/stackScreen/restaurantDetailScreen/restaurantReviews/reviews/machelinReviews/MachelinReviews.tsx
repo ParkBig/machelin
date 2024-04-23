@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   },
   line: {
     width: '100%',
-    height: 30,
+    height: 10,
     backgroundColor: Colors.lightGrayOpacity1,
   },
   showMoreButton: {

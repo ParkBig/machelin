@@ -32,7 +32,7 @@ export default function useRegionalRestaurantSearchQuery() {
     fetchNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery<Data, unknown, GooglePlace>(
-    ['nearbyRestaurantsSearch', keyword],
+    ['regionalRestaurantSearch', keyword],
     async ({ pageParam = null }) => {
       const { data } = await axiosRestaurants.get('/restaurantsTextSearch', {
         params: {
