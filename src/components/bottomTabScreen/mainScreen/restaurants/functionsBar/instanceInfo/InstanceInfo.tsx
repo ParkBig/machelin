@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useRecoilValue } from 'recoil';
 import { searchRadiusState } from 'store/locationState';
 import { mainSearchState } from 'store/searchState';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function InstanceInfo() {
   const netInfo = useNetInfo();
@@ -14,12 +15,17 @@ export default function InstanceInfo() {
   const restaurantsLength = restaurants?.pages ? `${restaurants.pages.length}개` : '';
 
   return (
-    <View style={styles.wrap}>
+    <LinearGradient
+      colors={['rgba(229, 252, 253, 0.9)', 'rgba(229, 252, 253, 0)']}
+      start={[0, 0]}
+      end={[1, 0]}
+      style={styles.wrap}
+    >
       {netInfo.isConnected && (
         <>
           <View style={styles.instanceInfo}>
             <View style={styles.title}>
-              <Text style={styles.text}>{mainSearchValue ? '검색결과' : '내주변'}</Text>
+              <Text style={styles.text}>{mainSearchValue ? '주변검색결과' : '내주변'}</Text>
               <Text style={styles.text}>({searchRadius}m)</Text>
             </View>
             <View style={styles.restaurantsLength}>
@@ -29,7 +35,7 @@ export default function InstanceInfo() {
           <View style={styles.ad}></View>
         </>
       )}
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -39,6 +45,7 @@ const styles = StyleSheet.create({
     height: 50,
     flexDirection: 'row',
     alignItems: 'center',
+    borderRadius: 10,
     gap: 10,
   },
   instanceInfo: {

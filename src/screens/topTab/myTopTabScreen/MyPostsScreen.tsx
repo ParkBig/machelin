@@ -28,7 +28,7 @@ export default function MyPostsScreen() {
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}
             showsVerticalScrollIndicator={false}
             data={posts?.pages}
-            keyExtractor={(_, index) => String(index)}
+            keyExtractor={(item) => String(item.id)}
             renderItem={({ item }) => <Post posts={item} />}
             ItemSeparatorComponent={() => <Line style={styles.line} />}
             ListFooterComponent={() => <Line style={styles.listFooterComponent} />}
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   line: {
     width: '100%',
-    height: 30,
+    height: 10,
     backgroundColor: Colors.lightGrayOpacity1,
   },
   listFooterComponent: {

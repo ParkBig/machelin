@@ -1,5 +1,6 @@
-import FunctionButtons from "./functionButtons/FunctionButtons";
-import InstanceInfo from "./instanceInfo/InstanceInfo";
+import { StyleSheet } from 'react-native';
+import FunctionButtons from './functionButtons/FunctionButtons';
+import InstanceInfo from './instanceInfo/InstanceInfo';
 
 export default function OnNearbySearch() {
   return (
@@ -7,5 +8,12 @@ export default function OnNearbySearch() {
       <InstanceInfo />
       <FunctionButtons />
     </>
-  )
+  );
 }
+
+const styles = StyleSheet.create({
+  wrap: {
+    width: '100%',
+    flexDirection: 'row',
+  },
+});

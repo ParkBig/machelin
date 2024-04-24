@@ -30,7 +30,7 @@ export default function RestaurantList() {
           data={restaurants?.pages}
           onEndReached={onEndReachedHandler}
           ItemSeparatorComponent={() => <Line style={styles.line} />}
-          keyExtractor={(_, index) => String(index)}
+          keyExtractor={(item) => item.place_id}
           renderItem={({ item }) => {
             const restaurantChoiceHandler = () => {
               const { lat, lng } = item.geometry.location;

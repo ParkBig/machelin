@@ -1,5 +1,6 @@
 import { Colors } from 'const/global-styles';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
+import { useEffect, useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Marker } from 'react-native-maps';
 import { useRecoilValue } from 'recoil';
@@ -8,15 +9,26 @@ import { myLocationState } from 'store/locationState';
 export default function MyLocationPing() {
   const { myInfo } = useMyInfoQuery();
   const myLocation = useRecoilValue(myLocationState);
+  const [isTrack, setIsTrack] = useState(false);
 
   const imageSource = myInfo?.authUser?.pfp ? { uri: myInfo?.authUser?.pfp } : require('assets/png/user.png');
+
+  useEffect(() => {
+    setIsTrack(true);
+
+    const trackOut = setTimeout(() => {
+      setIsTrack(false);
+    }, 500);
+
+    return () => clearInterval(trackOut);
+  }, [myLocation, myInfo])
 
   return (
     <>
       {myLocation.isGetLocation && (
         <Marker
           style={styles.wrap}
-          tracksViewChanges={true}
+          tracksViewChanges={isTrack}
           coordinate={{ latitude: myLocation.latitude, longitude: myLocation.longitude }}
           title={myInfo?.authUser?.nickname ? myInfo.authUser.nickname : '내위치'}
         >

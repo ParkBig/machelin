@@ -41,7 +41,7 @@ export default function NeighborhoodPosts() {
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefreshHandler} />}
             onEndReached={onEndReachedHandler}
             showsVerticalScrollIndicator={false}
-            keyExtractor={(_, index) => String(index)}
+            keyExtractor={(item) => String(item.id)}
             data={neighborhoodPosts?.pages}
             renderItem={({ item }) => <Post posts={item} />}
             ItemSeparatorComponent={() => <Line style={styles.line} />}
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
   line: {
     width: '100%',
-    height: 30,
+    height: 10,
     backgroundColor: Colors.lightGrayOpacity1,
   },
   netInfo: {

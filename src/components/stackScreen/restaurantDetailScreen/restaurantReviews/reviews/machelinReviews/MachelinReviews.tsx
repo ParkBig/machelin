@@ -65,7 +65,7 @@ export default function MachelinReviews() {
           scrollEnabled={false}
           style={styles.posts}
           showsVerticalScrollIndicator={false}
-          keyExtractor={(_, index) => String(index)}
+          keyExtractor={(item) => String(item.id)}
           data={restaurantPosts?.pages}
           renderItem={({ item }) => <Post posts={item} />}
           ItemSeparatorComponent={() => <Line style={styles.line} />}
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   },
   line: {
     width: '100%',
-    height: 30,
+    height: 10,
     backgroundColor: Colors.lightGrayOpacity1,
   },
   showMoreButton: {

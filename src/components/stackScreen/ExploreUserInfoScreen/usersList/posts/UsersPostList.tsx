@@ -10,7 +10,7 @@ import NoPost from './NoPost';
 
 export default function UsersPostList() {
   const { params } = useRoute<UseRouter<'ExploreUserInfoScreen'>>();
-  const { posts, postsIsLoading, rePosts, isFetchingNextPage } = useExploreUsersPostsQuery(params.userId);
+  const { posts, postsIsLoading, isFetchingNextPage } = useExploreUsersPostsQuery(params.userId);
   const postsExist = posts?.pages && posts.pages.length !== 0 ? true : false;
 
   return (
@@ -21,7 +21,7 @@ export default function UsersPostList() {
           style={styles.posts}
           showsVerticalScrollIndicator={false}
           data={posts?.pages}
-          keyExtractor={(_, index) => String(index)}
+          keyExtractor={(item) => String(item.id)}
           renderItem={({ item }) => <Post posts={item} />}
           ItemSeparatorComponent={() => <Line style={styles.line} />}
           ListFooterComponent={() => <Line style={styles.line} />}
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   line: {
     width: '100%',
-    height: 30,
+    height: 10,
     backgroundColor: Colors.lightGrayOpacity1,
   },
   loadingTop: {
