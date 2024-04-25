@@ -1,7 +1,7 @@
 import { MediaLibraryPermissionResponse, PermissionStatus as ImagePermissionStatus } from 'expo-image-picker';
 import { PermissionStatus as LocationPermissionsStatus, LocationPermissionResponse } from 'expo-location';
 import { CameraPermissionResponse, PermissionStatus as CameraPermissionsStatus } from 'expo-image-picker';
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 import { Linking, Platform } from 'react-native';
 
 const openAppSettings = () => {
@@ -12,15 +12,15 @@ const openAppSettings = () => {
   }
 };
 
-export const verifyMessagingPermissions = async () => {
-  const authStatus = await messaging().requestPermission();
-  const enabled =
-    authStatus === messaging.AuthorizationStatus.AUTHORIZED || authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+// export const verifyMessagingPermissions = async () => {
+//   const authStatus = await messaging().requestPermission();
+//   const enabled =
+//     authStatus === messaging.AuthorizationStatus.AUTHORIZED || authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
-  if (enabled) {
-    console.log('Authorization status:', authStatus);
-  }
-};
+//   if (enabled) {
+//     console.log('Authorization status:', authStatus);
+//   }
+// };
 
 export const verifyLocationPermissions = async (
   locationPermissionInformation: LocationPermissionResponse | null,
