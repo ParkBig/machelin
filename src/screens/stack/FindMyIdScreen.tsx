@@ -111,7 +111,7 @@ export default function FindMyIdScreen() {
 const styles = StyleSheet.create({
   wrap: {
     flex: 1,
-    paddingTop: 20,
+    paddingTop: 15,
     paddingHorizontal: 15,
     alignItems: 'center',
     backgroundColor: Colors.mainWhite1,
