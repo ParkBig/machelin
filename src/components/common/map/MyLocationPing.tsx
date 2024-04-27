@@ -21,7 +21,7 @@ export default function MyLocationPing() {
     }, 500);
 
     return () => clearInterval(trackOut);
-  }, [myLocation, myInfo])
+  }, [myLocation, myInfo?.authUser])
 
   return (
     <>

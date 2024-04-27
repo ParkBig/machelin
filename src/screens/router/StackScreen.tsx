@@ -34,9 +34,14 @@ export default function StackScreen() {
         headerStyle: {
           backgroundColor: Colors.mainGreen2,
         },
+        headerBackTitleVisible: false,
       }}
     >
-      <RootStack.Screen name="BottomTabScreen" component={BottomTabScreen} options={{ headerShown: false, title: '' }} />
+      <RootStack.Screen
+        name="BottomTabScreen"
+        component={BottomTabScreen}
+        options={{ headerShown: false, title: '' }}
+      />
       <RootStack.Screen
         name="NeighborHoodPostsTopTabScreen"
         component={NeighborHoodPostsTopTabScreen}
@@ -47,7 +52,9 @@ export default function StackScreen() {
         component={MakePostScreen}
         options={({ route }) => ({
           title: '기록하기',
-          headerRight: () => <MakePostButton restaurantInfo={route.params.restaurantInfo} prevScreen={route.params.prevScreen} />,
+          headerRight: () => (
+            <MakePostButton restaurantInfo={route.params.restaurantInfo} prevScreen={route.params.prevScreen} />
+          ),
         })}
       />
       <RootStack.Screen
@@ -76,7 +83,7 @@ export default function StackScreen() {
         name="MobileVerificationScreen"
         component={MobileVerificationScreen}
         options={{
-          title: '전화번호 인증하기'
+          title: '전화번호 인증하기',
         }}
       />
       <RootStack.Screen

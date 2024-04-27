@@ -14,7 +14,11 @@ export default function PleaseVerifyModal() {
 
   const closeModalHandler = () => {
     setToggleModal(false);
-    navigate('MobileVerificationScreen');
+  };
+
+  const gotoVerifyHandler = () => {
+    setToggleModal(false);
+    navigate('TermsOfUseScreen');
   };
 
   useEffect(() => {
@@ -37,9 +41,14 @@ export default function PleaseVerifyModal() {
         <View style={styles.msg}>
           <Text style={styles.text}>전화번호 인증을 통해 계정을 보호하세요</Text>
         </View>
-        <Button style={styles.button} onPress={closeModalHandler}>
-          <Text style={styles.text}>확인</Text>
-        </Button>
+        <View style={styles.buttons}>
+          <Button style={styles.button} onPress={closeModalHandler}>
+            <Text style={styles.text}>취소</Text>
+          </Button>
+          <Button style={styles.button} onPress={gotoVerifyHandler}>
+            <Text style={styles.text}>확인</Text>
+          </Button>
+        </View>
       </View>
     </Modal>
   );
@@ -68,9 +77,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  button: {
+  buttons: {
     height: 50,
     width: '100%',
+    flexDirection: 'row',
+  },
+  button: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

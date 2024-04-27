@@ -1,4 +1,4 @@
-import { Linking, StyleSheet, Text, View } from 'react-native';
+import { Linking, Platform, StyleSheet, Text, View } from 'react-native';
 import { Colors, Shadow, Size } from 'const/global-styles';
 import Modal from 'react-native-modal';
 import { useEffect, useState } from 'react';
@@ -9,10 +9,14 @@ export default function VersionCheckModal() {
   const [isVersionCorrect, setIsVersionCorrect] = useState(false);
 
   const closeModalHandler = async () => {
-    const supported = await Linking.canOpenURL('https://play.google.com/store/apps/details?id=com.parkbig.machelin');
+    if (Platform.OS === 'android') {
+      const supported = await Linking.canOpenURL('https://play.google.com/store/apps/details?id=com.parkbig.machelin');
 
-    if (supported) {
-      await Linking.openURL('https://play.google.com/store/apps/details?id=com.parkbig.machelin');
+      if (supported) {
+        await Linking.openURL('https://play.google.com/store/apps/details?id=com.parkbig.machelin');
+      }
+    } else {
+      setIsVersionCorrect(false)
     }
   };
 
@@ -21,7 +25,7 @@ export default function VersionCheckModal() {
       const axiosVersions = createAxiosInstance('versions');
       const { data } = await axiosVersions.get('');
 
-      if (data.machelinCurrentVersion !== '31') {
+      if (data.machelinCurrentVersion !== '33') {
         setIsVersionCorrect(true);
       }
     };
