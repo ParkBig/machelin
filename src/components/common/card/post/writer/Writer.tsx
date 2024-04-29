@@ -6,17 +6,18 @@ import Notice from './Notice';
 
 interface Props {
   posts: IPost;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Writer({ posts }: Props) {
+export default function Writer({ posts, setIsVisible }: Props) {
   const postType =
     posts.postType === 'ALL_NOTICE'
       ? 'ALL_NOTICE'
       : posts.postType === 'LOCAL_NOTICE'
-      ? 'LOCAL_NOTICE'
-      : posts.postType === 'ALL_AD' || posts.postType === 'LOCAL_AD'
-      ? 'LOCAL_AD'
-      : 'POST';
+        ? 'LOCAL_NOTICE'
+        : posts.postType === 'ALL_AD' || posts.postType === 'LOCAL_AD'
+          ? 'LOCAL_AD'
+          : 'POST';
 
   return (
     <View style={styles.wrap}>
@@ -27,7 +28,14 @@ export default function Writer({ posts }: Props) {
           {posts.owner && (
             <>
               <Info pfp={posts.owner.pfp} nickname={posts.owner.nickname} userInfoId={posts.owner.id} />
-              {postType === 'POST' && <Options postId={posts.id} ownerId={posts.owner.id} isPublic={posts.isPublic} />}
+              {postType === 'POST' && (
+                <Options
+                  setIsVisible={setIsVisible}
+                  postId={posts.id}
+                  ownerId={posts.owner.id}
+                  isPublic={posts.isPublic}
+                />
+              )}
             </>
           )}
         </>

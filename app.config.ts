@@ -45,7 +45,14 @@ const expoConfig: ExpoConfig = {
     [
       'expo-image-picker',
       {
-        cameraPermission: 'good work',
+        cameraPermission: 'the app accesses your photos to let you share them to Machelin user',
+      },
+    ],
+    [
+      'expo-location',
+      {
+        locationAlwaysAndWhenInUsePermission:
+          'Allows Machelin to use your location information to get information about restaurants and posts based on your current location.',
       },
     ],
   ],

@@ -38,6 +38,10 @@ interface CheckSignUpVerificationInput {
   verificationCode: string;
 }
 
+interface ToggleUserPostBlockInput {
+  postId: number;
+}
+
 // get~
 export const myInfoQuery = async () => {
   const token = await takeToken();
@@ -166,6 +170,11 @@ export const modifyUserPreferRestaurantQuery = async (modifyUserPreferRestaurant
 
 export const toggleFriendStateQuery = async (toggleFriendStateInput: ToggleFriendStateInput) => {
   const { data } = await axiosUsers.post('/toggleFriendState', toggleFriendStateInput);
+  return data;
+};
+
+export const toggleUserPostBlockQuery = async (toggleUserPostBlockInput: ToggleUserPostBlockInput) => {
+  const { data } = await axiosUsers.post('/toggleUserPostBlock', toggleUserPostBlockInput);
   return data;
 };
 

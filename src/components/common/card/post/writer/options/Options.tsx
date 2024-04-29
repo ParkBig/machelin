@@ -10,9 +10,10 @@ interface Props {
   postId: number;
   ownerId: number;
   isPublic: boolean;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Options({ postId, ownerId, isPublic }: Props) {
+export default function Options({ postId, ownerId, isPublic, setIsVisible }: Props) {
   const { myInfo } = useMyInfoQuery();
   const [toggleReportModal, setToggleReportModal] = useState(false);
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
@@ -32,6 +33,7 @@ export default function Options({ postId, ownerId, isPublic }: Props) {
         <Ionicons name="ellipsis-vertical" size={20} color={Colors.gray} />
       </Button>
       <OptionsModals
+        setIsVisible={setIsVisible}
         postId={postId}
         ownerId={ownerId}
         isPublic={isPublic}
