@@ -42,6 +42,10 @@ interface ToggleUserPostBlockInput {
   postId: number;
 }
 
+interface ToggleUserBlockInput {
+  userId: number;
+}
+
 // get~
 export const myInfoQuery = async () => {
   const token = await takeToken();
@@ -173,8 +177,13 @@ export const toggleFriendStateQuery = async (toggleFriendStateInput: ToggleFrien
   return data;
 };
 
+export const toggleUserBlockQuery = async (toggleUserBlockInput: ToggleUserBlockInput) => {
+  const { data } = await axiosUsers.post('/toggleUserBlock', toggleUserBlockInput);
+  return data;
+};
+
 export const toggleUserPostBlockQuery = async (toggleUserPostBlockInput: ToggleUserPostBlockInput) => {
-  const { data } = await axiosUsers.post('/toggleUserPostBlock', toggleUserPostBlockInput);
+  const { data } = await axiosUsers.post('/toggleUserBlockQuery', toggleUserPostBlockInput);
   return data;
 };
 

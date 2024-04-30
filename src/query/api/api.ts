@@ -4,7 +4,7 @@ import Constants from 'expo-constants';
 
 export const createAxiosInstance = (endpoint: string) => {
   const axiosBase = axios.create({
-    baseURL: `${Constants.expoConfig?.extra?.EXPO_DEV_SERVER_URL}/${endpoint}`,
+    baseURL: `${Constants.expoConfig?.extra?.EXPO_PROD_SERVER_URL}/${endpoint}`,
   });
 
   axiosBase.interceptors.request.use(async config => {

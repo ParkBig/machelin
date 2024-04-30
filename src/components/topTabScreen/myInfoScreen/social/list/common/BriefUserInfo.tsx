@@ -3,8 +3,8 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import { Colors, Size } from 'const/global-styles';
 import { useNavigation } from '@react-navigation/native';
 import { UseNavigation } from 'types/screenType';
-import ToggleFollow from 'components/stackScreen/ExploreUserInfoScreen/exploreUsersInfo/ToggleFollow';
 import { UserInfo } from 'types/types';
+import ToggleFollow from 'components/stackScreen/ExploreUserInfoScreen/exploreUserHeaderRight/ToggleFollow';
 
 interface Props {
   userInfo: UserInfo;

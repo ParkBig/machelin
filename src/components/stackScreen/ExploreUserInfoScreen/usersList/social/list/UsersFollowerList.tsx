@@ -20,7 +20,7 @@ export default function UsersFollowerList() {
           contentContainerStyle={{ gap: 5 }}
           data={followers?.followers}
           keyExtractor={item => `${item.id}`}
-          renderItem={({ item }) => <BriefUserInfo key={item.id} userInfo={item} />}
+          renderItem={({ item }) => <BriefUserInfo key={item.id} userInfo={item.follower} />}
         />
       ) : (
         <NoSocial type="follower" />
