@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import useMyInfoQuery from 'query/hooks/users/useMyInfoQuery';
 import { useNavigationState } from '@react-navigation/native';
 import Line from 'components/common/layout/Line';
+import HidePost from './HidePost';
 
 interface Props {
   postId: number;
@@ -17,11 +18,19 @@ interface Props {
   isPublic: boolean;
   toggleModal: boolean;
   toggleModalHandler: () => void;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export type WhichOneSelectedState = 'report' | 'delete' | 'publicSetting' | null;
+export type WhichOneSelectedState = 'report' | 'delete' | 'publicSetting' | 'hidePost' | null;
 
-export default function OptionsModals({ postId, toggleModal, ownerId, isPublic, toggleModalHandler }: Props) {
+export default function OptionsModals({
+  postId,
+  toggleModal,
+  ownerId,
+  isPublic,
+  toggleModalHandler,
+  setIsVisible,
+}: Props) {
   const navigationState = useNavigationState(state => state);
   const { myInfo } = useMyInfoQuery();
   const [whichOneSelected, setWhichOneSelected] = useState<WhichOneSelectedState>(null);
@@ -42,6 +51,13 @@ export default function OptionsModals({ postId, toggleModal, ownerId, isPublic, 
   const renderSelected =
     whichOneSelected === 'report' ? (
       <Report postId={postId} setWhichOneSelected={setWhichOneSelected} toggleModalHandler={toggleModalHandler} />
+    ) : whichOneSelected === 'hidePost' ? (
+      <HidePost
+        postId={postId}
+        setWhichOneSelected={setWhichOneSelected}
+        toggleModalHandler={toggleModalHandler}
+        setIsVisible={setIsVisible}
+      />
     ) : whichOneSelected === 'delete' ? (
       <Delete postId={postId} setWhichOneSelected={setWhichOneSelected} toggleModalHandler={toggleModalHandler} />
     ) : (
@@ -68,11 +84,7 @@ export default function OptionsModals({ postId, toggleModal, ownerId, isPublic, 
       <View style={styles.wrap}>
         {whichOneSelected === null ? (
           <>
-            <Button style={styles.button} onPress={changeWhichOneSelectedHandler.bind(null, 'report')}>
-              <Ionicons name="alert" size={Size.bigMiddle} />
-              <Text>신고하기</Text>
-            </Button>
-            {myInfo?.authUser && myInfo.authUser.id === ownerId && isMyScreen && (
+            {isMyScreen ? (
               <>
                 <Button style={styles.button} onPress={changeWhichOneSelectedHandler.bind(null, 'delete')}>
                   <Ionicons name="trash" size={Size.bigMiddle} />
@@ -81,6 +93,22 @@ export default function OptionsModals({ postId, toggleModal, ownerId, isPublic, 
                 <Button style={styles.button} onPress={changeWhichOneSelectedHandler.bind(null, 'publicSetting')}>
                   <Ionicons name="lock-open" size={Size.bigMiddle} />
                   <Text>공개설정</Text>
+                </Button>
+              </>
+            ) : myInfo?.authUser && myInfo.authUser.id === ownerId ? (
+              <View style={styles.button}>
+                <Ionicons name="person" size={Size.bigMiddle} />
+                <Text>나의 게시글입니다</Text>
+              </View>
+            ) : (
+              <>
+                <Button style={styles.button} onPress={changeWhichOneSelectedHandler.bind(null, 'hidePost')}>
+                  <Ionicons name="eye-off" size={Size.bigMiddle} />
+                  <Text>게시글 보지않기</Text>
+                </Button>
+                <Button style={styles.button} onPress={changeWhichOneSelectedHandler.bind(null, 'report')}>
+                  <Ionicons name="alert" size={Size.bigMiddle} />
+                  <Text>신고하기</Text>
                 </Button>
               </>
             )}

@@ -5,25 +5,25 @@ import { Text, View } from 'react-native';
 import { WhichOneSelectedState } from './OptionsModals';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
-import { deletePostQuery } from 'query/api/posts';
 import Line from 'components/common/layout/Line';
+import { toggleUserPostBlockQuery } from 'query/api/user';
 
 interface Props {
   postId: number;
   setWhichOneSelected: React.Dispatch<React.SetStateAction<WhichOneSelectedState>>;
   toggleModalHandler: () => void;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Delete({ postId, setWhichOneSelected, toggleModalHandler }: Props) {
-  const queryClient = useQueryClient();
+export default function HidePost({ postId, setWhichOneSelected, toggleModalHandler, setIsVisible }: Props) {
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
-  const { mutate, isLoading } = useMutation(deletePostQuery, {
+  const { mutate, isLoading } = useMutation(toggleUserPostBlockQuery, {
     onSuccess: res => {
       if (res.ok) {
-        queryClient.refetchQueries('usersPosts')
+        setIsVisible(false);
         setWhichOneSelected(null);
         toggleModalHandler();
       } else {
@@ -39,21 +39,21 @@ export default function Delete({ postId, setWhichOneSelected, toggleModalHandler
     setWhichOneSelected(null);
   };
 
-  const deleteHandler = () => {
-    mutate(postId);
+  const hidePostHandler = () => {
+    mutate({ postId });
   };
 
   return (
     <>
       <View style={styles.title}>
-        <Text style={styles.titleText}>정말 삭제하시겠습니까?</Text>
+        <Text style={styles.titleText}>게시글을 보지 않겠습니까?</Text>
       </View>
       <Line style={styles.line} />
       <View style={styles.buttons}>
         <Button style={styles.button} onPress={closeSelectedHandler}>
           <Text style={styles.buttonText}>아니요</Text>
         </Button>
-        <Button style={styles.button} onPress={deleteHandler}>
+        <Button style={styles.button} onPress={hidePostHandler}>
           <Text style={styles.buttonText}>네</Text>
         </Button>
       </View>
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor :Colors.mainGreen2,
+    backgroundColor: Colors.mainGreen2,
   },
   titleText: {
     fontSize: Size.normalMiddle,

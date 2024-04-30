@@ -6,7 +6,7 @@ config();
 const expoConfig: ExpoConfig = {
   name: '마슐랭',
   slug: 'machelin',
-  version: '1.0.420',
+  version: '1.0.430',
   orientation: 'portrait',
   icon: './src/assets/icon.png',
   userInterfaceStyle: 'light',
@@ -17,7 +17,7 @@ const expoConfig: ExpoConfig = {
   },
   assetBundlePatterns: ['**/*'],
   ios: {
-    buildNumber: '1.0.420',
+    buildNumber: '1.0.430',
     supportsTablet: true,
     bundleIdentifier: 'com.parkbig.machelin',
     config: {
@@ -25,7 +25,7 @@ const expoConfig: ExpoConfig = {
     },
   },
   android: {
-    versionCode: 33,
+    versionCode: 34,
     adaptiveIcon: {
       foregroundImage: './src/assets/adaptive-icon.png',
       backgroundColor: '#ffffff',
@@ -45,7 +45,14 @@ const expoConfig: ExpoConfig = {
     [
       'expo-image-picker',
       {
-        cameraPermission: 'good work',
+        cameraPermission: 'the app accesses your photos to let you share them to Machelin user',
+      },
+    ],
+    [
+      'expo-location',
+      {
+        locationAlwaysAndWhenInUsePermission:
+          'Allows Machelin to use your location information to get information about restaurants and posts based on your current location.',
       },
     ],
   ],

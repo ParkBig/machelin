@@ -9,6 +9,7 @@ import { useState } from 'react';
 import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 import { toggleFriendStateQuery } from 'query/api/user';
 import LoadingOverlay from 'components/common/modal/LoadingOverlay';
+import useMyBlockedUsersQuery from 'query/hooks/users/useMyBlockedUsersQuery';
 
 interface Props {
   exploreUserId: number;
@@ -17,7 +18,10 @@ interface Props {
 export default function ToggleFollow({ exploreUserId }: Props) {
   const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
   const { myInfo, reMyInfo } = useMyInfoQuery();
+  const { myBlockedUsers } = useMyBlockedUsersQuery();
   const { follows, reFollows } = useUsersFollowsQuery();
+
+  const isBlocked = myBlockedUsers?.myBlockedUsers.some(blockedUser => blockedUser.blockedUserId === exploreUserId);
 
   const { mutate, isLoading } = useMutation(toggleFriendStateQuery, {
     onSuccess: res => {
@@ -38,10 +42,15 @@ export default function ToggleFollow({ exploreUserId }: Props) {
       return;
     }
 
+    if (!myInfo?.authUser) {
+      setToggleAlertModal({ toggle: true, alertMsg: '로그인 후 이용가능합니다.' });
+      return;
+    }
+
     mutate({ exploreUserId });
   };
 
-  const isMyFollow = follows?.follows?.find(follow => +follow.id === exploreUserId);
+  const isMyFollow = follows?.follows?.find(follow => +follow.follow.id === exploreUserId);
   const iconName = myInfo?.authUser
     ? myInfo.authUser.id === exploreUserId
       ? 'body'
@@ -52,7 +61,7 @@ export default function ToggleFollow({ exploreUserId }: Props) {
 
   return (
     <>
-      <View style={styles.wrap}>
+      <View style={[styles.wrap, isBlocked && { display: 'none' }]}>
         {isLoading ? (
           <LoadingOverlay style={styles.loadingOverlay} />
         ) : (

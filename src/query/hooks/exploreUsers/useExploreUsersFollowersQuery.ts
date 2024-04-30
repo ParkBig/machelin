@@ -2,9 +2,15 @@ import { axiosUsers } from 'query/api/user';
 import { useQuery } from 'react-query';
 import { UserInfo } from 'types/types';
 
+interface Follower  {
+  createdAt: Date;
+  follower: UserInfo;
+  id: number;
+}
+
 interface Data {
   ok: boolean;
-  followers: UserInfo[];
+  followers: Follower[];
 }
 
 export default function useExploreUsersFollowersQuery(userId: number) {

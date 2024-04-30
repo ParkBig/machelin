@@ -25,7 +25,7 @@ export default function VersionCheckModal() {
       const axiosVersions = createAxiosInstance('versions');
       const { data } = await axiosVersions.get('');
 
-      if (data.machelinCurrentVersion !== '33') {
+      if (data.machelinCurrentVersion !== '34') {
         setIsVersionCorrect(true);
       }
     };

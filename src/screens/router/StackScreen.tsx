@@ -11,7 +11,6 @@ import MobileVerificationScreen from 'screens/stack/MobileVerificationScreen';
 import ChangeMyActivityZoneScreen from 'screens/stack/ChangeMyActivityZoneScreen';
 import ChangeMyPreferFoodsScreen from 'screens/stack/ChangeMyPreferFoodsScreen';
 import ChangeMyPreferRestaurantScreen from 'screens/stack/ChangeMyPreferRestaurantScreen';
-import ToggleFollow from 'components/stackScreen/ExploreUserInfoScreen/exploreUsersInfo/ToggleFollow';
 import ToggleBookmark from 'components/stackScreen/restaurantDetailScreen/ToggleBookmark';
 import FindMyIdScreen from 'screens/stack/FindMyIdScreen';
 import MakePostButton from 'components/stackScreen/makePostScreen/makePostButton/MakePostButton';
@@ -24,6 +23,7 @@ import TermsOfUseScreen from 'screens/stack/TermsOfUseScreen';
 import NeighborHoodPostsTopTabScreen from './NeighborHoodPostsTopTabScreen';
 import SettingScreen from 'screens/stack/SettingScreen';
 import RestaurantDetailMapScreen from 'screens/stack/RestaurantDetailMapScreen';
+import ExploreUserHeaderRight from 'components/stackScreen/ExploreUserInfoScreen/exploreUserHeaderRight/ExploreUserHeaderRight';
 
 export default function StackScreen() {
   return (
@@ -128,7 +128,7 @@ export default function StackScreen() {
         component={ExploreUserInfoScreen}
         options={({ route }) => ({
           title: '탐험중...',
-          headerRight: () => <ToggleFollow exploreUserId={route.params.userId} />,
+          headerRight: () => <ExploreUserHeaderRight exploreUserId={route.params.userId} />,
         })}
       />
       <RootStack.Screen

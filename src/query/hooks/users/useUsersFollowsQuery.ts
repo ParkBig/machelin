@@ -3,9 +3,15 @@ import { UserInfo } from 'types/types';
 import useMyInfoQuery from './useMyInfoQuery';
 import { axiosUsers } from 'query/api/user';
 
+interface Follow  {
+  createdAt: Date;
+  follow: UserInfo;
+  id: number;
+}
+
 interface Data {
   ok: boolean;
-  follows: UserInfo[];
+  follows: Follow[];
 }
 
 export default function useUsersFollowsQuery() {

@@ -10,16 +10,19 @@ import { IPost } from 'types/types';
 import CreatedAt from './createdAt/CreatedAt';
 import HasProblem from './hasProblem/HasProblem';
 import CreatedLocation from './createdLocation/CreatedLocation';
+import { useState } from 'react';
 
 interface Props {
   posts: IPost;
 }
 
 export default function Post({ posts }: Props) {
+  const [isVisible, setIsVisible] = useState(true);
+
   return (
-    <View style={styles.wrap}>
+    <View style={[styles.wrap, !isVisible && { display: 'none' }]}>
       <HasProblem posts={posts} />
-      <Writer posts={posts} />
+      <Writer posts={posts} setIsVisible={setIsVisible} />
       <CreatedLocation ownerSubLocality={posts.ownerSubLocality} />
       <CreatedAt createdAt={posts.createdAt} />
       <PostBriefRestaurantInfo posts={posts} />
