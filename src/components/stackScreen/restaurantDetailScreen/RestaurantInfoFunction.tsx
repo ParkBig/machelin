@@ -5,11 +5,14 @@ import Button from 'components/common/layout/Button';
 import useRestaurantDetailQuery from 'query/hooks/restaurants/useRestaurantDetailQuery';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { UseNavigation, UseRouter } from 'types/screenType';
+import { useState } from 'react';
+import ConfirmAlertModal, { ToggleState } from 'components/common/modal/ConfirmAlertModal';
 
 export default function RestaurantInfoFunction() {
   const { params } = useRoute<UseRouter<'RestaurantDetailScreen'>>();
   const { navigate } = useNavigation<UseNavigation<'RestaurantDetailScreen'>>();
   const { restaurantDetail } = useRestaurantDetailQuery(params.restaurantId);
+  const [toggleAlertModal, setToggleAlertModal] = useState<ToggleState>({ toggle: false, alertMsg: '' });
 
   const searchGoogleHandler = async () => {
     const supported = await Linking.canOpenURL(
@@ -22,7 +25,14 @@ export default function RestaurantInfoFunction() {
   };
 
   const goToRestaurantDetailMapScreenHandler = () => {
-    if (!restaurantDetail) {
+    if (
+      !restaurantDetail ||
+      !restaurantDetail.restaurantDetail.name ||
+      !restaurantDetail.restaurantDetail.geometry.location.lat ||
+      !restaurantDetail.restaurantDetail.geometry.location.lng
+    ) {
+
+      setToggleAlertModal({ toggle: true, alertMsg: '현재 이용할 수 없는 장소입니다.' });
       return;
     }
 
@@ -49,6 +59,11 @@ export default function RestaurantInfoFunction() {
           <Ionicons name="chevron-forward" size={30} color={Colors.mainGreen2} />
         </Button>
       </View>
+      <ConfirmAlertModal
+        toggleModal={toggleAlertModal.toggle}
+        setToggleAlertModal={setToggleAlertModal}
+        alertMsg={toggleAlertModal.alertMsg}
+      />
     </View>
   );
 }
