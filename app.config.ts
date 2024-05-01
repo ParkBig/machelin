@@ -23,6 +23,11 @@ const expoConfig: ExpoConfig = {
     config: {
       googleMapsApiKey: process.env.EXPO_GOOGLE_IOS_MAPS_SDK_KEY,
     },
+    infoPlist: {
+      NSPhotoLibraryUsageDescription: 'Machelin requires photo access permission to attach photos when creating posts.',
+      NSLocationAlwaysAndWhenInUseUsageDescription:
+        'Machelin needs access to your location to provide you with restaurant and post information based on your current location.',
+    },
   },
   android: {
     versionCode: 34,
@@ -45,14 +50,14 @@ const expoConfig: ExpoConfig = {
     [
       'expo-image-picker',
       {
-        cameraPermission: 'the app accesses your photos to let you share them to Machelin user',
+        cameraPermission: 'Machelin requires photo access permission to attach photos when creating posts.',
       },
     ],
     [
       'expo-location',
       {
         locationAlwaysAndWhenInUsePermission:
-          'Allows Machelin to use your location information to get information about restaurants and posts based on your current location.',
+          'Machelin needs access to your location to provide you with restaurant and post information based on your current location.',
       },
     ],
   ],
