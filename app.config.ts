@@ -6,7 +6,7 @@ config();
 const expoConfig: ExpoConfig = {
   name: '마슐랭',
   slug: 'machelin',
-  version: '1.0.434',
+  version: '1.0.435',
   orientation: 'portrait',
   icon: './src/assets/icon.png',
   userInterfaceStyle: 'light',
@@ -17,14 +17,17 @@ const expoConfig: ExpoConfig = {
   },
   assetBundlePatterns: ['**/*'],
   ios: {
-    buildNumber: '1.0.434',
+    buildNumber: '1.0.435',
     supportsTablet: true,
     bundleIdentifier: 'com.parkbig.machelin',
     config: {
       googleMapsApiKey: process.env.EXPO_GOOGLE_IOS_MAPS_SDK_KEY,
     },
     infoPlist: {
+      NSMicrophoneUsageDescription: 'Machelin needs access to your microphone to storing user information.' ,
       NSPhotoLibraryUsageDescription: 'Machelin requires photo access permission to attach photos when creating posts.',
+      NSLocationAlwaysUsageDescription: 'Machelin needs access to your location to provide you with restaurant and post information based on your current location.',
+      NSLocationWhenInUseUsageDescription: 'Machelin needs access to your location to provide you with restaurant and post information based on your current location.',
       NSLocationAlwaysAndWhenInUseUsageDescription:
         'Machelin needs access to your location to provide you with restaurant and post information based on your current location.',
     },
