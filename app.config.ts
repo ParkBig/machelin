@@ -6,7 +6,7 @@ config();
 const expoConfig: ExpoConfig = {
   name: '마슐랭',
   slug: 'machelin',
-  version: '1.0.435',
+  version: '1.0.436',
   orientation: 'portrait',
   icon: './src/assets/icon.png',
   userInterfaceStyle: 'light',
@@ -17,7 +17,7 @@ const expoConfig: ExpoConfig = {
   },
   assetBundlePatterns: ['**/*'],
   ios: {
-    buildNumber: '1.0.435',
+    buildNumber: '1.0.436',
     supportsTablet: true,
     bundleIdentifier: 'com.parkbig.machelin',
     config: {
