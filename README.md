@@ -11,6 +11,12 @@
 
 직접 다녀온 곳만 찍을 수 있는 스탬프 기능으로 나만의 지도를 완성해 추억을 남길 수 있어요.
 
+## **`다운로드링크`**
+
+- 앱스토어: https://apps.apple.com/us/app/%EB%A7%88%EC%8A%90%EB%9E%AD/id6499341714
+
+- 플레이스토어: https://play.google.com/store/apps/details?id=com.parkbig.machelin
+
 ## **`Summary`**
 
 4개의 메인 스크린
